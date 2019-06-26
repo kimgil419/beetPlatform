@@ -7,12 +7,18 @@
    	    <typeAlias alias="approval" type="com.beetoffice.approval.ApprovalVO"/>          
         <typeAlias alias="user" type="com.beetoffice.user.UserVO"/>
         <typeAlias alias="commute" type="com.beetoffice.commute.CommuteVO"/>
+        <typeAlias alias="meetingroom" type="com.beetoffice.meetingroom.MeetingRoomVO"/>
+        <typeAlias alias="companyevent" type="com.beetoffice.companyevent.CompanyEventVO"/>
+        <typeAlias alias="searchemployee" type="com.beetoffice.searchemployee.SearchEmployeeVO"/>
     </typeAliases>
 
     <mappers>        
         <mapper resource="mappings/user-mapper.xml"/>
         <mapper resource="mappings/commute-mapper.xml"/>
          <mapper resource="mappings/approval-mapper.xml"/>
+        <mapper resource="mappings/meetingroom-mapper.xml"/>
+        <mapper resource="mappings/companyevent-mapper.xml"/>
+        <mapper resource="mappings/searchemployee-mapper.xml"/>
     </mappers>
 </configuration>
 
