@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="meetingroom">
+
+    <insert id="insertContent" parameterType="meetingroom">
+        INSERT INTO MEETINGROOM (ROOM_NUM, START, END, DEPT, USER_ID, BOOK_DATE, USER_NAME, TITLE)
+        VALUES (
+                #{room_num},
+                #{start},
+                #{end},
+                #{dept},
+                #{user_id},
+                #{book_date},
+                #{user_name},
+                #{title})
+    </insert>
+
+    <delete id="deleteContent" parameterType="meetingroom">
+        DELETE FROM MEETINGROOM WHERE IDX=#{idx}
+    </delete>
+
+    <select id="selectContent" parameterType="meetingroom" resultType="meetingroom">
+        SELECT
+               CONCAT(DEPT, ' ', TITLE) TITLE,
+               CONCAT(BOOK_DATE,' ',START) START,
+               CONCAT(BOOK_DATE,' ',END) END,
+               ROOM_NUM,
+               BOOK_DATE,
+               DEPT,
+               IDX
+        FROM MEETINGROOM WHERE ROOM_NUM = #{room_num}
+    </select>
+
+    <select id="selectAll" parameterType="meetingroom" resultType="meetingroom">
+        SELECT
+        idx, room_num, start, end, dept, user_id, book_date, user_name, title
+        FROM MEETINGROOM
+    </select>
+
+    <select id="selectTime" parameterType="meetingroom" resultType="meetingroom">
+        SELECT
+        START
+        FROM MEETINGROOM WHERE BOOK_DATE = #{book_date}
+    </select>
+
+</mapper>
