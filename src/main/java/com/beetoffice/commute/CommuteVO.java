@@ -8,7 +8,11 @@ import lombok.ToString;
 public class CommuteVO {
 
     @Getter @Setter
-    String in_time, out_time, user_id, user_name, dept, user_position;
+    String in_time, out_time, user_id, user_name, dept,
+    user_position, job_id, searchCondition, searchKeyword ;
+
+	
+	
 	
 
 

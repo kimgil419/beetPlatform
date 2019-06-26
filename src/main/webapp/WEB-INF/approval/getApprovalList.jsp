@@ -34,7 +34,7 @@
 
 <div id="cotainer">
 	<h1>전자 결재 서류 목록</h1>
-	<h3>[${userName }]님 환영합니다....<a href="logout.do">Log-out</a></h3>
+	<h3>[${userName.user_name }]님 환영합니다....<a href="logout.do">Log-out</a></h3>
 
 	<!-- 검색을 위한 폼 -->
 	<form action="getApprovalList.do" method="POST">
@@ -74,9 +74,9 @@
 		
 		<c:forEach var="approval" items="${approvalList}">
 		
-		<c:if test="${ (approval.user_id1 == userName and empty approval.ok1) 
-		or (approval.user_id2 == userName and not empty approval.ok1 and empty approval.ok2) 
-		or (approval.user_id3 == userName and not empty approval.ok1 and not empty approval.ok2 and empty approval.ok3)}" >
+		<c:if test="${ (approval.user_id1 == userName.user_id and empty approval.ok1) 
+		or (approval.user_id2 == userName.user_id and not empty approval.ok1 and empty approval.ok2) 
+		or (approval.user_id3 == userName.user_id and not empty approval.ok1 and not empty approval.ok2 and empty approval.ok3)}" >
 		
 		<tr>
 			<td class="center">${approval.a_num }</td>
@@ -99,9 +99,9 @@
 			
 		<c:forEach var="approval" items="${approvalList}">
 		
-		<c:if test="${ (approval.user_id1 == userName and not empty approval.ok1) 
-		or (approval.user_id2 == userName and not empty approval.ok2) 
-		or (approval.user_id3 == userName and not empty approval.ok3)}" >
+		<c:if test="${ (approval.user_id1 == userName.user_id and not empty approval.ok1) 
+		or (approval.user_id2 == userName.user_id and not empty approval.ok2) 
+		or (approval.user_id3 == userName.user_id and not empty approval.ok3)}" >
 		
 		<tr>
 			<td class="center">${approval.a_num }</td>
@@ -121,7 +121,7 @@
 			
 	</table>
 	<br>
-	<p><a href="insertApproval.jsp">새글 등록</a></p>
+	<p><a href="ApprovalForm.do">새글 등록</a></p>
 </div>
 
 

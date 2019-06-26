@@ -16,9 +16,10 @@
 	
 	
 	<insert id="insertApproval" parameterType="approval">
-	INSERT INTO APPROVAL VALUES (#{user_id}, #{a_content}, #{user_id1}, #{user_id2}, #{user_id3},
-	 #{ok1}, #{ok2}, #{ok3}, NULL,#{a_title},  #{regdate} )
+	INSERT INTO APPROVAL VALUES (NULL, #{user_id}, #{a_title},  #{a_content}, #{user_id1}, #{user_id2}, #{user_id3},
+	NULL, NULL, NULL, NOW(), #{urgent}, NULL)
 	</insert>
+	
 	<update id="updateApproval" parameterType="approval">
 	UPDATE APPROVAL SET
 	        A_CONTENT = #{a_content},
@@ -37,7 +38,7 @@
 	</update>
 
 	<delete id="deleteApproval" parameterType="approval">
-	DELETE FROM APPROVAL WHERE ID = ? 
+	DELETE FROM APPROVAL WHERE A_NUM = #{a_num} 
 	</delete>
 
 </mapper>

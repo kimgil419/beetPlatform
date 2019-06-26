@@ -40,7 +40,7 @@ public class ApprovalController {
 		
 		model.addAttribute("approval", approvalService.getApproval(vo)); 
 		System.out.println(approvalService.getApproval(vo));
-		return "approval/getApproval.jsp";
+		return "approval/getApproval";
 	}
 	
 	
@@ -74,22 +74,9 @@ public class ApprovalController {
 	public String insertApproval(ApprovalVO vo) 
 			throws IllegalStateException, IOException {
 		System.out.println(">>> �? ?���? 처리 - insertApproval()");
-		
-		/* ***** ?��?�� ?��로드 처리 *************
-		 * MultipartFile ?��?��?��?��?�� 주요 메소?��
-		 * String getOriginalFilename() : ?��로드?�� ?��?���?
-		 * void transferTo(File destFile) : ?��로드?�� ?��?��?�� destFile?�� ???��
-		 * boolean isEmpty() : ?��로드?�� ?��?��?�� 존재?���?(?��?���? true 리턴)
-//		 */
-//		MultipartFile uploadFile = vo.getUploadFile();
-//		System.out.println("uploadFile : " + uploadFile);
-//		if (!uploadFile.isEmpty()) {//?��?��?�� ?��?���?
-//			String fileName = uploadFile.getOriginalFilename();
-//			uploadFile.transferTo(new File("c:/MyStudy/temp/" + fileName));
-//		} 
-//		
+			
 		approvalService.insertApproval(vo);
-		return "getApprovalList.do";
+		return "redirect:getApprovalList.do";
 	}
 	
 	@RequestMapping("/updateApproval.do")
@@ -109,6 +96,10 @@ public class ApprovalController {
 		
 		approvalService.refuseApproval(vo);
 		return "getApprovalList.do";
+	}
+	@RequestMapping("/ApprovalForm.do")
+	public String ApprovalForm(ApprovalVO vo) {
+		return "approval/insertApproval";
 	}
 	
 	@RequestMapping("/deleteApproval.do")

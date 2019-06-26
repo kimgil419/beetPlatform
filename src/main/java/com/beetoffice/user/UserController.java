@@ -19,46 +19,8 @@ public class UserController {
    @Autowired
    private UserService userService;
    
-   @ModelAttribute("conditionMap")
-	public Map<String, String> searchConditionMap() {
-		//key: ?���?, value: TITLE
-		//key: ?��?��, value: CONTENT
-		Map<String, String> conditionMap = new HashMap<>();
-		conditionMap.put("이름", "NAME");
-		conditionMap.put("내선번호", "PHONE");
-		conditionMap.put("휴대폰", "CPHONE");
-		conditionMap.put("부서", "DEPT");
-		conditionMap.put("직급", "POSITION");
-		conditionMap.put("직무", "JOB_ID");
-		return conditionMap;
-	}
-   
-   @RequestMapping("/getUserList.do")
-	public String getUserList(UserVO vo, 
-			Model model) {
-		
-		System.out.println(">>>  목록 조회 처리- getUserList()");
-		System.out.println("condition: " + vo.getSearchCondition());
-		System.out.println("keyword: -" + vo.getSearchKeyword() + "-");
-		
-		//null체크 ?�� 초기�? ?��?��
-		if (vo.getSearchCondition() == null) {
-			vo.setSearchCondition("NAME");
-		}
-		if (vo.getSearchKeyword() == null) {
-			vo.setSearchKeyword("");
-		}
-		System.out.println("null처리 condition: " + vo.getSearchCondition());
-		System.out.println("null처리 keyword: -" + vo.getSearchKeyword() + "-");
-	
-		List<UserVO> userList = userService.getUserList(vo);
-		
-		model.addAttribute("userList", userList);
-		
-		return "employee.jsp";
-	}	
-
-   
+  
+  
    @RequestMapping(value="/login.do", method=RequestMethod.POST) 
    public String login(UserVO vo, 
          HttpSession session) {//UserVO : Command 객체
@@ -91,7 +53,7 @@ public class UserController {
    public String insertUser(UserVO vo) {
       
       userService.insertUser(vo);
-      return "main.jsp";
+      return "main";
    }
    
    @RequestMapping("/logout.do")
@@ -99,6 +61,6 @@ public class UserController {
       System.out.println(">>> 로그아웃 처리 - logout()");
       
       session.invalidate();
-      return "login.jsp";
+      return "login";
    }   
 }

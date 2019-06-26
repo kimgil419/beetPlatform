@@ -123,15 +123,15 @@ th {
             <tr>
                <th>등록일</th>
                <td>${approval.regdate}</td>
-               <c:if test="${approval.user_id1 == userName }">
+               <c:if test="${approval.user_id1 == userName.user_id }">
                   <input type="hidden" name="ok1" id="ok1" value="1">
                </c:if>
 
-               <c:if test="${approval.user_id2 == userName }">
+               <c:if test="${approval.user_id2 == userName.user_id }">
                   <input type="hidden" name="ok2" id="ok2" value="1">
                </c:if>
 
-               <c:if test="${approval.user_id3 == userName }">
+               <c:if test="${approval.user_id3 == userName.user_id }">
                   <input type="hidden" name="ok3" id="ok3" value="1">
                </c:if>
             </tr>
@@ -145,9 +145,9 @@ th {
                
                   <input type="button" value="반려" onclick="refuse(this.form)">
                   
-                   <c:if test="${(approval.user_id1 == userName and not empty approval.ok1)
-                    or (approval.user_id2 == userName and not empty approval.ok2)
-                     or (approval.user_id3 == userName and not empty approval.ok3)}">
+                   <c:if test="${(approval.user_id1 == userName.user_id and not empty approval.ok1)
+                    or (approval.user_id2 == userName.user_id and not empty approval.ok2)
+                     or (approval.user_id3 == userName.user_id and not empty approval.ok3)}">
                   
                    <input type="button" value="결재 취소" id="btn">
                    </c:if>
@@ -159,7 +159,7 @@ th {
       </form>
       <hr>
       <p>
-         <a href="insertApproval.jsp">글쓰기</a>&nbsp;&nbsp; <a
+         <a href="insertApproval.do">글쓰기</a>&nbsp;&nbsp; <a
             href="deleteApproval.do?a_num=${approval.a_num }">글삭제</a>&nbsp;&nbsp;
          <a href="getApprovalList.do">글목록</a>
       </p>

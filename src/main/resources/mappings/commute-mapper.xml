@@ -5,20 +5,27 @@
 
 <mapper namespace="commute">
 
-<insert id="insertCommte" parameterType="commute">
-    INSERT INTO COMMUTE (IN_TIME, OUT_TIME, USER_ID)
-		VALUES (NOW(), NULL, #{USER_ID})
-</insert>
+	<insert id="insertCommte" parameterType="commute">
+		INSERT INTO COMMUTE (IN_TIME, OUT_TIME, USER_ID)
+		VALUES (NOW(), NULL,
+		#{USER_ID})
+	</insert>
 
-<update id="updateCommute" parameterType="commute">
-    UPDATE COMMUTE SET OUT_TIME = NOW() 
-</update>
+	<update id="updateCommute" parameterType="commute">
+		UPDATE COMMUTE SET OUT_TIME = NOW()
+	</update>
 
-<select id="commuteList" resultType="commute" >
+	<select id="commuteList" resultType="commute">
+		SELECT * FROM USER_DB D, COMMUTE C
+		WHERE D.USER_ID = C.USER_ID
+		
+	</select>
 
-</select>
+	<select id="commuteList_day" resultType="commute">
+		SELECT * FROM USER_DB D, COMMUTE C
+		WHERE D.USER_ID = C.USER_ID
+		AND IN_TIME LIKE IN %#{in_time}%
+	</select>
 
-   
-   
 
 </mapper>
