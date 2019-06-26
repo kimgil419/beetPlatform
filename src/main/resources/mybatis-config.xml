@@ -10,15 +10,19 @@
         <typeAlias alias="meetingroom" type="com.beetoffice.meetingroom.MeetingRoomVO"/>
         <typeAlias alias="companyevent" type="com.beetoffice.companyevent.CompanyEventVO"/>
         <typeAlias alias="searchemployee" type="com.beetoffice.searchemployee.SearchEmployeeVO"/>
+        <typeAlias alias="project" type="com.beetoffice.project.vo.ProjectVO"/>
+        <typeAlias alias="source" type="com.beetoffice.project.vo.SourceVO"/>
+        <typeAlias alias="pages" type="com.beetoffice.project.vo.PagingVO"/>
     </typeAliases>
 
-    <mappers>        
+    <mappers>
         <mapper resource="mappings/user-mapper.xml"/>
         <mapper resource="mappings/commute-mapper.xml"/>
-         <mapper resource="mappings/approval-mapper.xml"/>
+        <mapper resource="mappings/approval-mapper.xml"/>
         <mapper resource="mappings/meetingroom-mapper.xml"/>
         <mapper resource="mappings/companyevent-mapper.xml"/>
         <mapper resource="mappings/searchemployee-mapper.xml"/>
+        <mapper resource="mappings/project-mapper.xml"/>
     </mappers>
 </configuration>
 

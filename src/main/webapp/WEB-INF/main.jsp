@@ -14,7 +14,7 @@
     <h1>메인화면입니다</h1>
     <a href="getApprovalList.do">전자결재(김길중)</a>
     <a href="getCommuteList.do">출결관리(김길중)</a>
-    <a href="getProjectList.do">프로젝트 관리(김동현)</a>
+    <a href="getProjectList.do?currentPage=1">프로젝트 관리(김동현)</a>
     <a href="getBoard.do">게시판 (한재정) </a>
     <a href="getRegEmployee.do"> 사원등록 (한재정) </a>
     <a href="getMeetingroom.do">회의실예약(김범현)</a>
