@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="commute">
+
+<insert id="insertCommte" parameterType="commute">
+    INSERT INTO COMMUTE (IN_TIME, OUT_TIME, USER_ID)
+		VALUES (NOW(), NULL, #{USER_ID})
+</insert>
+
+<update id="updateCommute" parameterType="commute">
+    UPDATE COMMUTE SET OUT_TIME = NOW() 
+</update>
+
+<select id="commuteList" resultType="commute" >
+
+</select>
+
+   
+   
+
+</mapper>

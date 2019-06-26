@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper 태그의 namespace 속성 필수 작성 -->
+<mapper namespace="ApprovalDAO">
+	
+	<select id="getApproval"  parameterType="approval" resultType="approval">
+	SELECT * FROM APPROVAL WHERE A_NUM = #{a_num}
+	</select>
+	
+	<select id="getApprovalList" parameterType="approval" resultType="approval">
+	 SELECT * FROM APPROVAL
+	</select>
+	
+	
+	<insert id="insertApproval" parameterType="approval">
+	INSERT INTO APPROVAL VALUES (#{user_id}, #{a_content}, #{user_id1}, #{user_id2}, #{user_id3},
+	 #{ok1}, #{ok2}, #{ok3}, NULL,#{a_title},  #{regdate} )
+	</insert>
+	<update id="updateApproval" parameterType="approval">
+	UPDATE APPROVAL SET
+	        A_CONTENT = #{a_content},
+			OK1 = #{ok1},	
+			OK2 = #{ok2},
+			OK3 = #{ok3}
+		WHERE A_NUM = #{a_num}
+	</update>
+	<update id="refuseApproval" parameterType="approval">
+	UPDATE APPROVAL SET
+	        A_CONTENT = #{a_content},
+			OK1 = NULL,
+			OK2 = NULL,
+			OK3 = NULL
+		WHERE A_NUM = #{a_num}
+	</update>
+
+	<delete id="deleteApproval" parameterType="approval">
+	DELETE FROM APPROVAL WHERE ID = ? 
+	</delete>
+
+</mapper>
+
+
+
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+   	    <typeAlias alias="approval" type="com.beetoffice.approval.ApprovalVO"/>          
+        <typeAlias alias="user" type="com.beetoffice.user.UserVO"/>
+        <typeAlias alias="commute" type="com.beetoffice.commute.CommuteVO"/>
+    </typeAliases>
+
+    <mappers>        
+        <mapper resource="mappings/user-mapper.xml"/>
+        <mapper resource="mappings/commute-mapper.xml"/>
+         <mapper resource="mappings/approval-mapper.xml"/>
+    </mappers>
+</configuration>
+
