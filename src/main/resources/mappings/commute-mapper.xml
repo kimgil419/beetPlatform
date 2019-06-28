@@ -15,16 +15,34 @@
 		UPDATE COMMUTE SET OUT_TIME = NOW()
 	</update>
 
-	<select id="commuteList" resultType="commute">
+<!-- 	<select id="commuteList" resultType="commute">
 		SELECT * FROM USER_DB D, COMMUTE C
 		WHERE D.USER_ID = C.USER_ID
 		
-	</select>
-
-	<select id="commuteList_day" resultType="commute">
+	</select>	 -->
+	
+	<select id="commuteList" parameterType="commute"
+		resultType="commute">
 		SELECT * FROM USER_DB D, COMMUTE C
-		WHERE D.USER_ID = C.USER_ID
-		AND IN_TIME LIKE IN %#{in_time}%
+		WHERE (D.USER_ID = C.USER_ID ) 
+		<if test="in_time1 != null and in_time2 != null">
+		AND (DATE(IN_TIME) BETWEEN '#{in_time1}' AND '#{in_time2}')
+		</if>
+		
+		<if test="searchCondition =='USER_NAME' ">
+			AND (USER_NAME LIKE '%'|| #{searchKeyword} ||'%')
+		</if>
+		
+		<if test="searchCondition =='USER_POSITION' ">
+			AND (USER_POSITION LIKE '%'|| #{searchKeyword} ||'%')
+		</if>
+		<if test="searchCondition =='JOB_ID' ">
+			AND (JOB_ID LIKE '%'|| #{searchKeyword} ||'%')
+		</if>
+		<if test="searchCondition =='DEPT' ">
+			AND (DEPT LIKE '%'|| #{searchKeyword} ||'%')
+		</if>
+	
 	</select>
 
 

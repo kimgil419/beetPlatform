@@ -32,10 +32,9 @@ public class CommuteController {
 			//key: ?��?��, value: CONTENT
 			Map<String, String> conditionMap = new HashMap<>();
 			
-			conditionMap.put("이름", "NAME");
+			conditionMap.put("이름", "USER_NAME");
 			conditionMap.put("부서", "DEPT");
-			conditionMap.put("날짜", "IN_TIME");
-			conditionMap.put("직급", "POSITION");
+			conditionMap.put("직급", "USER_POSITION");
 			conditionMap.put("직무", "JOB_ID");
 			return conditionMap;
 		}
@@ -50,8 +49,9 @@ public class CommuteController {
 		System.out.println("keyword: -" + vo.getSearchKeyword() + "-");
 		
 		//null체크 
+		
 		if (vo.getSearchCondition() == null) {
-			vo.setSearchCondition("IN_TIME");
+			vo.setSearchCondition("user_name");
 		}
 		if (vo.getSearchKeyword() == null) {
 			vo.setSearchKeyword("");
