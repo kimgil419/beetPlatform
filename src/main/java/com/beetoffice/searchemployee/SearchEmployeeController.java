@@ -16,16 +16,26 @@ public class SearchEmployeeController {
     @Autowired
     private SearchEmployeeService searchEmployeeService;
 
-    @RequestMapping(value="/reacttest.do", produces="application/json; charset=utf8")
-//    @CrossOrigin(origins = "http://localhost:3000")
-    public @ResponseBody
-    String react(SearchEmployeeVO vo, Model model){
+    @RequestMapping(value="/showEmployee.do", produces="application/json; charset=utf8")
+    public String showEmployee(SearchEmployeeVO vo, Model model){
 
-        List<SearchEmployeeVO> list = searchEmployeeService.getUserList(vo);
+        List<SearchEmployeeVO> employeelist = searchEmployeeService.getUserList(vo);
+        Gson json = new Gson();
+
+        model.addAttribute("list", json.toJson(employeelist));
+
+        return "searchemployee/showEmployeeList";
+    }
+
+
+    @RequestMapping(value="/searchEmployee.do", produces="application/json; charset=utf8")
+    public @ResponseBody
+    String searchEmployee(String keyword, Model model){
+
+        List<SearchEmployeeVO> list = searchEmployeeService.getUserListbyKeyword(keyword);
         Gson json = new Gson();
 
         model.addAttribute("list", list);
-        System.out.println(json.toJson(list));
         return json.toJson(list);
     }
 }

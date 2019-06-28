@@ -20,7 +20,6 @@ public class MeetingRoomController {
     @RequestMapping("/getMeetingRoomList.do")
     public String getMeetingRoomList(MeetingRoomVO vo, Model model) {
 
-        System.out.println("Dadada");
         vo.setRoom_num("room1");
 
         List<MeetingRoomVO> meetingroom =  meetingRoomService.getReserveInfo(vo);
@@ -39,7 +38,7 @@ public class MeetingRoomController {
     public @ResponseBody
     Map saveMeetingRoom(MeetingRoomVO vo, Model model){
 
-        vo.setDept("인사팀");
+
         //세션데이터 입력
 
         meetingRoomService.insertReserveInfo(vo);
