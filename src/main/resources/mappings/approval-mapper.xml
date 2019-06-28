@@ -33,7 +33,8 @@
 	        A_CONTENT = #{a_content},
 			OK1 = NULL,
 			OK2 = NULL,
-			OK3 = NULL
+			OK3 = NULL,
+			REFUSE = '1'
 		WHERE A_NUM = #{a_num}
 	</update>
 

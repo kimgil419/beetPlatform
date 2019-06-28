@@ -89,6 +89,7 @@ th {
 				</form>
 				<p>
 					<a href="getApprovalList.do">글 목록 가기</a>
+					  <p><a href="Main.do">메인메뉴이동</a></p>
 				</p>
 				</div>
 </body>

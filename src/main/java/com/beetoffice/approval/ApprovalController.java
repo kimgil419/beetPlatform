@@ -32,6 +32,13 @@ public class ApprovalController {
 		return conditionMap;
 	}
 
+	@RequestMapping("/Main.do")
+	public String getMain(ApprovalVO vo, Model model) {
+		
+		return "main";
+	}
+	
+
 
 	
 	@RequestMapping("/getApproval.do")
@@ -86,7 +93,7 @@ public class ApprovalController {
 		
 		
 		approvalService.updateApproval(vo);
-		return "getApprovalList.do";
+		return "redirect:getApprovalList.do";
 	}
 	@RequestMapping("/refuseApproval.do")
 	public String refuseApproval(@ModelAttribute("approval") ApprovalVO vo) {
@@ -95,7 +102,7 @@ public class ApprovalController {
 		
 		
 		approvalService.refuseApproval(vo);
-		return "getApprovalList.do";
+		return "redirect:getApprovalList.do";
 	}
 	@RequestMapping("/ApprovalForm.do")
 	public String ApprovalForm(ApprovalVO vo) {
@@ -107,6 +114,6 @@ public class ApprovalController {
 		System.out.println(">>> �? ?��?�� 처리 - deleteApproval()");
 		approvalService.deleteApproval(vo);
 		
-		return "getApprovalList.do";
+		return "redirect:getApprovalList.do";
 	}
 }

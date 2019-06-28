@@ -1,4 +1,5 @@
-
+<%@page import="com.beetoffice.approval.ApprovalDAO"%>
+<%@page import="com.beetoffice.approval.ApprovalVO"%>
 <%@page import="java.util.List"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,25 +11,11 @@
 <head>
 <meta charset="UTF-8">
 <title>글목록</title>
-<style>
-	/* #container {
-		width: 700px;
-		margin: 0 auto;
-	}
-	h1, h3, p { text-align: center; }
-	table { border-collapse: collapse; }
-	table, th, td {
-		border: 1px solid black;
-		margin: 0 auto;
-	}
-	th { background-color: orange; }
-	.border-none, .border-none td { border: none; }
-	.center { text-align: center; }
-	.left { text-align: left; }
-	.right { text-align: right; }
-	.orange { background-color: orange; } */
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
 
-            /* Default */
+
+<style>
+  /* Default */
             input[type=text],input[type=password]{font-family:"Malgun Gothic","맑은 고딕",Dotum,"돋움",Arial,sans-serif}
             *{margin:0;padding:0;font-family:"Malgun Gothic","맑은 고딕",Dotum,"돋움",Arial,sans-serif}
             body{font-size:12px;color:#555;background:transparent;-webkit-user-select:none;-moz-user-select:none;-webkit-text-size-adjust:none;-moz-text-size-adjust:none;-ms-text-size-adjust:none}
@@ -67,14 +54,12 @@
 
 
         </style>
-
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
         <!-- datepicker 한국어로 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
     
-        <script>                
-
+        <script>   
         $(document).ready(function() {
 
             //datepicker 한국어로 사용하기 위한 언어설정
@@ -180,18 +165,11 @@
 
             
         </script>
-</head>
-<body>
 
-<div id="cotainer">
-	<h1>출퇴근 기록</h1>
-	<h3>[${userName.user_name }]님 환영합니다....<a href="logout.do">Log-out</a></h3>
+    </head>
+    <body>
 
-
-
-  
-
-        <form>
+        <form action="getCommuteList.do" method="POST">
             
         <!-- search -->
         <table class="searchBox">
@@ -252,24 +230,21 @@
                         <div class="clearfix">
                             <!-- 시작일 -->
                             <span class="dset">
-                                <input type="text" class="datepicker inpType" name="searchStartDate" id="searchStartDate" >
+                                <input type="text" class="datepicker inpType" name="in_time1" id="searchStartDate" >
                                 <a href="#none" class="btncalendar dateclick">달력</a>
                             </span>
                             <span class="demi">~</span>
                             <!-- 종료일 -->
                             <span class="dset">
-                                <input type="text" class="datepicker inpType" name="searchEndDate" id="searchEndDate" >
+                                <input type="text" class="datepicker inpType" name="in_time2" id="searchEndDate" >
                                 <a href="#none" class="btncalendar dateclick">달력</a>
                             </span>
                         </div>    
                     </td>
-                </tr>
-	</tbody>
-	</table>
-	</form>
-	
-	<form action="getCommuteList.do" method="POST">
-	<table class="border-none">
+                </tr>   
+            <tbody>
+        </table>
+ <table class="border-none">
 		<tr>
 			<td>
 				
@@ -315,8 +290,10 @@
 	</table>
 	<br>
 	
-</div>
-
-
-</body>
+	<c:if test="${ commute.in_time > today}">
+	<input type="button" value="출근" onclick="in(this.form)">
+	</c:if>	
+	 <p><a href="getCommute.do">메인메뉴이동</a></p>
+       
+   </body>
 </html>

@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.beetoffice.commute.CommuteService;
+import com.beetoffice.commute.CommuteVO;
+
 
 @Controller
 public class UserController {
@@ -40,7 +43,8 @@ public class UserController {
     	   
     	 
          session.setAttribute("userName", user); 
-         return "main";
+        
+         return "redirect:getCommute.do";
       } else { //사용자가 없는 경우
          
          throw new IllegalArgumentException(

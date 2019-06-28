@@ -1,5 +1,7 @@
 package com.beetoffice.commute;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.beetoffice.user.UserVO;
+import javax.servlet.http.HttpSession;
+
 
 
 @Controller
@@ -28,14 +33,13 @@ public class CommuteController {
 	
 	 @ModelAttribute("conditionMap")
 		public Map<String, String> searchConditionMap() {
-			//key: ?���?, value: TITLE
-			//key: ?��?��, value: CONTENT
+			
 			Map<String, String> conditionMap = new HashMap<>();
 			
-			conditionMap.put("이름", "USER_NAME");
-			conditionMap.put("부서", "DEPT");
-			conditionMap.put("직급", "USER_POSITION");
-			conditionMap.put("직무", "JOB_ID");
+			conditionMap.put("이름", "user_name");
+			conditionMap.put("부서", "dept");
+			conditionMap.put("직급", "user_position");
+			conditionMap.put("직무", "job_id");
 			return conditionMap;
 		}
 	   
@@ -45,6 +49,7 @@ public class CommuteController {
 			Model model) {
 		
 		System.out.println(">>>  목록 조회 처리- getUserList()");
+		System.out.println("날짜 검색" + vo.getIn_time1() + " ~ " + vo.getIn_time2());
 		System.out.println("condition: " + vo.getSearchCondition());
 		System.out.println("keyword: -" + vo.getSearchKeyword() + "-");
 		
@@ -56,6 +61,7 @@ public class CommuteController {
 		if (vo.getSearchKeyword() == null) {
 			vo.setSearchKeyword("");
 		}
+		
 		System.out.println("null처리 condition: " + vo.getSearchCondition());
 		System.out.println("null처리 keyword: -" + vo.getSearchKeyword() + "-");		
 		List<CommuteVO> commuteList = commuteService.getCommuteList(vo);
@@ -71,17 +77,46 @@ public class CommuteController {
 		System.out.println(">>> 처리 - insertCommute()");
 		
 		commuteService.insertCommute(vo);
-		return "getCommuteList.do";
+		return "redirect:getCommuteList.do";
+	}
+	
+	
+	@RequestMapping("/getCommute.do")
+	public String getCommute(CommuteVO vo, Model model, HttpSession session) {
+		
+
+	
+		System.out.println("1122112" + session.getAttribute("userName"));
+		
+		
+		UserVO user = (UserVO) session.getAttribute("userName");
+		String id = user.getUser_id();
+		vo.setUser_id(id);
+		
+		CommuteVO getCommute = commuteService.getCommute(vo);
+		
+		if ( getCommute == null ) {
+		String ccc = "x";
+		model.addAttribute("ccc", ccc);
+		System.out.println("-"+ ccc +"-");
+		}
+		if ( getCommute != null) {
+			model.addAttribute("getCommute", getCommute);
+			System.out.println("-"+getCommute+"-");
+		}
+
+		
+		return "main";
 	}
 	
 	@RequestMapping("/updateCommute.do")
-	public String updateApproval(@ModelAttribute("commute") CommuteVO vo) {
+	public String updateApproval(CommuteVO vo) {
 		System.out.println(">>> 처리 - updateCommute()");
 		System.out.println(" vo : " + vo);
 		
 		
 		commuteService.updateCommute(vo);
-		return "getCommuteList.do";
+		return "redirect:getCommuteList.do";
 	}
 	
 	

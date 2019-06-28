@@ -160,8 +160,9 @@ th {
       <hr>
       <p>
          <a href="insertApproval.do">글쓰기</a>&nbsp;&nbsp; <a
-            href="deleteApproval.do?a_num=${approval.a_num }">글삭제</a>&nbsp;&nbsp;
+            href="deleteApproval.do?a_num=${approval.a_num}">글삭제</a>&nbsp;&nbsp;
          <a href="getApprovalList.do">글목록</a>
+         <p><a href="Main.do">메인메뉴이동</a></p>
       </p>
    </div>
 
