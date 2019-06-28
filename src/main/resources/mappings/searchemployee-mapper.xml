@@ -6,7 +6,7 @@
 <mapper namespace="searchemployee">
 
     <select id="selectAll" resultType="searchemployee" parameterType="searchemployee">
-        SELECT USER_NAME, DEPT, USER_POSITION, PHONE, CPHONE, FIRSTJOIN
+        SELECT USER_NAME, DEPT, USER_POSITION, PHONE, CPHONE, FIRSTJOIN, EMAIL
         FROM USER_DB
     </select>
 

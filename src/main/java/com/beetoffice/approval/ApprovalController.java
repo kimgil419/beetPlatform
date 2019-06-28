@@ -31,8 +31,8 @@ public class ApprovalController {
 		
 		return conditionMap;
 	}
-	
-	
+
+
 	
 	@RequestMapping("/getApproval.do")
 	public String getApproval(ApprovalVO vo, Model model) {
