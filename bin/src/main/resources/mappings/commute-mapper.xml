@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="commuteDAO">
+
+	<insert id="insertCommute" parameterType="commute">
+		INSERT INTO COMMUTE (IN_TIME, OUT_TIME, USER_ID)
+		VALUES (NOW(), NULL,
+		#{user_id})
+	</insert>
+
+	<update id="updateCommute" parameterType="commute">
+		UPDATE COMMUTE SET OUT_TIME = NOW() 
+		WHERE (USER_ID = #{user_id})
+		AND (DATE(IN_TIME) = CURDATE())
+	</update>
+
+<!-- 	<select id="commuteList" resultType="commute">
+		SELECT * FROM USER_DB D, COMMUTE C
+		WHERE D.USER_ID = C.USER_ID
+		
+	</select>	 -->
+	
+	<select id="commuteList" parameterType="commute"
+		resultType="commute">
+		SELECT * FROM USER_DB D, COMMUTE C
+		WHERE (D.USER_ID = C.USER_ID ) 
+
+		<if test="in_time1 != null and in_time2 != null and in_time1 != '' and in_time2 != '' ">
+			AND (DATE(IN_TIME) BETWEEN #{in_time1} AND #{in_time2})
+		</if>			
+		<if test="searchCondition == 'user_name' ">
+			AND (USER_NAME LIKE CONCAT('%', #{searchKeyword}, '%'))
+		</if>
+		
+		<if test="searchCondition == 'user_position' ">
+			AND (USER_POSITION LIKE CONCAT('%', #{searchKeyword}, '%'))
+		</if>
+		<if test="searchCondition == 'job_id' ">
+			AND (JOB_ID LIKE CONCAT('%', #{searchKeyword}, '%'))
+		</if> 
+		<if test="searchCondition == 'dept' ">
+			AND (DEPT LIKE CONCAT('%', #{searchKeyword}, '%'))
+		</if>
+		
+	</select>
+	<select id="getCommute" parameterType="commute"
+	resultType="commute">
+	SELECT * FROM USER_DB D, COMMUTE C
+	WHERE (D.USER_ID = C.USER_ID)
+	AND (DATE(IN_TIME) = CURDATE())
+	AND D.USER_ID = #{user_id}
+
+</select>
+
+</mapper>

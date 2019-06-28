@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.beetoffice.commute.CommuteService;
-import com.beetoffice.commute.CommuteVO;
-
 
 @Controller
 public class UserController {
@@ -42,9 +39,21 @@ public class UserController {
       if (user != null) { //사용자가 존재하는 경우
     	   
     	 
-         session.setAttribute("userName", user); 
-        
-         return "redirect:getCommute.do";
+         session.setAttribute("userInfo", user);
+         session.setAttribute("user_id", user.getUser_id());
+         session.setAttribute("firstjoin", user.getFirstjoin());
+         session.setAttribute("departure", user.getDeparture());
+         session.setAttribute("user_password", user.getUser_password());
+         session.setAttribute("dept", user.getDept());
+         session.setAttribute("birth", user.getBirth());
+         session.setAttribute("job_id", user.getJob_id());
+         session.setAttribute("user_name", user.getUser_name());
+         session.setAttribute("user_position", user.getUser_position());
+         session.setAttribute("phone", user.getPhone());
+         session.setAttribute("cphone", user.getCphone());
+         session.setAttribute("email", user.getEmail());
+         
+         return "main";
       } else { //사용자가 없는 경우
          
          throw new IllegalArgumentException(
@@ -53,7 +62,7 @@ public class UserController {
    }
    
    
-   @RequestMapping(value="/login_insert.do", method=RequestMethod.POST) 
+   @RequestMapping(value="/insertUser.do", method=RequestMethod.POST) 
    public String insertUser(UserVO vo) {
       
       userService.insertUser(vo);
