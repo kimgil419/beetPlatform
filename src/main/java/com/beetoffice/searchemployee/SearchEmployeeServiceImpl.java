@@ -2,16 +2,18 @@ package com.beetoffice.searchemployee;
 
 import com.beetoffice.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class SeacrhEmployeeServiceImpl implements SearchEmployeeService {
+@Service("SearchEmployeeService")
+public class SearchEmployeeServiceImpl implements SearchEmployeeService {
 
     @Autowired
     private SearchEmployeeDAO seDAO;
 
     @Override
     public List<SearchEmployeeVO> getUserList(SearchEmployeeVO vo) {
-        return null;
+        return seDAO.getList(vo);
     }
 }

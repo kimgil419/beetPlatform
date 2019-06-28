@@ -12,14 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class MeetingroomController {
+public class MeetingRoomController {
 
     @Autowired
     private MeetingRoomService meetingRoomService;
 
     @RequestMapping("/getMeetingRoomList.do")
-    public String getMeetingRoomList(MeetingRoomVO vo, Model model){
+    public String getMeetingRoomList(MeetingRoomVO vo, Model model) {
 
+        System.out.println("Dadada");
         vo.setRoom_num("room1");
 
         List<MeetingRoomVO> meetingroom =  meetingRoomService.getReserveInfo(vo);

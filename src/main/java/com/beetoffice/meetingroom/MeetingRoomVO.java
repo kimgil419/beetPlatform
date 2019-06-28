@@ -13,4 +13,6 @@ public class MeetingRoomVO {
     @Getter
     @Setter
     String start, end, user_id, dept, user_name, book_date, room_num, title;
+
+
 }
