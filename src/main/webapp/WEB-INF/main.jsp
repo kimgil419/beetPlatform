@@ -18,7 +18,7 @@
     <a href="getBoard.do">게시판 (한재정) </a>
     <a href="getRegEmployee.do"> 사원등록 (한재정) </a>
     <a href="getMeetingRoomList.do">회의실예약(김범현)</a>
-    <a href="getEmployeeList.do">사원검색(김범현)</a>
+    <a href="showEmployee.do">사원검색(김범현)</a>
 
 
 </body>

@@ -10,8 +10,18 @@
         FROM USER_DB
     </select>
 
-    <select id="selectbykeyword" resultType="searchemployee" parameterType="searchemployee">
-        SELECT
+    <select id="selectbykeyword" resultType="searchemployee" parameterType="String">
+        SELECT USER_NAME, DEPT, USER_POSITION, PHONE, CPHONE, FIRSTJOIN, EMAIL
+        FROM USER_DB
+        WHERE USER_NAME regexp #{keyword} OR
+            USER_NAME regexp #{keyword} OR
+            DEPT regexp #{keyword}  OR
+            USER_POSITION regexp #{keyword} OR
+            PHONE regexp #{keyword} OR
+            CPHONE regexp #{keyword} OR
+            FIRSTJOIN regexp #{keyword} OR
+            EMAIL regexp #{keyword};
+
     </select>
 
 
