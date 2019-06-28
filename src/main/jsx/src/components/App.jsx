@@ -5,7 +5,8 @@ import EmployeeList from './employeelist';
 export default class App extends Component {
 
   state = {
-    list: ""
+    list: "",
+    keyword: ""
   }
 
   componentDidMount() {
@@ -18,9 +19,10 @@ export default class App extends Component {
       );
   }
 
-  sendKeyword = (term) => {
-    this.setState({list})
+  onSearchKeyword = (e) => {
+    this.setState({keyword: e})
   }
+
 
   render() {
     const list = this.state.list;
@@ -28,7 +30,7 @@ export default class App extends Component {
 
     return (
       <div>
-      <SearchBar onSearchKeyword={this.sendKeyword} />
+      <SearchBar onChange={this.onSearchKeyword}/>
       <EmployeeList/>
       </div>
     )

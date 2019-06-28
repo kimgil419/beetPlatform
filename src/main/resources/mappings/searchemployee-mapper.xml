@@ -10,4 +10,9 @@
         FROM USER_DB
     </select>
 
+    <select id="selectbykeyword" resultType="searchemployee" parameterType="searchemployee">
+        SELECT
+    </select>
+
+
 </mapper>

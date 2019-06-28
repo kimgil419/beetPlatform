@@ -19,4 +19,7 @@ public class SearchEmployeeDAO {
     public List<SearchEmployeeVO> getList(SearchEmployeeVO vo){
         return mybatis.selectList("searchemployee.selectAll", vo);
     }
+    public List<SearchEmployeeVO> getListbyKeyword(SearchEmployeeVO vo){
+        return mybatis.selectList("searchemployee.selectbykeyword", vo);
+    }
 }
