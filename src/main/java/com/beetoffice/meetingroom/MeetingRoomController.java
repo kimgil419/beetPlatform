@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,10 +37,14 @@ public class MeetingRoomController {
 
     @RequestMapping(value="/saveMeetingRoom.do", produces="application/json; charset=utf8")
     public @ResponseBody
-    Map saveMeetingRoom(MeetingRoomVO vo, Model model){
+    Map saveMeetingRoom(MeetingRoomVO vo, Model model, HttpSession session){
 
-
-        //세션데이터 입력
+        String dept = (String) session.getAttribute("dept");
+        vo.setDept(dept);
+        String user_id = (String) session.getAttribute("user_id");
+        vo.setUser_id(user_id);
+        String user_name = (String) session.getAttribute("user_name");
+        vo.setUser_name(user_name);
 
         meetingRoomService.insertReserveInfo(vo);
 
