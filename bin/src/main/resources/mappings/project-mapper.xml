@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProjectDAO">
+
+	<select id="getProject_idx" parameterType="project" resultType="int">
+		SELECT PROJECT_IDX FROM PROJECT_VIEW
+		 WHERE PROJECT_MANAGER=#{project_manager}
+		   AND PROJECT_REG_DATE=(SELECT MAX(PROJECT_REG_DATE) FROM PROJECT_VIEW
+		                          WHERE PROJECT_MANAGER=#{project_manager}
+		                         )
+	</select>
+
+	<select id="getTotalPost" resultType="int">
+		SELECT COUNT(PROJECT_IDX) FROM PROJECT_VIEW
+	</select>
+
+	<select id="getProjectList" parameterType="pages" resultType="project">
+		SELECT * FROM PROJECT_VIEW ORDER BY PROJECT_IDX DESC LIMIT #{startPost}, #{countPost}
+	</select>
+	
+	<select id="getProject" parameterType="project" resultType="project">
+		SELECT * FROM PROJECT_VIEW
+		 WHERE PROJECT_IDX=#{project_idx}
+	</select>
+	
+	<select id="getSourceList" parameterType="project" resultType="source">
+		SELECT * FROM PROJECT_SOURCE
+		 WHERE PROJECT_IDX=#{project_idx}
+	</select>
+	
+	<select id="getSource" parameterType="source" resultType="source">
+		SELECT * FROM PROJECT_SOURCE
+		 WHERE SOURCE_IDX=#{source_idx}
+	</select>
+	
+	<select id="modifyProject" parameterType="project" resultType="project">
+		SELECT * FROM PROJECT_VIEW
+		 WHERE PROJECT_IDX=#{project_idx}
+	</select>
+	
+	<select id="getManager" parameterType="project" resultType="project">
+		SELECT * FROM PROJECT_VIEW
+		 WHERE PROJECT_MANAGER=#{project_manager}
+	</select>
+	
+	<delete id="deleteProject" parameterType="project">
+		DELETE FROM PROJECT_VIEW
+		 WHERE PROJECT_IDX=#{project_idx}
+	</delete>
+
+	<insert id="insertProject" parameterType="project">
+		INSERT INTO PROJECT_VIEW
+		VALUES (DEFAULT, #{project_name}, #{project_contractor}, #{project_contract_amount}, 
+			   #{project_progress}, DEFAULT, #{project_start_date}, #{project_end_date},
+			   #{project_manager}
+			   )
+	</insert>
+	
+	<insert id="insertSource" parameterType="source">
+		INSERT INTO PROJECT_SOURCE
+			   (PROJECT_IDX, SOURCE_IDX, USER_ID, SOURCE_NAME, SOURCE_PROGRESS)
+		VALUES (#{project_idx}, DEFAULT, #{user_id}, #{source_name}, #{source_progress})
+	</insert>
+	
+	<insert id="insertFunction" parameterType="source">
+		INSERT INTO PROJECT_SOURCE
+			   (PROJECT_IDX, SOURCE_IDX, USER_ID, SOURCE_NAME, SOURCE_PROGRESS)
+		VALUES (#{project_idx}, DEFAULT, #{user_id}, #{source_name}, #{source_progress})
+	</insert>
+	
+	<update id="updateProject" parameterType="project">
+		UPDATE PROJECT_VIEW
+		   SET PROJECT_CONTRACTOR=#{project_contractor}, PROJECT_NAME=#{project_name}, PROJECT_CONTRACT_AMOUNT=#{project_contract_amount},
+		   	   PROJECT_START_DATE=#{project_start_date}, PROJECT_END_DATE=#{project_end_date}, PROJECT_MANAGER=#{project_manager},
+		   	   PROJECT_MEMBERS=#{project_members}, PROJECT_PROGRESS=#{project_progress}
+		 WHERE PROJECT_IDX=#{project_idx}
+	</update>
+	
+</mapper>

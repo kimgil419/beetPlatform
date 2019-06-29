@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.beetoffice.commute.CommuteService;
 import com.beetoffice.commute.CommuteVO;
 
-@Service("Commute")
+@Service("CommuteService")
 public class CommuteServiceImpl implements CommuteService {
 
     @Autowired
@@ -29,5 +29,11 @@ public class CommuteServiceImpl implements CommuteService {
     public List<CommuteVO> getCommuteList(CommuteVO vo) {
     	return CommuteDAO.CommuteList(vo);
     }
+    @Override
+    public CommuteVO getCommute(CommuteVO vo) {
+    	return CommuteDAO.getCommute(vo);
+    }
+
+
 	
 }

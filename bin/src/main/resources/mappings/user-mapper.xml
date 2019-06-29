@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper 태그의 namespace 속성 필수 작성 -->
+<mapper namespace="UserDAO">
+	
+	 <select id="user_get"  parameterType="user" resultType="user">
+   SELECT * FROM USER_DB WHERE USER_ID = #{user_id} AND USER_PASSWORD = #{user_password}
+   </select>
+   
+   <select id="selectUserList" parameterType="user" resultType="user">
+    SELECT * FROM USER_DB WHERE 1=1
+    	 <if test="searchCondition =='NAME' ">
+			AND USER_NAME LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+		<if test="searchCondition =='PHONE' ">
+			AND PHONE LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+		<if test="searchCondition =='CPHONE' ">
+			AND CPHONE LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+		<if test="searchCondition =='DEPT' ">
+			AND DEPT LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+		<if test="searchCondition =='JOB_ID' ">
+			AND JOB_ID LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+		<if test="searchCondition =='POSITION' ">
+			AND USER_POSITION LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+   
+   </select>
+   <insert id="user_insert" parameterType="user">
+   INSERT INTO USER_DB VALUES (#{user_id},#{user_password},#{dept},#{birth},#{job_id},#{user_number},#{user_name},#{user_position})
+   </insert>
+
+
+</mapper>
+

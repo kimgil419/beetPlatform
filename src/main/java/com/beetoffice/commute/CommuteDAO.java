@@ -5,10 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.beetoffice.commute.CommuteVO;
-
 import java.util.List;
 
-@Repository
+@Repository("CommuteDAO")
 public class CommuteDAO {
 
     @Autowired
@@ -16,18 +15,23 @@ public class CommuteDAO {
 
     public CommuteDAO() {
     }
-
+                                                                                  
     public void insertCommute(CommuteVO vo){
-        mybatis.insert("commute.insertCommute", vo);
+        mybatis.insert("commuteDAO.insertCommute", vo);
     }
 
     public List<CommuteVO> CommuteList(CommuteVO vo){
-        return mybatis.selectList("commute.commuteList", vo);
+        return mybatis.selectList("commuteDAO.commuteList", vo);
 
     }
     
     public void updateCommute(CommuteVO vo){
-        mybatis.update("commute.updateCommute", vo);
+        mybatis.update("commuteDAO.updateCommute", vo);
+    }
+    
+    public CommuteVO getCommute(CommuteVO vo) {
+    	return mybatis.selectOne("commuteDAO.getCommute", vo);
+		
     }
 
 }

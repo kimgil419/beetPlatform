@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="searchemployee">
+
+    <select id="selectAll" resultType="searchemployee" parameterType="searchemployee">
+        SELECT USER_NAME, DEPT, USER_POSITION, PHONE, CPHONE, FIRSTJOIN, EMAIL
+        FROM USER_DB
+    </select>
+
+    <select id="selectbykeyword" resultType="searchemployee" parameterType="String">
+        SELECT USER_NAME, DEPT, USER_POSITION, PHONE, CPHONE, FIRSTJOIN, EMAIL
+        FROM USER_DB
+        WHERE USER_NAME regexp #{keyword} OR
+            USER_NAME regexp #{keyword} OR
+            DEPT regexp #{keyword}  OR
+            USER_POSITION regexp #{keyword} OR
+            PHONE regexp #{keyword} OR
+            CPHONE regexp #{keyword} OR
+            FIRSTJOIN regexp #{keyword} OR
+            EMAIL regexp #{keyword};
+
+    </select>
+
+
+</mapper>
