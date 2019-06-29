@@ -35,7 +35,7 @@ public class SearchEmployeeController {
         List<SearchEmployeeVO> list = searchEmployeeService.getUserListbyKeyword(keyword);
         Gson json = new Gson();
 
-        model.addAttribute("list", list);
+//        model.addAttribute("list", list);
         return json.toJson(list);
     }
 }
