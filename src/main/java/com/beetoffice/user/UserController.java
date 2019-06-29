@@ -53,7 +53,7 @@ public class UserController {
          session.setAttribute("cphone", user.getCphone());
          session.setAttribute("email", user.getEmail());
          
-         return "main";
+         return "redirect:getCommute.do";
       } else { //사용자가 없는 경우
          
          throw new IllegalArgumentException(
@@ -66,7 +66,7 @@ public class UserController {
    public String insertUser(UserVO vo) {
       
       userService.insertUser(vo);
-      return "main";
+      return "redirect:getCommute.do";
    }
    
    @RequestMapping("/logout.do")
