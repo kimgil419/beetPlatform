@@ -9,6 +9,7 @@
 <script src='js/jquery-3.4.0.js'></script>
 <script src="js/pagination.min.js"></script>
 <link href="css/pagination.css" rel='stylesheet'/>
+<script src="js/searchpeople.js"></script>
 <style>
     ul, li {
         list-style: none;
@@ -52,47 +53,17 @@
 
     $(function () {
 
-        employeelist.forEach(function (item) {
-            var string =
-                "<tr>" +
-                "<td>" + item.user_name + "</td>" +
-                "<td>" + item.dept + "</td>" +
-                "<td>" + item.user_position + "</td>" +
-                "<td>" + item.firstjoin + "</td>" +
-                "<td>" + item.email + "</td>" +
-                "<td>" + item.cphone + "</td>" +
-                "<td>" + item.phone + "</td>" +
-                "</tr>";
-            list.push(string);
+        searchpeople();
+
+        $("#searchbar").keydown(function (key) {
+            if (key.keyCode == 13) {
+                key.preventDefault();
+                searchkeyword();
+            }
         })
-
-
-        $(function () {
-
-            $('#pagination-bar').pagination({
-                dataSource: list,
-                pageSize: 10,
-                autoHidePrevious: true,
-                autoHideNext: true,
-                callback: function (data, pagination) {
-                    var html = template(data);
-                    $('#pagination-data-container').html(html);
-                }
-            });
-
-            $("#searchbar").keydown(function (key) {
-
-                if (key.keyCode == 13) {
-                    key.preventDefault();
-                    searchkeyword();
-
-                }
-            })
-        });
     })
 
     function searchkeyword() {
-
 
 
         var keyword = $("#searchbar").val();
@@ -106,30 +77,7 @@
                 employeelist = data;
                 list = [];
 
-                employeelist.forEach(function (item) {
-                    var string =
-                        "<tr>" +
-                        "<td>" + item.user_name + "</td>" +
-                        "<td>" + item.dept + "</td>" +
-                        "<td>" + item.user_position + "</td>" +
-                        "<td>" + item.firstjoin + "</td>" +
-                        "<td>" + item.email + "</td>" +
-                        "<td>" + item.cphone + "</td>" +
-                        "<td>" + item.phone + "</td>" +
-                        "</tr>";
-                    list.push(string);
-                })
-
-                $('#pagination-bar').pagination({
-                    dataSource: list,
-                    pageSize: 10,
-                    autoHidePrevious: true,
-                    autoHideNext: true,
-                    callback: function (data, pagination) {
-                        var html = template(data);
-                        $('#pagination-data-container').html(html);
-                    }
-                });
+                searchpeople();
             }
         })
 
