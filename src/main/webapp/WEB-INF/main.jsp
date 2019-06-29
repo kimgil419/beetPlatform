@@ -30,9 +30,9 @@
 <body>
 
 	<form>
-		<input type="text" name="user_id" value=" ${userName.user_id } "
+		<input type="text" name="user_id" value=" ${userInfo.user_id } "
 			readonly="readonly"> <input type="text" name="user_name"
-			value=" ${userName.user_name } 님 " readonly="readonly">
+			value=" ${userInfo.user_name } 님 " readonly="readonly">
 
     <h1>메인화면입니다</h1>
      <a 

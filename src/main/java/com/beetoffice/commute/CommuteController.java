@@ -86,10 +86,10 @@ public class CommuteController {
 		
 
 	
-		System.out.println("1122112" + session.getAttribute("userName"));
+		System.out.println("1122112" + session.getAttribute("userInfo"));
 		
 		
-		UserVO user = (UserVO) session.getAttribute("userName");
+		UserVO user = (UserVO) session.getAttribute("userInfo");
 		String id = user.getUser_id();
 		vo.setUser_id(id);
 		
