@@ -38,4 +38,16 @@ public class SearchEmployeeController {
         model.addAttribute("list", list);
         return json.toJson(list);
     }
+    
+    
+    @RequestMapping(value="/searchEmployeeForSelect.do", produces="application/json; charset=utf8")
+    public @ResponseBody
+    String searchEmployeeForSelect(SearchEmployeeVO model){
+
+        List<SearchEmployeeVO> list = searchEmployeeService.getUserList(model);
+        Gson json = new Gson();
+
+      //  model.addAttribute("list", list);
+        return json.toJson(list);
+    }
 }
