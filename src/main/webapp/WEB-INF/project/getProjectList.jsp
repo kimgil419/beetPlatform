@@ -97,7 +97,7 @@
 			</tr>
 		</tfoot>
 	</table>
-	<a href="www.naver.com">>타사이트 링크 어케검????</a>
+	<a href="https://www.naver.com/">>타사이트 링크 어케검????</a>
 	<c:choose>
 		<c:when test="${user.position == '과장' || user.position == '차장' || user.position == '부장' || user.position == '이사' || user.position == '대표이사' }">
 			<a href="writeProject.do">프로젝트 작성</a>
