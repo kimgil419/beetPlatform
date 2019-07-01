@@ -25,7 +25,9 @@ $(function() {
 
 <h1>성공입니다</h1>
 
-	<form action="insertUser.do" method="post">
+	
+	<form action="insertUser.do" method="post"
+	        enctype="multipart/form-data">
 	<table>
 		<tr>
 			<th>아이디</th>
@@ -73,7 +75,21 @@ $(function() {
 		</tr>
 		<tr>
 			<th>이메일</th>
-			<td><input type="text" name="email"></td>
+			<td><input type="text" name="user_email"></td>
+		</tr>
+		<tr>
+			<th>주소</th>
+			<td><input type="text" name="user_addr"></td>
+		</tr>
+		<tr>
+			<th>유저등급</th>
+			<td><input type="text" name="user_grd"></td>
+		</tr>
+		<tr>
+		    <th>첨부파일</th>
+		    <td>
+		        <input type="file" name="user_pictures">
+		    </td>
 		</tr>
 		<tr>
 			<td colspan="2" class="center">

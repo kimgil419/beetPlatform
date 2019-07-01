@@ -36,7 +36,7 @@
 
     <h1>메인화면입니다</h1>
      <a 
-    ${((userInfo.dept=='인사' && userInfo.user_position=='부장') || (userInfo.dept=='인사' && userInfo.user_position=='대표이사')) ? '' : 'hidden'} href="signup.jsp">직원등록 </a><!-- submit이 폼안에 있으면 온클릭으로 이동이 안되고 폼으로 지정된쪽으로 이동된다  -->
+    ${((userInfo.dept=='인사' && userInfo.user_position=='부장') || (userInfo.dept=='인사' && userInfo.user_position=='대표이사') || (userInfo.dept=='인사' && userInfo.user_position=='대리') || (userInfo.dept=='인사' && userInfo.user_position=='과장') || (userInfo.dept=='인사' && userInfo.user_position=='차장')) ? '' : 'hidden'} href="insertUser.do">직원등록 </a><!-- submit이 폼안에 있으면 온클릭으로 이동이 안되고 폼으로 지정된쪽으로 이동된다  -->
     <a href="getApprovalList.do">전자결재(김길중)</a>
     <a href="getCommuteList.do">출결관리(김길중)</a>
     <a href="getProjectList.do?currentPage=1">프로젝트 관리(김동현)</a>
