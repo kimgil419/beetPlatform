@@ -41,18 +41,18 @@
 	<div>
 		<c:choose>
 			<c:when test="${pages.currentPage == pages.totalPage }">
-				<li>다음</li>
+				<button type="button">다음</button>
 			</c:when>
 			<c:otherwise>
-				<li><a href="getProjectList.do?currentPage=${pages.currentPage + 1 }">다음</a></li>
+				<a href="getProjectList.do?currentPage=${pages.currentPage + 1 }"><button type="button">다음</button></a>
 			</c:otherwise>
 		</c:choose>
 		<c:choose>
 			<c:when test="${pages.currentPage == 1 }">
-				<li>이전</li>
+				<button type="button">이전</button>
 			</c:when>
 			<c:otherwise>
-				<li><a href="getProjectList.do?currentPage=${pages.currentPage - 1 }">이전</a></li>
+				<a href="getProjectList.do?currentPage=${pages.currentPage - 1 }"><button type="button">이전</button></a>
 			</c:otherwise>
 		</c:choose>
 	</div>
@@ -68,10 +68,10 @@
 			</c:choose>
 			<c:choose>
 				<c:when test="${pages.startPage == 1 }">
-					<li>PREV10</li>
+					<li>PREV5</li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="getProjectList.do?currentPage=${pages.startPage - 1 }">PREV10</a>
+					<li><a href="getProjectList.do?currentPage=${pages.startPage - 1 }">PREV5</a>
 				</c:otherwise>
 			</c:choose>
 				<c:forEach var="page" begin="${pages.startPage }" end="${pages.endPage }">
@@ -79,10 +79,10 @@
 				</c:forEach>
 			<c:choose>
 				<c:when test="${pages.endPage == pages.totalPage }">
-					<li>NEXT10</li>
+					<li>NEXT5</li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="getProjectList.do?currentPage=${pages.endPage + 1 }">NEXT10</a></li>
+					<li><a href="getProjectList.do?currentPage=${pages.endPage + 1 }">NEXT5</a></li>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
@@ -100,7 +100,7 @@
 			<a href="writeProject.do">프로젝트 작성</a>
 		</c:when>
 	</c:choose>
-	<a href="getCommute.do">메인화면</a>
+	<a href="getCommute.do"><button type="button">메인화면</button></a>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 </body>
 </html>
