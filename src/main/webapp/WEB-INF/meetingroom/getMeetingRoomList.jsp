@@ -7,24 +7,24 @@
 <head>
     <meta charset='utf-8' />
 </head>
-<script src='js/jquery-3.4.0.js'></script>
-<link href='library/fullcalendar/packages/core/main.css' rel='stylesheet' />
-<link href='library/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
-<link href='library/fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
-<link href='library/fullcalendar/packages/list/main.css' rel='stylesheet' />
-<script src='library/fullcalendar/packages/core/main.js'></script>
-<script src='library/fullcalendar/packages/interaction/main.js'></script>
-<script src='library/ful
+<script src='/js/jquery-3.4.0.js'></script>
+<link href='/library/fullcalendar/packages/core/main.css' rel='stylesheet' />
+<link href='/library/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
+<link href='/library/fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
+<link href='/library/fullcalendar/packages/list/main.css' rel='stylesheet' />
+<script src='/library/fullcalendar/packages/core/main.js'></script>
+<script src='/library/fullcalendar/packages/interaction/main.js'></script>
+<script src='/library/ful
 lcalendar/packages/daygrid/main.js'></script>
-<script src='library/fullcalendar/packages/timegrid/main.js'></script>
-<script src='library/fullcalendar/packages/list/main.js'></script>
-<link href="library/chenfengyuan/datepicker/dist/datepicker.css" rel="stylesheet">
-<script src="library/chenfengyuan/datepicker/dist/datepicker.js"></script>
- <script src='js/calendar.js'></script>
-<script src='library/timepicker/dist/wickedpicker.min.js'></script>
-<link href='library/timepicker/dist/wickedpicker.min.css' rel='stylesheet' />
-<script src="js/clickedRoom.js"></script>
-<script src="js/booklist.js"></script>
+<script src='/library/fullcalendar/packages/timegrid/main.js'></script>
+<script src='/library/fullcalendar/packages/list/main.js'></script>
+<link href="/library/chenfengyuan/datepicker/dist/datepicker.css" rel="stylesheet">
+<script src="/library/chenfengyuan/datepicker/dist/datepicker.js"></script>
+ <script src='/js/calendar.js'></script>
+<script src='/library/timepicker/dist/wickedpicker.min.js'></script>
+<link href='/library/timepicker/dist/wickedpicker.min.css' rel='stylesheet' />
+<script src="/js/clickedRoom.js"></script>
+<script src="/js/booklist.js"></script>
 <script>
 
   var list = ${meetingRoomList};
@@ -153,10 +153,10 @@ lcalendar/packages/daygrid/main.js'></script>
     예약하실 회의실을 선택해주세요.
     <br />
     <div style="">
-        <img src="images/mr1.jpg" id="i1"></a>
-        <img src="images/mr2.jpg" id="i2"></a><br />
-        <img src="images/mr3.jpg" id="i3"></a>
-        <img src="images/mr4.jpg" id="i4"></a>
+        <img src="/image/mr1.jpg" id="i1"></a>
+        <img src="/image/mr2.jpg" id="i2"></a><br />
+        <img src="/image/mr3.jpg" id="i3"></a>
+        <img src="/image/mr4.jpg" id="i4"></a>
     </div>
     <div>
         <form id="bookdata" method="post" action="/saveMeetingRoom.do">
