@@ -41,7 +41,7 @@ th {
 <script type="text/javascript">
 function loadRenderTemplate() {
     $.ajax({
-       url: 'beetPlatform/common/empSearch.html'
+       url: 'empSearch.html'
        , dataType: 'html'
        ,async : 'false'
           , success: function(templateData) {
@@ -54,7 +54,7 @@ function employeeSearch(){
 
 	$.ajax({
 		url: "/searchEmployeeForSelect.do", // 클라이언트가 요청을 보낼 서버의 URL 주소
-        data: keyword,                // HTTP 요청과 함께 서버로 보낼 데이터
+        data: "keyword=''",                // HTTP 요청과 함께 서버로 보낼 데이터
 		type: "POST",                             // HTTP 요청 방식(GET, POST)
 		 dataType: "json",                         // 서버에서 보내줄 데이터의 타입
 		success : function(data) {
@@ -66,7 +66,8 @@ function employeeSearch(){
 			   });
 			
 			 $('#user_id1 option').remove();
-	   for (var i = 0; i < employeeData.length; i++) {
+			 console.log(employeeData1[0]);
+	   for (var i = 0; i < employeeData1.length; i++) {
 		 $('#user_id1').append("<option value=''>"+employeeData1[i].user_name +"</option>");
   		}
 	      		console.log(employeeData);

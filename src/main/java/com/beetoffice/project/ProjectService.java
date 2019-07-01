@@ -22,5 +22,6 @@ public interface ProjectService {
 	int getProject_idx(ProjectVO vo);
 	void insertFunction(SourceVO svo);
 	void insertSource(SourceVO svo);
+	void updateSource(SourceVO svo);
 
 }

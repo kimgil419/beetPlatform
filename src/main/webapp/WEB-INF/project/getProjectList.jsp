@@ -4,19 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script>
-
-</script>
-<style>
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+<script src="/js/jquery-3.4.0.js"></script>
+<!-- <style>
 	ul, li {
 		display: inline;
 	}	
-</style>
-<title>Insert title here</title>
+</style> -->
 </head>
 <body>
 	<h1>프로젝트리스트</h1>
-	<table border='1'>
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -37,115 +36,71 @@
 				</tr>
 			</c:forEach>
 		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="5">
-					<ul>
-						<c:choose>
-							<c:when test="${pages.currentPage == 1 }">
-								<li>처음</li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="getProjectList.do?currentPage=1">처음</a></li>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${pages.startPage == 1 }">
-								<li>&lt;&lt;</li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="getProjectList.do?currentPage=${pages.startPage - 1 }">&lt;&lt;</a>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${pages.currentPage == 1 }">
-								<li>&lt;</li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="getProjectList.do?currentPage=${pages.currentPage - 1 }">&lt;</a></li>
-							</c:otherwise>
-						</c:choose>
-							<c:forEach var="page" begin="${pages.startPage }" end="${pages.endPage }">
-								<li><a href="getProjectList.do?currentPage=${page }">${page }</a></li>
-							</c:forEach>
-						<c:choose>
-							<c:when test="${pages.currentPage == pages.totalPage }">
-								<li>&gt;</li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="getProjectList.do?currentPage=${pages.currentPage + 1 }">&gt;</a></li>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${pages.endPage == pages.totalPage }">
-								<li>&gt;&gt;</li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="getProjectList.do?currentPage=${pages.endPage + 1 }">&gt;&gt;</a></li>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${pages.currentPage == pages.totalPage }">
-								<li>끝</li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="getProjectList.do?currentPage=${pages.totalPage }">끝</a></li>
-							</c:otherwise>
-						</c:choose>
-					</ul>
-				</td>
-			</tr>
-		</tfoot>
 	</table>
-	<a href="https://www.naver.com/">>타사이트 링크 어케검????</a>
+	<hr>
+	<div>
+		<c:choose>
+			<c:when test="${pages.currentPage == pages.totalPage }">
+				<button type="button">다음</button>
+			</c:when>
+			<c:otherwise>
+				<a href="getProjectList.do?currentPage=${pages.currentPage + 1 }"><button type="button">다음</button></a>
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${pages.currentPage == 1 }">
+				<button type="button">이전</button>
+			</c:when>
+			<c:otherwise>
+				<a href="getProjectList.do?currentPage=${pages.currentPage - 1 }"><button type="button">이전</button></a>
+			</c:otherwise>
+		</c:choose>
+	</div>
+	<div class="text-center">
+		<ul class="pagination">
+			<c:choose>
+				<c:when test="${pages.currentPage == 1 }">
+					<li>처음</li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="getProjectList.do?currentPage=1">처음</a></li>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${pages.startPage == 1 }">
+					<li>PREV5</li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="getProjectList.do?currentPage=${pages.startPage - 1 }">PREV5</a>
+				</c:otherwise>
+			</c:choose>
+				<c:forEach var="page" begin="${pages.startPage }" end="${pages.endPage }">
+					<li><a href="getProjectList.do?currentPage=${page }">${page }</a></li>
+				</c:forEach>
+			<c:choose>
+				<c:when test="${pages.endPage == pages.totalPage }">
+					<li>NEXT5</li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="getProjectList.do?currentPage=${pages.endPage + 1 }">NEXT5</a></li>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${pages.currentPage == pages.totalPage }">
+					<li>마지막</li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="getProjectList.do?currentPage=${pages.totalPage }">마지막</a></li>
+				</c:otherwise>
+			</c:choose>
+		</ul>
+	</div>
 	<c:choose>
-		<c:when test="${user.position == '과장' || user.position == '차장' || user.position == '부장' || user.position == '이사' || user.position == '대표이사' }">
+		<c:when test="${userInfo.user_position == '과장' || userInfo.user_position == '차장' || userInfo.user_position == '부장' || userInfo.user_position == '이사' || userInfo.user_position == '대표이사' }">
 			<a href="writeProject.do">프로젝트 작성</a>
 		</c:when>
-		<c:otherwise>
-			<a href="#">직급이 딸려요</a>
-		</c:otherwise>
 	</c:choose>
-	<a href="writeProject.do">프로젝트 작성2</a>
-	<a href="http://localhost:9999/main.jsp">메인화면main.jsp</a>
-	<a href="http://localhost:9999/login.do">메인화면login.do</a>
-	<a href="login.do">메인화면 순수 login.do</a>
-	
+	<a href="getCommute.do"><button type="button">메인화면</button></a>
+<script type="text/javascript" src="js/bootstrap.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
