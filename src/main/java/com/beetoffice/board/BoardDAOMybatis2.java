@@ -49,6 +49,10 @@ public class BoardDAOMybatis2 {
 	public List<BoardVO> getBoardList(BoardVO vo) {
 		System.out.println("===> Mybatis2로 getBoardList() 실행");
 		return mybatis.selectList("BoardDAO.getBoardList", vo);
+	}
+	public void getBoardInsert(BoardVO vo) {
+		System.out.println("===> Mybatis2로 deleteBoard() 실행");
+		mybatis.update("BoardDAO.getBoardInsert",vo);
 	}	
 }
 

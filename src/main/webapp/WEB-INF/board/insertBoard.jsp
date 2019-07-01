@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>글등록</title>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <style>
 	#container {
 		width: 700px;
@@ -20,6 +21,16 @@
 	.center { text-align: center; }
 	.border-none, .border-none td { border: none; }
 </style>
+<script>
+function categoryChange() {
+	var sel = $("#ss option:selected").val();
+	var se = "";
+	if (sel != "X"){
+		
+		$("#category").val(sel); 
+	}
+}
+</script>
 </head>
 <body>
 
@@ -33,25 +44,36 @@
 		<tr>
 			<th width="70">제목</th>
 			<td>
-				<input type="text" name="title" size="30">
+				<input type="text" name="t_title" size="30">
 			</td>
 		</tr>
 		<tr>
 			<th>작성자</th>
 			<td>
-				<input type="text" name="writer">
+				<input type="text" name="user_name" value="${user_name }">
 			</td>
+		</tr>
+		<tr>
+		    <th>본문</th>
+		    <td>
+		        <select name="ss" id="ss" onchange="categoryChange()">
+                    <option value="X">선택사항</option>
+                    <option value="Y">공지사항</option>
+                    <option value="N">일반글</option>      
+                </select>
+                <input type="text" name="t_noti" id="category">
+		    </td>
 		</tr>
 		<tr>
 			<th>내용</th>
 			<td>
-				<textarea name="content" rows="10" cols="40"></textarea>
+				<textarea name="t_content" rows="10" cols="40"></textarea>
 			</td>
 		</tr>
 		<tr>
 		    <th>업로드</th>
 		    <td>
-		        <input type="file" name="uploadFile">
+		        <input type="file" name="t_imgs">
 		    </td>
 		</tr>
 		<tr>

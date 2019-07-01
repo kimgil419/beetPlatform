@@ -46,6 +46,12 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.getBoardList(vo);
 	}
 
+	@Override
+	public void getBoardInsert(BoardVO vo) {
+		boardDAO.getBoardInsert(vo);
+		
+	}
+
 }
 
 

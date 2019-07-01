@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.beetoffice.user.UserVO;
 
 
 
@@ -41,16 +45,27 @@ public class BoardController {
 		return conditionMap;
 	}
 	
+	@RequestMapping("/getBoardInsert.do")
+	public String getBoardInsert(BoardVO vo, HttpSession session) {
+		System.out.println(">>>조회수를 위한것 - getBoardInsert.do");
+		System.out.println("수정요청 vo : " + vo);
+		int a = vo.getSeq();
+		String b = String.valueOf(a);
+		session.setAttribute("mySeq", b);
+		boardService.getBoardInsert(vo);
+		return "redirect:getBoard.do";
+	}
 	
 	//리턴타입 ModleAndView -> String 변경 통일
 	//데이타 저장타입 : ModleAndView -> Model
 	@RequestMapping("/getBoard.do")
-	public String getBoard(BoardVO vo, Model model) {
+	public String getBoard(BoardVO vo, Model model, HttpSession session) {
 		System.out.println(">>> 글 상세 조회 처리 - getBoard()");
-		
+		String a = (String) session.getAttribute("mySeq");
+		vo.setSeq(Integer.parseInt(a));
 		model.addAttribute("board", boardService.getBoard(vo)); //데이타 저장
 		
-		return "getBoard.jsp";
+		return "board/getBoard";
 	}
 	
 	//리턴타입 ModleAndView -> String 변경 통일
@@ -70,9 +85,17 @@ public class BoardController {
 	}	
 	
 	@RequestMapping("/insertBoard.do")
-	public String insertBoard(BoardVO vo) 
+	public String insertBoard(BoardVO vo, HttpSession session) 
 			throws IllegalStateException, IOException {
 		System.out.println(">>> 글 등록 처리 - insertBoard()");
+		vo.setCnt(0);
+		String a = (String) session.getAttribute("user_id");
+		String b = (String) session.getAttribute("dept");
+		String c = (String) session.getAttribute("user_position");
+		
+		vo.setUser_id(a);
+		vo.setDept(b);
+		vo.setUser_position(c);
 		
 		/* ***** 파일 업로드 처리 *************
 		 * MultipartFile 인터페이스 주요 메소드
@@ -84,13 +107,22 @@ public class BoardController {
 		System.out.println("uploadFile : " + uploadFile);
 		if (!uploadFile.isEmpty()) {//파일이 있으면
 			String fileName = uploadFile.getOriginalFilename();
-			uploadFile.transferTo(new File("c:/MyStudy/temp/" + fileName));
+			uploadFile.transferTo(new File("C:/Users/HB04-01/git/beetPlatform/src/main/resources/static/image/" + fileName));
 			
 			vo.setT_img(fileName);
 		} 
 		
 		boardService.insertBoard(vo);
-		return "getBoardList.do";
+		return "redirect:getBoardList.do";
+	}
+	
+	@RequestMapping("/insertBoardf.do")
+	public String insertBoardf(BoardVO vo) 
+			throws IllegalStateException, IOException {
+		System.out.println(">>> 글 등록 처리 - insertBoardf()");
+		
+
+		return "board/insertBoard";
 	}
 	
 	@RequestMapping("/updateBoard.do")

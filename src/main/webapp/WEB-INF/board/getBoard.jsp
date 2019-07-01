@@ -36,22 +36,22 @@
 		<tr>
 			<th width="70">제목</th>
 			<td><input type="text" name="title" 
-						value="${board.title}">
+						value="${board.t_title}">
 			</td>
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td>${board.writer }</td>
+			<td>${user_name }</td>
 		</tr>
 		<tr>
 			<th>내용</th>
 			<td><textarea rows="10" cols="40" 
-					name="content">${board.content}</textarea>
+					name="content">${board.t_content}</textarea>
 			</td>
 		</tr>
 		<tr>
 			<th>등록일</th>
-			<td>${board.regdate}</td>
+			<td>${board.t_regdate}</td>
 		</tr>
 		<tr>
 			<th>조회수</th>
@@ -66,7 +66,7 @@
 	</form>
 	<hr>
 	<p>
-		<a href="insertBoard.jsp">글쓰기</a>&nbsp;&nbsp;
+		<a href="insertBoardf.do">글쓰기</a>&nbsp;&nbsp;
 		<a href="deleteBoard.do?seq=${board.seq }">글삭제</a>&nbsp;&nbsp;
 		<a href="getBoardList.do">글목록</a>
 	</p>

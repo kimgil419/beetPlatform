@@ -73,7 +73,7 @@
 		<tr>
 		
 			<td class=${(board.t_noti == 'Y') ? 'notie' : '' }>
-				<a href="getBoard.do?seq=${board.seq }">
+				<a href="getBoardInsert.do?seq=${board.seq }">
 					${board.t_title }
 				</a>
 			</td>
@@ -84,7 +84,7 @@
 		</c:forEach>
 	</table>
 	<br>
-	<p><a href="insertBoard.jsp">새글 등록</a></p>
+	<p><a href="insertBoardf.do">새글 등록</a></p>
 </div>
 
 

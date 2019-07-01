@@ -7,15 +7,23 @@
 <mapper namespace="BoardDAO">
 	
 	<insert id="insertBoard"  parameterType="board">
-		INSERT INTO BOARD (SEQ, TITLE, WRITER, CONTENT) 
-		VALUES ((SELECT NVL(MAX(SEQ),0) + 1 FROM BOARD), 
-				#{title}, #{writer}, #{content})
+		INSERT INTO BOARD (T_REGDATE,T_TITLE, USER_NAME, T_CONTENT,T_NOTI,T_IMG,CNT,USER_ID,DEPT,USER_POSITION) 
+		VALUES (NOW(), 
+				#{t_title}, #{user_name}, #{t_content}, 
+				#{t_noti}, #{t_img}, 
+				#{cnt}, #{user_id}, #{dept}, #{user_position})
 	</insert>
 	
 	<update id="updateBoard"  parameterType="board">
 		UPDATE BOARD SET TITLE=#{title}, CONTENT=#{content} 
 		WHERE SEQ=#{seq}
 	</update>
+	
+	<update id="getBoardInsert"  parameterType="board">
+		UPDATE BOARD SET CNT = CNT + 1
+		WHERE SEQ=#{seq}
+	</update>
+	
 	
 	<delete id="deleteBoard"  parameterType="board">
 		DELETE FROM BOARD WHERE SEQ = #{seq}
