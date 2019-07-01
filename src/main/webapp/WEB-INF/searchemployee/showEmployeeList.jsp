@@ -108,5 +108,4 @@
 <div id="pagination-data-container"></div>
 <div id="pagination-bar"></div>
 </body>
-
 </html>
