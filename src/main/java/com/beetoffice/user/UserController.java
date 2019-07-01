@@ -69,6 +69,32 @@ public class UserController {
       if(vo.getDeparture()==null) {
     	  return "signup";
       }
+      
+      if("".equals(vo.getDeparture())) {
+    	  vo.setDeparture("0000-00-00");
+      }else if(!"".equals(vo.getDeparture())) {
+    	  vo.setUser_grd("1");
+      }
+      
+      if("사원".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("2");
+      }else if("주임".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("3");
+      }else if("대리".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("4");
+      }else if("과장".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("5");
+      }else if("차장".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("6");
+      }else if("부장".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("7");
+      }else if("이사".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("8");
+      }else if("대표이사".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("9");
+      }
+      
+      
 	     MultipartFile uploadFile = vo.getUser_pictures();
 	     
  		System.out.println("uploadFile : " + uploadFile);

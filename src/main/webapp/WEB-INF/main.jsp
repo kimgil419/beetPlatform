@@ -40,7 +40,7 @@
     <a href="getApprovalList.do">전자결재(김길중)</a>
     <a href="getCommuteList.do">출결관리(김길중)</a>
     <a href="getProjectList.do?currentPage=1">프로젝트 관리(김동현)</a>
-    <a href="getBoard.do">게시판 (한재정) </a>
+    <a href="getBoardList.do">게시판 (한재정) </a>
     <a href="getRegEmployee.do"> 사원등록 (한재정) </a>
     <a href="getMeetingRoomList.do">회의실예약(김범현)</a>
     <a href="showEmployee.do">사원검색(김범현)</a>

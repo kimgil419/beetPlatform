@@ -82,10 +82,6 @@ $(function() {
 			<td><input type="text" name="user_addr"></td>
 		</tr>
 		<tr>
-			<th>유저등급</th>
-			<td><input type="text" name="user_grd"></td>
-		</tr>
-		<tr>
 		    <th>첨부파일</th>
 		    <td>
 		        <input type="file" name="user_pictures">
