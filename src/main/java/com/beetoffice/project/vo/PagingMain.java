@@ -22,5 +22,11 @@ public class PagingMain {
 		System.out.println("startPost: " + pu.getStartPost());
 		System.out.println("endPost: " + pu.getEndPost());
 		
+		String code = "<!DOCTYPE html>\r\n" + 
+				"<html>";
+		
+		code.replace("<", "&lt;");
+		
+		System.out.println("code: " + code);
 	}
 }
