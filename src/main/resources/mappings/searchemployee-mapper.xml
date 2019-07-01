@@ -6,12 +6,12 @@
 <mapper namespace="searchemployee">
 
     <select id="selectAll" resultType="searchemployee" parameterType="searchemployee">
-        SELECT USER_NAME, DEPT, USER_POSITION, PHONE, CPHONE, FIRSTJOIN, EMAIL
+        SELECT USER_NAME, DEPT, USER_POSITION, PHONE, CPHONE, FIRSTJOIN, USER_EMAIL
         FROM USER_DB
     </select>
 
     <select id="selectbykeyword" resultType="searchemployee" parameterType="String">
-        SELECT USER_NAME, DEPT, USER_POSITION, PHONE, CPHONE, FIRSTJOIN, EMAIL
+        SELECT USER_NAME, DEPT, USER_POSITION, PHONE, CPHONE, FIRSTJOIN, USER_EMAIL
         FROM USER_DB
         WHERE USER_NAME regexp #{keyword} OR
             USER_NAME regexp #{keyword} OR
@@ -20,7 +20,7 @@
             PHONE regexp #{keyword} OR
             CPHONE regexp #{keyword} OR
             FIRSTJOIN regexp #{keyword} OR
-            EMAIL regexp #{keyword};
+            USER_EMAIL regexp #{keyword};
 
     </select>
 
