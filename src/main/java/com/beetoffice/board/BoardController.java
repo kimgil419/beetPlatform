@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.beetoffice.user.UserVO;
 
 
 
@@ -168,11 +167,30 @@ public class BoardController {
 		}
 	}
 	
-	@RequestMapping("/deleteBoard.do")
-	public String deleteBoard(BoardVO vo) {
+	
+	
+	@RequestMapping(value="/deleteBoard.do", method=RequestMethod.POST)
+	public String deleteBoard(BoardVO vo, HttpSession session,Model model,@RequestParam String password) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
+		
+		String user_password = (String) session.getAttribute("user_password");
+		System.out.println(">>> 글 삭제 처리 - deleteBoard()" + password);
+		System.out.println(">>> 글 삭제 처리 - deleteBoard()" + user_password);
+		if(!password.equals(user_password)) {
+			 model.addAttribute("dlmsg", "비밀번호");
+	    	  return "board/deleteBoards";
+		} else {
 		boardService.deleteBoard(vo);
 		
-		return "getBoardList.do";
+		return "redirect:getBoardList.do";
+		}
+	}
+	
+	@RequestMapping("/deleteBoards.do")
+	public String deleteBoards(BoardVO vo,Model model) {
+		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
+		boardService.getBoard(vo);
+		model.addAttribute("board", vo);
+		return "board/deleteBoards";
 	}
 }

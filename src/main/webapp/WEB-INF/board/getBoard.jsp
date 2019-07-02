@@ -64,7 +64,7 @@
 			<th>내용</th>
 			
 			<td style="width: 700px; height: 500px;">
-			<div style="border: 5px solid #5D6F5E; padding: 7px;">
+			<div style="border: 5px solid #A9F5A9; padding: 7px; display: ${(board.t_img == null) ? 'none':'' };" >
 			<img class="fancy"  style="display: ${(board.t_img == null) ? 'none':'' };" src ="image/${board.t_img}" width="500px;" height="350px;" alt="boardImage"> </div> <!-- $는 .equals는 반응하지 않는다 'null'은 안된다 -->
 					<p>
 					${board.t_content}
@@ -89,7 +89,7 @@
 	<p>
 		<a href="insertBoardf.do">글쓰기</a>&nbsp;&nbsp;
 		
-		<a href="deleteBoard.do?seq=${board.seq }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
+		<a href="deleteBoards.do?seq=${board.seq }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
 		
 		<a href="getBoardList.do">글목록</a>
 	</p>
