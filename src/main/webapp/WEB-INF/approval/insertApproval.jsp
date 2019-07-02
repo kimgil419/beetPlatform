@@ -66,9 +66,13 @@ function employeeSearch(){
 			   });
 			
 			 $('#user_id1 option').remove();
+			 $('#user_id2 option').remove();
+			 $('#user_id3 option').remove();
 			 console.log(employeeData1[0]);
 	   for (var i = 0; i < employeeData1.length; i++) {
 		 $('#user_id1').append("<option value=''>"+employeeData1[i].user_name +"</option>");
+		 $('#user_id2').append("<option value=''>"+employeeData1[i].user_name +"</option>");
+		 $('#user_id3').append("<option value=''>"+employeeData1[i].user_name +"</option>");
   		}
 	      		console.log(employeeData);
 				console.log(employeeData1);
@@ -108,12 +112,21 @@ function  renderSearchTmpl(){
 					</select>
 						<input type="button" value="찾기" onclick="employeeSearch()"></input>
 					</td>
-					<td width="70">결재2<input id="user_id2" type="text"
-						name="user_id"></td>
+					<td width="140" id="empSearch">결재1 
+					<select id="user_id2" name="user_id">
+							<option value="1">1</option>
+							<option value="2">2</option>
+					</select>
+						<input type="button" value="찾기" onclick="employeeSearch()"></input>
+					</td>
 
-					<td width="70">결재3<input id="user_id3" type="text"
-						name="user_id"></td>
-
+					<td width="140" id="empSearch">결재1 
+					<select id="user_id3" name="user_id">
+							<option value="1">1</option>
+							<option value="2">2</option>
+					</select>
+						<input type="button" value="찾기" onclick="employeeSearch()"></input>
+					</td>
 				</tr>
 
 			</table>
