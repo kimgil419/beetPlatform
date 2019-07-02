@@ -20,7 +20,7 @@
             PHONE regexp #{keyword} OR
             CPHONE regexp #{keyword} OR
             FIRSTJOIN regexp #{keyword} OR
-            EMAIL regexp #{keyword};
+            USER_EMAIL regexp #{keyword};
 
     </select>
 

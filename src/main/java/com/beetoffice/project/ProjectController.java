@@ -104,46 +104,31 @@ public class ProjectController {
 		
 		return "project/insertProject";
 	}
+	
+	@RequestMapping("modifySource.do")
+	public String modifySource(SourceVO vo, Model model) {
+		System.out.println(">> Controller: modifySource()");
+		System.out.println("sourceVO: " + vo);
+		System.out.println("source_idx: " + vo.getSource_idx());
+		
+		model.addAttribute("source", projectService.getSource(vo));
+		return "project/modifySource";
+	}
+	
+	@RequestMapping("updateSource.do")
+	public String updateSource(SourceVO vo, Model model) {
+		System.out.println(">> Controller: updateSource");
+		System.out.println(">>>> souce원본: " + vo.getSource_code());
+		
+		String source_code = vo.getSource_code().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("\'", "&39#");
+		vo.setSource_code(source_code);
+		
+		System.out.println(">>>> source수정: " + vo.getSource_code());
+		
+		projectService.updateSource(vo);
+		
+		return "redirect:getSource.do?source_idx=" + vo.getSource_idx();
+	}
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -79,4 +79,10 @@
 		 WHERE PROJECT_IDX=#{project_idx}
 	</update>
 	
+	<update id="updateSource" parameterType="source">
+		UPDATE PROJECT_SOURCE
+		   SET SOURCE_NAME=#{source_name}, SOURCE_CODE=#{source_code}
+		 WHERE SOURCE_IDX=#{source_idx}
+	</update>
+	
 </mapper>

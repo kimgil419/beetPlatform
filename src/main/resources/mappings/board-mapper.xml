@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper 태그의 namespace 속성 필수 작성 -->
+<mapper namespace="BoardDAO">
+	
+	<insert id="insertBoard"  parameterType="board">
+		INSERT INTO BOARD (T_REGDATE,T_TITLE, USER_NAME, T_CONTENT,T_NOTI,T_IMG,CNT,USER_ID,DEPT,USER_POSITION) 
+		VALUES (NOW(), 
+				#{t_title}, #{user_name}, #{t_content}, 
+				#{t_noti}, #{t_img}, 
+				#{cnt}, #{user_id}, #{dept}, #{user_position})
+	</insert>
+	
+	<update id="updateBoard"  parameterType="board">
+		UPDATE BOARD SET TITLE=#{title}, CONTENT=#{content} 
+		WHERE SEQ=#{seq}
+	</update>
+	
+	<update id="getBoardInsert"  parameterType="board">
+		UPDATE BOARD SET CNT = CNT + 1
+		WHERE SEQ=#{seq}
+	</update>
+	
+	
+	<delete id="deleteBoard"  parameterType="board">
+		DELETE FROM BOARD WHERE SEQ = #{seq}
+	</delete>
+	
+	<select id="getBoard" parameterType="board"
+		resultType="board">
+		SELECT * FROM BOARD WHERE SEQ = #{seq}
+	</select>
+	
+	<select id="getBoardList" parameterType="board"
+		resultType="board">
+		(SELECT * 
+		FROM BOARD 
+		WHERE T_NOTI = 'Y')
+		
+		UNION ALL
+		
+		(SELECT * 
+		FROM BOARD 
+		WHERE T_NOTI = 'N')
+		
+		ORDER BY T_NOTI = 'N',T_NOTI = 'Y'
+	</select>
+	
+	
+	<!--  <select id="ugetBoard" parameterType="user"
+		resultType="user">
+	SELECT * FROM USERS WHERE ID = #{id} AND PASSWORD = #{password}
+	</select>-->
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

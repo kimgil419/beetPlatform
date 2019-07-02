@@ -6,7 +6,7 @@ function searchpeople(){
             "<td>" + item.dept + "</td>" +
             "<td>" + item.user_position + "</td>" +
             "<td>" + item.firstjoin + "</td>" +
-            "<td>" + item.email + "</td>" +
+            "<td>" + item.user_email + "</td>" +
             "<td>" + item.cphone + "</td>" +
             "<td>" + item.phone + "</td>" +
             "</tr>";

@@ -90,14 +90,12 @@ public class ProjectServiceImpl implements ProjectService {
 		System.out.println(">> Service: getProject_idx()");
 		return projectDAO.getProject_idx(vo);
 	}
-	
-	
-	
 
-	
-	
-	
-	
+	@Override
+	public void updateSource(SourceVO svo) {
+		System.out.println(">> Service: updateSource()");
+		projectDAO.updateSource(svo);
+	}
 
 	
 	

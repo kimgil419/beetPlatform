@@ -8,6 +8,6 @@ import lombok.ToString;
 public class SearchEmployeeVO {
 
     @Getter @Setter
-    String firstjoin, dept, user_name, user_position, phone, cphone, email;
+    String firstjoin, dept, user_name, user_position, phone, cphone, user_email;
 
 }

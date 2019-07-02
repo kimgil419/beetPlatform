@@ -83,4 +83,9 @@ public class ProjectDAO {
 		System.out.println(">> DAO: insertSource()");
 		mybatis.insert("ProjectDAO.insertFunction", svo);
 	}
+	
+	public void updateSource(SourceVO svo) {
+		System.out.println(">> DAO: updateSource()");
+		mybatis.update("ProjectDAO.updateSource", svo);
+	}
 }

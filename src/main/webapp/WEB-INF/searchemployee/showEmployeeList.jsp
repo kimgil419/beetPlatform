@@ -107,9 +107,5 @@
 </div>
 <div id="pagination-data-container"></div>
 <div id="pagination-bar"></div>
-<div>
-    <a href="http://naver.com">dsda</a>
-</div>
 </body>
-
 </html>

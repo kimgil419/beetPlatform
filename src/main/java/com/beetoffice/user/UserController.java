@@ -1,17 +1,16 @@
 package com.beetoffice.user;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -23,19 +22,22 @@ public class UserController {
   
    @RequestMapping(value="/login.do", method=RequestMethod.POST) 
    public String login(UserVO vo, 
-         HttpSession session) {//UserVO : Command 객체
+         HttpSession session, Model model) {//UserVO : Command 객체
       System.out.println(">> 로그인 처리");
       System.out.println("전달받은 vo: " + vo);
       
       
       //예외처리를 위해 예외 발생 시키기
-            if (vo.getUser_id() == null || vo.getUser_id().equals("")) {
-               throw new IllegalArgumentException(
-                     "아이디는 반드시 입력해야 합니다.");
-            }
+//            if (vo.getUser_id() == null || vo.getUser_id().equals("")) {
+//            	model.addAttribute("lgmsg", "아이디");
+//            	
+//            	return "login";
+//            }
+            
+       
       
       UserVO user = userService.getUser(vo);
-      
+   
       if (user != null) { //사용자가 존재하는 경우
     	   
     	 
@@ -51,20 +53,62 @@ public class UserController {
          session.setAttribute("user_position", user.getUser_position());
          session.setAttribute("phone", user.getPhone());
          session.setAttribute("cphone", user.getCphone());
-         session.setAttribute("email", user.getEmail());
+         session.setAttribute("user_email", user.getUser_email());
          
          return "redirect:getCommute.do";
       } else { //사용자가 없는 경우
          
-         throw new IllegalArgumentException(
-               "등록되지 않은 직원입니다 인사과에 문의해주세요.");
+    	  model.addAttribute("lgmsg", "아이디");
+    	  return "login";
       }
+      
+    
    }
    
    
-   @RequestMapping(value="/insertUser.do", method=RequestMethod.POST) 
-   public String insertUser(UserVO vo) {
+   @RequestMapping(value="/insertUser.do", method = {RequestMethod.GET, RequestMethod.POST})
+
+
+   public String insertUser(UserVO vo) throws IllegalStateException, IOException {
+      if(vo.getDeparture()==null) {
+    	  return "signup";
+      }
       
+      if("".equals(vo.getDeparture())) {
+    	  vo.setDeparture("0000-00-00");
+      }else if(!"".equals(vo.getDeparture())) {
+    	  vo.setUser_grd("1");
+      }
+      
+      if("사원".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("2");
+      }else if("주임".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("3");
+      }else if("대리".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("4");
+      }else if("과장".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("5");
+      }else if("차장".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("6");
+      }else if("부장".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("7");
+      }else if("이사".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("8");
+      }else if("대표이사".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("9");
+      }
+      
+      
+	     MultipartFile uploadFile = vo.getUser_pictures();
+	     
+ 		System.out.println("uploadFile : " + uploadFile);
+ 		if (!uploadFile.isEmpty()) {//파일이 있으면
+ 			String fileName = uploadFile.getOriginalFilename();
+ 			uploadFile.transferTo(new File("C:/Users/HB04-01/git/beetPlatform/src/main/resources/static/image/" + fileName));
+ 			
+ 			vo.setUser_picture(fileName);
+ 		} 
+	   
       userService.insertUser(vo);
       return "redirect:getCommute.do";
    }
