@@ -26,21 +26,22 @@ public class UserController {
   
    @RequestMapping(value="/login.do", method=RequestMethod.POST) 
    public String login(UserVO vo, 
-         HttpSession session) {//UserVO : Command 객체
+         HttpSession session, Model model) {//UserVO : Command 객체
       System.out.println(">> 로그인 처리");
       System.out.println("전달받은 vo: " + vo);
       
       
       //예외처리를 위해 예외 발생 시키기
-            if (vo.getUser_id() == null || vo.getUser_id().equals("")) {
-               throw new IllegalArgumentException(
-                     "아이디는 반드시 입력해야 합니다.");
-            }
+//            if (vo.getUser_id() == null || vo.getUser_id().equals("")) {
+//            	model.addAttribute("lgmsg", "아이디");
+//            	
+//            	return "login";
+//            }
             
        
       
       UserVO user = userService.getUser(vo);
-      
+   
       if (user != null) { //사용자가 존재하는 경우
     	   
     	 
@@ -61,9 +62,11 @@ public class UserController {
          return "redirect:getCommute.do";
       } else { //사용자가 없는 경우
          
-         throw new IllegalArgumentException(
-               "등록되지 않은 직원입니다 인사과에 문의해주세요.");
+    	  model.addAttribute("lgmsg", "아이디");
+    	  return "login";
       }
+      
+    
    }
    
    
@@ -74,6 +77,32 @@ public class UserController {
       if(vo.getDeparture()==null) {
     	  return "signup";
       }
+      
+      if("".equals(vo.getDeparture())) {
+    	  vo.setDeparture("0000-00-00");
+      }else if(!"".equals(vo.getDeparture())) {
+    	  vo.setUser_grd("1");
+      }
+      
+      if("사원".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("2");
+      }else if("주임".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("3");
+      }else if("대리".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("4");
+      }else if("과장".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("5");
+      }else if("차장".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("6");
+      }else if("부장".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("7");
+      }else if("이사".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("8");
+      }else if("대표이사".equals(vo.getUser_position())) {
+    	  vo.setUser_grd("9");
+      }
+      
+      
 	     MultipartFile uploadFile = vo.getUser_pictures();
 	     
  		System.out.println("uploadFile : " + uploadFile);

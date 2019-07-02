@@ -20,12 +20,35 @@
 	.center { text-align: center; }
 </style>
 </head>
+<script>
+function send_go(frm) {
+	if (frm.user_id.value.trim() == "") {
+		alert("아이디(ID)는 필수 입력항목입니다.\n입력하세요.");
+		frm.id.value = "";
+		frm.id.focus();
+		return false;
+		
+	} else if(frm.user_password.value.trim() == "") {
+		alert("비밀번호도 필수 입력항목입니다.\n입력하세요.");
+		frm.id.value = "";
+		frm.id.focus();
+		return false;
+	} 
+	frm.action = "login.do";
+	frm.submit();
+	
+}
+var result = '${lgmsg}';
+if(result == '아이디') {
+alert(result + '나 비밀번호가 틀리셨습니다 인사과에 문의해주세요'); //아무 조건도 안걸면 계속 나온다 전달도 안된다
+}
+</script>
 <body>
 
 <div id="container">
 	<h1>로그인</h1>
 	<hr>
-	<form action="login.do" method="post">
+	<form method="post">
 	<table>
 		<tr>
 			<th>아이디</th>
@@ -37,7 +60,7 @@
 		</tr>
 		<tr>
 			<td colspan="2" class="center">
-				<input type="submit" value="로그인">
+				<input type="submit" value="로그인" onclick="send_go(this.form)">
 			</td>
 		</tr>
 	</table>

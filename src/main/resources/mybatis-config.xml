@@ -13,6 +13,7 @@
         <typeAlias alias="project" type="com.beetoffice.project.vo.ProjectVO"/>
         <typeAlias alias="source" type="com.beetoffice.project.vo.SourceVO"/>
         <typeAlias alias="pages" type="com.beetoffice.project.vo.PagingVO"/>
+        <typeAlias alias="board" type="com.beetoffice.board.BoardVO"/>
     </typeAliases>
 
     <mappers>
@@ -23,6 +24,7 @@
         <mapper resource="mappings/companyevent-mapper.xml"/>
         <mapper resource="mappings/searchemployee-mapper.xml"/>
         <mapper resource="mappings/project-mapper.xml"/>
+        <mapper resource="mappings/board-mapper.xml"/>
     </mappers>
 </configuration>
 
