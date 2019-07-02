@@ -69,7 +69,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/updateBoardf.do")
-	public String updateBoardf(BoardVO vo, Model model) {
+	public String updateBoardf(BoardVO vo, Model model, HttpSession session) {
+		
 		model.addAttribute("board", boardService.updateBoardf(vo));
 		return "board/updateBoard";
 	}
@@ -95,7 +96,7 @@ public class BoardController {
 			throws IllegalStateException, IOException {
 		System.out.println(">>> 글 등록 처리 - insertBoard()");
 		
-		
+	
 		vo.setCnt(0);
 		String a = (String) session.getAttribute("user_id");
 		String b = (String) session.getAttribute("dept");
@@ -139,12 +140,32 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/updateBoard.do")
-	public String updateBoard(@ModelAttribute("board") BoardVO vo) {
+	public String updateBoard(BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
-		System.out.println("수정요청 vo : " + vo);
+		
+		BoardVO bvo = boardService.getBoard(vo);
+		//bvo.getT_img();
+		MultipartFile uploadFile = vo.getT_imgs();
+		System.out.println("uploadFile : " + uploadFile);
+		if (!uploadFile.isEmpty()) {//파일이 있으면
+			String fileName = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(new File("C:/Users/HB04-01/git/beetPlatform/src/main/resources/static/image/" + fileName));
+			
+			vo.setT_img(fileName);
+			System.out.println("수정요청 vo : " + uploadFile.getName());
+			System.out.println("수정요청 vo : " + vo);
+			
+			boardService.updateBoard(vo);
+			return "redirect:getBoardList.do";
+		} else {
+		
+		vo.setT_img(bvo.getT_img());
+		
+		//System.out.println("수정요청 vo : " + igg);
 		
 		boardService.updateBoard(vo);
-		return "getBoardList.do";
+		return "redirect:getBoardList.do";
+		}
 	}
 	
 	@RequestMapping("/deleteBoard.do")

@@ -15,7 +15,7 @@
 	</insert>
 	
 	<update id="updateBoard"  parameterType="board">
-		UPDATE BOARD SET TITLE=#{title}, CONTENT=#{content} 
+		UPDATE BOARD SET T_TITLE=#{t_title}, T_CONTENT=#{t_content}, T_IMG=#{t_img} 
 		WHERE SEQ=#{seq}
 	</update>
 	

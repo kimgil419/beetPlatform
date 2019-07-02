@@ -30,12 +30,13 @@
 	<h1>글 상세</h1>
 	<p><a href="logout.do">Log-out</a></p>
 	<hr>
-	<form action="updateBoard.do" method="post">
+	<form action="updateBoard.do" method="post"
+	enctype="multipart/form-data">
 	<input type="hidden" name="seq" value="${board.seq}">
 	<table>
 		<tr>
 			<th width="70">제목</th>
-			<td><input type="text" name="title" 
+			<td><input type="text" name="t_title" 
 						value="${board.t_title}">
 			</td>
 		</tr>
@@ -44,9 +45,14 @@
 			<td>${user_name }</td>
 		</tr>
 		<tr>
+			<th>사용하던 이미지</th>
+			<td><img class="fancy" src ="image/${board.t_img}" style="display: ${(board.t_img == null) ? 'none':'' };" width="500px;" height="350px;" alt="boardImage">
+			</td>
+		</tr>
+		<tr>
 			<th>내용</th>
 			<td><textarea rows="10" cols="40" 
-					name="content">${board.t_content}</textarea>
+					name="t_content">${board.t_content}</textarea>
 			</td>
 		</tr>
 		<tr>
@@ -56,6 +62,12 @@
 		<tr>
 			<th>조회수</th>
 			<td>${board.cnt }</td>
+		</tr>
+		<tr>
+		    <th>바꿀이미지</th>
+		    <td>
+		        <input type="file" name="t_imgs">
+		    </td>
 		</tr>
 		<tr>
 			<td colspan="2" class="center">
