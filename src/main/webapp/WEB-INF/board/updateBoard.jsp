@@ -30,7 +30,7 @@
 	<h1>글 상세</h1>
 	<p><a href="logout.do">Log-out</a></p>
 	<hr>
-	<form action="updateBoardf.do" method="post">
+	<form action="updateBoard.do" method="post">
 	<input type="hidden" name="seq" value="${board.seq}">
 	<table>
 		<tr>
@@ -45,9 +45,8 @@
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><img src ="image/${board.t_img}">
-					<p>
-					${board.t_content}
+			<td><textarea rows="10" cols="40" 
+					name="content">${board.t_content}</textarea>
 			</td>
 		</tr>
 		<tr>

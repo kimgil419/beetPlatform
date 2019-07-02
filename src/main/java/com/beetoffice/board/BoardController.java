@@ -68,6 +68,12 @@ public class BoardController {
 		return "board/getBoard";
 	}
 	
+	@RequestMapping("/updateBoardf.do")
+	public String updateBoardf(BoardVO vo, Model model) {
+		model.addAttribute("board", boardService.updateBoardf(vo));
+		return "board/updateBoard";
+	}
+	
 	//리턴타입 ModleAndView -> String 변경 통일
 	//데이타 저장타입 : ModleAndView -> Model
 	@RequestMapping("/getBoardList.do")
@@ -85,14 +91,21 @@ public class BoardController {
 	}	
 	
 	@RequestMapping("/insertBoard.do")
-	public String insertBoard(BoardVO vo, HttpSession session) 
+	public String insertBoard(BoardVO vo, HttpSession session, Model model) 
 			throws IllegalStateException, IOException {
 		System.out.println(">>> 글 등록 처리 - insertBoard()");
+		
+		
 		vo.setCnt(0);
 		String a = (String) session.getAttribute("user_id");
 		String b = (String) session.getAttribute("dept");
 		String c = (String) session.getAttribute("user_position");
-		
+		if ( "Y".equals(vo.getT_noti().trim())) {
+		if(!("인사".equals(b) && "대리".equals(c))) {
+				model.addAttribute("bdmsg", "공지");
+  	            return "board/insertBoard";
+		}
+		}
 		vo.setUser_id(a);
 		vo.setDept(b);
 		vo.setUser_position(c);

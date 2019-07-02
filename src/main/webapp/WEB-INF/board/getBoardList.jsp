@@ -37,6 +37,7 @@
 
 	<!-- 검색을 위한 폼 -->
 	<form action="getBoardList.do" method="POST">
+	<h1>사내게시판</h1>
 	<table class="border-none">
 		<tr>
 			<td>
