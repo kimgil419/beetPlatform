@@ -18,7 +18,7 @@
 		border: 1px solid black;
 		margin: 0 auto;
 	}
-	th { background-color: orange; }
+	th.tt { background-color: orange; }
 	.center { text-align: center; }
 	.left { text-align: left; }
 	.orange { background-color: orange; }
@@ -30,32 +30,44 @@
 	<h1>글 상세</h1>
 	<p><a href="logout.do">Log-out</a></p>
 	<hr>
-	<form action="updateBoard.do" method="post">
+	<form action="updateBoard.do" method="post"
+	enctype="multipart/form-data">
 	<input type="hidden" name="seq" value="${board.seq}">
 	<table>
 		<tr>
-			<th width="70">제목</th>
-			<td><input type="text" name="title" 
+			<th width="70" class="tt">제목</th>
+			<td><input type="text" name="t_title" 
 						value="${board.t_title}">
 			</td>
 		</tr>
 		<tr>
-			<th>작성자</th>
+			<th class="tt">작성자</th>
 			<td>${user_name }</td>
 		</tr>
 		<tr>
-			<th>내용</th>
-			<td><textarea rows="10" cols="40" 
-					name="content">${board.t_content}</textarea>
+			<th bgcolor="#A9F5A9">사용하던 이미지</th>
+			<td><img class="fancy" src ="image/${board.t_img}" style="display: ${(board.t_img == null) ? 'none':'' };" width="500px;" height="350px;" alt="boardImage">
 			</td>
 		</tr>
 		<tr>
-			<th>등록일</th>
+			<th class="tt">내용</th>
+			<td><textarea rows="10" cols="40" 
+					name="t_content">${board.t_content}</textarea>
+			</td>
+		</tr>
+		<tr>
+			<th class="tt">등록일</th>
 			<td>${board.t_regdate}</td>
 		</tr>
 		<tr>
-			<th>조회수</th>
+			<th class="tt">조회수</th>
 			<td>${board.cnt }</td>
+		</tr>
+		<tr>
+		    <th bgcolor="#A9F5A9">바꿀이미지</th>
+		    <td>
+		        <input type="file" name="t_imgs">
+		    </td>
 		</tr>
 		<tr>
 			<td colspan="2" class="center">
@@ -68,7 +80,7 @@
 	<p>
 		<a href="insertBoardf.do">글쓰기</a>&nbsp;&nbsp;
 		
-		<a href="deleteBoard.do?seq=${board.seq }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
+		<a href="deleteBoards.do?seq=${board.seq }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
 		
 		<a href="getBoardList.do">글목록</a>
 	</p>

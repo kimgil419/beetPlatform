@@ -22,6 +22,24 @@
 	.center { text-align: center; }
 	.left { text-align: left; }
 	.orange { background-color: orange; }
+	
+	.fancy{
+	position:relative;
+	display:inline-block;
+	font-size:0;
+	line-height:0;
+}
+
+.fancy:after{
+	position:absolute;
+	top:1px;
+	left:1px;
+	bottom:1px;
+	right:1px;
+	border:1px solid rgba(255,255,255,0.5);
+	outline:1px solid rgba(0,0,0,0.2);
+	content:" ";
+}
 </style>
 </head>
 <body>
@@ -32,11 +50,11 @@
 	<hr>
 	<form action="updateBoardf.do" method="post">
 	<input type="hidden" name="seq" value="${board.seq}">
+	<input type="text" name="curPage" value="${c1 }">
 	<table>
 		<tr>
 			<th width="70">제목</th>
-			<td><input type="text" name="title" 
-						value="${board.t_title}">
+			<td>${board.t_title}>
 			</td>
 		</tr>
 		<tr>
@@ -45,7 +63,10 @@
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><img src ="image/${board.t_img}">
+			
+			<td style="width: 700px; height: 500px;">
+			<div style="border: 5px solid #A9F5A9; padding: 7px; display: ${(board.t_img == null) ? 'none':'' };" >
+			<img class="fancy"  style="display: ${(board.t_img == null) ? 'none':'' };" src ="image/${board.t_img}" width="500px;" height="350px;" alt="boardImage"> </div> <!-- $는 .equals는 반응하지 않는다 'null'은 안된다 -->
 					<p>
 					${board.t_content}
 			</td>
@@ -67,11 +88,11 @@
 	</form>
 	<hr>
 	<p>
-		<a href="insertBoardf.do">글쓰기</a>&nbsp;&nbsp;
+		<a href="insertBoardf.do?curPage=${c1 }">글쓰기</a>&nbsp;&nbsp;
 		
-		<a href="deleteBoard.do?seq=${board.seq }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
+		<a href="deleteBoards.do?seq=${board.seq }&curPage=${c1 }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
 		
-		<a href="getBoardList.do">글목록</a>
+		<a href="getBoardList.do?curPage=${c1 }">글목록</a>
 	</p>
 </div>
 
