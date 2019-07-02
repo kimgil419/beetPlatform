@@ -34,19 +34,29 @@
 		SELECT * FROM BOARD WHERE SEQ = #{seq}
 	</select>
 	
-	<select id="getBoardList" parameterType="board"
+	<select id="totalCount" resultType="int">
+	SELECT COUNT(SEQ) FROM BOARD
+	</select>
+	
+	<select id="getBoardList" parameterType="Map"
 		resultType="board">
-		(SELECT * 
-		FROM BOARD 
-		WHERE T_NOTI = 'Y')
 		
-		UNION ALL
+		SELECT *
+		  FROM (SELECT ROW_NUMBER() OVER() R_NUM, BBS.*
+		          FROM ( (SELECT * 
+		                  FROM BOARD 
+		                  WHERE T_NOTI = 'Y')
 		
-		(SELECT * 
-		FROM BOARD 
-		WHERE T_NOTI = 'N')
+		                  UNION ALL
 		
-		ORDER BY T_NOTI = 'N',T_NOTI = 'Y'
+		                  (SELECT * 
+		                  FROM BOARD 
+		                  WHERE T_NOTI = 'N')
+		
+		                  ORDER BY T_NOTI = 'N',T_NOTI = 'Y'
+		                   ) BBS 
+		       ) S
+		 WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
 	
 	

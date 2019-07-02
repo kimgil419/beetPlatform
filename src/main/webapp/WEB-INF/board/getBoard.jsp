@@ -50,6 +50,7 @@
 	<hr>
 	<form action="updateBoardf.do" method="post">
 	<input type="hidden" name="seq" value="${board.seq}">
+	<input type="text" name="curPage" value="${c1 }">
 	<table>
 		<tr>
 			<th width="70">제목</th>
@@ -87,11 +88,11 @@
 	</form>
 	<hr>
 	<p>
-		<a href="insertBoardf.do">글쓰기</a>&nbsp;&nbsp;
+		<a href="insertBoardf.do?curPage=${c1 }">글쓰기</a>&nbsp;&nbsp;
 		
-		<a href="deleteBoards.do?seq=${board.seq }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
+		<a href="deleteBoards.do?seq=${board.seq }&curPage=${c1 }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
 		
-		<a href="getBoardList.do">글목록</a>
+		<a href="getBoardList.do?curPage=${c1 }">글목록</a>
 	</p>
 </div>
 
