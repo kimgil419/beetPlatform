@@ -28,7 +28,6 @@
                     } else {
                         $("input[name='originalpassword']").css("border", "solid 2px green");
                         $("#forerror").text("");
-                        $("input[name='passwordwannachange']").focus();
                         $("input[name='changepassword']").attr('disabled', false);
                     }
                 }
@@ -37,11 +36,13 @@
 
         $("input[name='changepassword']").on("click", function () {
 
-            if($("input[name='changepassword']").val() == ""){
+            var user_password = $("input[name='passwordwannachange']").val();
+
+            if(user_password == ""){
+                alert("비밀번호를 입력해주세요.");
+                user_password.focus();
                 return false;
             }
-
-            var user_password = $("input[name='passwordwannachange']").val();
 
             $.ajax({
                 url: "changepassword.do",
