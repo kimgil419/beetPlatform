@@ -13,12 +13,65 @@
 		                         )
 	</select>
 
-	<select id="getTotalPost" resultType="int">
-		SELECT COUNT(PROJECT_IDX) FROM PROJECT_VIEW
+	<select id="getProject_manager" parameterType="project" resultType="string">
+		SELECT USER_ID FROM USER
 	</select>
 
+	<select id="getTotalPost" parameterType="map" resultType="int">
+		<choose>
+			<when test="searchCondition == 'project_name' ">
+				SELECT COUNT(PROJECT_IDX) FROM PROJECT_VIEW
+				 WHERE PROJECT_NAME LIKE CONCAT('%', #{searchKeyword}, '%')
+			</when>
+			<when test="searchCondition == 'project_manager' ">
+				SELECT COUNT(PROJECT_IDX) FROM PROJECT_VIEW
+				 WHERE PROJECT_MANAGER
+				    IN (SELECT USER_ID FROM USER_DB
+				       	 WHERE USER_NAME LIKE CONCAT('%', #{searchKeyword}, '%')
+				       )
+			</when>
+			<otherwise>
+				SELECT COUNT(PROJECT_IDX) FROM PROJECT_VIEW
+			</otherwise>
+		</choose>
+	</select>
+	
 	<select id="getProjectList" parameterType="pages" resultType="project">
-		SELECT * FROM PROJECT_VIEW ORDER BY PROJECT_IDX DESC LIMIT #{startPost}, #{countPost}
+		<choose>
+			<when test="searchCondition == 'project_name' ">
+				SELECT PV.*, UD.USER_NAME
+				  FROM (
+						SELECT *
+						  FROM PROJECT_VIEW
+						 WHERE PROJECT_NAME LIKE CONCAT('%', #{searchKeyword}, '%')
+				  		) AS PV
+				  LEFT OUTER JOIN USER_DB AS UD
+				    ON PV.PROJECT_MANAGER = UD.USER_ID
+				 ORDER BY PROJECT_IDX LIMIT #{startPost}, #{viewPost}
+			</when>
+			<when test="searchCondition == 'project_manager' ">
+				SELECT PV.*, UD.USER_NAME
+				  FROM (
+						SELECT *
+						  FROM PROJECT_VIEW
+						 WHERE PROJECT_MANAGER
+						    IN (SELECT USER_ID
+						          FROM USER_DB
+						         WHERE USER_NAME LIKE CONCAT('%', #{searchKeyword}, '%')
+						       )
+				       ) AS PV
+				  LEFT OUTER JOIN USER_DB AS UD
+				    ON PV.PROJECT_MANAGER = UD.USER_ID
+				 ORDER BY PROJECT_IDX LIMIT #{startPost}, #{viewPost}
+			</when>
+			<otherwise>
+				SELECT PV.*, UD.USER_NAME
+				  FROM PROJECT_VIEW AS PV
+				  LEFT OUTER JOIN USER_DB AS UD
+				    ON PV.PROJECT_MANAGER = UD.USER_ID
+				 ORDER BY PROJECT_IDX DESC LIMIT #{startPost}, #{viewPost}
+			</otherwise>
+		</choose>
 	</select>
 	
 	<select id="getProject" parameterType="project" resultType="project">
