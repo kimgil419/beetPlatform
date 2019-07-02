@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updatePassword(UserVO vo) {
-		kor.updateUser(vo);
+		userDAO.updateUser(vo);
 	}
 
 	@Override

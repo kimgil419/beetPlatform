@@ -37,6 +37,10 @@
 
         $("input[name='changepassword']").on("click", function () {
 
+            if($("input[name='changepassword']").val() == ""){
+                return false;
+            }
+
             var user_password = $("input[name='passwordwannachange']").val();
 
             $.ajax({
