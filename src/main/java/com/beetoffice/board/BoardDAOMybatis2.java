@@ -53,6 +53,10 @@ public class BoardDAOMybatis2 {
 	public void getBoardInsert(BoardVO vo) {
 		System.out.println("===> Mybatis2로 deleteBoard() 실행");
 		mybatis.update("BoardDAO.getBoardInsert",vo);
+	}
+	public BoardVO updateBoardf(BoardVO vo) {
+		System.out.println("===> Mybatis2로 updateBoardf() 실행");
+		 return mybatis.selectOne("BoardDAO.getBoard", vo);
 	}	
 }
 
