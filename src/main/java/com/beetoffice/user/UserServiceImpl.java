@@ -23,6 +23,12 @@ public class UserServiceImpl implements UserService {
 		kor.insertUser(vo);
 		
 	}
+
+	@Override
+	public void updatePassword(UserVO vo) {
+		kor.updateUser(vo);
+	}
+
 	@Override
 	public List<UserVO> getUserList(UserVO vo) {
 		return kor.getUserList(vo);

@@ -44,7 +44,8 @@
     <a href="getRegEmployee.do"> 사원등록 (한재정) </a>
     <a href="getMeetingRoomList.do">회의실예약(김범현)</a>
     <a href="showEmployee.do">사원검색(김범현)</a>
-        
+    <a href="showEachEmployee.do">마이페이지(김범현)</a>
+
 
 		<p>
 			<c:if test="${ccc == 'x' }">

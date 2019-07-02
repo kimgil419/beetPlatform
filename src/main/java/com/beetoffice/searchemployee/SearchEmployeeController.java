@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -47,7 +48,8 @@ public class SearchEmployeeController {
         List<SearchEmployeeVO> list = searchEmployeeService.getUserList(model);
         Gson json = new Gson();
 
-      //  model.addAttribute("list", list);
         return json.toJson(list);
     }
+
+
 }

@@ -29,11 +29,11 @@
 	<table>
 		<tr>
 			<th>아이디</th>
-			<td><input type="text" name="user_id" value="${user.id }"></td>
+			<td><input type="text" name="user_id"></td>
 		</tr>
 		<tr>
 			<th>패스워드</th>
-			<td><input type="text" name="user_password" value="${user.password }"></td>
+			<td><input type="text" name="user_password"></td>
 		</tr>
 		<tr>
 			<td colspan="2" class="center">
