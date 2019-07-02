@@ -39,54 +39,80 @@ th {
 </style>
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <script type="text/javascript">
-function loadRenderTemplate() {
-    $.ajax({
-       url: 'empSearch.html'
-       , dataType: 'html'
-       ,async : 'false'
-          , success: function(templateData) {
-        	$.templates({searchTmpl: templateData});
-        	//employeeSearch();
-          }
-    });
-};
-function employeeSearch(){
+	function loadRenderTemplate() {
+		$.ajax({
+			url : 'empSearch.html',
+			dataType : 'html',
+			async : 'false',
+			success : function(templateData) {
+				$.templates({
+					searchTmpl : templateData
+				});
+				//employeeSearch();
+			}
+		});
+	};
+	function employeeSearch() {
 
-	$.ajax({
-		url: "/searchEmployeeForSelect.do", // 클라이언트가 요청을 보낼 서버의 URL 주소
-        data: "keyword=''",                // HTTP 요청과 함께 서버로 보낼 데이터
-		type: "POST",                             // HTTP 요청 방식(GET, POST)
-		 dataType: "json",                         // 서버에서 보내줄 데이터의 타입
-		success : function(data) {
-			 var employeeData = data
-			 var employeeData1 = [];
-		
-		 employeeData1= employeeData.filter(function(x){
-				   return x.user_position ==="과장" ||x.user_position ==="부장"
-			   });
-			
-			 $('#user_id1 option').remove();
-			 $('#user_id2 option').remove();
-			 $('#user_id3 option').remove();
-			 console.log(employeeData1[0]);
-	   for (var i = 0; i < employeeData1.length; i++) {
-		 $('#user_id1').append("<option value=''>"+employeeData1[i].user_name +"</option>");
-		 $('#user_id2').append("<option value=''>"+employeeData1[i].user_name +"</option>");
-		 $('#user_id3').append("<option value=''>"+employeeData1[i].user_name +"</option>");
-  		}
-	      		console.log(employeeData);
-				console.log(employeeData1);
-		}
+		$.ajax({
+			url : "/searchEmployeeForSelect.do", // 클라이언트가 요청을 보낼 서버의 URL 주소
+			data : "keyword=''", // HTTP 요청과 함께 서버로 보낼 데이터
+			type : "POST", // HTTP 요청 방식(GET, POST)
+			dataType : "json", // 서버에서 보내줄 데이터의 타입
+			success : function(data) {
+				var employeeData = data
+				var employeeData1 = [];
 
-});
-	
-};
+				employeeData1 = employeeData.filter(function(x) {
+					return x.user_position === "대리" || x.user_position === "주임"
+				});
 
-function  renderSearchTmpl(){
-	  $("#empSearch").html($.render.searchTmpl(employeeData));
-}
+				$('#user_id1 option').remove();
+				console.log(employeeData1[0]);
+				for (var i = 0; i < employeeData1.length; i++) {
+					$('#user_id1').append(
+							"<option value=''>" + employeeData1[i].user_name
+									+ employeeData1[i].user_position
+									+ "</option>");
 
+				}
+				employeeData1 = employeeData.filter(function(x) {
+					return x.user_position === "과장" || x.user_position === "부장" 
+					});
 
+				$('#user_id2 option').remove();
+				console.log(employeeData1[0]);
+				for (var i = 0; i < employeeData1.length; i++) {
+					$('#user_id2').append(
+							"<option value=''>" + employeeData1[i].user_name
+									+ employeeData1[i].user_position
+									+ "</option>");
+
+				}
+
+				employeeData1 = employeeData.filter(function(x) {
+					return x.user_position === "차장" || x.user_position === "대표이사" || x.user_position === "이사"
+				});
+
+				$('#user_id3 option').remove();
+				console.log(employeeData1[0]);
+				for (var i = 0; i < employeeData1.length; i++) {
+					$('#user_id3').append(
+							"<option value=''>" + employeeData1[i].user_name
+									+ employeeData1[i].user_position
+									+ "</option>");
+
+				}
+
+			}
+
+		});
+
+	};
+
+	function renderSearchTmpl() {
+		$("#empSearch").html($.render.searchTmpl(employeeData));
+	}
 </script>
 </head>
 <body>
@@ -105,27 +131,24 @@ function  renderSearchTmpl(){
 				</tr>
 
 				<tr>
-					<td width="140" id="empSearch">결재1 
-					<select id="user_id1" name="user_id">
+					<td width="140" id="empSearch">결재1 <select id="user_id1"
+						name="user_id1">
 							<option value="1">1</option>
 							<option value="2">2</option>
-					</select>
-						<input type="button" value="찾기" onclick="employeeSearch()"></input>
+					</select> <input type="button" value="찾기" onclick="employeeSearch()"></input>
 					</td>
-					<td width="140" id="empSearch">결재1 
-					<select id="user_id2" name="user_id">
+					<td width="140" id="empSearch">결재1 <select id="user_id2"
+						name="user_id2">
 							<option value="1">1</option>
 							<option value="2">2</option>
-					</select>
-						<input type="button" value="찾기" onclick="employeeSearch()"></input>
+					</select> <input type="button" value="찾기" onclick="employeeSearch()"></input>
 					</td>
 
-					<td width="140" id="empSearch">결재1 
-					<select id="user_id3" name="user_id">
+					<td width="140" id="empSearch">결재1 <select id="user_id3"
+						name="user_id3">
 							<option value="1">1</option>
 							<option value="2">2</option>
-					</select>
-						<input type="button" value="찾기" onclick="employeeSearch()"></input>
+					</select> <input type="button" value="찾기" onclick="employeeSearch()"></input>
 					</td>
 				</tr>
 
