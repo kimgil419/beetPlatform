@@ -83,7 +83,7 @@ function categoryChange() {
                     <option value="이사">이사</option>   
                     <option value="대표이사">대표이사</option>      
                 </select>
-                <input type="hidden" name="t_noti" id="category">
+                <input type="hidden" name="user_position" id="category">
 		    </td>
 		</tr>
 		<tr>
