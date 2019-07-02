@@ -61,7 +61,7 @@ function categoryChange() {
                     <option value="Y">공지사항</option>
                     <option value="N">일반글</option>      
                 </select>
-                <input type="text" name="t_noti" id="category">
+                <input type="hidden" name="t_noti" id="category">
 		    </td>
 		</tr>
 		<tr>
