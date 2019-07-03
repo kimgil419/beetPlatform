@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.beetoffice.board.CommentService;
+import com.beetoffice.board.CommentVO;
+
 
 
 
@@ -28,6 +31,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class BoardController {
 	@Autowired //일치 타입이 하나여야만 한다, 예전에 컨트롤러 타입?으로 찾던걸 오토와이어드로 찾는다
 	private BoardService boardService; //이 변수 명과 @서비스의 변수명이 같아야 서비스로 이동
+	
+	@Autowired
+	CommentService commentService;
 	
 	//메소드에 설정된 @ModelAttribute 는 리턴된 데이타를 View에 전달
 	//@ModelAttribute 선언된 메소드는  
@@ -61,7 +67,7 @@ public class BoardController {
 	//리턴타입 ModleAndView -> String 변경 통일
 	//데이타 저장타입 : ModleAndView -> Model
 	@RequestMapping("/getBoard.do")
-	public String getBoard(BoardVO vo, Model model, HttpSession session,@RequestParam String curPage) {
+	public String getBoard(BoardVO vo, Model model, HttpSession session,@RequestParam String curPage, CommentVO vol) {
 		System.out.println(">>> 글 상세 조회 처리 - getBoard()");
 		String a = (String) session.getAttribute("mySeq");
 		vo.setSeq(Integer.parseInt(a));
@@ -69,6 +75,26 @@ public class BoardController {
 		
 //		String c1 = (String) session.getAttribute("c1");
 //		model.addAttribute("c1", c1);
+		model.addAttribute("c1", curPage);
+		
+		vol.setSeq(vo.getSeq());
+        List<CommentVO> list = commentService.getCommentList(vol);
+		
+		model.addAttribute("cm_list", list);
+		
+		return "board/getBoard";
+	}
+	
+	@RequestMapping("/insertComment.do")
+	public String insertComment(CommentVO vo, HttpSession session,@RequestParam String curPage, Model model) {
+		String id = (String) session.getAttribute("user_id");
+		vo.setUser_id(id);
+		
+		commentService.insertComment(vo);
+		
+		List<CommentVO> list = commentService.getCommentList(vo);
+		
+		model.addAttribute("cm_list", list);
 		model.addAttribute("c1", curPage);
 		return "board/getBoard";
 	}
@@ -138,12 +164,29 @@ public class BoardController {
 
 		//현재페이지 기준 게시글 가져오기---------------
 		//DB에서 게시글 데이타 가져오기
-		Map<String, Integer> map = new HashMap<>();
-		map.put("begin", p.getBegin());
-		map.put("end", p.getEnd());
+//		Map<String, Integer> map = new HashMap<>();
+//		map.put("begin", p.getBegin());
+//		map.put("end", p.getEnd());
+		
+		vo.setBegin(p.getBegin());
+		vo.setEnd(p.getEnd());
+		
+		System.out.println(">>> 글 목록 조회 처리- getBoardList()");
+		System.out.println("condition: " + vo.getSearchCondition());
+		System.out.println("keyword: -" + vo.getSearchKeyword() + "-");
+		
+		//null체크 후 초기값 설정
+		if (vo.getSearchCondition() == null) {
+			vo.setSearchCondition("TITLE");
+		}
+		if (vo.getSearchKeyword() == null) {
+			vo.setSearchKeyword("");
+		}
+		System.out.println("null처리후 condition: " + vo.getSearchCondition());
+		System.out.println("null처리후 keyword: -" + vo.getSearchKeyword() + "-");
 		
 		//전체 데이타 조회(검새조건 적용)
-		List<BoardVO> boardList = boardService.getBoardList(map);
+		List<BoardVO> boardList = boardService.getBoardList(vo);
 		
 		System.out.println("현재페이지 글목록(list) : "+ boardList);
 		
@@ -260,5 +303,36 @@ public class BoardController {
 		model.addAttribute("board", vo);
 		model.addAttribute("cc", curPage);
 		return "board/deleteBoards";
+	}
+	
+	@RequestMapping("/deleteComments.do")
+	public String deleteComments(CommentVO vo,Model model,@RequestParam String curPage) {
+		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
+		
+		model.addAttribute("s", vo.getSeq());
+		model.addAttribute("rs", vo.getReply_seq());
+		model.addAttribute("cc1", curPage);
+		return "board/deleteComments";
+	}
+	
+	@RequestMapping(value="/deleteComment.do", method=RequestMethod.POST)
+	public String deleteComment(CommentVO vo, HttpSession session,Model model,@RequestParam String password,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
+		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
+		
+		String user_password = (String) session.getAttribute("user_password");
+		System.out.println(">>> 글 삭제 처리 - deleteBoard()" + password);
+		System.out.println(">>> 글 삭제 처리 - deleteBoard()" + user_password);
+		if(!password.equals(user_password)) {
+			 model.addAttribute("dlcmmsg", "비밀번호");
+			 model.addAttribute("cc1", curPage);
+	    	  return "board/deleteComments";
+		} else {
+		commentService.deleteComment(vo);
+		int a1 = vo.getSeq();
+		String bdseq1 = String.valueOf(a1);
+		session.setAttribute("mySeq", bdseq1);
+		redirectAttributes.addAttribute("curPage", curPage);
+		return "redirect:getBoard.do";
+		}
 	}
 }

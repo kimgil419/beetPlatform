@@ -14,7 +14,7 @@
         <typeAlias alias="source" type="com.beetoffice.project.vo.SourceVO"/>
         <typeAlias alias="pages" type="com.beetoffice.project.vo.PagingVO"/>
         <typeAlias alias="board" type="com.beetoffice.board.BoardVO"/>
-        <typeAlias alias="comment" type="com.beetoffice.comment.CommentVO"/>
+        <typeAlias alias="comment" type="com.beetoffice.board.CommentVO"/>
     </typeAliases>
 
     <mappers>

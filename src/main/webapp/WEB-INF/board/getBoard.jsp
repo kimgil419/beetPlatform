@@ -114,17 +114,17 @@
 
 <c:forEach var="com" items="${cm_list }">
 <div class="comment">
-	<form action="ans_del.jsp" method="post">
+	<form action="deleteComments.do" method="post">
 		<p>이름 : ${com.user_name }</p>
 		<p>날짜 : ${com.write_date }</p>
 		<p>내용 : ${com.board_content }</p>
 		<input type="submit" value="댓글삭제">
 		
-		<input type="text" name="c_idx" value="${com.reply_seq }">
+		<input type="hidden" name="reply_seq" value="${com.reply_seq }">
 		
-		
+		<input type="hidden" name="curPage" value="${c1 }">
 		<%--삭제처리 후 게시글 상세페이지로 이동시 사용 --%>
-		<input type="hidden" name="b_idx" value="${com.seq }">
+		<input type="hidden" name="seq" value="${com.seq }">
 	</form>
 </div>
 </c:forEach>

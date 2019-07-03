@@ -1,4 +1,4 @@
-package com.beetoffice.comment;
+package com.beetoffice.board;
 
 import lombok.Getter;
 import lombok.Setter;
