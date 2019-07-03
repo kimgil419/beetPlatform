@@ -38,6 +38,19 @@
 	SELECT COUNT(SEQ) FROM BOARD
 	</select>
 	
+	<select id="totalCounts" parameterType="board" resultType="int">
+	SELECT COUNT(SEQ) 
+		                  FROM BOARD 
+		                  WHERE
+		                           <if test="searchCondition =='TITLE' ">
+			                           T_TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
+		                           </if>
+		                           <if test="searchCondition =='CONTENT' ">
+			                           T_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')
+		                           </if>
+		               
+	</select>
+	
 	<select id="getBoardList" parameterType="board"
 		resultType="board">
 		

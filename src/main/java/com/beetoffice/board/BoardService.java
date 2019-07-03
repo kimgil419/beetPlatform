@@ -12,4 +12,5 @@ public interface BoardService {
 	BoardVO getBoard(BoardVO vo); //조회(상세조회)
 	List<BoardVO> getBoardList(BoardVO vo); //조회(글목록)
 	int getTotalCount();
+	int getTotalCounts(BoardVO vo);
 }

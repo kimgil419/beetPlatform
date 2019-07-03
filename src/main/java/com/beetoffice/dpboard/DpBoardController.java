@@ -1,4 +1,4 @@
-package com.beetoffice.board;
+package com.beetoffice.dpboard;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.beetoffice.board.BoardVO;
 import com.beetoffice.board.CommentService;
 import com.beetoffice.board.CommentVO;
+import com.beetoffice.board.Paging;
 
 
 
@@ -28,12 +30,12 @@ import com.beetoffice.board.CommentVO;
 @Controller
 //"board"라는 이름의 Model 이 있으면 session에 저장
 @SessionAttributes("board") //모델에 값을 넣어 세션에 저장?
-public class BoardController {
+public class DpBoardController {
 	@Autowired //일치 타입이 하나여야만 한다, 예전에 컨트롤러 타입?으로 찾던걸 오토와이어드로 찾는다
-	private BoardService boardService; //이 변수 명과 @서비스의 변수명이 같아야 서비스로 이동
+	private DpBoardService boardService; //이 변수 명과 @서비스의 변수명이 같아야 서비스로 이동
 	
 	@Autowired
-	CommentService commentService;
+	DpCommentService commentService;
 	
 	//메소드에 설정된 @ModelAttribute 는 리턴된 데이타를 View에 전달
 	//@ModelAttribute 선언된 메소드는  
@@ -50,67 +52,67 @@ public class BoardController {
 		return conditionMap;
 	}
 	
-	@RequestMapping("/getBoardInsert.do")
-	public String getBoardInsert(BoardVO vo, HttpSession session,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
+	@RequestMapping("/dpgetBoardInsert.do")
+	public String dpgetBoardInsert(DpBoardVO vo, HttpSession session,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
 		System.out.println(">>>조회수를 위한것 - getBoardInsert.do");
 		System.out.println("수정요청 vo : " + vo);
 		int a = vo.getSeq();
 		String b = String.valueOf(a);
 		session.setAttribute("mySeq", b);
-		boardService.getBoardInsert(vo);
+		boardService.dpgetBoardInsert(vo);
 		
 		//session.setAttribute("c1",curPage);
 		redirectAttributes.addAttribute("curPage", curPage);
-		return "redirect:getBoard.do";
+		return "redirect:dpgetBoard.do";
 	}
 	
 	//리턴타입 ModleAndView -> String 변경 통일
 	//데이타 저장타입 : ModleAndView -> Model
-	@RequestMapping("/getBoard.do")
-	public String getBoard(BoardVO vo, Model model, HttpSession session,@RequestParam String curPage, CommentVO vol) {
+	@RequestMapping("/dpgetBoard.do")
+	public String dpgetBoard(DpBoardVO vo, Model model, HttpSession session,@RequestParam String curPage, DpCommentVO vol) {
 		System.out.println(">>> 글 상세 조회 처리 - getBoard()");
 		String a = (String) session.getAttribute("mySeq");
 		vo.setSeq(Integer.parseInt(a));
-		model.addAttribute("board", boardService.getBoard(vo)); //데이타 저장
+		model.addAttribute("board", boardService.dpgetBoard(vo)); //데이타 저장
 		
 //		String c1 = (String) session.getAttribute("c1");
 //		model.addAttribute("c1", c1);
 		model.addAttribute("c1", curPage);
 		
 		vol.setSeq(vo.getSeq());
-        List<CommentVO> list = commentService.getCommentList(vol);
+        List<DpCommentVO> list = commentService.dpgetCommentList(vol);
 		
 		model.addAttribute("cm_list", list);
 		
-		return "board/getBoard";
+		return "board/dpgetBoard";
 	}
 	
-	@RequestMapping("/insertComment.do")
-	public String insertComment(CommentVO vo, HttpSession session,@RequestParam String curPage, Model model) {
+	@RequestMapping("/dpinsertComment.do")
+	public String dpinsertComment(DpCommentVO vo, HttpSession session,@RequestParam String curPage, Model model) {
 		String id = (String) session.getAttribute("user_id");
 		vo.setUser_id(id);
 		
-		commentService.insertComment(vo);
+		commentService.dpinsertComment(vo);
 		
-		List<CommentVO> list = commentService.getCommentList(vo);
+		List<DpCommentVO> list = commentService.dpgetCommentList(vo);
 		
 		model.addAttribute("cm_list", list);
 		model.addAttribute("c1", curPage);
-		return "board/getBoard";
+		return "board/dpgetBoard";
 	}
 	
-	@RequestMapping("/updateBoardf.do")
-	public String updateBoardf(BoardVO vo, Model model, HttpSession session,@RequestParam String curPage) {
+	@RequestMapping("/dpupdateBoardf.do")
+	public String dpupdateBoardf(DpBoardVO vo, Model model, HttpSession session,@RequestParam String curPage) {
 		
-		model.addAttribute("board", boardService.updateBoardf(vo));
+		model.addAttribute("board", boardService.dpupdateBoardf(vo));
 		model.addAttribute("c3", curPage);
-		return "board/updateBoard";
+		return "board/dpupdateBoard";
 	}
 	
 	//리턴타입 ModleAndView -> String 변경 통일
 	//데이타 저장타입 : ModleAndView -> Model
-	@RequestMapping("/getBoardList.do")
-	public String getBoardList(BoardVO vo, 
+	@RequestMapping("/dpgetBoardList.do")
+	public String dpgetBoardList(DpBoardVO vo, 
 			Model model,@RequestParam String curPage) {
 		System.out.println(">>> 글 목록 조회 처리- getBoardList()");
 		//페이지 처리를 위한 Paging 객체 생성해서 값 설정
@@ -119,7 +121,7 @@ public class BoardController {
 
 
 		//1. 전체 게시물의 수를 구하기
-		p.setTotalRecord(boardService.getTotalCount());
+		p.setTotalRecord(boardService.dpgetTotalCount());
 		p.setTotalPage(); //전체 페이지 갯수 구하기
 		
 		System.out.println(">전체 건수: "+ p.getTotalRecord());
@@ -169,7 +171,7 @@ public class BoardController {
 		System.out.println("null처리후 keyword: -" + vo.getSearchKeyword() + "-");
 		
 		if(!"".equals(vo.getSearchKeyword())) {
-		p.setTotalRecord(boardService.getTotalCounts(vo));
+		p.setTotalRecord(boardService.dpgetTotalCounts(vo));
 		p.setTotalPage(); //전체 페이지 갯수 구하기
 		}
 		//---------
@@ -193,7 +195,7 @@ public class BoardController {
 		
 		
 		//전체 데이타 조회(검새조건 적용)
-		List<BoardVO> boardList = boardService.getBoardList(vo);
+		List<DpBoardVO> boardList = boardService.dpgetBoardList(vo);
 		
 		System.out.println("현재페이지 글목록(list) : "+ boardList);
 		
@@ -202,8 +204,8 @@ public class BoardController {
 		return "board/getBoardList";
 	}	
 	
-	@RequestMapping("/insertBoard.do")
-	public String insertBoard(BoardVO vo, HttpSession session, Model model,@RequestParam String curPage,RedirectAttributes redirectAttributes) 
+	@RequestMapping("/dpinsertBoard.do")
+	public String dpinsertBoard(DpBoardVO vo, HttpSession session, Model model,@RequestParam String curPage,RedirectAttributes redirectAttributes) 
 			throws IllegalStateException, IOException {
 		System.out.println(">>> 글 등록 처리 - insertBoard()");
 		
@@ -216,7 +218,7 @@ public class BoardController {
 		if(!("인사".equals(b) && "대리".equals(c))) {
 				model.addAttribute("bdmsg", "공지");
 				model.addAttribute("c2", curPage);
-  	            return "board/insertBoard";
+  	            return "board/dpinsertBoard";
 		}
 		}
 		vo.setUser_id(a);
@@ -238,25 +240,25 @@ public class BoardController {
 			vo.setT_img(fileName);
 		} 
 		
-		boardService.insertBoard(vo);
+		boardService.dpinsertBoard(vo);
 		redirectAttributes.addAttribute("curPage", curPage);
-		return "redirect:getBoardList.do";
+		return "redirect:dpgetBoardList.do";
 	}
 	
-	@RequestMapping("/insertBoardf.do")
-	public String insertBoardf(BoardVO vo,@RequestParam String curPage,Model model) 
+	@RequestMapping("/dpinsertBoardf.do")
+	public String dpinsertBoardf(DpBoardVO vo,@RequestParam String curPage,Model model) 
 			throws IllegalStateException, IOException {
 		System.out.println(">>> 글 등록 처리 - insertBoardf()");
 		
 		model.addAttribute("c2", curPage);
-		return "board/insertBoard";
+		return "board/dpinsertBoard";
 	}
 	
-	@RequestMapping("/updateBoard.do")
-	public String updateBoard(BoardVO vo, HttpSession session,@RequestParam String curPage,RedirectAttributes redirectAttributes) throws IllegalStateException, IOException {
+	@RequestMapping("/dpupdateBoard.do")
+	public String dpupdateBoard(DpBoardVO vo, HttpSession session,@RequestParam String curPage,RedirectAttributes redirectAttributes) throws IllegalStateException, IOException {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 		
-		BoardVO bvo = boardService.getBoard(vo);
+		DpBoardVO bvo = boardService.dpgetBoard(vo);
 		//bvo.getT_img();
 		MultipartFile uploadFile = vo.getT_imgs();
 		System.out.println("uploadFile : " + uploadFile);
@@ -268,25 +270,25 @@ public class BoardController {
 			System.out.println("수정요청 vo : " + uploadFile.getName());
 			System.out.println("수정요청 vo : " + vo);
 			
-			boardService.updateBoard(vo);
+			boardService.dpupdateBoard(vo);
 			redirectAttributes.addAttribute("curPage", curPage);
-			return "redirect:getBoardList.do";
+			return "redirect:dpgetBoardList.do";
 		} else {
 		
 		vo.setT_img(bvo.getT_img());
 		
 		//System.out.println("수정요청 vo : " + igg);
 		
-		boardService.updateBoard(vo);
+		boardService.dpupdateBoard(vo);
 		redirectAttributes.addAttribute("curPage", curPage);
-		return "redirect:getBoardList.do";
+		return "redirect:dpgetBoardList.do";
 		}
 	}
 	
 	
 	
-	@RequestMapping(value="/deleteBoard.do", method=RequestMethod.POST)
-	public String deleteBoard(BoardVO vo, HttpSession session,Model model,@RequestParam String password,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
+	@RequestMapping(value="/dpdeleteBoard.do", method=RequestMethod.POST)
+	public String dpdeleteBoard(DpBoardVO vo, HttpSession session,Model model,@RequestParam String password,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
 		String user_password = (String) session.getAttribute("user_password");
@@ -295,35 +297,35 @@ public class BoardController {
 		if(!password.equals(user_password)) {
 			 model.addAttribute("dlmsg", "비밀번호");
 			 model.addAttribute("cc", curPage);
-	    	  return "board/deleteBoards";
+	    	  return "board/dpdeleteBoards";
 		} else {
-		boardService.deleteBoard(vo);
+		boardService.dpdeleteBoard(vo);
 		redirectAttributes.addAttribute("curPage", curPage);
-		return "redirect:getBoardList.do";
+		return "redirect:dpgetBoardList.do";
 		}
 	}
 	
-	@RequestMapping("/deleteBoards.do")
-	public String deleteBoards(BoardVO vo,Model model,@RequestParam String curPage) {
+	@RequestMapping("/dpdeleteBoards.do")
+	public String dpdeleteBoards(DpBoardVO vo,Model model,@RequestParam String curPage) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
-		boardService.getBoard(vo);
+		boardService.dpgetBoard(vo);
 		model.addAttribute("board", vo);
 		model.addAttribute("cc", curPage);
-		return "board/deleteBoards";
+		return "board/dpdeleteBoards";
 	}
 	
-	@RequestMapping("/deleteComments.do")
-	public String deleteComments(CommentVO vo,Model model,@RequestParam String curPage) {
+	@RequestMapping("/dpdpdeleteComments.do")
+	public String dpdeleteComments(CommentVO vo,Model model,@RequestParam String curPage) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
 		model.addAttribute("s", vo.getSeq());
 		model.addAttribute("rs", vo.getReply_seq());
 		model.addAttribute("cc1", curPage);
-		return "board/deleteComments";
+		return "board/dpdeleteComments";
 	}
 	
-	@RequestMapping(value="/deleteComment.do", method=RequestMethod.POST)
-	public String deleteComment(CommentVO vo, HttpSession session,Model model,@RequestParam String password,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
+	@RequestMapping(value="/dpdpdeleteComment.do", method=RequestMethod.POST)
+	public String dpdeleteComment(DpCommentVO vo, HttpSession session,Model model,@RequestParam String password,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
 		String user_password = (String) session.getAttribute("user_password");
@@ -332,14 +334,14 @@ public class BoardController {
 		if(!password.equals(user_password)) {
 			 model.addAttribute("dlcmmsg", "비밀번호");
 			 model.addAttribute("cc1", curPage);
-	    	  return "board/deleteComments";
+	    	  return "board/dpdeleteComments";
 		} else {
-		commentService.deleteComment(vo);
+		commentService.dpdeleteComment(vo);
 		int a1 = vo.getSeq();
 		String bdseq1 = String.valueOf(a1);
 		session.setAttribute("mySeq", bdseq1);
 		redirectAttributes.addAttribute("curPage", curPage);
-		return "redirect:getBoard.do";
+		return "redirect:dpgetBoard.do";
 		}
 	}
 }

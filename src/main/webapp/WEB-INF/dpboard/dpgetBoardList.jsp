@@ -68,7 +68,7 @@
 
 
 	<!-- 검색을 위한 폼 -->
-	<form action="getBoardList.do?curPage=${pvo.nowPage }" method="POST">
+	<form action="dpgetBoardList.do?curPage=${pvo.nowPage }" method="POST">
 	<h1>사내게시판</h1>
 	<table class="border-none">
 		<tr>
@@ -108,7 +108,7 @@
 		<tr>
 		
 			<td class=${(board.t_noti == 'Y') ? 'notie' : '' }>
-				<a href="getBoardInsert.do?seq=${board.seq }&curPage=${pvo.nowPage}">
+				<a href="dpgetBoardInsert.do?seq=${board.seq }&curPage=${pvo.nowPage}">
 					${board.t_title }
 				</a>
 			</td>
@@ -129,7 +129,7 @@
 						<li class="disable">이전으로</li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="getBoardList.do?curPage=${pvo.beginPage - 1 }">이전으로</a></li>
+						<li><a href="dpgetBoardList.do?curPage=${pvo.beginPage - 1 }">이전으로</a></li>
 					</c:otherwise>
 				</c:choose>	
 				
@@ -141,7 +141,7 @@
 					</c:when>
 					<c:otherwise>
 						<li>
-							<a href="getBoardList.do?curPage=${k }">${k }</a>
+							<a href="dpgetBoardList.do?curPage=${k }">${k }</a>
 						</li>
 					</c:otherwise>
 				</c:choose>
@@ -154,16 +154,15 @@
 						<li class="disable">다음으로</li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="getBoardList.do?curPage=${pvo.endPage + 1 }">다음으로</a></li>
+						<li><a href="dpgetBoardList.do?curPage=${pvo.endPage + 1 }">다음으로</a></li>
 					</c:otherwise>
 					
-					
 				</c:choose>
-				    <li><a href="getBoardList.do?curPage=${pvo.nowPage }">목록으로</a></li>
-					<li><a href="insertBoardf.do?curPage=${pvo.nowPage }">새글 등록</a></li>
 				</ol>
 			</td>
-			
+			<td>
+				<p><a href="dpinsertBoardf.do">새글 등록</a></p>
+			</td>
 		</tr>
 	</tfoot>	
 	</table>
