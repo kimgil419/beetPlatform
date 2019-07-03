@@ -17,7 +17,7 @@ alert(result + '가 틀리셨습니다 인사과에 문의해주세요'); //아�
 <body>
 <form action="deleteBoard.do?seq=${board.seq }" method="post">
 <input type="text" name="password">
-	
+<input type="text" name="curPage" value="${cc }">	
 		
 		
 		<input type="submit" value="글삭제" >

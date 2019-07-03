@@ -23,15 +23,17 @@
 <script>
 function send_go(frm) {
 	if (frm.user_id.value.trim() == "") {
+		
 		alert("아이디(ID)는 필수 입력항목입니다.\n입력하세요.");
-		frm.id.value = "";
-		frm.id.focus();
+		frm.user_id.value = "";
+		frm.user_id.focus();
+		
 		return false;
 		
 	} else if(frm.user_password.value.trim() == "") {
 		alert("비밀번호도 필수 입력항목입니다.\n입력하세요.");
-		frm.id.value = "";
-		frm.id.focus();
+		frm.user_password.value = "";
+		frm.user_password.focus();
 		return false;
 	} 
 	frm.action = "login.do";

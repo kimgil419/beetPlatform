@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--(실습) 스크립트릿, 표현식 사용하지 말고 EL, JSTL 사용 형태로 전환 --%>
 <!DOCTYPE html>
 <html>
@@ -50,7 +51,7 @@
 	<hr>
 	<form action="updateBoardf.do" method="post">
 	<input type="hidden" name="seq" value="${board.seq}">
-	<input type="text" name="curPage" value="${c1 }">
+	<input type="hidden" name="curPage" value="${c1 }">
 	<table>
 		<tr>
 			<th width="70">제목</th>
@@ -95,6 +96,38 @@
 		<a href="getBoardList.do?curPage=${c1 }">글목록</a>
 	</p>
 </div>
+
+<%--댓글 입력 폼 --%>
+<form method="post" action="insertComment.do">
+	<p>이름 : <input type="text" name="user_name" value="${user_name }"></p>
+	<p>내용 : <textarea name="board_content" rows="4" cols="55"></textarea></p>
+	<input type="submit" value="댓글저장">
+	
+	<input type="hidden" name="seq" value="${board.seq }">
+	<input type="hidden" name="curPage" value="${c1 }">
+</form>
+
+<%--댓글 출력(동적 태그 작성) --%>
+<hr>
+댓글들
+<hr>
+
+<c:forEach var="com" items="${cm_list }">
+<div class="comment">
+	<form action="ans_del.jsp" method="post">
+		<p>이름 : ${com.user_name }</p>
+		<p>날짜 : ${com.write_date }</p>
+		<p>내용 : ${com.board_content }</p>
+		<input type="submit" value="댓글삭제">
+		
+		<input type="text" name="c_idx" value="${com.reply_seq }">
+		
+		
+		<%--삭제처리 후 게시글 상세페이지로 이동시 사용 --%>
+		<input type="hidden" name="b_idx" value="${com.seq }">
+	</form>
+</div>
+</c:forEach>
 
 </body>
 </html>

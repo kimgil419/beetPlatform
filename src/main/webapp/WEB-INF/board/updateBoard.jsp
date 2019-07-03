@@ -33,6 +33,7 @@
 	<form action="updateBoard.do" method="post"
 	enctype="multipart/form-data">
 	<input type="hidden" name="seq" value="${board.seq}">
+	<input type="hidden" name="curPage" value="${c3 }">
 	<table>
 		<tr>
 			<th width="70" class="tt">제목</th>
@@ -78,11 +79,11 @@
 	</form>
 	<hr>
 	<p>
-		<a href="insertBoardf.do">글쓰기</a>&nbsp;&nbsp;
+		<a href="insertBoardf.do?curPage=${c3 }">글쓰기</a>&nbsp;&nbsp;
 		
-		<a href="deleteBoards.do?seq=${board.seq }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
+		<a href="deleteBoards.do?seq=${board.seq }&curPage=${c3 }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
 		
-		<a href="getBoardList.do">글목록</a>
+		<a href="getBoardList.do?curPage=${c3 }">글목록</a>
 	</p>
 </div>
 

@@ -45,35 +45,39 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/getBoardInsert.do")
-	public String getBoardInsert(BoardVO vo, HttpSession session,@RequestParam String curPage) {
+	public String getBoardInsert(BoardVO vo, HttpSession session,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
 		System.out.println(">>>조회수를 위한것 - getBoardInsert.do");
 		System.out.println("수정요청 vo : " + vo);
 		int a = vo.getSeq();
 		String b = String.valueOf(a);
 		session.setAttribute("mySeq", b);
 		boardService.getBoardInsert(vo);
-		session.setAttribute("c1",curPage);
 		
+		//session.setAttribute("c1",curPage);
+		redirectAttributes.addAttribute("curPage", curPage);
 		return "redirect:getBoard.do";
 	}
 	
 	//리턴타입 ModleAndView -> String 변경 통일
 	//데이타 저장타입 : ModleAndView -> Model
 	@RequestMapping("/getBoard.do")
-	public String getBoard(BoardVO vo, Model model, HttpSession session) {
+	public String getBoard(BoardVO vo, Model model, HttpSession session,@RequestParam String curPage) {
 		System.out.println(">>> 글 상세 조회 처리 - getBoard()");
 		String a = (String) session.getAttribute("mySeq");
 		vo.setSeq(Integer.parseInt(a));
 		model.addAttribute("board", boardService.getBoard(vo)); //데이타 저장
-		String c1 = (String) session.getAttribute("c1");
-		model.addAttribute("c1", c1);
+		
+//		String c1 = (String) session.getAttribute("c1");
+//		model.addAttribute("c1", c1);
+		model.addAttribute("c1", curPage);
 		return "board/getBoard";
 	}
 	
 	@RequestMapping("/updateBoardf.do")
-	public String updateBoardf(BoardVO vo, Model model, HttpSession session) {
+	public String updateBoardf(BoardVO vo, Model model, HttpSession session,@RequestParam String curPage) {
 		
 		model.addAttribute("board", boardService.updateBoardf(vo));
+		model.addAttribute("c3", curPage);
 		return "board/updateBoard";
 	}
 	
@@ -161,6 +165,7 @@ public class BoardController {
 		if ( "Y".equals(vo.getT_noti().trim())) {
 		if(!("인사".equals(b) && "대리".equals(c))) {
 				model.addAttribute("bdmsg", "공지");
+				model.addAttribute("c2", curPage);
   	            return "board/insertBoard";
 		}
 		}
@@ -198,7 +203,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/updateBoard.do")
-	public String updateBoard(BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
+	public String updateBoard(BoardVO vo, HttpSession session,@RequestParam String curPage,RedirectAttributes redirectAttributes) throws IllegalStateException, IOException {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 		
 		BoardVO bvo = boardService.getBoard(vo);
@@ -214,6 +219,7 @@ public class BoardController {
 			System.out.println("수정요청 vo : " + vo);
 			
 			boardService.updateBoard(vo);
+			redirectAttributes.addAttribute("curPage", curPage);
 			return "redirect:getBoardList.do";
 		} else {
 		
@@ -222,6 +228,7 @@ public class BoardController {
 		//System.out.println("수정요청 vo : " + igg);
 		
 		boardService.updateBoard(vo);
+		redirectAttributes.addAttribute("curPage", curPage);
 		return "redirect:getBoardList.do";
 		}
 	}
@@ -229,7 +236,7 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="/deleteBoard.do", method=RequestMethod.POST)
-	public String deleteBoard(BoardVO vo, HttpSession session,Model model,@RequestParam String password) {
+	public String deleteBoard(BoardVO vo, HttpSession session,Model model,@RequestParam String password,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
 		String user_password = (String) session.getAttribute("user_password");
@@ -237,19 +244,21 @@ public class BoardController {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()" + user_password);
 		if(!password.equals(user_password)) {
 			 model.addAttribute("dlmsg", "비밀번호");
+			 model.addAttribute("cc", curPage);
 	    	  return "board/deleteBoards";
 		} else {
 		boardService.deleteBoard(vo);
-		
+		redirectAttributes.addAttribute("curPage", curPage);
 		return "redirect:getBoardList.do";
 		}
 	}
 	
 	@RequestMapping("/deleteBoards.do")
-	public String deleteBoards(BoardVO vo,Model model) {
+	public String deleteBoards(BoardVO vo,Model model,@RequestParam String curPage) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		boardService.getBoard(vo);
 		model.addAttribute("board", vo);
+		model.addAttribute("cc", curPage);
 		return "board/deleteBoards";
 	}
 }
