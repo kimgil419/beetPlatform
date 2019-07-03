@@ -17,19 +17,19 @@ public class UserDAOMybatis1 {
     private SqlSessionTemplate mybatis;
 
 	public UserDAOMybatis1() {
-		System.out.println(">> uBoardDAOMybastis1 객체 생성");
+		;
 	}
 
-	// 글 상세 조회
 	public UserVO getUser(UserVO vo) {
-		System.out.println("===> uMybatis2로 getUser() 실행");
 		return mybatis.selectOne("UserDAO.user_get", vo);
 	}
 
-	// 글 상세 조회
 	public void insertUser(UserVO vo) {
-		System.out.println("===> uMybatis2로 insertUser() 실행");
 		mybatis.insert("UserDAO.user_insert", vo);
+	}
+
+	public void updateUser(UserVO vo) {
+		mybatis.update("UserDAO.user_update", vo);
 	}
 
 	public List<UserVO> getUserList(UserVO vo) {

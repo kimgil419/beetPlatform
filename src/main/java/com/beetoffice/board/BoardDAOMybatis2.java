@@ -1,6 +1,7 @@
 package com.beetoffice.board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -46,13 +47,21 @@ public class BoardDAOMybatis2 {
 	
 	//검색조건 적용해서 데이타 조회
 	//(실습) 검색조건 적용해서 처리되도록 구현
-	public List<BoardVO> getBoardList(BoardVO vo) {
+	public List<BoardVO> getBoardList(Map<String, Integer> map) {
 		System.out.println("===> Mybatis2로 getBoardList() 실행");
-		return mybatis.selectList("BoardDAO.getBoardList", vo);
+		return mybatis.selectList("BoardDAO.getBoardList", map);
 	}
 	public void getBoardInsert(BoardVO vo) {
 		System.out.println("===> Mybatis2로 deleteBoard() 실행");
 		mybatis.update("BoardDAO.getBoardInsert",vo);
+	}
+	public BoardVO updateBoardf(BoardVO vo) {
+		System.out.println("===> Mybatis2로 updateBoardf() 실행");
+		 return mybatis.selectOne("BoardDAO.getBoard", vo);
+	}
+	public int getTotalCount() {
+	
+		return mybatis.selectOne("BoardDAO.totalCount");
 	}	
 }
 

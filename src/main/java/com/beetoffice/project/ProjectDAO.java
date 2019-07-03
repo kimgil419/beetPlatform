@@ -1,6 +1,7 @@
 package com.beetoffice.project;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,9 +70,9 @@ public class ProjectDAO {
 		mybatis.insert("ProjecDAO.insertSource", svo);
 	}
 	
-	public int getTotalPost() {
+	public int getTotalPost(Map map) {
 		System.out.println(">> DAO: getTotalPost()");
-		return mybatis.selectOne("ProjectDAO.getTotalPost");
+		return mybatis.selectOne("ProjectDAO.getTotalPost", map);
 	}
 
 	public int getProject_idx(ProjectVO vo) {

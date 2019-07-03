@@ -1,6 +1,7 @@
 package com.beetoffice.project;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,9 +81,9 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public int getTotalPost() {
+	public int getTotalPost(Map map) {
 		System.out.println(">> Service: getTotalPost()");
-		return projectDAO.getTotalPost();
+		return projectDAO.getTotalPost(map);
 	}
 
 	@Override

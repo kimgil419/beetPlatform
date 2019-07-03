@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper 태그의 namespace 속성 필수 작성 -->
+<mapper namespace="CommentDAO">
+	
+	<insert id="insertComment"  parameterType="comment">
+		INSERT INTO COMMENT (SEQ,USER_ID,BOARD_CONTENT,WRITE_DATE,USER_NAME) 
+		VALUES (#{seq}, 
+				#{user_id}, #{board_content}, NOW(), 
+				#{user_name})
+	</insert>
+	
+	
+	<select id="getCommentList" parameterType="comment"
+		resultType="comment">
+		SELECT * FROM COMMENT WHERE SEQ = #{seq}
+	</select>
+	</mapper>

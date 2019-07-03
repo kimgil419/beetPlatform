@@ -1,10 +1,13 @@
 package com.beetoffice.project;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,18 +21,45 @@ public class ProjectController {
 	@Autowired
 	private ProjectService projectService;
 	
+	@ModelAttribute("conditionMap")
+	public Map<String, String> searchConditionMap() {
+		Map<String, String> conditionMap = new HashMap<String, String>();
+		conditionMap.put("프로젝트명", "project_name");
+		conditionMap.put("담당자", "project_manager");
+		
+		return conditionMap;
+	}
+	
 	@RequestMapping("getProjectList.do")
-	public String getProjectList(ProjectVO vo, Model model, @RequestParam String currentPage) {
+	public String getProjectSearchList(ProjectVO vo, Model model, @RequestParam String currentPage, @RequestParam String searchCondition, @RequestParam String searchKeyword) {
 		System.out.println(">> Controller: getProjectList()");
+		System.out.println(">>>> searchCondition: " + searchCondition);
+		System.out.println(">>>> searchKeyword: " + searchKeyword);
 		
-		PagingVO pages = new PagingVO(projectService.getTotalPost(), Integer.parseInt(currentPage));
-		System.out.println(">> pages: " + pages);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchCondition", searchCondition);
+		map.put("searchKeyword", searchKeyword);
 		
+		int totalPost = projectService.getTotalPost(map);
+		System.out.println(">>>> total: " + totalPost);
+		PagingVO pages = new PagingVO(totalPost, Integer.parseInt(currentPage));
+		System.out.println(">>>> pages 처음: " + pages);
+		
+		pages.setSearchCondition(searchCondition);
+		pages.setSearchKeyword(searchKeyword);
+		System.out.println(">>>> pages 중간: " + pages);
 		List<ProjectVO> projectList = projectService.getProjectList(pages);
+		
+		int i = 0;
+		for (ProjectVO pvo : projectList) {
+			System.out.println(i + ": " + pvo.toString());
+			i++;
+		}
 		
 		model.addAttribute("projectList", projectList);
 		model.addAttribute("pages", pages);
 		
+		System.out.println(">>>> pages 끝: " + pages);
 		return "project/getProjectList";
 	}
 	

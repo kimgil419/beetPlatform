@@ -36,6 +36,9 @@
    INSERT INTO USER_DB (USER_ID,USER_PASSWORD,DEPT,BIRTH,JOB_ID,USER_ADDR,USER_NAME,USER_POSITION,USER_GRD,PHONE,CPHONE,USER_EMAIL,FIRSTJOIN,DEPARTURE,USER_PICTURE) VALUES (#{user_id},#{user_password},#{dept},#{birth},#{job_id},#{user_addr},#{user_name},#{user_position},#{user_grd},#{phone},#{cphone},#{user_email},#{firstjoin},#{departure},#{user_picture})
    </insert>
 
+	<update id="user_update" parameterType="user">
+		UPDATE USER_DB SET USER_PASSWORD = #{user_password} WHERE USER_ID = #{user_id}
+	</update>
 
 </mapper>
 

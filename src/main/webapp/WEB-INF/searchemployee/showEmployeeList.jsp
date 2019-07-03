@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>dsdsad</title>
 </head>
-<script src='/js/jquery-3.4.0.js'></script>
+<script src='/js/jquery-3.4.1.min.js'></script>
 <script src="/js/pagination.min.js"></script>
 <link href="css/pagination.css" rel='stylesheet'/>
 <script src="/js/searchpeople.js"></script>

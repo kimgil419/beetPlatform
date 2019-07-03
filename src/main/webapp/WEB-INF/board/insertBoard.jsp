@@ -30,6 +30,11 @@ function categoryChange() {
 		$("#category").val(sel); 
 	}
 }
+
+var result = '${bdmsg}';
+if(result == '공지') {
+alert(result + '를 쓸 수 없는 권한입니다'); //아무 조건도 안걸면 계속 나온다 전달도 안된다
+}
 </script>
 </head>
 <body>
@@ -38,7 +43,7 @@ function categoryChange() {
 	<h1>글등록</h1>
 	<p><a href="logout.do">Log-out</a></p>
 	<hr>
-	<form action="insertBoard.do" method="post"
+	<form action="insertBoard.do?curPage=${c2 }" method="post"
 	        enctype="multipart/form-data">
 	<table>
 		<tr>
@@ -83,7 +88,7 @@ function categoryChange() {
 		</tr>
 	</table>
 	</form>
-	<p><a href="getBoardList.do">글 목록 가기</a></p>
+	<p><a href="getBoardList.do?curPage=${c2 }">글 목록 가기</a></p>
 </div>
 
 </body>

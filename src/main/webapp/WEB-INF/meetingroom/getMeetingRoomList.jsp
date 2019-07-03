@@ -7,7 +7,7 @@
 <head>
     <meta charset='utf-8' />
 </head>
-<script src='/js/jquery-3.4.0.js'></script>
+<script src='/js/jquery-3.4.1.min.js'></script>
 <link href='/library/fullcalendar/packages/core/main.css' rel='stylesheet' />
 <link href='/library/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
 <link href='/library/fullcalendar/packages/timegrid/main.css' rel='stylesheet' />

@@ -9,8 +9,10 @@ public class PagingVO {
 	private int currentPage;
 	private int startPost;
 	private int endPost;
+	private int viewPost;
 	private int startPage;
 	private int endPage;
+	private String searchCondition, searchKeyword;
 	
 	public PagingVO(int totalPost, int currentPage) {
 		System.out.println(">> PagingVO 객체 생성");
@@ -19,6 +21,7 @@ public class PagingVO {
 		setTotalPage();
 		setStartPost();
 		setEndPost();
+		setViewPost();
 		setStartPage();
 		setEndPage();
 	}
@@ -74,6 +77,12 @@ public class PagingVO {
 	public int getEndPost() {
 		return endPost;
 	}
+	public void setViewPost() {
+		this.viewPost = endPost - startPost + 1;
+	}
+	public int getViewPost() {
+		return viewPost;
+	}
 	
 	public void setStartPage() {
 		this.startPage = (currentPage - 1) / countPage * countPage + 1;
@@ -84,23 +93,39 @@ public class PagingVO {
 	
 	public void setEndPage() {
 		this.endPage = startPage + countPage - 1;
-		System.out.println("endPage1: " + endPage);
 		if (endPage > totalPage) {
 			endPage = totalPage;
-			System.out.println("endPage2: " + endPage);
 		}
-		System.out.println("endPage3: " + endPage);
 	}
 	public int getEndPage() {
 		return endPage;
+	}
+
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
 	}
 
 	@Override
 	public String toString() {
 		return "PagingVO [countPost=" + countPost + ", countPage=" + countPage + ", totalPost=" + totalPost
 				+ ", totalPage=" + totalPage + ", currentPage=" + currentPage + ", startPost=" + startPost
-				+ ", endPost=" + endPost + ", startPage=" + startPage + ", endPage=" + endPage + "]";
+				+ ", endPost=" + endPost + ", viewPost=" + viewPost + ", startPage=" + startPage + ", endPage="
+				+ endPage + ", searchCondition=" + searchCondition + ", searchKeyword=" + searchKeyword + "]";
 	}
+
+	
 }
 
 

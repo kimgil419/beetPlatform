@@ -1,6 +1,7 @@
 package com.beetoffice.board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,14 +43,26 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getBoardList(BoardVO vo) {
-		return boardDAO.getBoardList(vo);
-	}
-
-	@Override
 	public void getBoardInsert(BoardVO vo) {
 		boardDAO.getBoardInsert(vo);
 		
+	}
+
+	@Override
+	public BoardVO updateBoardf(BoardVO vo) {
+		return boardDAO.updateBoardf(vo);
+		
+	}
+
+	@Override
+	public int getTotalCount() {
+		return boardDAO.getTotalCount();
+	}
+
+	@Override
+	public List<BoardVO> getBoardList(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return boardDAO.getBoardList(map);
 	}
 
 }

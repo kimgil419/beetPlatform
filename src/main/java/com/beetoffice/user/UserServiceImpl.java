@@ -23,6 +23,12 @@ public class UserServiceImpl implements UserService {
 		userDAO.insertUser(vo);
 		
 	}
+
+	@Override
+	public void updatePassword(UserVO vo) {
+		userDAO.updateUser(vo);
+	}
+
 	@Override
 	public List<UserVO> getUserList(UserVO vo) {
 		return userDAO.getUserList(vo);

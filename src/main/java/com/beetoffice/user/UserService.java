@@ -11,4 +11,6 @@ public interface UserService {
 	List<UserVO> getUserList(UserVO vo);
 	
 	void insertUser(UserVO vo);
+
+	void updatePassword(UserVO vo);
 }
