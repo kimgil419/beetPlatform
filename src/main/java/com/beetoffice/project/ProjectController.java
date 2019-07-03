@@ -41,25 +41,22 @@ public class ProjectController {
 		map.put("searchKeyword", searchKeyword);
 		
 		int totalPost = projectService.getTotalPost(map);
-		System.out.println(">>>> total: " + totalPost);
 		PagingVO pages = new PagingVO(totalPost, Integer.parseInt(currentPage));
-		System.out.println(">>>> pages 처음: " + pages);
 		
 		pages.setSearchCondition(searchCondition);
 		pages.setSearchKeyword(searchKeyword);
-		System.out.println(">>>> pages 중간: " + pages);
 		List<ProjectVO> projectList = projectService.getProjectList(pages);
 		
-		int i = 0;
-		for (ProjectVO pvo : projectList) {
-			System.out.println(i + ": " + pvo.toString());
-			i++;
-		}
+//		int i = 0;
+//		for (ProjectVO pvo : projectList) {
+//			System.out.println(i + ": " + pvo.toString());
+//			i++;
+//		}
 		
 		model.addAttribute("projectList", projectList);
 		model.addAttribute("pages", pages);
 		
-		System.out.println(">>>> pages 끝: " + pages);
+		System.out.println(">>>> pages: " + pages);
 		return "project/getProjectList";
 	}
 	
@@ -76,9 +73,10 @@ public class ProjectController {
 	@RequestMapping("deleteProject.do")
 	public String deleteProject(ProjectVO vo) {
 		System.out.println(">> Controller: deleteProject()");
+		
 		projectService.deleteProject(vo);
 		
-		return "redirect:getProjectList.do?currentPage=1";
+		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
 	}
 	
 	@RequestMapping("insertProject.do")
@@ -98,7 +96,7 @@ public class ProjectController {
 		}
 		System.out.println(">>> insertProject완료");
 		
-		return "redirect:getProjectList.do?currentPage=1";
+		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
 	}
 	
 	@RequestMapping("getSource.do")
@@ -126,7 +124,7 @@ public class ProjectController {
 		projectService.updateProject(vo);
 		model.addAttribute("project", projectService.getProject(vo));
 		
-		return "getProject";
+		return "forward:getProject.do";
 	}
 	
 	@RequestMapping("writeProject.do")
@@ -138,8 +136,6 @@ public class ProjectController {
 	@RequestMapping("modifySource.do")
 	public String modifySource(SourceVO vo, Model model) {
 		System.out.println(">> Controller: modifySource()");
-		System.out.println("sourceVO: " + vo);
-		System.out.println("source_idx: " + vo.getSource_idx());
 		
 		model.addAttribute("source", projectService.getSource(vo));
 		return "project/modifySource";
@@ -148,16 +144,26 @@ public class ProjectController {
 	@RequestMapping("updateSource.do")
 	public String updateSource(SourceVO vo, Model model) {
 		System.out.println(">> Controller: updateSource");
-		System.out.println(">>>> souce원본: " + vo.getSource_code());
-		
-		String source_code = vo.getSource_code().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("\'", "&39#");
-		vo.setSource_code(source_code);
-		
-		System.out.println(">>>> source수정: " + vo.getSource_code());
 		
 		projectService.updateSource(vo);
 		
 		return "redirect:getSource.do?source_idx=" + vo.getSource_idx();
+	}
+	
+	@RequestMapping("/insert")
+	public String insertExample() {
+		
+		return "project/insertExample";
+	}
+	@RequestMapping("/code")
+	public String insertCodeExample() {
+		
+		return "project/insertCodeExample";
+	}
+	@RequestMapping("/code2")
+	public String insertCodeExample2() {
+		
+		return "project/insertCodeExample2";
 	}
 	
 }

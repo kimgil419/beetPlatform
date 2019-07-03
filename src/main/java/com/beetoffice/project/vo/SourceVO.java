@@ -11,6 +11,6 @@ public class SourceVO {
 	int source_idx, project_idx;
 	
 	@Getter @Setter
-	String user_id, source_name, source_code, source_progress;
+	String user_id, source_name, source_code, source_progress, user_name;
 
 }
