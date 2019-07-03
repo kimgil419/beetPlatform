@@ -22,4 +22,9 @@ public class SearchEmployeeDAO {
     public List<SearchEmployeeVO> getListbyKeyword(String keyword){
         return mybatis.selectList("searchemployee.selectbykeyword", keyword);
     }
+    
+    public List<SearchEmployeeVO> getListForSearch(SearchEmployeeVO vo){
+        return mybatis.selectList("searchemployee.selectAllForSearch", vo);
+    }
+    
 }

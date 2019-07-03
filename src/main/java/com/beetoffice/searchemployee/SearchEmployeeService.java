@@ -6,4 +6,5 @@ public interface SearchEmployeeService {
 
     List<SearchEmployeeVO> getUserList(SearchEmployeeVO vo);
     List<SearchEmployeeVO> getUserListbyKeyword(String keyword);
+	List<SearchEmployeeVO> getUserListForSearch(SearchEmployeeVO vo);
 }

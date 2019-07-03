@@ -39,7 +39,7 @@ th {
 </style>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<script src="/js/jquery-3.4.0.js"></script>
+<script src="/js/jquery-3.4.1.min.js"></script>
 <script src="/js/multiselect.min.js"></script>
 <script type="text/javascript">
 
@@ -87,7 +87,7 @@ th {
 				console.log(employeeData1[0]);
 				for (var i = 0; i < employeeData1.length; i++) {
 					$('#user_id1').append(
-							"<option value="+ employeeData1[i].user_id">" + employeeData1[i].user_name
+							"<option value="+ employeeData1[i].user_id+ ">" + employeeData1[i].user_name
 									+ employeeData1[i].user_position
 									+ "</option>");
 
@@ -213,12 +213,16 @@ th {
 					<td width="140" id="empSearch">결재2 <select id="user_id2"
 						name="user_id2">
 							<option value="1">1</option>
-							<option value="2">2</option></td>
+							<option value="2">2</option></select></td>
+							
+							
 
 					<td width="140" id="empSearch">결재3 <select id="user_id3"
 						name="user_id3">
 							<option value="1">1</option>
-							<option value="2">2</option></td>
+							<option value="2">2</option></select></td>
+							
+							
 				</tr>
 
 			</table>
@@ -260,8 +264,7 @@ th {
 			<table>
 				<tr>
 					<th>제목</th>
-					<td colspan="2"><input type="text" name="a_title"
-						value="${approval.a_title}"></td>
+					<td colspan="2"><input type="text" name="a_title"></td>
 				</tr>
 				<tr>
 					<th>작성자</th>

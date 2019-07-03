@@ -21,4 +21,9 @@ public class SearchEmployeeServiceImpl implements SearchEmployeeService {
     public List<SearchEmployeeVO> getUserListbyKeyword(String keyword) {
         return seDAO.getListbyKeyword(keyword);
     }
+    @Override
+    public List<SearchEmployeeVO> getUserListForSearch(SearchEmployeeVO vo) {
+        return seDAO.getListForSearch(vo);
+    }
+    
 }

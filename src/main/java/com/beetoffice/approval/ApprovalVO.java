@@ -8,6 +8,10 @@ public class ApprovalVO {
 	@Getter @Setter 
 	private String  a_content, ok1, ok2, ok3,
 	regdate, a_title, urgent, refuse, searchCondition, searchKeyword;
+	
+	@Getter @Setter
+	private String[] to[];
+	
 	@Getter @Setter
 	private int a_num, user_id, user_id1, user_id2, user_id3;
 

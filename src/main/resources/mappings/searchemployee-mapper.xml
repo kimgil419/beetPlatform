@@ -21,7 +21,11 @@
             CPHONE regexp #{keyword} OR
             FIRSTJOIN regexp #{keyword} OR
             USER_EMAIL regexp #{keyword};
-
+    </select>
+    
+     <select id="selectAllForSearch" resultType="searchemployee" parameterType="searchemployee">
+        SELECT *
+        FROM USER_DB
     </select>
 
 

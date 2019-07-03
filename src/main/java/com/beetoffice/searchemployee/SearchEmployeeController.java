@@ -45,7 +45,7 @@ public class SearchEmployeeController {
     public @ResponseBody
     String searchEmployeeForSelect(SearchEmployeeVO model){
 
-        List<SearchEmployeeVO> list = searchEmployeeService.getUserList(model);
+        List<SearchEmployeeVO> list = searchEmployeeService.getUserListForSearch(model);
         Gson json = new Gson();
 
         return json.toJson(list);
