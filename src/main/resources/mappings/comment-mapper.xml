@@ -18,4 +18,10 @@
 		resultType="comment">
 		SELECT * FROM COMMENT WHERE SEQ = #{seq}
 	</select>
+	
+	
+    <delete id="deleteComment"  parameterType="comment">
+    
+		DELETE FROM COMMENT WHERE REPLY_SEQ = #{reply_seq}
+	</delete>
 	</mapper>

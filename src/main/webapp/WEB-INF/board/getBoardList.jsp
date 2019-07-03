@@ -68,7 +68,7 @@
 
 
 	<!-- 검색을 위한 폼 -->
-	<form action="getBoardList.do" method="POST">
+	<form action="getBoardList.do?curPage=${pvo.nowPage }" method="POST">
 	<h1>사내게시판</h1>
 	<table class="border-none">
 		<tr>

@@ -47,9 +47,9 @@ public class BoardDAOMybatis2 {
 	
 	//검색조건 적용해서 데이타 조회
 	//(실습) 검색조건 적용해서 처리되도록 구현
-	public List<BoardVO> getBoardList(Map<String, Integer> map) {
+	public List<BoardVO> getBoardList(BoardVO vo) {
 		System.out.println("===> Mybatis2로 getBoardList() 실행");
-		return mybatis.selectList("BoardDAO.getBoardList", map);
+		return mybatis.selectList("BoardDAO.getBoardList", vo);
 	}
 	public void getBoardInsert(BoardVO vo) {
 		System.out.println("===> Mybatis2로 deleteBoard() 실행");

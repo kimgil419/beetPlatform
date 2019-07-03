@@ -1,4 +1,4 @@
-package com.beetoffice.comment;
+package com.beetoffice.board;
 
 import java.util.List;
 
@@ -20,6 +20,11 @@ public class CommentDAOMybatis {
 	public List<CommentVO> getCommentList(CommentVO vo) {
 		System.out.println("===> Mybatis로 getComment() 실행");
 		return mybatis.selectList("CommentDAO.getCommentList", vo);
+	}
+
+	public void deleteComment(CommentVO vo) {
+		System.out.println("===> Mybatis로 deleteComment() 실행");
+		mybatis.delete("CommentDAO.deleteComment", vo);
 	}
 
 }

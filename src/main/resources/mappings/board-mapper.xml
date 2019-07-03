@@ -38,20 +38,33 @@
 	SELECT COUNT(SEQ) FROM BOARD
 	</select>
 	
-	<select id="getBoardList" parameterType="Map"
+	<select id="getBoardList" parameterType="board"
 		resultType="board">
 		
 		SELECT *
 		  FROM (SELECT ROW_NUMBER() OVER() R_NUM, BBS.*
 		          FROM ( (SELECT * 
 		                  FROM BOARD 
-		                  WHERE T_NOTI = 'Y')
+		                  WHERE T_NOTI = 'Y'
+		                           <if test="searchCondition =='TITLE' ">
+			                           AND (T_TITLE LIKE CONCAT('%', #{searchKeyword}, '%'))
+		                           </if>
+		                           <if test="searchCondition =='CONTENT' ">
+			                           AND (T_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%'))
+		                           </if>
+		                  )
 		
 		                  UNION ALL
 		
 		                  (SELECT * 
 		                  FROM BOARD 
-		                  WHERE T_NOTI = 'N')
+		                  WHERE T_NOTI = 'N' 
+		                           <if test="searchCondition =='TITLE' ">
+			                           AND (T_TITLE LIKE CONCAT('%', #{searchKeyword}, '%'))
+		                           </if>
+		                           <if test="searchCondition =='CONTENT' ">
+			                           AND (T_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%'))
+		                           </if>)
 		
 		                  ORDER BY T_NOTI = 'N',T_NOTI = 'Y'
 		                   ) BBS 

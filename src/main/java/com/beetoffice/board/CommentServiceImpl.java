@@ -1,4 +1,4 @@
-package com.beetoffice.comment;
+package com.beetoffice.board;
 
 import java.util.List;
 
@@ -24,6 +24,12 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<CommentVO> getCommentList(CommentVO vo) {
 		return commentDAO.getCommentList(vo);
+	}
+
+	@Override
+	public void deleteComment(CommentVO vo) {
+		commentDAO.deleteComment(vo);
+		
 	}
 
 }
