@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,12 +82,26 @@ public class ApprovalController {
 	}	
 	
 	@RequestMapping("/insertApproval.do")
-	public String insertApproval(ApprovalVO vo) 
+	public String insertApproval(ApprovalVO vo, HttpServletRequest request) 
 			throws IllegalStateException, IOException {
-		System.out.println(">>> �? ?���? 처리 - insertApproval()");
+		System.out.println(">>>  - insertApproval()");
+		System.out.println(vo.getTo());
 		
-		System.out.println("lk;saf" + vo.getTo());
-		
+	 System.out.println("userid1 : " + vo.getUser_id1());
+	 if (vo.getUser_id1() == null || vo.getUser_id1() == "") {
+		 String id1 = vo.getTo().split(",")[0];
+		String id2 = vo.getTo().split(",")[1];
+		String id3 = vo.getTo().split(",")[2];
+		 System.out.println("1 : "+id1);
+		 System.out.println("2 : "+id2);
+		 System.out.println("3 : "+id3);
+		 vo.setUser_id1(id1);
+		 vo.setUser_id2(id2);
+		 vo.setUser_id3(id3);
+		 vo.setOption("1");
+	 } else {
+		 vo.setOption("0");
+	 }
 		approvalService.insertApproval(vo);
 		return "redirect:getApprovalList.do";
 	}

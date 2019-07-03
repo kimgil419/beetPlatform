@@ -75,13 +75,17 @@
 	</select>
 	
 	<select id="getProject" parameterType="project" resultType="project">
-		SELECT * FROM PROJECT_VIEW
-		 WHERE PROJECT_IDX=#{project_idx}
+		SELECT PV.*, UD.USER_NAME
+		  FROM PROJECT_VIEW AS PV, USER_DB AS UD
+		 WHERE PROJECT_IDX = #{project_idx}
+		   AND PV.PROJECT_MANAGER = UD.USER_ID 
 	</select>
 	
 	<select id="getSourceList" parameterType="project" resultType="source">
-		SELECT * FROM PROJECT_SOURCE
+		SELECT PS.*, UD.USER_NAME
+		  FROM PROJECT_SOURCE AS PS, USER_DB AS UD
 		 WHERE PROJECT_IDX=#{project_idx}
+		   AND PS.USER_ID = UD.USER_ID
 	</select>
 	
 	<select id="getSource" parameterType="source" resultType="source">
@@ -90,8 +94,10 @@
 	</select>
 	
 	<select id="modifyProject" parameterType="project" resultType="project">
-		SELECT * FROM PROJECT_VIEW
-		 WHERE PROJECT_IDX=#{project_idx}
+		SELECT PV.*, UD.USER_NAME
+		  FROM PROJECT_VIEW AS PV, USER_DB AS UD
+		 WHERE PROJECT_IDX = #{project_idx}
+		   AND PV.PROJECT_MANAGER = UD.USER_ID
 	</select>
 	
 	<select id="getManager" parameterType="project" resultType="project">
@@ -128,13 +134,13 @@
 		UPDATE PROJECT_VIEW
 		   SET PROJECT_CONTRACTOR=#{project_contractor}, PROJECT_NAME=#{project_name}, PROJECT_CONTRACT_AMOUNT=#{project_contract_amount},
 		   	   PROJECT_START_DATE=#{project_start_date}, PROJECT_END_DATE=#{project_end_date}, PROJECT_MANAGER=#{project_manager},
-		   	   PROJECT_MEMBERS=#{project_members}, PROJECT_PROGRESS=#{project_progress}
+		   	   PROJECT_PROGRESS=#{project_progress}
 		 WHERE PROJECT_IDX=#{project_idx}
 	</update>
 	
 	<update id="updateSource" parameterType="source">
 		UPDATE PROJECT_SOURCE
-		   SET SOURCE_NAME=#{source_name}, SOURCE_CODE=#{source_code}
+		   SET SOURCE_NAME=#{source_name}, SOURCE_CODE=#{source_code}, SOURCE_PROGRESS=#{source_progress}, USER_ID=#{user_id}
 		 WHERE SOURCE_IDX=#{source_idx}
 	</update>
 	

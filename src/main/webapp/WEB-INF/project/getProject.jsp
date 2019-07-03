@@ -4,11 +4,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>프로젝트상세</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+<script src='/js/jquery-3.4.1.min.js'></script>
 </head>
+<style>
+	.flex_div {
+		display: flex;
+	}
+	#flex_div_children1 {
+		width: 50%;
+	}
+	#flex_div_children2 {
+		width: 50%;
+		display: flex;
+		justify-content: flex-end;
+	}
+</style>
 <body>
 	<h1>프로젝트 상세보기</h1>
-	<table border="1">
+	<table class="table table-bordered">
 		<tr>
 			<th>프로젝트번호</th>
 			<td>${project.project_idx }</td>
@@ -23,35 +38,40 @@
 			<th>계약금액</th>
 			<td>${project.project_contract_amount }</td>
 			<th>계약기간</th>
-			<td>${project.project_start_date }</td>
-			<td>${project.project_end_date }</td>
+			<td>${project.project_start_date }&nbsp;/&nbsp;${project.project_end_date }</td>
 		</tr>
 		<tr>
-			<th>팀장</th>
-			<td>${project.project_manager }</td>
-			<th>팀원</th>
-			<td></td>
+			<th>책임자</th>
+			<td>${project.user_name }</td>
 			<th>진행상황</th>
 			<td>${project.project_progress }</td>
 		<tr>
 	</table>
-<table border="1">
-	<tr>
-		<th>담당자</th>
-		<th>소스번호(삭제예정)</th>
-		<th>기능</th>
-		<th>진행상황</th>
-	</tr>
-	<c:forEach var="source" items="${sourceList }">
+	<table class="table table-bordered">
 		<tr>
-			<td>${source.user_id }</td>
-			<td>${source.source_idx }</td>
-			<td><a href="getSource.do?source_idx=${source.source_idx }">${source.source_name }</a></td>
-			<td>${source.source_progress }</td>
+			<th>담당자</th>
+			<th>소스번호(삭제예정)</th>
+			<th>기능</th>
+			<th>진행상황</th>
 		</tr>
-	</c:forEach>
-</table>
-<a href="deleteProject.do?project_idx=${project.project_idx }">삭제</a>
-<a href="modifyProject.do?project_idx=${project.project_idx }">수정</a>
+		<c:forEach var="source" items="${sourceList }">
+			<tr>
+				<td>${source.user_name }</td>
+				<td>${source.source_idx }</td>
+				<td><a href="getSource.do?source_idx=${source.source_idx }">${source.source_name }</a></td>
+				<td>${source.source_progress }</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<div class="flex_div">
+		<div id="flex_div_children1">
+			<a href="modifyProject.do?project_idx=${project.project_idx }"><input type="button" value="수정"></a>
+			<a href="deleteProject.do?project_idx=${project.project_idx }"><input type="button" value="삭제"></a>
+		</div>
+		<div id="flex_div_children2">
+			<a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null"><input type="button" value="목록"></a>
+			<a href="getCommute.do"><input type="button" value="메인"></a>
+		</div>
+	</div>
 </body>
 </html>

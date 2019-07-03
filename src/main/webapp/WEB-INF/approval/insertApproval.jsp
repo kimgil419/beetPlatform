@@ -67,13 +67,14 @@ th {
 			dataType : "json", // 서버에서 보내줄 데이터의 타입
 			success : function(data) {
 				var employeeData = data
-				var employeeData1 = [];
+				var employeeData1 = [];3
 
 				console.log(employeeData[0]);
 				$('#multiselect option').remove();
+				
 				for (var i = 0; i < employeeData.length; i++) {
 					$('#multiselect').append(
-							"<option value="+ employeeData[i].user_id + ">" + employeeData[i].user_name
+							"<option value="+employeeData[i].user_id+">" + employeeData[i].user_name
 									+ employeeData[i].user_position
 									+ "</option>");
 
@@ -85,9 +86,11 @@ th {
 
 				$('#user_id1 option').remove();
 				console.log(employeeData1[0]);
+				$('#user_id1').append(
+						"<option value='' selected disabled hidden>" +"선택하세요"+ "</option>");
 				for (var i = 0; i < employeeData1.length; i++) {
 					$('#user_id1').append(
-							"<option value="+ employeeData1[i].user_id+ ">" + employeeData1[i].user_name
+							"<option value="+employeeData1[i].user_id+">" + employeeData1[i].user_name
 									+ employeeData1[i].user_position
 									+ "</option>");
 
@@ -98,9 +101,11 @@ th {
 
 				$('#user_id2 option').remove();
 				console.log(employeeData1[0]);
+				$('#user_id2').append(
+						"<option value='' selected disabled hidden>" +"선택하세요"+ "</option>");
 				for (var i = 0; i < employeeData1.length; i++) {
 					$('#user_id2').append(
-							"<option value="+ employeeData1[i].user_id + ">" + employeeData1[i].user_name
+							"<option value="+employeeData1[i].user_id+ ">" + employeeData1[i].user_name
 									+ employeeData1[i].user_position
 									+ "</option>");
 
@@ -114,9 +119,11 @@ th {
 
 				$('#user_id3 option').remove();
 				console.log(employeeData1[0]);
+				$('#user_id3').append(
+						"<option value='' selected disabled hidden>" +"선택하세요"+ "</option>");
 				for (var i = 0; i < employeeData1.length; i++) {
 					$('#user_id3').append(
-							"<option value="+ employeeData1[i].user_id + ">" + employeeData1[i].user_name
+							"<option value="+employeeData1[i].user_id+ ">" + employeeData1[i].user_name
 									+ employeeData1[i].user_position
 									+ "</option>");
 
@@ -151,9 +158,17 @@ th {
 			console.log($("#multiselect_to"));
 			if ($("#multiselect_to option").length > 2) {
 				$("#multiselect_rightSelected").prop("disabled", true);
+				
+				$("#multiselect_to").find("option:eq(0)").prop("selected", true);
+				$("#multiselect_to").find("option:eq(1)").prop("selected", true);
+				$("#multiselect_to").find("option:eq(2)").prop("selected", true);
 				alert('You can select upto 3 options only');
-				return false;
-			} else { $("#multiselect_rightSelected").prop("disabled", false); }
+				
+			} else { $("#multiselect_rightSelected").prop("disabled", false);
+			$("#multiselect_to").find("option:eq(0)").prop("selected", true);
+			$("#multiselect_to").find("option:eq(1)").prop("selected", true);
+			$("#multiselect_to").find("option:eq(2)").prop("selected", true);
+			}
 		});
 
 		$('#multiselect').multiselect();
@@ -228,7 +243,7 @@ th {
 			</table>
 
 			<div class="row" id="p3">
-				<div class="col-xs-5" oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
+				<div class="col-xs-5">
 					<select name="from[]" id="multiselect" class="form-control"
 						size="8" multiple="multiple">
 						<option value="1">1</option>
@@ -252,7 +267,7 @@ th {
 					</button>
 				</div>
 				<div class="col-xs-5">
-					<select name="to[]" id="multiselect_to" class="form-control"
+					<select name="to" id="multiselect_to" class="form-control"
 						size="8" multiple="multiple">
 					</select>
 				</div>

@@ -72,6 +72,61 @@
 			<th width="50">등록일</th>			
 		</tr>
 		<tr>
+		
+		<th colspan="7">직렬결재서류</th>
+		</tr>
+			
+		<c:forEach var="approval" items="${approvalList}">
+		
+		<c:if test="${(approval.option == 0 ) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
+		or (approval.user_id2 == userInfo.user_id and not empty approval.ok1 and empty approval.ok2) 
+		or (approval.user_id3 == userInfo.user_id and not empty approval.ok1 and not empty approval.ok2 and empty approval.ok3)}" >
+		
+		<tr>
+			<td class="center">${approval.a_num }</td>
+			<td>
+				<a href="getApproval.do?a_num=${approval.a_num }">
+					${approval.a_title }
+				</a>
+			</td>
+			<td>${approval.user_id}</td>
+			<td>${approval.user_id1}</td>
+			<td>${approval.user_id2}</td>
+			<td>${approval.user_id3}</td>
+			<td>${approval.regdate}</td>
+		</tr>
+		</c:if>
+		</c:forEach>
+		
+		
+		<tr>
+		<th colspan="7">병렬 결재 서류</th>
+		</tr>	
+		
+		
+		<c:forEach var="approval" items="${approvalList}">
+		
+		<c:if test="${ (approval.option == 1) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
+		or (approval.user_id2 == userInfo.user_id and empty approval.ok2) 
+		or (approval.user_id3 == userInfo.user_id and empty approval.ok3)}" >
+		
+		<tr>
+			<td class="center">${approval.a_num }</td>
+			<td>
+				<a href="getApproval.do?a_num=${approval.a_num }">
+					${approval.a_title }
+				</a>
+			</td>
+			<td>${approval.user_id}</td>
+			<td>${approval.user_id1}</td>
+			<td>${approval.user_id2}</td>
+			<td>${approval.user_id3}</td>
+			<td>${approval.regdate}</td>
+		</tr>
+		</c:if>
+		</c:forEach>
+		
+		<tr>
 		<th colspan="7">반려서류</th>
 		</tr>
 			
@@ -96,6 +151,7 @@
 		</tr>
 		</c:if>
 		</c:forEach>
+		<tr>
 		<th colspan="7">긴급결재서류</th>
 		</tr>
 			
@@ -120,33 +176,8 @@
 		</tr>
 		</c:if>
 		</c:forEach>
-		<tr>
-		<th colspan="7">지난 서류</th>
-		</tr>
-			
 		
 		
-		<c:forEach var="approval" items="${approvalList}">
-		
-		<c:if test="${ (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
-		or (approval.user_id2 == userInfo.user_id and not empty approval.ok1 and empty approval.ok2) 
-		or (approval.user_id3 == userInfo.user_id and not empty approval.ok1 and not empty approval.ok2 and empty approval.ok3)}" >
-		
-		<tr>
-			<td class="center">${approval.a_num }</td>
-			<td>
-				<a href="getApproval.do?a_num=${approval.a_num }">
-					${approval.a_title }
-				</a>
-			</td>
-			<td>${approval.user_id}</td>
-			<td>${approval.user_id1}</td>
-			<td>${approval.user_id2}</td>
-			<td>${approval.user_id3}</td>
-			<td>${approval.regdate}</td>
-		</tr>
-		</c:if>
-		</c:forEach>
 		<tr>
 		<th colspan="7">지난 서류</th>
 		</tr>
@@ -172,7 +203,29 @@
 		</tr>
 		</c:if>
 		</c:forEach>
+		<tr>
+		<th colspan="7">내가쓴 서류</th>
+		</tr>
 			
+		<c:forEach var="approval" items="${approvalList}">
+		
+		<c:if test="${approval.user_id == userInfo.user_id}" >
+		
+		<tr>
+			<td class="center">${approval.a_num }</td>
+			<td>
+				<a href="getApproval.do?a_num=${approval.a_num }">
+					${approval.a_title }
+				</a>
+			</td>
+			<td>${approval.user_id}</td>
+			<td>${approval.user_id1}</td>
+			<td>${approval.user_id2}</td>
+			<td>${approval.user_id3}</td>
+			<td>${approval.regdate}</td>
+		</tr>
+		</c:if>
+		</c:forEach>	
 	</table>
 	<br>
 	<p><a href="ApprovalForm.do">새글 등록</a></p>

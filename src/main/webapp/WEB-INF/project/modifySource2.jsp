@@ -3,43 +3,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>코드수정</title>
+<title>Insert title here</title>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/css/css.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.min.css"></script>
 <script src="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/xml/xml.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/htmlmixed/htmlmixed.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/css/css.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.0/holder.js"></script>
-
-
-<!-- https://codepen.io/wolfgang1983/pen/mVmxpp -->
 <script>
 $(document).ready(function() {
-	// 쇽쇽작성
-	switch ("$(source.source_progress)") {
-	case "예정":
-		$("#progress_select option:eq(0)").attr("selected", "selected");
-		break;
-	case "완료":
-		$("#progress_select option:eq(1)").attr("selected", "selected");
-		break;
-	case "보류":
-		$("#progress_select option:eq(2)").attr("selected", "selected");
-		break;
-	case "폐기":
-		$("#progress_select option:eq(3)").attr("selected", "selected");
-		break;
-	default:
-		alert("progress select eorror");
-		break;
-	}
-	
-	
-	//////////////////////////////////editor 옵션 퍼온것/////////////////////////
     
     // tooltips on hover
     $('[data-toggle=\'tooltip\']').tooltip({container: 'body', html: true});
@@ -194,32 +169,42 @@ blockquote {
 	min-height: 350px;
 }
 </style>
+
+
+<style>
+/* textarea 위에 코드용 동작하면 지울것 */
+	.shadow-textarea textarea.form-control::placeholder {
+	    font-weight: 300;
+	}
+	.shadow-textarea textarea.form-control {
+	    padding-left: 0.8rem;
+	}
+</style>
+
+
 </head>
 <body>
 <h1>코드수정</h1>
 	<form action="updateSource.do">
 		<table class="table table-bordered">
 			<tr>
-				<td>No.</td>
-				<td><input type="text" name="source_idx" value="${source.source_idx }" readonly="readonly"></td>
-				<td>작성자</td>
-				<td><input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">
-				<input type="text" name="user_id" value="${source.user_id }">찾기로수정해서쓰게
-				<input type="text" name="source_idx" value="${source.user_name }" readonly="readonly"></td>
+				<td>코드번호</td>
+				<td><input type="text" name="source_idx" value="${source.source_idx }"></td>
 			</tr>
 			<tr>
-				<td>기능</td>
+				<td>작성자</td>
 				<td><input type="text" name="source_name" value="${source.source_name }"></td>
-				<th>진행상황</th>
-				<td><select id="progress_select" name="source_progress">
-					<option value="예정">예정</option>
-					<option value="완료">완료</option>
-					<option value="보류">보류</option>
-					<option value="폐기">폐기</option>
-				</select></td>
 			</tr>
 		</table>
-<div class="container">
+		<div class="form-group shadow-textarea">
+			<label for="exampleFormControlTextarea6">코드</label>
+			<textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="소스내용을 작성해 주세요..."></textarea>
+		</div>
+		<div class="container">
+
+
+
+
 
 <div class="row">
 
@@ -249,7 +234,7 @@ blockquote {
 
 </div>
 <div class="panel-body">
-<textarea id="text-editor" name="source_code" class="form-control">${source.source_code }</textarea>
+<textarea id="text-editor" name="text-editor" class="form-control" name="source_code"></textarea>
 </div>
 </div>
 </div>
@@ -266,11 +251,16 @@ blockquote {
 
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+
 
 
 		<input type="submit" value="수정하기">
 	</form>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
 </html>
