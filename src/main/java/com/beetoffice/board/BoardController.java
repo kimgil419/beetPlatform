@@ -212,6 +212,13 @@ public class BoardController {
 		String a = (String) session.getAttribute("user_id");
 		String b = (String) session.getAttribute("dept");
 		String c = (String) session.getAttribute("user_position");
+		
+		if("".equals(vo.getT_noti())) {
+			model.addAttribute("bdfsmsg", "본문");
+			model.addAttribute("c2", curPage);
+	            return "board/insertBoard";
+		}
+		
 		if ( "Y".equals(vo.getT_noti().trim())) {
 		if(!("인사".equals(b) && "대리".equals(c))) {
 				model.addAttribute("bdmsg", "공지");
@@ -220,7 +227,7 @@ public class BoardController {
 		}
 		}
 		vo.setUser_id(a);
-		vo.setDept(b);
+		
 		vo.setUser_position(c);
 		
 		/* ***** 파일 업로드 처리 *************

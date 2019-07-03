@@ -14,7 +14,20 @@
 				#{cnt}, #{user_id}, #{dept}, #{user_position})
 	</insert>
 	
+		<insert id="dpinsertBoard"  parameterType="dpboard">
+		INSERT INTO BOARD (T_REGDATE,T_TITLE, USER_NAME, T_CONTENT,T_NOTI,T_IMG,CNT,USER_ID,DEPT,USER_POSITION) 
+		VALUES (NOW(), 
+				#{t_title}, #{user_name}, #{t_content}, 
+				#{t_noti}, #{t_img}, 
+				#{cnt}, #{user_id}, #{dept}, #{user_position})
+	</insert>
+	
 	<update id="updateBoard"  parameterType="board">
+		UPDATE BOARD SET T_TITLE=#{t_title}, T_CONTENT=#{t_content}, T_IMG=#{t_img} 
+		WHERE SEQ=#{seq}
+	</update>
+	
+	<update id="dpupdateBoard"  parameterType="dpboard">
 		UPDATE BOARD SET T_TITLE=#{t_title}, T_CONTENT=#{t_content}, T_IMG=#{t_img} 
 		WHERE SEQ=#{seq}
 	</update>
@@ -25,7 +38,16 @@
 	</update>
 	
 	
+	<update id="dpgetBoardInsert"  parameterType="dpboard">
+		UPDATE BOARD SET CNT = CNT + 1
+		WHERE SEQ=#{seq}
+	</update>
+	
 	<delete id="deleteBoard"  parameterType="board">
+		DELETE FROM BOARD WHERE SEQ = #{seq}
+	</delete>
+	
+	<delete id="dpdeleteBoard"  parameterType="dpboard">
 		DELETE FROM BOARD WHERE SEQ = #{seq}
 	</delete>
 	
@@ -34,8 +56,17 @@
 		SELECT * FROM BOARD WHERE SEQ = #{seq}
 	</select>
 	
+	<select id="dpgetBoard" parameterType="dpboard"
+		resultType="dpboard">
+		SELECT * FROM BOARD WHERE SEQ = #{seq}
+	</select>
+	
 	<select id="totalCount" resultType="int">
-	SELECT COUNT(SEQ) FROM BOARD
+	SELECT COUNT(SEQ) FROM BOARD WHERE DEPT IS NULL
+	</select>
+	
+	<select id="dptotalCount" parameterType="dpboard" resultType="int">
+	SELECT COUNT(SEQ) FROM BOARD WHERE DEPT = #{dept}
 	</select>
 	
 	<select id="totalCounts" parameterType="board" resultType="int">
@@ -43,10 +74,23 @@
 		                  FROM BOARD 
 		                  WHERE
 		                           <if test="searchCondition =='TITLE' ">
-			                           T_TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
+			                           T_TITLE LIKE CONCAT('%', #{searchKeyword}, '%') AND DEPT IS NULL
 		                           </if>
 		                           <if test="searchCondition =='CONTENT' ">
-			                           T_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')
+			                           T_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%') AND DEPT IS NULL
+		                           </if>
+		               
+	</select>
+	
+	<select id="dptotalCounts" parameterType="dpboard" resultType="int">
+	SELECT COUNT(SEQ) 
+		                  FROM BOARD 
+		                  WHERE
+		                           <if test="searchCondition =='TITLE' ">
+			                           T_TITLE LIKE CONCAT('%', #{searchKeyword}, '%') AND DEPT = #{dept}
+		                           </if>
+		                           <if test="searchCondition =='CONTENT' ">
+			                           T_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%') AND DEPT = #{dept}
 		                           </if>
 		               
 	</select>
@@ -58,7 +102,7 @@
 		  FROM (SELECT ROW_NUMBER() OVER() R_NUM, BBS.*
 		          FROM ( (SELECT * 
 		                  FROM BOARD 
-		                  WHERE T_NOTI = 'Y'
+		                  WHERE T_NOTI = 'Y' AND DEPT IS NULL
 		                           <if test="searchCondition =='TITLE' ">
 			                           AND (T_TITLE LIKE CONCAT('%', #{searchKeyword}, '%'))
 		                           </if>
@@ -71,7 +115,7 @@
 		
 		                  (SELECT * 
 		                  FROM BOARD 
-		                  WHERE T_NOTI = 'N' 
+		                  WHERE T_NOTI = 'N' AND DEPT IS NULL
 		                           <if test="searchCondition =='TITLE' ">
 			                           AND (T_TITLE LIKE CONCAT('%', #{searchKeyword}, '%'))
 		                           </if>
@@ -85,6 +129,39 @@
 		 WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
 	
+	<select id="dpgetBoardList" parameterType="dpboard"
+		resultType="dpboard">
+		
+		SELECT *
+		  FROM (SELECT ROW_NUMBER() OVER() R_NUM, BBS.*
+		          FROM ( (SELECT * 
+		                  FROM BOARD 
+		                  WHERE T_NOTI = 'Y' AND DEPT = #{dept}
+		                           <if test="searchCondition =='TITLE' ">
+			                           AND (T_TITLE LIKE CONCAT('%', #{searchKeyword}, '%'))
+		                           </if>
+		                           <if test="searchCondition =='CONTENT' ">
+			                           AND (T_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%'))
+		                           </if>
+		                  )
+		
+		                  UNION ALL
+		
+		                  (SELECT * 
+		                  FROM BOARD 
+		                  WHERE T_NOTI = 'N' AND DEPT = #{dept}
+		                           <if test="searchCondition =='TITLE' ">
+			                           AND (T_TITLE LIKE CONCAT('%', #{searchKeyword}, '%'))
+		                           </if>
+		                           <if test="searchCondition =='CONTENT' ">
+			                           AND (T_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%'))
+		                           </if>)
+		
+		                  ORDER BY T_NOTI = 'N',T_NOTI = 'Y'
+		                   ) BBS 
+		       ) S
+		 WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
 	
 	<!--  <select id="ugetBoard" parameterType="user"
 		resultType="user">

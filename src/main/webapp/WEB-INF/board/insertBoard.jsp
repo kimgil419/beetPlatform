@@ -32,8 +32,11 @@ function categoryChange() {
 }
 
 var result = '${bdmsg}';
+var results = '${bdfsmsg}';
 if(result == '공지') {
 alert(result + '를 쓸 수 없는 권한입니다'); //아무 조건도 안걸면 계속 나온다 전달도 안된다
+}else if(results == '본문'){
+	alert(results + '태그를 선택해주세요');
 }
 </script>
 </head>

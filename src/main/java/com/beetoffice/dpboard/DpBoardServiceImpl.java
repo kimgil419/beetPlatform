@@ -55,8 +55,8 @@ public class DpBoardServiceImpl implements DpBoardService {
 	}
 
 	@Override
-	public int dpgetTotalCount() {
-		return boardDAO.dpgetTotalCount();
+	public int dpgetTotalCount(DpBoardVO vo) {
+		return boardDAO.dpgetTotalCount(vo);
 	}
 
 	@Override

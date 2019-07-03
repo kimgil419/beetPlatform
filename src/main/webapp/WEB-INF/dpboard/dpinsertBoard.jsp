@@ -30,11 +30,17 @@ function categoryChange() {
 		$("#category").val(sel); 
 	}
 }
-
+var resultss = '${bdfsmsg}';
 var result = '${bdmsg}';
+var results = '${bdssmsg}';
 if(result == '공지') {
 alert(result + '를 쓸 수 없는 권한입니다'); //아무 조건도 안걸면 계속 나온다 전달도 안된다
+} else if(results == '공지') {
+	alert(results + '사항은 비밀번호를 입력할 수 없습니다');
+} else if(resultss == '본문'){
+	alert(resultss + '태그를 선택해주세요');
 }
+
 </script>
 </head>
 <body>
@@ -56,6 +62,12 @@ alert(result + '를 쓸 수 없는 권한입니다'); //아무 조건도 안걸�
 			<th>작성자</th>
 			<td>
 				<input type="text" name="user_name" value="${user_name }">
+			</td>
+		</tr>
+		<tr>
+			<th>비밀번호</th>
+			<td>
+				<input type="text" name="t_password">
 			</td>
 		</tr>
 		<tr>

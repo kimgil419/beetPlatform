@@ -1,5 +1,7 @@
 package com.beetoffice.dpboard;
 
+import static org.mockito.Mockito.mockitoSession;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,6 +25,7 @@ import com.beetoffice.board.BoardVO;
 import com.beetoffice.board.CommentService;
 import com.beetoffice.board.CommentVO;
 import com.beetoffice.board.Paging;
+import com.mysql.cj.Session;
 
 
 
@@ -60,16 +63,18 @@ public class DpBoardController {
 		String b = String.valueOf(a);
 		session.setAttribute("mySeq", b);
 		boardService.dpgetBoardInsert(vo);
-		
+		String pd = vo.getT_password();
 		//session.setAttribute("c1",curPage);
+		
 		redirectAttributes.addAttribute("curPage", curPage);
+		session.setAttribute("pd", pd);
 		return "redirect:dpgetBoard.do";
 	}
 	
 	//리턴타입 ModleAndView -> String 변경 통일
 	//데이타 저장타입 : ModleAndView -> Model
 	@RequestMapping("/dpgetBoard.do")
-	public String dpgetBoard(DpBoardVO vo, Model model, HttpSession session,@RequestParam String curPage, DpCommentVO vol) {
+	public String dpgetBoard(DpBoardVO vo, Model model, HttpSession session,@RequestParam String curPage, DpCommentVO vol,RedirectAttributes redirectAttributes) {
 		System.out.println(">>> 글 상세 조회 처리 - getBoard()");
 		String a = (String) session.getAttribute("mySeq");
 		vo.setSeq(Integer.parseInt(a));
@@ -83,8 +88,17 @@ public class DpBoardController {
         List<DpCommentVO> list = commentService.dpgetCommentList(vol);
 		
 		model.addAttribute("cm_list", list);
+		String pd = (String) session.getAttribute("pd");
+		vo.setT_password(pd);
+		if("".equals(vo.getT_password())) {
+			if(!("과장".equals(vo.getUser_position()) || "차장".equals(vo.getUser_position()) || "부장".equals(vo.getUser_position()) || "이사".equals(vo.getUser_position()) || "대표이사".equals(vo.getUser_position()))) {
+				model.addAttribute("bdmsg", "비밀글");
+				redirectAttributes.addAttribute("curPage", curPage);
+		            return "redirect:dpgetBoardList.do";
+			}
+		}
 		
-		return "board/dpgetBoard";
+		return "dpboard/dpgetBoard";
 	}
 	
 	@RequestMapping("/dpinsertComment.do")
@@ -113,15 +127,18 @@ public class DpBoardController {
 	//데이타 저장타입 : ModleAndView -> Model
 	@RequestMapping("/dpgetBoardList.do")
 	public String dpgetBoardList(DpBoardVO vo, 
-			Model model,@RequestParam String curPage) {
+			Model model,@RequestParam String curPage, HttpSession session) {
 		System.out.println(">>> 글 목록 조회 처리- getBoardList()");
+		
+		String dept = (String) session.getAttribute("dept");
+        vo.setDept(dept);
 		//페이지 처리를 위한 Paging 객체 생성해서 값 설정
 		Paging p = new Paging();
 		//p.setNumPerPage(2);
 
 
 		//1. 전체 게시물의 수를 구하기
-		p.setTotalRecord(boardService.dpgetTotalCount());
+		p.setTotalRecord(boardService.dpgetTotalCount(vo));
 		p.setTotalPage(); //전체 페이지 갯수 구하기
 		
 		System.out.println(">전체 건수: "+ p.getTotalRecord());
@@ -201,7 +218,7 @@ public class DpBoardController {
 		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pvo", p);
-		return "board/getBoardList";
+		return "dpboard/dpgetBoardList";
 	}	
 	
 	@RequestMapping("/dpinsertBoard.do")
@@ -214,17 +231,31 @@ public class DpBoardController {
 		String a = (String) session.getAttribute("user_id");
 		String b = (String) session.getAttribute("dept");
 		String c = (String) session.getAttribute("user_position");
+		
+		if("".equals(vo.getT_noti())) {
+			model.addAttribute("bdfsmsg", "본문");
+			model.addAttribute("c2", curPage);
+	            return "dpboard/dpinsertBoard";
+		}
+		
 		if ( "Y".equals(vo.getT_noti().trim())) {
-		if(!("인사".equals(b) && "대리".equals(c))) {
+		if(!"대리".equals(c)) {
 				model.addAttribute("bdmsg", "공지");
 				model.addAttribute("c2", curPage);
-  	            return "board/dpinsertBoard";
+  	            return "dpboard/dpinsertBoard";
+		} else if(!"".equals(vo.getT_password())) {
+			    model.addAttribute("bdssmsg", "공지");
+			    model.addAttribute("c2", curPage);
+	            return "dpboard/dpinsertBoard";
 		}
 		}
 		vo.setUser_id(a);
 		vo.setDept(b);
 		vo.setUser_position(c);
-		
+		if(!"".equals(vo.getT_password())) {
+			String str = "[건의사항]" + vo.getT_title();
+			vo.setT_title(str);
+		}
 		/* ***** 파일 업로드 처리 *************
 		 * MultipartFile 인터페이스 주요 메소드
 		 * String getOriginalFilename() : 업로드한 파일명
@@ -251,7 +282,7 @@ public class DpBoardController {
 		System.out.println(">>> 글 등록 처리 - insertBoardf()");
 		
 		model.addAttribute("c2", curPage);
-		return "board/dpinsertBoard";
+		return "dpboard/dpinsertBoard";
 	}
 	
 	@RequestMapping("/dpupdateBoard.do")
@@ -311,7 +342,7 @@ public class DpBoardController {
 		boardService.dpgetBoard(vo);
 		model.addAttribute("board", vo);
 		model.addAttribute("cc", curPage);
-		return "board/dpdeleteBoards";
+		return "dpboard/dpdeleteBoards";
 	}
 	
 	@RequestMapping("/dpdpdeleteComments.do")
@@ -321,7 +352,7 @@ public class DpBoardController {
 		model.addAttribute("s", vo.getSeq());
 		model.addAttribute("rs", vo.getReply_seq());
 		model.addAttribute("cc1", curPage);
-		return "board/dpdeleteComments";
+		return "dpboard/dpdeleteComments";
 	}
 	
 	@RequestMapping(value="/dpdpdeleteComment.do", method=RequestMethod.POST)

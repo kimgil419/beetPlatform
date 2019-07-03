@@ -61,6 +61,12 @@
 	}
 	/****** 페이지 표시 부분 스타일(끝) ********/
 </style>
+<script>
+ar result = '${bdmsg}';
+if(result == '비밀글') {
+alert(result + '을 열람할 수 없는 권함입니다'); //아무 조건도 안걸면 계속 나온다 전달도 안된다
+} 
+</script>
 </head>
 <body>
 
@@ -161,7 +167,7 @@
 				</ol>
 			</td>
 			<td>
-				<p><a href="dpinsertBoardf.do">새글 등록</a></p>
+				<p><a href="dpinsertBoardf.do?curPage=${pvo.nowPage }">새글 등록</a></p>
 			</td>
 		</tr>
 	</tfoot>	

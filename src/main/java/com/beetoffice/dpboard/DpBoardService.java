@@ -13,6 +13,6 @@ public interface DpBoardService {
 	void dpgetBoardInsert(DpBoardVO vo); //게시물 조회수 에 이용할 것;
 	DpBoardVO dpgetBoard(DpBoardVO vo); //조회(상세조회)
 	List<DpBoardVO> dpgetBoardList(DpBoardVO vo); //조회(글목록)
-	int dpgetTotalCount();
+	int dpgetTotalCount(DpBoardVO vo);
 	int dpgetTotalCounts(DpBoardVO vo);
 }
