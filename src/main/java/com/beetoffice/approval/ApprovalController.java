@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @SessionAttributes("approval")
 public class ApprovalController {
+	String aplist;
+	
 	@Autowired
 	private ApprovalService approvalService;
 	
@@ -78,10 +81,11 @@ public class ApprovalController {
 	}	
 	
 	@RequestMapping("/insertApproval.do")
-	public String insertApproval(ApprovalVO vo) 
+	public String insertApproval(ApprovalVO vo,  HttpServletRequest request ) 
 			throws IllegalStateException, IOException {
 		System.out.println(">>> �? ?���? 처리 - insertApproval()");
-			
+		aplist =  request.getParameter("to[]");
+		System.out.println("aplist");
 		approvalService.insertApproval(vo);
 		return "redirect:getApprovalList.do";
 	}

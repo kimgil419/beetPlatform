@@ -37,8 +37,14 @@ th {
 	border: none;
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="/js/jquery-3.4.0.js"></script>
+<script src="/js/multiselect.min.js"></script>
 <script type="text/javascript">
+
+	
+
 	function loadRenderTemplate() {
 		$.ajax({
 			url : 'empSearch.html',
@@ -63,6 +69,16 @@ th {
 				var employeeData = data
 				var employeeData1 = [];
 
+				console.log(employeeData[0]);
+				$('#multiselect option').remove();
+				for (var i = 0; i < employeeData.length; i++) {
+					$('#multiselect').append(
+							"<option value="+ employeeData[i].user_id + ">" + employeeData[i].user_name
+									+ employeeData[i].user_position
+									+ "</option>");
+
+				}
+
 				employeeData1 = employeeData.filter(function(x) {
 					return x.user_position === "대리" || x.user_position === "주임"
 				});
@@ -71,34 +87,36 @@ th {
 				console.log(employeeData1[0]);
 				for (var i = 0; i < employeeData1.length; i++) {
 					$('#user_id1').append(
-							"<option value=''>" + employeeData1[i].user_name
+							"<option value="+ employeeData1[i].user_id">" + employeeData1[i].user_name
 									+ employeeData1[i].user_position
 									+ "</option>");
 
 				}
 				employeeData1 = employeeData.filter(function(x) {
-					return x.user_position === "과장" || x.user_position === "부장" 
-					});
+					return x.user_position === "과장" || x.user_position === "부장"
+				});
 
 				$('#user_id2 option').remove();
 				console.log(employeeData1[0]);
 				for (var i = 0; i < employeeData1.length; i++) {
 					$('#user_id2').append(
-							"<option value=''>" + employeeData1[i].user_name
+							"<option value="+ employeeData1[i].user_id + ">" + employeeData1[i].user_name
 									+ employeeData1[i].user_position
 									+ "</option>");
 
 				}
 
 				employeeData1 = employeeData.filter(function(x) {
-					return x.user_position === "차장" || x.user_position === "대표이사" || x.user_position === "이사"
+					return x.user_position === "차장"
+							|| x.user_position === "대표이사"
+							|| x.user_position === "이사"
 				});
 
 				$('#user_id3 option').remove();
 				console.log(employeeData1[0]);
 				for (var i = 0; i < employeeData1.length; i++) {
 					$('#user_id3').append(
-							"<option value=''>" + employeeData1[i].user_name
+							"<option value="+ employeeData1[i].user_id + ">" + employeeData1[i].user_name
 									+ employeeData1[i].user_position
 									+ "</option>");
 
@@ -109,10 +127,56 @@ th {
 		});
 
 	};
+	
+	function submit() {
+		
+	}
 
 	function renderSearchTmpl() {
 		$("#empSearch").html($.render.searchTmpl(employeeData));
 	}
+
+	$(function() {
+	
+		
+		$("#multiselect").change(function() {
+			if ($("#multiselect option:selected ").length > 3 ) {
+				$("#multiselect_rightSelected").prop("disabled", true);
+				alert('You can select upto 3 options only')
+				
+				return false;
+			} else { $("#multiselect_rightSelected").prop("disabled", false); }
+		
+
+			console.log($("#multiselect_to"));
+			if ($("#multiselect_to option").length > 2) {
+				$("#multiselect_rightSelected").prop("disabled", true);
+				alert('You can select upto 3 options only');
+				return false;
+			} else { $("#multiselect_rightSelected").prop("disabled", false); }
+		});
+
+		$('#multiselect').multiselect();
+
+		$("#p3").hide();
+
+		$("#p").click(function() {
+
+			if ($("#p3").css("display") === "none") {
+				$("#p2").hide();
+				$("#p3").show();
+			} else {
+				$("#p3").hide();
+				$("#p2").show();
+			}
+
+		});
+
+	});
+	
+
+	//세번째 p태그가 눌리면
+	//세번째 p태그 사라지고, 두번째 p태그 나타나도록 처리
 </script>
 </head>
 <body>
@@ -123,8 +187,17 @@ th {
 			<a href="logout.do">Log-out</a>
 		</p>
 		<hr>
-		<form>
-			<table>
+		<form action="insertApproval.do" method="post"> 
+			<p>
+				<input type="button" name="p" id="p" value=" 결재 방식 전환 ">
+			</p>
+
+
+
+
+
+			<table id="p2">
+
 				<tr>
 					<td><input type="checkbox" name="urgent" value="1"> 긴급
 					</td>
@@ -137,22 +210,52 @@ th {
 							<option value="2">2</option>
 					</select> <input type="button" value="찾기" onclick="employeeSearch()"></input>
 					</td>
-					<td width="140" id="empSearch">결재1 <select id="user_id2"
+					<td width="140" id="empSearch">결재2 <select id="user_id2"
 						name="user_id2">
 							<option value="1">1</option>
-							<option value="2">2</option>
-					</select> <input type="button" value="찾기" onclick="employeeSearch()"></input>
-					</td>
+							<option value="2">2</option></td>
 
-					<td width="140" id="empSearch">결재1 <select id="user_id3"
+					<td width="140" id="empSearch">결재3 <select id="user_id3"
 						name="user_id3">
 							<option value="1">1</option>
-							<option value="2">2</option>
-					</select> <input type="button" value="찾기" onclick="employeeSearch()"></input>
-					</td>
+							<option value="2">2</option></td>
 				</tr>
 
 			</table>
+
+			<div class="row" id="p3">
+				<div class="col-xs-5" oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
+					<select name="from[]" id="multiselect" class="form-control"
+						size="8" multiple="multiple">
+						<option value="1">1</option>
+						<option value="2">2</option>
+					</select>
+				</div>
+				<div class="col-xs-2">
+					<input type="button" value="찾기" onclick="employeeSearch()"></input>
+					
+					<button type="button" id="multiselect_rightSelected"
+						class="btn btn-block">
+						<i class="glyphicon glyphicon-chevron-right"></i>
+					</button>
+					<button type="button" id="multiselect_leftSelected"
+						class="btn btn-block">
+						<i class="glyphicon glyphicon-chevron-left"></i>
+					</button>
+					<button type="button" id="multiselect_leftAll"
+						class="btn btn-block">
+						<i class="glyphicon glyphicon-backward"></i>
+					</button>
+				</div>
+				<div class="col-xs-5">
+					<select name="to[]" id="multiselect_to" class="form-control"
+						size="8" multiple="multiple">
+					</select>
+				</div>
+			</div>
+
+
+
 
 			<table>
 				<tr>
@@ -172,8 +275,8 @@ th {
 				</tr>
 
 				<tr>
-					<td colspan="2" class="center"><input type="submit"
-						value="결재요청"></td>
+					<td colspan="2" class="center"><input type="button"
+						value="결재요청" onclick="submit()"></td>
 				</tr>
 			</table>
 		</form>
