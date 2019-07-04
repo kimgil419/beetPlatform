@@ -26,7 +26,7 @@ $(function() {
 	            data : userid,
 	            url : "idcheck.do",
 	            dataType : "json",
-	      
+	            
 	            success : function(data) {
 	            	console.log(typeof data.cnt);
 	                if (data.cnt > 0) {
@@ -40,8 +40,7 @@ $(function() {
 	                } else {
 	                    alert("사용가능한 아이디입니다.");
 	                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-	                    $("#divInputId").addClass("has-success")
-	                    $("#divInputId").removeClass("has-error")
+	                    $("#user_ids").val(userid);
 	                    $("#userpwd").focus();
 	                    //아이디가 중복하지 않으면  idck = 1 
 	                    idck = 1;
@@ -50,8 +49,9 @@ $(function() {
 	            }
 	         
 	        });
+	        return false;
 	    });
-	
+	   
 	  $( "#testDatepicker" ).datepicker({
 	       changeYear: true,
 	       changeMonth: true,
@@ -96,7 +96,7 @@ function categoryChange() {
 			
 			<td>
 		
-			<input type="text" name="user_id"  id="user_id">
+			<input type="text" name="user_id"  id="user_ids">
 			
 			
 			</td>
