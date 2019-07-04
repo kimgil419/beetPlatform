@@ -1,5 +1,6 @@
 package com.beetoffice.meetingroom;
 
+import com.beetoffice.user.UserVO;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,17 +20,19 @@ public class MeetingRoomController {
     private MeetingRoomService meetingRoomService;
 
     @RequestMapping("/getMeetingRoomList.do")
-    public String getMeetingRoomList(MeetingRoomVO vo, Model model) {
+    public String getMeetingRoomList(MeetingRoomVO vo, Model model, HttpSession session) {
+
+        String dept = (String) session.getAttribute("dept");
 
         vo.setRoom_num("room1");
-
-        List<MeetingRoomVO> meetingroom =  meetingRoomService.getReserveInfo(vo);
-        List<MeetingRoomVO> allList =  meetingRoomService.getAll(vo);
-
         Gson gson = new Gson();
+        List<MeetingRoomVO> meetingroom =  meetingRoomService.getReserveInfo(vo);
         String meetingroomjson = gson.toJson(meetingroom);
+
+        List<MeetingRoomVO> allList =  meetingRoomService.getAll(vo);
         String allListjson = gson.toJson(allList);
 
+        model.addAttribute("userDept",dept);
         model.addAttribute("meetingRoomList",meetingroomjson);
         model.addAttribute("allList",allListjson);
         return "meetingroom/getMeetingRoomList";
@@ -61,13 +64,21 @@ public class MeetingRoomController {
         return dataList;
     }
 
-    @RequestMapping(value = "/selectroom.do", produces = "application/text; charset=utf8")
-    public @ResponseBody String selectroom(MeetingRoomVO vo){
+    @RequestMapping(value = "/selectroom.do", produces = "application/json; charset=utf8")
+    public @ResponseBody Map selectroom(MeetingRoomVO vo){
 
         List<MeetingRoomVO> meetingroom =  meetingRoomService.getReserveInfo(vo);
+        List<MeetingRoomVO> allList =  meetingRoomService.getAll(vo);
 
         Gson gson = new Gson();
-        return gson.toJson(meetingroom);
+        String meetingroomjson = gson.toJson(meetingroom);
+        String allListjson = gson.toJson(allList);
+
+        Map<String, String> dataList = new HashMap<>();
+        dataList.put("meetingroom", meetingroomjson);
+        dataList.put("allList", allListjson);
+        return dataList;
+
 
     }
 

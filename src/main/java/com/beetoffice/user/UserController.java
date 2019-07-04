@@ -153,5 +153,7 @@ public class UserController {
       vo.setUser_id((String) session.getAttribute("user_id"));
       userService.updatePassword(vo);
 
+      session.setAttribute("user_password", vo.getUser_password());
+
    }
 }

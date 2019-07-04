@@ -1,7 +1,5 @@
 package com.beetoffice.dpboard;
 
-import static org.mockito.Mockito.mockitoSession;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,9 +23,6 @@ import com.beetoffice.board.BoardVO;
 import com.beetoffice.board.CommentService;
 import com.beetoffice.board.CommentVO;
 import com.beetoffice.board.Paging;
-import com.mysql.cj.Session;
-
-
 
 
 @Controller
