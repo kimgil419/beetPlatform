@@ -16,13 +16,13 @@ $(function() {
 	
 	    //idck 버튼을 클릭했을 때 
 	    $("#idck").click(function(e) {
-	        e.preventDefault();
 	        //userid 를 param.
+
 	        var userid =  $("#user_id").val();
 	        
 	        $.ajax({
 	            method : 'POST',
-	            data : "user_id="+userid,
+	            data : userid,
 	            url : "idcheck.do",
 	            datatype : "json",
 	            success : function(data) {
