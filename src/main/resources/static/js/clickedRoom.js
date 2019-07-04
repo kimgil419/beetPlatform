@@ -5,7 +5,8 @@ function clicked(room_num) {
             data: "room_num=" + room_num,
             datatype: "json",
             success: function (data) {
-                list = JSON.parse(data);
+                list = JSON.parse(data.meetingroom);
+                allList = JSON.parse(data.allList);
 
                 $("#calendar").empty();
                 calendar = new FullCalendar.Calendar(calendarEl, {

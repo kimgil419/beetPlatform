@@ -84,8 +84,7 @@ public class CommuteController {
 		
 
 	
-		System.out.println("1122112" + session.getAttribute("userInfo"));
-		
+
 		
 		UserVO user = (UserVO) session.getAttribute("userInfo");
 		String id = user.getUser_id();
@@ -96,11 +95,9 @@ public class CommuteController {
 		if ( getCommute == null ) {
 		String ccc = "x";
 		model.addAttribute("ccc", ccc);
-		System.out.println("-"+ ccc +"-");
 		}
 		if ( getCommute != null) {
 			model.addAttribute("getCommute", getCommute);
-			System.out.println("-"+getCommute+"-");
 		}
 
 		

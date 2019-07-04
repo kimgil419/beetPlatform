@@ -32,6 +32,7 @@ lcalendar/packages/daygrid/main.js'></script>
   var calendarEl;
   var calendar;
   var allList = ${allList};
+  var userDept = `${userDept}`;
 
 
     function addList() {
@@ -109,8 +110,7 @@ lcalendar/packages/daygrid/main.js'></script>
 
         initCalendar();
 
-
-        bookList(allList);
+        if(userDept === '인사'){bookList(allList);}
 
         $(document).on("click", '.deletebutton', function () {
             $.ajax({
@@ -127,7 +127,7 @@ lcalendar/packages/daygrid/main.js'></script>
                     clicked("room1");
 
                     $("#table").empty();
-                    bookList(allList);
+                    if(userDept === '인사'){bookList(allList);}
                 }
             })
         })
