@@ -160,15 +160,13 @@ public class UserController {
    }
    
    @RequestMapping(value="/idcheck.do", produces="application/json; charset=utf8")
-   @ResponseBody //이거를 public 옆에 쓰면 받는 모든값이 ajax인거 같다
-   public Map<Object, Object> idcheck(String user_id) {
+   public @ResponseBody Map idcheck(String user_id) {
        
-       int count = 0;
-       Map<Object, Object> map = new HashMap<Object, Object>();
+       Map<String, Integer> map = new HashMap<>();
 
-       count = userService.idcheck(user_id);
+       int count = userService.idcheck(user_id);
        map.put("cnt", count);
 
-       return  map;
+       return map;
    }
 }

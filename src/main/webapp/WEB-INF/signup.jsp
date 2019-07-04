@@ -15,20 +15,18 @@ $(function() {
 	var idck = 0;
 	
 	    //idck 버튼을 클릭했을 때 
-	    $("#idck").click(function() {
-	        
+	    $("#idck").click(function(e) {
+	        e.preventDefault();
 	        //userid 를 param.
 	        var userid =  $("#user_id").val(); 
 	        
 	        $.ajax({
-	            
-	            type : 'POST',
+	            method : 'POST',
 	            data : userid,
 	            url : "idcheck.do",
-	            dataType : "json",
-	      
+	            datatype : "json",
 	            success : function(data) {
-	            	console.log(typeof data.cnt);
+	                console.log(data);
 	                if (data.cnt > 0) {
 	                    
 	                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
@@ -43,12 +41,11 @@ $(function() {
 	                    $("#divInputId").addClass("has-success")
 	                    $("#divInputId").removeClass("has-error")
 	                    $("#userpwd").focus();
-	                    //아이디가 중복하지 않으면  idck = 1 
+	                    //아이디가 중복하지 않으면  idck = 1
 	                    idck = 1;
 	                    
 	                }
 	            }
-	         
 	        });
 	    });
 	
