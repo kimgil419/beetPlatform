@@ -89,8 +89,10 @@
 	</select>
 	
 	<select id="getSource" parameterType="source" resultType="source">
-		SELECT * FROM PROJECT_SOURCE
+		SELECT PS.*, UD.USER_NAME
+		  FROM PROJECT_SOURCE AS PS, USER_DB AS UD
 		 WHERE SOURCE_IDX=#{source_idx}
+		   AND PS.USER_ID = UD.USER_ID
 	</select>
 	
 	<select id="modifyProject" parameterType="project" resultType="project">

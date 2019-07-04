@@ -19,28 +19,27 @@
 <!-- https://codepen.io/wolfgang1983/pen/mVmxpp -->
 <script>
 $(document).ready(function() {
-	// 쇽쇽작성
-	switch ("$(source.source_progress)") {
+	switch ("${source.source_progress }") {
 	case "예정":
-		$("#progress_select option:eq(0)").attr("selected", "selected");
+			$("#progress_select option:eq(0)").attr("selected", "selected");
+		break;
+	case "진행":
+			$("#progress_select option:eq(1)").attr("selected", "selected");
 		break;
 	case "완료":
-		$("#progress_select option:eq(1)").attr("selected", "selected");
+			$("#progress_select option:eq(2)").attr("selected", "selected");
 		break;
 	case "보류":
-		$("#progress_select option:eq(2)").attr("selected", "selected");
-		break;
-	case "폐기":
-		$("#progress_select option:eq(3)").attr("selected", "selected");
+			$("#progress_select option:eq(3)").attr("selected", "selected");
 		break;
 	default:
-		alert("progress select eorror");
+		alert("progress select error");
 		break;
 	}
-	
+});
 	
 	//////////////////////////////////editor 옵션 퍼온것/////////////////////////
-    
+$(document).ready(function() {	
     // tooltips on hover
     $('[data-toggle=\'tooltip\']').tooltip({container: 'body', html: true});
 
@@ -211,12 +210,14 @@ blockquote {
 				<td>기능</td>
 				<td><input type="text" name="source_name" value="${source.source_name }"></td>
 				<th>진행상황</th>
-				<td><select id="progress_select" name="source_progress">
-					<option value="예정">예정</option>
-					<option value="완료">완료</option>
-					<option value="보류">보류</option>
-					<option value="폐기">폐기</option>
-				</select></td>
+				<td>
+					<select id="progress_select" name="source_progress">
+						<option value="예정">예정</option>
+						<option value="완료">완료</option>
+						<option value="보류">보류</option>
+						<option value="폐기">폐기</option>
+					</select>
+				</td>
 			</tr>
 		</table>
 <div class="container">

@@ -137,7 +137,9 @@ public class ProjectController {
 	public String modifySource(SourceVO vo, Model model) {
 		System.out.println(">> Controller: modifySource()");
 		
-		model.addAttribute("source", projectService.getSource(vo));
+		vo = projectService.getSource(vo);
+		model.addAttribute("source", vo);
+		System.out.println(">>>> sourceVO: " + vo);
 		return "project/modifySource";
 	}
 	
