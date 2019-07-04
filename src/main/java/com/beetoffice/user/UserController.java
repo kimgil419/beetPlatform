@@ -159,14 +159,21 @@ public class UserController {
 
    }
    
+<<<<<<< HEAD
    @RequestMapping("/idcheck.do")
    @ResponseBody
    public Map<Object, Object> idcheck(@RequestBody String user_id) {
        
        int count = 0;
        Map<Object, Object> map = new HashMap<Object, Object>();
+=======
+   @RequestMapping(value="/idcheck.do", produces="application/json; charset=utf8")
+   public @ResponseBody Map idcheck(String user_id) {
 
-       count = userService.idcheck(user_id);
+       Map<String, Integer> map = new HashMap<>();
+>>>>>>> ed41bf78da9d2882d6ce90876a77541b61db38b3
+
+       int count = userService.idcheck(user_id);
        map.put("cnt", count);
 
        return map;

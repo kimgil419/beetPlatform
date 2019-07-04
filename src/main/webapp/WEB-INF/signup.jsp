@@ -15,20 +15,23 @@ $(function() {
 	var idck = 0;
 	
 	    //idck 버튼을 클릭했을 때 
-	    $("#idck").click(function() {
-	        
+	    $("#idck").click(function(e) {
 	        //userid 를 param.
-	        var userid =  $("#user_id").val(); 
+
+	        var userid =  $("#user_id").val();
 	        
 	        $.ajax({
-	            
-	            type : 'POST',
+	            method : 'POST',
 	            data : userid,
 	            url : "idcheck.do",
+<<<<<<< HEAD
 	            dataType : "json",
 	            
+=======
+	            datatype : "json",
+>>>>>>> ed41bf78da9d2882d6ce90876a77541b61db38b3
 	            success : function(data) {
-	            	console.log(typeof data.cnt);
+	                console.log(data);
 	                if (data.cnt > 0) {
 	                    
 	                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
@@ -42,12 +45,11 @@ $(function() {
 	                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
 	                    $("#user_ids").val(userid);
 	                    $("#userpwd").focus();
-	                    //아이디가 중복하지 않으면  idck = 1 
+	                    //아이디가 중복하지 않으면  idck = 1
 	                    idck = 1;
 	                    
 	                }
 	            }
-	         
 	        });
 	        return false;
 	    });

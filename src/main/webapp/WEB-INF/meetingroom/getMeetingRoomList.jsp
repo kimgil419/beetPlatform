@@ -1,43 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang='en'>
 
 <head>
-    <meta charset='utf-8' />
+    <meta charset='utf-8'/>
 </head>
 <script src='/js/jquery-3.4.1.min.js'></script>
-<link href='/library/fullcalendar/packages/core/main.css' rel='stylesheet' />
-<link href='/library/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
-<link href='/library/fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
-<link href='/library/fullcalendar/packages/list/main.css' rel='stylesheet' />
+<link href='/library/fullcalendar/packages/core/main.css' rel='stylesheet'/>
+<link href='/library/fullcalendar/packages/daygrid/main.css' rel='stylesheet'/>
+<link href='/library/fullcalendar/packages/timegrid/main.css' rel='stylesheet'/>
+<link href='/library/fullcalendar/packages/list/main.css' rel='stylesheet'/>
 <script src='/library/fullcalendar/packages/core/main.js'></script>
 <script src='/library/fullcalendar/packages/interaction/main.js'></script>
-<script src='/library/ful
-lcalendar/packages/daygrid/main.js'></script>
+<script src='/library/fullcalendar/packages/daygrid/main.js'></script>
 <script src='/library/fullcalendar/packages/timegrid/main.js'></script>
 <script src='/library/fullcalendar/packages/list/main.js'></script>
 <link href="/library/chenfengyuan/datepicker/dist/datepicker.css" rel="stylesheet">
 <script src="/library/chenfengyuan/datepicker/dist/datepicker.js"></script>
- <script src='/js/calendar.js'></script>
+<script src='/js/calendar.js'></script>
 <script src='/library/timepicker/dist/wickedpicker.min.js'></script>
-<link href='/library/timepicker/dist/wickedpicker.min.css' rel='stylesheet' />
+<link href='/library/timepicker/dist/wickedpicker.min.css' rel='stylesheet'/>
 <script src="/js/clickedRoom.js"></script>
 <script src="/js/booklist.js"></script>
 <script>
 
-  var list = ${meetingRoomList};
-  var currentDate = new Date();
-  var calendarEl;
-  var calendar;
-  var allList = ${allList};
-  var userDept = `${userDept}`;
+    var list = ${meetingRoomList};
+    var currentDate = new Date();
+    var calendarEl;
+    var calendar;
+    var allList = ${allList};
+    var userDept = `${userDept}`;
 
 
     function addList() {
 
-        for (var i=0;i<allList.length;i++) {
+        for (var i = 0; i < allList.length; i++) {
             if ($("#datepicker").val() == allList[i].book_date) {
                 if (!($("#timePicker2").val() <= allList[i].start || $("#timePicker1").val() >= allList[i].end)) {
                     alert("시간이 중복됩니다.");
@@ -46,13 +45,13 @@ lcalendar/packages/daygrid/main.js'></script>
             }
         }
 
-        if($("#timePicker1").val() >= $("#timePicker2").val()){
+        if ($("#timePicker1").val() >= $("#timePicker2").val()) {
             alert("시간 설정을 다시 해주세요.")
             $("#timePicker2").focus();
             return false;
         }
 
-        if($("input[name=title]").val() == ""){
+        if ($("input[name=title]").val() == "") {
             alert("예약 목적을 입력해주세요.")
             $("input[name=title]").focus();
             return false;
@@ -62,7 +61,7 @@ lcalendar/packages/daygrid/main.js'></script>
 
     }
 
-    $(function() {
+    $(function () {
 
         $("#i1").on("click", function () {
             $("#room_num").val("room1")
@@ -87,18 +86,18 @@ lcalendar/packages/daygrid/main.js'></script>
 
         $('#timePicker1').wickedpicker({
             timeSeparator: ':',
-            now : "9:00:00",
-            twentyFour : true,
-            minutesInterval : 30,
-            title : "시간선택"
+            now: "9:00:00",
+            twentyFour: true,
+            minutesInterval: 30,
+            title: "시간선택"
         });
 
         $('#timePicker2').wickedpicker({
             timeSeparator: ':',
-            now : "10:00:00",
-            twentyFour : true,
-            minutesInterval : 30,
-            title : "시간선택"
+            now: "10:00:00",
+            twentyFour: true,
+            minutesInterval: 30,
+            title: "시간선택"
         });
 
         $("#datepicker").datepicker({
@@ -110,7 +109,9 @@ lcalendar/packages/daygrid/main.js'></script>
 
         initCalendar();
 
-        if(userDept === '인사'){bookList(allList);}
+        if (userDept === '인사') {
+            bookList(allList);
+        }
 
         $(document).on("click", '.deletebutton', function () {
             $.ajax({
@@ -127,7 +128,9 @@ lcalendar/packages/daygrid/main.js'></script>
                     clicked("room1");
 
                     $("#table").empty();
-                    if(userDept === '인사'){bookList(allList);}
+                    if (userDept === '인사') {
+                        bookList(allList);
+                    }
                 }
             })
         })
@@ -151,10 +154,10 @@ lcalendar/packages/daygrid/main.js'></script>
 <body>
 <div id="leftcontainer" style="float:left">
     예약하실 회의실을 선택해주세요.
-    <br />
+    <br/>
     <div style="">
         <img src="/image/mr1.jpg" id="i1"></a>
-        <img src="/image/mr2.jpg" id="i2"></a><br />
+        <img src="/image/mr2.jpg" id="i2"></a><br/>
         <img src="/image/mr3.jpg" id="i3"></a>
         <img src="/image/mr4.jpg" id="i4"></a>
     </div>
@@ -165,10 +168,11 @@ lcalendar/packages/daygrid/main.js'></script>
             <option value="room2">Room B</option>
             <option value="room3">Room C</option>
             <option value="room4">Room D</option>
-        </select><br />
-            날짜 : <input type="text" id="datepicker" name="book_date"/><br />
-            시간 : <input type="text" id="timePicker1" name="start" /> ~ <input type="text" id="timePicker2" name="end"/><br />
-            목적 : <input type="text" name="title" placeholder="회의실 대여 목적을 입력해주세요."/><br />
+        </select><br/>
+            날짜 : <input type="text" id="datepicker" name="book_date"/><br/>
+            시간 : <input type="text" id="timePicker1" name="start"/> ~ <input type="text" id="timePicker2"
+                                                                             name="end"/><br/>
+            목적 : <input type="text" name="title" placeholder="회의실 대여 목적을 입력해주세요."/><br/>
             <input type=button value="예약" onclick="addList()"/>
 
         </form>
@@ -179,7 +183,6 @@ lcalendar/packages/daygrid/main.js'></script>
 
 
 <table id="table" style="border:solid black 1px"/>
-
 
 
 </body>
