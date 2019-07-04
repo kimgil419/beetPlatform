@@ -142,11 +142,11 @@ th {
 
             <tr>
             <td colspan="2" class="center">
-            <c:if test="${ not empty approval.ok1 or not empty approval.ok2 or not approval.ok3}" >
-               <input type="submit" value="결재">
-               </c:if>
-               
-                  <input type="button" value="반려" onclick="refuse(this.form)">
+            <c:if
+							test="${ (not empty approval.ok1 or not empty approval.ok2 or not approval.ok3)
+             and (approval.user_id1 == userInfo.user_id or approval.user_id2 == userInfo.user_id or approval.user_id2 == userInfo.user_id  ) }">
+							<input type="submit" value="결재">
+						</c:if> <input type="button" value="반려" onclick="refuse(this.form)">
                   
                    <c:if test="${(approval.user_id1 == userInfo.user_id and not empty approval.ok1)
                     or (approval.user_id2 == userInfo.user_id and not empty approval.ok2)

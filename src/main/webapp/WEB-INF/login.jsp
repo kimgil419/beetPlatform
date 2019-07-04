@@ -19,8 +19,19 @@
 	th { background-color: orange; }
 	.center { text-align: center; }
 </style>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 </head>
 <script>
+$(document).ready(function(){
+	
+	 if( $("#user_id").val().length == 0 )
+		 {
+		 $("#user_id").focus();
+		 }
+});
+
+
+
 function send_go(frm) {
 	if (frm.user_id.value.trim() == "") {
 		
@@ -28,17 +39,20 @@ function send_go(frm) {
 		frm.user_id.value = "";
 		frm.user_id.focus();
 		
-		return false;
+		frm.action = "redirect:login";
+		frm.submit();
 		
 	} else if(frm.user_password.value.trim() == "") {
 		alert("비밀번호도 필수 입력항목입니다.\n입력하세요.");
 		frm.user_password.value = "";
 		frm.user_password.focus();
-		return false;
-	} 
-	frm.action = "login.do";
-	frm.submit();
-	
+		
+		frm.action = "redirect:login";
+		frm.submit();
+	} else{
+		frm.action = "login.do";
+		frm.submit();
+	}
 }
 var result = '${lgmsg}';
 if(result == '아이디') {
@@ -54,7 +68,7 @@ alert(result + '나 비밀번호가 틀리셨습니다 인사과에 문의해주
 	<table>
 		<tr>
 			<th>아이디</th>
-			<td><input type="text" name="user_id"></td>
+			<td><input type="text" name="user_id" id="user_id"></td>
 		</tr>
 		<tr>
 			<th>패스워드</th>

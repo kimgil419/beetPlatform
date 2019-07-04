@@ -60,7 +60,8 @@ public class DpBoardController {
 		boardService.dpgetBoardInsert(vo);
 		String pd = vo.getT_password();
 		//session.setAttribute("c1",curPage);
-		
+		System.out.println("이게 뭘까요????????????????????????????????????????????????????????????????????????????????" + vo.getT_password().toString());
+
 		redirectAttributes.addAttribute("curPage", curPage);
 		session.setAttribute("pd", pd);
 		return "redirect:dpgetBoard.do";
@@ -85,9 +86,14 @@ public class DpBoardController {
 		model.addAttribute("cm_list", list);
 		String pd = (String) session.getAttribute("pd");
 		vo.setT_password(pd);
-		if("".equals(vo.getT_password())) {
-			if(!("과장".equals(vo.getUser_position()) || "차장".equals(vo.getUser_position()) || "부장".equals(vo.getUser_position()) || "이사".equals(vo.getUser_position()) || "대표이사".equals(vo.getUser_position()))) {
-				model.addAttribute("bdmsg", "비밀글");
+		System.out.println("이게 뭘까요????????????????????????????????????????????????????????????????????????????????" + vo.getT_password().toString());
+		if(!"".equals(vo.getT_password())) {
+			String user_position = (String) session.getAttribute("user_position");
+			if("과장".equals(user_position) || "차장".equals(user_position) || "부장".equals(user_position) || "이사".equals(user_position) || "대표이사".equals(user_position)) {
+				return "dpboard/dpgetBoard";
+				
+			}else {
+				session.setAttribute("secretAgent", "비밀글");
 				redirectAttributes.addAttribute("curPage", curPage);
 		            return "redirect:dpgetBoardList.do";
 			}
@@ -107,7 +113,7 @@ public class DpBoardController {
 		
 		model.addAttribute("cm_list", list);
 		model.addAttribute("c1", curPage);
-		return "board/dpgetBoard";
+		return "dpboard/dpgetBoard";
 	}
 	
 	@RequestMapping("/dpupdateBoardf.do")
@@ -115,7 +121,7 @@ public class DpBoardController {
 		
 		model.addAttribute("board", boardService.dpupdateBoardf(vo));
 		model.addAttribute("c3", curPage);
-		return "board/dpupdateBoard";
+		return "dpboard/dpupdateBoard";
 	}
 	
 	//리턴타입 ModleAndView -> String 변경 통일
@@ -213,6 +219,9 @@ public class DpBoardController {
 		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pvo", p);
+		String secretAgent = (String) session.getAttribute("secretAgent");
+	    model.addAttribute("bdmsg", secretAgent);
+	    session.removeAttribute("secretAgent");
 		return "dpboard/dpgetBoardList";
 	}	
 	
@@ -238,10 +247,12 @@ public class DpBoardController {
 				model.addAttribute("bdmsg", "공지");
 				model.addAttribute("c2", curPage);
   	            return "dpboard/dpinsertBoard";
+  	            
 		} else if(!"".equals(vo.getT_password())) {
 			    model.addAttribute("bdssmsg", "공지");
 			    model.addAttribute("c2", curPage);
 	            return "dpboard/dpinsertBoard";
+	            
 		}
 		}
 		vo.setUser_id(a);
@@ -323,7 +334,7 @@ public class DpBoardController {
 		if(!password.equals(user_password)) {
 			 model.addAttribute("dlmsg", "비밀번호");
 			 model.addAttribute("cc", curPage);
-	    	  return "board/dpdeleteBoards";
+	    	  return "dpboard/dpdeleteBoards";
 		} else {
 		boardService.dpdeleteBoard(vo);
 		redirectAttributes.addAttribute("curPage", curPage);
@@ -360,7 +371,7 @@ public class DpBoardController {
 		if(!password.equals(user_password)) {
 			 model.addAttribute("dlcmmsg", "비밀번호");
 			 model.addAttribute("cc1", curPage);
-	    	  return "board/dpdeleteComments";
+	    	  return "dpboard/dpdeleteComments";
 		} else {
 		commentService.dpdeleteComment(vo);
 		int a1 = vo.getSeq();

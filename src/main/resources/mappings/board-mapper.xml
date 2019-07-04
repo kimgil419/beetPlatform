@@ -15,11 +15,11 @@
 	</insert>
 	
 		<insert id="dpinsertBoard"  parameterType="dpboard">
-		INSERT INTO BOARD (T_REGDATE,T_TITLE, USER_NAME, T_CONTENT,T_NOTI,T_IMG,CNT,USER_ID,DEPT,USER_POSITION) 
+		INSERT INTO BOARD (T_REGDATE,T_TITLE, USER_NAME, T_CONTENT,T_NOTI,T_IMG,CNT,USER_ID,DEPT,USER_POSITION,T_PASSWORD) 
 		VALUES (NOW(), 
 				#{t_title}, #{user_name}, #{t_content}, 
 				#{t_noti}, #{t_img}, 
-				#{cnt}, #{user_id}, #{dept}, #{user_position})
+				#{cnt}, #{user_id}, #{dept}, #{user_position},#{t_password})
 	</insert>
 	
 	<update id="updateBoard"  parameterType="board">
