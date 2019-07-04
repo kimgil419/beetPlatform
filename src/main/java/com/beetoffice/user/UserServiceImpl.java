@@ -34,4 +34,9 @@ public class UserServiceImpl implements UserService {
 		return userDAO.getUserList(vo);
 	}
 
+	@Override
+	public int idcheck(String userid) {
+		return userDAO.idcheck(userid);
+	}
+
 }

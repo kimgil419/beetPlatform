@@ -2,19 +2,21 @@ package com.beetoffice.user;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.beetoffice.searchemployee.SearchEmployeeVO;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 
 @Controller
@@ -153,5 +155,18 @@ public class UserController {
       vo.setUser_id((String) session.getAttribute("user_id"));
       userService.updatePassword(vo);
 
+   }
+   
+   @RequestMapping(value="/idcheck.do", produces="application/json; charset=utf8")
+   @ResponseBody //이거를 public 옆에 쓰면 받는 모든값이 ajax인거 같다
+   public Map<Object, Object> idcheck(String user_id) {
+       
+       int count = 0;
+       Map<Object, Object> map = new HashMap<Object, Object>();
+
+       count = userService.idcheck(user_id);
+       map.put("cnt", count);
+
+       return  map;
    }
 }

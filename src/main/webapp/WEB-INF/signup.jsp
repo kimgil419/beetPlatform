@@ -12,7 +12,53 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script>
 $(function() {
+	var idck = 0;
+	
+	    //idck 버튼을 클릭했을 때 
+	    $("#idck").click(function() {
+	        
+	        //userid 를 param.
+	        var userid =  $("#user_id").val(); 
+	        
+	        $.ajax({
+	            
+	            type : 'POST',
+	            data : userid,
+	            url : "idcheck.do",
+	            dataType : "json",
+	      
+	            success : function(data) {
+	            	console.log(typeof data.cnt);
+	                if (data.cnt > 0) {
+	                    
+	                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+	                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+	               
+	                    $("#user_id").focus();
+	                   
+	                
+	                } else {
+	                    alert("사용가능한 아이디입니다.");
+	                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+	                    $("#divInputId").addClass("has-success")
+	                    $("#divInputId").removeClass("has-error")
+	                    $("#userpwd").focus();
+	                    //아이디가 중복하지 않으면  idck = 1 
+	                    idck = 1;
+	                    
+	                }
+	            }
+	         
+	        });
+	    });
+	
 	  $( "#testDatepicker" ).datepicker({
+	       changeYear: true,
+	       changeMonth: true,
+	       yearRange: '1960:2020',
+	       dateFormat: 'yy-mm-dd'
+	  });
+	  $( "#testDatepicker1" ).datepicker({
 	       changeYear: true,
 	       changeMonth: true,
 	       yearRange: '1960:2020',
@@ -33,14 +79,30 @@ function categoryChange() {
 
 <h1>성공입니다</h1>
 
+	<form action="idcheck.do" method="post">
+	<div id="divInputId" >
+			<input type="text" name="user_id"  id="user_id">
+			<input type="submit" value="아이디중복체크" id="idck">
+			</div>
+			</form>
+	
 	
 	<form action="insertUser.do" method="post"
 	        enctype="multipart/form-data">
 	<table>
+
 		<tr>
 			<th>아이디</th>
-			<td><input type="text" name="user_id"></td>
+			
+			<td>
+		
+			<input type="text" name="user_id"  id="user_id">
+			
+			
+			</td>
+		
 		</tr>
+		  
 		<tr>
 			<th>패스워드</th>
 			<td><input type="text" name="user_password"></td>
@@ -59,7 +121,7 @@ function categoryChange() {
 		</tr>
 		<tr>
 			<th>입사날짜</th>
-			<td><input type="text" id="testDatepicker" name="firstjoin"></td>
+			<td><input type="text" id="testDatepicker1" name="firstjoin"></td>
 		</tr>
 		<tr>
 			<th>퇴사날짜</th>

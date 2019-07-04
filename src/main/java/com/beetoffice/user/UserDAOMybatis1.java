@@ -35,4 +35,9 @@ public class UserDAOMybatis1 {
 	public List<UserVO> getUserList(UserVO vo) {
 		return mybatis.selectList("UserDAO.getUserList", vo) ;
 	}
+
+	public int idcheck(String userid) {
+		// TODO Auto-generated method stub
+		return mybatis.selectOne("UserDAO.idcheck",userid);
+	}
 }

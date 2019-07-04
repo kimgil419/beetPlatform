@@ -40,5 +40,11 @@
 		UPDATE USER_DB SET USER_PASSWORD = #{user_password} WHERE USER_ID = #{user_id}
 	</update>
 
+    <select id="idcheck" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM USER_DB
+      WHERE
+          USER_ID = #{user_id}
+    </select>
+    
 </mapper>
 

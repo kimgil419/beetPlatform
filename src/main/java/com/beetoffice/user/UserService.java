@@ -13,4 +13,6 @@ public interface UserService {
 	void insertUser(UserVO vo);
 
 	void updatePassword(UserVO vo);
+
+	int idcheck(String userid);
 }
