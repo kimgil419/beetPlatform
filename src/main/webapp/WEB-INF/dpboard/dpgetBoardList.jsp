@@ -62,9 +62,9 @@
 	/****** 페이지 표시 부분 스타일(끝) ********/
 </style>
 <script>
-ar result = '${bdmsg}';
+var result = '${bdmsg}';
 if(result == '비밀글') {
-alert(result + '을 열람할 수 없는 권함입니다'); //아무 조건도 안걸면 계속 나온다 전달도 안된다
+alert(result + '을 열람할 수 있는 권한이 아닙니다'); //아무 조건도 안걸면 계속 나온다 전달도 안된다
 } 
 </script>
 </head>
@@ -75,7 +75,7 @@ alert(result + '을 열람할 수 없는 권함입니다'); //아무 조건도 �
 
 	<!-- 검색을 위한 폼 -->
 	<form action="dpgetBoardList.do?curPage=${pvo.nowPage }" method="POST">
-	<h1>사내게시판</h1>
+	<h1>${dept} 부서 게시판</h1>
 	<table class="border-none">
 		<tr>
 			<td>
@@ -114,7 +114,7 @@ alert(result + '을 열람할 수 없는 권함입니다'); //아무 조건도 �
 		<tr>
 		
 			<td class=${(board.t_noti == 'Y') ? 'notie' : '' }>
-				<a href="dpgetBoardInsert.do?seq=${board.seq }&curPage=${pvo.nowPage}">
+				<img class="fancy"  style="display: ${(board.t_password == null) ? 'none':'' };" src ="image/icon_secret.gif" alt="titleImage"><a href="dpgetBoardInsert.do?seq=${board.seq }&curPage=${pvo.nowPage}&t_password=${board.t_password}">
 					${board.t_title }
 				</a>
 			</td>

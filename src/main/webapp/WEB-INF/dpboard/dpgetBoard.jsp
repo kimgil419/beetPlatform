@@ -47,7 +47,7 @@
 
 <div id="container">
 	<h1>글 상세</h1>
-	<p><a href="dplogout.do">Log-out</a></p>
+	<p><a href="logout.do">Log-out</a></p>
 	<hr>
 	<form action="dpupdateBoardf.do" method="post">
 	<input type="hidden" name="seq" value="${board.seq}">
