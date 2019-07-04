@@ -144,7 +144,6 @@ th {
 	}
 
 	$(function() {
-	
 		
 		$("#multiselect").change(function() {
 			if ($("#multiselect option:selected ").length > 3 ) {
@@ -159,16 +158,18 @@ th {
 			if ($("#multiselect_to option").length > 2) {
 				$("#multiselect_rightSelected").prop("disabled", true);
 				
-				$("#multiselect_to").find("option:eq(0)").prop("selected", true);
-				$("#multiselect_to").find("option:eq(1)").prop("selected", true);
-				$("#multiselect_to").find("option:eq(2)").prop("selected", true);
+				
 				alert('You can select upto 3 options only');
 				
 			} else { $("#multiselect_rightSelected").prop("disabled", false);
+		
+			}
+		});
+		
+		$("#textbox").click(function() {
 			$("#multiselect_to").find("option:eq(0)").prop("selected", true);
 			$("#multiselect_to").find("option:eq(1)").prop("selected", true);
 			$("#multiselect_to").find("option:eq(2)").prop("selected", true);
-			}
 		});
 
 		$('#multiselect').multiselect();
@@ -204,11 +205,8 @@ th {
 		<hr>
 		<form action="insertApproval.do" method="post"> 
 			<p>
-				<input type="button" name="p" id="p" value=" 결재 방식 전환 ">
+				<input type="button" name="p" id="p" value=" 결재 방식 전환 " onclick="employeeSearch()">
 			</p>
-
-
-
 
 
 			<table id="p2">
@@ -220,22 +218,19 @@ th {
 
 				<tr>
 					<td width="140" id="empSearch">결재1 <select id="user_id1"
-						name="user_id1">
-							<option value="1">1</option>
-							<option value="2">2</option>
-					</select> <input type="button" value="찾기" onclick="employeeSearch()"></input>
+						name="user_id1" onclick="employeeSearch()">
+							
+					</select> 
 					</td>
 					<td width="140" id="empSearch">결재2 <select id="user_id2"
-						name="user_id2">
-							<option value="1">1</option>
-							<option value="2">2</option></select></td>
+						name="user_id2" onclick="employeeSearch()">
+							</select></td>
 							
 							
 
 					<td width="140" id="empSearch">결재3 <select id="user_id3"
-						name="user_id3">
-							<option value="1">1</option>
-							<option value="2">2</option></select></td>
+						name="user_id3" onclick="employeeSearch()"> 
+							</select></td>
 							
 							
 				</tr>
@@ -246,12 +241,10 @@ th {
 				<div class="col-xs-5">
 					<select name="from[]" id="multiselect" class="form-control"
 						size="8" multiple="multiple">
-						<option value="1">1</option>
-						<option value="2">2</option>
+						
 					</select>
 				</div>
 				<div class="col-xs-2">
-					<input type="button" value="찾기" onclick="employeeSearch()"></input>
 					
 					<button type="button" id="multiselect_rightSelected"
 						class="btn btn-block">
@@ -279,7 +272,7 @@ th {
 			<table>
 				<tr>
 					<th>제목</th>
-					<td colspan="2"><input type="text" name="a_title"></td>
+					<td colspan="2"><input type="text" name="a_title" ></td>
 				</tr>
 				<tr>
 					<th>작성자</th>
@@ -289,7 +282,7 @@ th {
 
 				<tr>
 					<th>내용</th>
-					<td colspan="3"><textarea rows="10" cols="40" name="a_content"></textarea></td>
+					<td colspan="3" id="textbox"><textarea rows="10" cols="40" name="a_content" id="textbox"></textarea></td>
 				</tr>
 
 				<tr>
