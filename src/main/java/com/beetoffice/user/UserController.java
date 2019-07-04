@@ -161,7 +161,7 @@ public class UserController {
    
    @RequestMapping(value="/idcheck.do", produces="application/json; charset=utf8")
    public @ResponseBody Map idcheck(String user_id) {
-       
+
        Map<String, Integer> map = new HashMap<>();
 
        int count = userService.idcheck(user_id);

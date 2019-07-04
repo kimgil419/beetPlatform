@@ -18,11 +18,11 @@ $(function() {
 	    $("#idck").click(function(e) {
 	        e.preventDefault();
 	        //userid 를 param.
-	        var userid =  $("#user_id").val(); 
+	        var userid =  $("#user_id").val();
 	        
 	        $.ajax({
 	            method : 'POST',
-	            data : userid,
+	            data : "user_id="+userid,
 	            url : "idcheck.do",
 	            datatype : "json",
 	            success : function(data) {
