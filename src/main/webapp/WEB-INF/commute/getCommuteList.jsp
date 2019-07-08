@@ -11,10 +11,15 @@
 <head>
 <meta charset="UTF-8">
 <title>글목록</title>
- <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src='/js/jquery-3.4.1.min.js'></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>  
 <style>
   /* Default */
             input[type=text],input[type=password]{font-family:"Malgun Gothic","맑은 고딕",Dotum,"돋움",Arial,sans-serif}
@@ -55,16 +60,12 @@
 
 
         </style>
-  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-        <!-- datepicker 한국어로 -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
-    
+ 
         <script>   
         $(document).ready(function() {
 
             //datepicker 한국어로 사용하기 위한 언어설정
-            $.datepicker.setDefaults($.datepicker.regional['ko']);     
+            $.datepicker.setDefaults($.datepicker.regional['ko']);
         
             // Datepicker            
             $(".datepicker").datepicker({
@@ -169,9 +170,11 @@
 
     </head>
     <body>
-   
+    
+  
+
 <div id="page-wrapper">
-<jsp:include page="../menu.jsp"/>
+  <jsp:include page="../menu.jsp"></jsp:include>
         <form action="getCommuteList.do" method="POST">
             
         <!-- search -->
@@ -266,7 +269,7 @@
 	</form>
 	
 	<!-- 데이타 표시 -->
-	<table>
+	<table class="table table-hover">
 		<tr>
 			<th width="100">사번</th>
 			<th width="100">이름</th>
@@ -298,6 +301,6 @@
 	</c:if>	
 	 <p><a href="getCommute.do">메인메뉴이동</a></p>
     </div>  
-  
+    
    </body>
 </html>
