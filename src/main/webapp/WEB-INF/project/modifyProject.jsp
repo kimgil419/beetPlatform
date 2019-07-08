@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,12 +31,43 @@
 			break;
 		}
 		
-		
-	
-	
-	
-	
+		var counter = 0;
+
+		$("#addrow").on("click", function () {
+			var newRow = $("<tr>");
+	        var cols = "";
+	        cols += '<td><input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">' +
+            		'<input type="text" class="form_control" name="user_id">' +
+            		'<input type="text" class="form_control" name="user_name" readonly="readonly"></td>';
+            cols += '<td><input type="text" name="source_name" class="form-control"></td>';
+            cols += '<td><select name="source_progress">' +
+            			'<option value="예정">예정</option>'+
+            			'<option value="진행">진행</option>' +
+            			'<option value="완료">완료</option>' +
+            			'<option value="보류">보류</option>' +
+            			'<option value="폐기">폐기</option>';
+            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+	        newRow.append(cols);
+	        $("table#function_table").append(newRow);
+	        counter++;
+	    });
+
+	    $("table#function_table").on("click", ".ibtnDel", function (event) {
+	        $(this).closest("tr").remove();       
+	        counter -= 1
+	    });
 	});
+	function calculateRow(row) {
+	    var price = +row.find('input[name^="price"]').val();
+
+	}
+	function calculateGrandTotal() {
+	    var grandTotal = 3;
+	    $("table#function_table").find('input[name^="price"]').each(function () {
+	        grandTotal += +$(this).val();
+	    });
+	    $("#grandtotal").text(grandTotal.toFixed(2));
+	}
 </script>
 <style>
 	.table-sortable tbody tr {
@@ -44,9 +76,9 @@
 </style>
 </head>
 <body>
-	<div class="container">
-		<h3>프로젝트 수정</h3>
-		<form action="updateProject.do?project_idx=${project.project_idx}" method="post">
+	<form action="updateProject.do?project_idx=${project.project_idx}" method="post">
+		<div class="container">
+			<h3>프로젝트 수정</h3>
 			<div>
 				<table class="table table-orderlist">
 					<tbody>
@@ -80,20 +112,67 @@
 					</tbody>
 				</table>
 			</div>
-			<div>
-				<table class="table table-bordered">
-					<tbody>
-						
-					</tbody>
-				</table>
-			</div>
+		</div>		
 			
-			<div class="container">
+			
+		<div class="container">
+		    <table id="function_table" class=" table order-list">
+			    <thead>
+			        <tr>
+			            <td>담당자</td>
+			            <td>기능</td>
+			            <td>진행상태</td>
+			        </tr>
+			    </thead>
+			    <tbody>
+			    	<c:forEach var="source" items="${sourceList }">
+			    		<tr>
+			    			<td class="col-sm-">
+				                <input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">
+				                <input type="text" class="form_control" name="user_id" value="${source.user_id }">
+				                <input type="text" class="form_control" name="user_name" value="${source.user_name }" readonly="readonly">
+			            	</td>
+				            <td class="col-sm-">
+				                <input type="text" name="source_name" class="form-control" value="${source.source_name }">
+				            </td>
+				            <td class="col-sm-">
+				            	<select name="source_progress">
+				            		<option value="예정">예정</option>
+				            		<option value="진행">진행</option>
+				            		<option value="완료">완료</option>
+				            		<option valeu="보류">보류</option>
+				            		<option value="폐기">폐기</option>
+				            	</select>
+				            </td>
+				            <td class="col-sm-">
+				            	<a class="deleteRow"></a>
+							</td>
+							<td>
+								<input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete">
+							</td>
+			    		</tr>
+			    	</c:forEach>
+			      
+			    </tbody>
+			    <tfoot>
+			        <tr>
+			            <td colspan="5" style="text-align: left;">
+			                <input type="button" class="btn btn-lg btn-block " id="addrow" value="기능추가" />
+			            </td>
+			        </tr>
+			        <tr>
+			        </tr>
+			    </tfoot>
+			</table>
+		</div>
+			
+			
+		<div class="container">
 		    <div class="row clearfix">
-			<input type="submit" value="수정">
+				<input type="submit" value="수정">
+				<a href="getProject.do?project_idx=${project.project_idx }><input type="button" value="돌아가기"></a>
 			<div>
-			</div>
-		</form>
-	</div>
+		</div>
+	</form>
 </body>
 </html>

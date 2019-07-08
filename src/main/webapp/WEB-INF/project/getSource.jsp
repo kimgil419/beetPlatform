@@ -246,10 +246,10 @@
 		<div class="flex_div">
 			<div id="flex_div_children1">
 				<a href="modifySource.do?source_idx=${source.source_idx }"><input type="button" value="수정"></a>
-				<a href="deleteSource.do?project_idx=${project.project_idx }"><input type="button" value="삭제"></a>
+				<a href="deleteSource.do?project_idx=${source.project_idx }"><input type="button" value="삭제"></a>
 			</div>
 			<div id="flex_div_children2">
-				<a href="getProject.do?project_idx=${project.project_idx }"><input type="button" value="프로젝트"></a>
+				<a href="getProject.do?project_idx=${source.project_idx }"><input type="button" value="프로젝트"></a>
 				<a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null"><input type="button" value="목록"></a>
 				<a href="getCommute.do"><input type="button" value="메인"></a>
 			</div>

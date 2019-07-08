@@ -77,7 +77,6 @@ public class ProjectController {
 			svo.setSource_progress(source_progress[i]);
 			projectService.insertFunction(svo);
 		}
-		System.out.println(">>> insertProject완료");
 		
 		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
 	}
@@ -96,15 +95,27 @@ public class ProjectController {
 		System.out.println(">> Controller: modifyProject()");
 		
 		model.addAttribute("project", projectService.modifyProject(vo));
+		model.addAttribute("sourceList", projectService.getSourceList(vo));
 		
 		return "project/modifyProject";
 	}
 	
 	@RequestMapping("updateProject.do")
-	public String updateProject(ProjectVO vo, Model model) {
+	public String updateProject(ProjectVO vo, SourceVO svo, Model model, @RequestParam String[] user_id,
+			@RequestParam String[] source_name, @RequestParam String[] source_progress) {
 		System.out.println(">> Controller: updateProject()");
 		
 		projectService.updateProject(vo);
+		
+		int project_idx = vo.getProject_idx();
+		for (int i = 0; i < user_id.length; i++) {
+			svo.setProject_idx(project_idx);
+			svo.setUser_id(user_id[i]);
+			svo.setSource_name(source_name[i]);
+			svo.setSource_progress(source_progress[i]);
+			projectService.insertFunction(svo);
+		}
+		
 		model.addAttribute("project", projectService.getProject(vo));
 		
 		return "forward:getProject.do";

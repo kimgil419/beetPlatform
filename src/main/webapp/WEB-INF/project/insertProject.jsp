@@ -23,7 +23,7 @@
 	
 	$(document).ready(function() {
 		
-		$("input[value='추가']").on("click", function(){
+		/* $("input[value='추가']").on("click", function(){
 			var html = 
 			 	'<tr>' +
 				'<td>' +
@@ -35,7 +35,7 @@
 				'<td><select name="source_progress"><option value="예정">예정</option><option value="완료">완료</option><option value="보류">보류</option><option value="폐기">폐기</option></select></td>' +
 				'</tr>';
 			$("#tbody_func").append(html);
-		});
+		}); */
 		var counter = 0;
 
 			$("#addrow").on("click", function () {
@@ -125,49 +125,49 @@
 		</div>
 	</div>
 	<div class="container">
-    <table id="function_table" class=" table order-list">
-    <thead>
-        <tr>
-            <td>담당자</td>
-            <td>기능</td>
-            <td>진행상태</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="col-sm-">
-                <input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">
-                <input type="text" class="form_control" name="user_id">
-                <input type="text" class="form_control" name="user_name" readonly="readonly">
-            </td>
-            <td class="col-sm-">
-                <input type="text" name="source_name" class="form-control">
-            </td>
-            <td class="col-sm-">
-            	<select name="source_progress">
-            		<option value="예정">예정</option>
-            		<option value="진행">진행</option>
-            		<option value="완료">완료</option>
-            		<option valeu="보류">보류</option>
-            		<option value="폐기">폐기</option>
-            	</select>
-            </td>
-            <td class="col-sm-"><a class="deleteRow"></a>
-
-            </td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="5" style="text-align: left;">
-                <input type="button" class="btn btn-lg btn-block " id="addrow" value="기능추가" />
-            </td>
-        </tr>
-        <tr>
-        </tr>
-    </tfoot>
-</table>
-</div>
+	    <table id="function_table" class=" table order-list">
+		    <thead>
+		        <tr>
+		            <td>담당자</td>
+		            <td>기능</td>
+		            <td>진행상태</td>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr>
+		            <td class="col-sm-">
+		                <input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">
+		                <input type="text" class="form_control" name="user_id">
+		                <input type="text" class="form_control" name="user_name" readonly="readonly">
+		            </td>
+		            <td class="col-sm-">
+		                <input type="text" name="source_name" class="form-control">
+		            </td>
+		            <td class="col-sm-">
+		            	<select name="source_progress">
+		            		<option value="예정">예정</option>
+		            		<option value="진행">진행</option>
+		            		<option value="완료">완료</option>
+		            		<option valeu="보류">보류</option>
+		            		<option value="폐기">폐기</option>
+		            	</select>
+		            </td>
+		            <td class="col-sm-"><a class="deleteRow"></a>
+		
+		            </td>
+		        </tr>
+		    </tbody>
+		    <tfoot>
+		        <tr>
+		            <td colspan="5" style="text-align: left;">
+		                <input type="button" class="btn btn-lg btn-block " id="addrow" value="기능추가" />
+		            </td>
+		        </tr>
+		        <tr>
+		        </tr>
+		    </tfoot>
+		</table>
+	</div>
 
 		<div class="container">
 			<input type="submit" value="등록">
