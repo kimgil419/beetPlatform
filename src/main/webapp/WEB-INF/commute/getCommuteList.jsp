@@ -169,9 +169,9 @@
 
     </head>
     <body>
-    
-<div class="container">
-
+   
+<div id="page-wrapper">
+<jsp:include page="../menu.jsp"/>
         <form action="getCommuteList.do" method="POST">
             
         <!-- search -->
@@ -297,6 +297,7 @@
 	<input type="button" value="출근" onclick="in(this.form)">
 	</c:if>	
 	 <p><a href="getCommute.do">메인메뉴이동</a></p>
-    </div>   
+    </div>  
+  
    </body>
 </html>
