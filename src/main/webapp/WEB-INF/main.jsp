@@ -98,7 +98,7 @@
       </li>
       <li><a href="getApprovalList.do">전자결재(김길중)</a></li>
       <li><a href="getCommuteList.do">출결관리(김길중)</a></li>
-      <li><a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null">프로젝트 관리(김동현)</a></li>
+      <li><a href="getProjectList.do?currentPage=1">프로젝트 관리(김동현)</a></li>
       <li><a href="getBoardList.do?curPage=1">사내게시판 (한재정) </a></li>
       <li><a href="dpgetBoardList.do?curPage=1">부서게시판 (한재정) </a></li>
       
@@ -122,22 +122,6 @@
 
     <h1>메인화면입니다</h1>
      
-<<<<<<< HEAD
-    <a href="getApprovalList.do">전자결재(김길중)</a>
-    <a href="getCommuteList.do">출결관리(김길중)</a>
-<!--     <a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null">프로젝트 관리(김동현)</a> -->
-    <a href="getProjectList.do?currentPage=1">프로젝트 관리(김동현)</a>
-    <a href="getBoardList.do?curPage=1">사내게시판 (한재정) </a>
-    <a href="dpgetBoardList.do?curPage=1">부서게시판 (한재정) </a>
-    <a 
-    ${((userInfo.dept=='인사' && userInfo.user_position=='부장') || (userInfo.dept=='인사' && userInfo.user_position=='대표이사') || (userInfo.dept=='인사' && userInfo.user_position=='대리') || (userInfo.dept=='인사' && userInfo.user_position=='과장') || (userInfo.dept=='인사' && userInfo.user_position=='차장')) ? '' : 'hidden'} href="insertUser.do"> 사원등록 (한재정) </a>
-    <a href="getMeetingRoomList.do">회의실예약(김범현)</a>
-    <a href="showEmployee.do">사원검색(김범현)</a>
-    <a href="showEachEmployee.do">마이페이지(김범현)</a>
-
-
-=======
->>>>>>> b2875e010e7e252c48415c348d62855721ab1fd2
 		<p>
 			<c:if test="${ccc == 'x' }">
 				<input type="button" value="출근" onclick="in_commute(this.form)">
