@@ -12,7 +12,8 @@
 <meta charset="UTF-8">
 <title>글목록</title>
  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
-
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <style>
   /* Default */
@@ -168,6 +169,8 @@
 
     </head>
     <body>
+    
+<div class="container">
 
         <form action="getCommuteList.do" method="POST">
             
@@ -294,6 +297,6 @@
 	<input type="button" value="출근" onclick="in(this.form)">
 	</c:if>	
 	 <p><a href="getCommute.do">메인메뉴이동</a></p>
-       
+    </div>   
    </body>
 </html>

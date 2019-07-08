@@ -14,10 +14,10 @@
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <style>
-	S
+	
 </style>
 </head>
-<body>S
+<body>
 
 <div class="container">
 	<h1>전자 결재 서류 목록</h1>
