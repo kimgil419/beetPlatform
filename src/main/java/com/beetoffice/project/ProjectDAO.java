@@ -7,7 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.beetoffice.project.vo.PagingVO;
 import com.beetoffice.project.vo.ProjectVO;
 import com.beetoffice.project.vo.SourceVO;
 
@@ -21,7 +20,7 @@ public class ProjectDAO {
 		System.out.println(">> ProjectDAO 객체 생성");
 	}
 	
-	public List<ProjectVO> getProjectList(PagingVO pages) {
+	public List<ProjectVO> getProjectList(PagingProcess pages) {
 		System.out.println(">> DAO: getProjectList()");
 		
 		return mybatis.selectList("ProjectDAO.getProjectList", pages);
@@ -70,9 +69,9 @@ public class ProjectDAO {
 		mybatis.insert("ProjecDAO.insertSource", svo);
 	}
 	
-	public int getTotalPost(Map map) {
+	public int getTotalPost(PagingProcess pages) {
 		System.out.println(">> DAO: getTotalPost()");
-		return mybatis.selectOne("ProjectDAO.getTotalPost", map);
+		return mybatis.selectOne("ProjectDAO.getTotalPost", pages);
 	}
 
 	public int getProject_idx(ProjectVO vo) {

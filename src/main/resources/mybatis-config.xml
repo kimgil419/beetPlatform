@@ -12,7 +12,7 @@
         <typeAlias alias="searchemployee" type="com.beetoffice.searchemployee.SearchEmployeeVO"/>
         <typeAlias alias="project" type="com.beetoffice.project.vo.ProjectVO"/>
         <typeAlias alias="source" type="com.beetoffice.project.vo.SourceVO"/>
-        <typeAlias alias="pages" type="com.beetoffice.project.vo.PagingVO"/>
+        <typeAlias alias="pages" type="com.beetoffice.project.PagingProcess"/>
         <typeAlias alias="board" type="com.beetoffice.board.BoardVO"/>
         <typeAlias alias="dpboard" type="com.beetoffice.dpboard.DpBoardVO"/>
         <typeAlias alias="comment" type="com.beetoffice.board.CommentVO"/>

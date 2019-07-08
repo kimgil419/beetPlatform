@@ -1,29 +1,22 @@
-package com.beetoffice.project.vo;
+package com.beetoffice.project;
 
-public class PagingVO {
+public class PagingProcess {
 
 	private int countPost = 5;
 	private int countPage = 5;
 	private int totalPost;
 	private int totalPage;
-	private int currentPage;
+	private String currentPage;
 	private int startPost;
 	private int endPost;
 	private int viewPost;
 	private int startPage;
 	private int endPage;
 	private String searchCondition, searchKeyword;
-	
-	public PagingVO(int totalPost, int currentPage) {
-		System.out.println(">> PagingVO 객체 생성");
-		this.totalPost = totalPost;
-		this.currentPage = currentPage;
-		setTotalPage();
-		setStartPost();
-		setEndPost();
-		setViewPost();
-		setStartPage();
-		setEndPage();
+
+	public PagingProcess() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	public void setCountPost(int countPost) {
@@ -41,14 +34,20 @@ public class PagingVO {
 	
 	public void setTotalPost(int totalPost) {
 		this.totalPost = totalPost;
+		setTotalPage();
+		setStartPage();
+		setEndPage();
+		setStartPost();
+		setEndPost();
+		setViewPost();
 	}
 	public int getTotalPost() {
 		return totalPost;
 	}
-	public void setCurrentPage(int currentPage) {
+	public void setCurrentPage(String currentPage) {
 		this.currentPage = currentPage;
 	}
-	public int getCurrentPage() {
+	public String getCurrentPage() {
 		return currentPage;
 	}
 	
@@ -63,7 +62,7 @@ public class PagingVO {
 	}
 	
 	public void setStartPost() {
-		this.startPost = currentPage * countPost - countPost;
+		this.startPost = Integer.parseInt(currentPage) * countPost - countPost;
 	}
 	public int getStartPost() {
 		return startPost;
@@ -85,17 +84,26 @@ public class PagingVO {
 	}
 	
 	public void setStartPage() {
-		this.startPage = (currentPage - 1) / countPage * countPage + 1;
+		this.startPage = (Integer.parseInt(currentPage) - 1) / countPage * countPage + 1;
+		System.out.println("startPage: " + startPage);
 	}
 	public int getStartPage() {
 		return startPage;
 	}
 	
 	public void setEndPage() {
+		System.out.println("startPage in end: " + startPage);
+		System.out.println("countPage in end: " + countPage);
 		this.endPage = startPage + countPage - 1;
+		System.out.println(startPage + countPage - 1);
+		System.out.println(endPage > totalPage);
+		System.out.println(endPage);
 		if (endPage > totalPage) {
 			endPage = totalPage;
+			System.out.println("totalPage: " + totalPage);
+			System.out.println("endPage: " + endPage);
 		}
+		System.out.println();
 	}
 	public int getEndPage() {
 		return endPage;
@@ -119,10 +127,10 @@ public class PagingVO {
 
 	@Override
 	public String toString() {
-		return "PagingVO [countPost=" + countPost + ", countPage=" + countPage + ", totalPost=" + totalPost
-				+ ", totalPage=" + totalPage + ", currentPage=" + currentPage + ", startPost=" + startPost
-				+ ", endPost=" + endPost + ", viewPost=" + viewPost + ", startPage=" + startPage + ", endPage="
-				+ endPage + ", searchCondition=" + searchCondition + ", searchKeyword=" + searchKeyword + "]";
+		return "PagingVO [countPost=" + countPost + ", countPage=" + countPage + "\n, totalPost=" + totalPost
+				+ ", totalPage=" + totalPage + ", currentPage=" + currentPage + "\n, startPost=" + startPost
+				+ ", endPost=" + endPost + ", viewPost=" + viewPost + "\n, startPage=" + startPage + ", endPage="
+				+ endPage + ", searchCondition=" + searchCondition + "\n, searchKeyword=" + searchKeyword + "]";
 	}
 
 	

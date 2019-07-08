@@ -1,9 +1,7 @@
 package com.beetoffice.project;
 
 import java.util.List;
-import java.util.Map;
 
-import com.beetoffice.project.vo.PagingVO;
 import com.beetoffice.project.vo.ProjectVO;
 import com.beetoffice.project.vo.SourceVO;
 
@@ -13,13 +11,11 @@ public interface ProjectService {
 	void updateProject(ProjectVO vo);
 	void deleteProject(ProjectVO vo);
 	ProjectVO getProject(ProjectVO vo);
-	List<ProjectVO> getProjectList(PagingVO pages);
+	List<ProjectVO> getProjectList(PagingProcess pages);
 	SourceVO getSource(SourceVO vo);
 	List<SourceVO> getSourceList(ProjectVO vo);
 	ProjectVO modifyProject(ProjectVO vo);
-//	ProjectVO getManager(int project_idx);
-	
-	int getTotalPost(Map<String, String> map);
+	int getTotalPost(PagingProcess pages);
 	int getProject_idx(ProjectVO vo);
 	void insertFunction(SourceVO svo);
 	void insertSource(SourceVO svo);

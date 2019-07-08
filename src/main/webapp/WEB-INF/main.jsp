@@ -38,7 +38,8 @@
      
     <a href="getApprovalList.do">전자결재(김길중)</a>
     <a href="getCommuteList.do">출결관리(김길중)</a>
-    <a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null">프로젝트 관리(김동현)</a>
+<!--     <a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null">프로젝트 관리(김동현)</a> -->
+    <a href="getProjectList.do?currentPage=1">프로젝트 관리(김동현)</a>
     <a href="getBoardList.do?curPage=1">사내게시판 (한재정) </a>
     <a href="dpgetBoardList.do?curPage=1">부서게시판 (한재정) </a>
     <a 
