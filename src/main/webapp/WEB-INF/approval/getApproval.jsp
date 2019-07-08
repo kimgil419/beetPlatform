@@ -70,7 +70,8 @@ th {
 </style>
 </head>
 <body>
-
+<div id="page-wrapper">
+<jsp:include page="../menu.jsp"/>
    <div id="container">
       <h1>결재</h1>
       <p>
@@ -166,9 +167,9 @@ th {
             href="deleteApproval.do?a_num=${approval.a_num}">글삭제</a>&nbsp;&nbsp;
          <a href="getApprovalList.do">글목록</a>
          <p><a href="Main.do">메인메뉴이동</a></p>
-      </p>
+     
    </div>
-
+</div>
 </body>
 
 </html>

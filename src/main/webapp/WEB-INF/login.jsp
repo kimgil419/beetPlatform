@@ -20,7 +20,7 @@
 	.center { text-align: center; }
 </style>
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
-</head>
+
 <script>
 $(document).ready(function(){
 	
@@ -59,6 +59,7 @@ if(result == '아이디') {
 alert(result + '나 비밀번호가 틀리셨습니다 인사과에 문의해주세요'); //아무 조건도 안걸면 계속 나온다 전달도 안된다
 }
 </script>
+</head>
 <body>
 
 <div id="container">
