@@ -32,18 +32,7 @@
 <body>
 <div id="page-wrapper">
 <jsp:include page="menu.jsp"/>  
-	<form>
-		<p>
-			<c:if test="${ccc == 'x' }">
-				<input type="button" value="출근" onclick="in_commute(this.form)">
-			</c:if>
-
-			<c:if
-				test="${ getCommute.user_id !='' and not empty getCommute.user_id }">
-				<input type="button" value="퇴근" onclick="out_commute(this.form)">
-			</c:if>
-		</p>
-	</form>
+	
 
   
 
