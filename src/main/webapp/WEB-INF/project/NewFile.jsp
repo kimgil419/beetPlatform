@@ -22,42 +22,36 @@
 	}
 	
 	$(document).ready(function() {
-		
-		$("input[value='추가']").on("click", function(){
+		 $("input[value='추가']").on("click", function(){
 			var html = 
 			 	'<tr>' +
 				'<td>' +
 				'<input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">' +
-				'<input type="text" class="form_control" name="user_id">' +
-				'<input type="text" class="form_control" name="user_name" readonly="readonly">' +
+				'<input type="text" name="user_id">' +
+				'<input type="text" name="user_name" readonly="readonly">' +
 				'</td>' +
 				'<td><input type="text" name="source_name"></td>' +
 				'<td><select name="source_progress"><option value="예정">예정</option><option value="완료">완료</option><option value="보류">보류</option><option value="폐기">폐기</option></select></td>' +
 				'</tr>';
 			$("#tbody_func").append(html);
 		});
-		var counter = 0;
+		 var counter = 0;
 
-			$("#addrow").on("click", function () {
-				var newRow = $("<tr>");
+		    $("#addrow").on("click", function () {
+		        var newRow = $("<tr>");
 		        var cols = "";
-		        cols += '<td><input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">' +
-                		'<input type="text" class="form_control" name="user_id">' +
-                		'<input type="text" class="form_control" name="user_name" readonly="readonly"></td>';
-                cols += '<td><input type="text" name="source_name" class="form-control"></td>';
-                cols += '<td><select name="source_progress">' +
-                			'<option value="예정">예정</option>'+
-                			'<option value="진행">진행</option>' +
-                			'<option value="완료">완료</option>' +
-                			'<option value="보류">보류</option>' +
-                			'<option value="폐기">폐기</option>';
-                cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+
+		        cols += '<td><input type="text" class="form-control" name="name' + counter + '"/></td>';
+		        cols += '<td><input type="text" class="form-control" name="mail' + counter + '"/></td>';
+		        cols += '<td><input type="text" class="form-control" name="phone' + counter + '"/></td>';
+
+		        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
 		        newRow.append(cols);
-		        $("table#function_table").append(newRow);
+		        $("table.order-list").append(newRow);
 		        counter++;
 		    });
 
-		    $("table#function_table").on("click", ".ibtnDel", function (event) {
+		    $("table.order-list").on("click", ".ibtnDel", function (event) {
 		        $(this).closest("tr").remove();       
 		        counter -= 1
 		    });
@@ -69,7 +63,7 @@
 
 	function calculateGrandTotal() {
 	    var grandTotal = 0;
-	    $("table#function_table").find('input[name^="price"]').each(function () {
+	    $("table.order-list").find('input[name^="price"]').each(function () {
 	        grandTotal += +$(this).val();
 	    });
 	    $("#grandtotal").text(grandTotal.toFixed(2));
@@ -101,11 +95,10 @@
 						<th>책임자</th>
 						<td><input type="text" value="${userInfo.user_name }" readonly="readonly">
 							<input type="hidden" name="project_manager" value="${userInfo.user_id}" }></td>
-						<th>진행상태</th>
+						<th>진행상황</th>
 						<td>
 							<select name="project_progress">
 								<option value="예정">예정</option>
-								<option value="진행">진행</option>
 								<option value="완료">완료</option>
 								<option value="보류">보류</option>
 								<option value="폐기">폐기</option>
@@ -115,7 +108,44 @@
 				</tbody>
 			</table>
 		</div>
-		
+		<div>
+			<table class="table order-list">
+				<tbody id="tbody_func">
+					<tr>
+						<td colspan="3">
+							<input type="button" value="추가">
+							<input type="button" value="삭제" onclick="deleteRow()">
+						</td>
+					</tr>
+					<tr>
+						<th>담당자</th>
+						<th>기능</th>
+						<th>진행상황</th>
+					</tr>
+					<tr>
+						<td>
+							<input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">
+							<input type="text" name="user_id">
+							<input type="text" name="user_name" readonly="readonly">
+						</td>
+						<td><input type="text" name="source_name"></td>
+						<td>
+							<select name="source_progress">
+								<option value="예정">예정</option>
+								<option value="완료">완료</option>
+								<option value="보류">보류</option>
+								<option value="폐기">폐기</option>
+							</select>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div>
+			<input type="submit" value="등록">
+			<input type="reset" value="재작성">
+		</div>
+	</form>
 
 	<div class="modal fade">
 		<div class="modal-dialog">
@@ -124,33 +154,26 @@
 			</div>
 		</div>
 	</div>
+	<hr><hr>
 	<div class="container">
-    <table id="function_table" class=" table order-list">
+    <table id="myTable" class=" table order-list">
     <thead>
         <tr>
-            <td>담당자</td>
-            <td>기능</td>
-            <td>진행상태</td>
+            <td>Name</td>
+            <td>Gmail</td>
+            <td>Phone</td>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td class="col-sm-">
-                <input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">
-                <input type="text" class="form_control" name="user_id">
-                <input type="text" class="form_control" name="user_name" readonly="readonly">
+                <input type="text" name="name" class="form-control" />
             </td>
             <td class="col-sm-">
-                <input type="text" name="source_name" class="form-control">
+                <input type="mail" name="mail"  class="form-control"/>
             </td>
             <td class="col-sm-">
-            	<select name="source_progress">
-            		<option value="예정">예정</option>
-            		<option value="진행">진행</option>
-            		<option value="완료">완료</option>
-            		<option valeu="보류">보류</option>
-            		<option value="폐기">폐기</option>
-            	</select>
+                <input type="text" name="phone"  class="form-control"/>
             </td>
             <td class="col-sm-"><a class="deleteRow"></a>
 
@@ -160,7 +183,7 @@
     <tfoot>
         <tr>
             <td colspan="5" style="text-align: left;">
-                <input type="button" class="btn btn-lg btn-block " id="addrow" value="기능추가" />
+                <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row" />
             </td>
         </tr>
         <tr>
@@ -169,10 +192,6 @@
 </table>
 </div>
 
-		<div class="container">
-			<input type="submit" value="등록">
-			<input type="reset" value="재작성">
-		</div>
-	</form>
+	<hr><hr>
 </body>
 </html>

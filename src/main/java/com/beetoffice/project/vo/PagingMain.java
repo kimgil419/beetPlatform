@@ -1,32 +1,18 @@
 package com.beetoffice.project.vo;
 
+import com.beetoffice.project.PagingProcess;
+
 public class PagingMain {
 
 	public static void main(String[] shockWave) {
 		
-		PagingVO pu = new PagingVO(255, 1);
 		
-		System.out.println("totalPage: " + pu.getTotalPage());
-		System.out.println("currentPage: " + pu.getCurrentPage());
-		System.out.println("startPage: " + pu.getStartPage());
-		System.out.println("endPage: " + pu.getEndPage());
-		System.out.println("startPost: " + pu.getStartPost());
-		System.out.println("endPost: " + pu.getEndPost());
-		System.out.println();
+		PagingProcess pu = new PagingProcess();
+		pu.setCurrentPage("9");
+//		System.out.println(pu);
+		pu.setTotalPost(240);
+		System.out.println(pu);
 		
-		pu = new PagingVO(350, 34);
-		System.out.println("totalPage: " + pu.getTotalPage());
-		System.out.println("currentPage: " + pu.getCurrentPage());
-		System.out.println("startPage: " + pu.getStartPage());
-		System.out.println("endPage: " + pu.getEndPage());
-		System.out.println("startPost: " + pu.getStartPost());
-		System.out.println("endPost: " + pu.getEndPost());
 		
-		String code = "<!DOCTYPE html>\r\n" + 
-				"<html>";
-		
-		code.replace("<", "&lt;");
-		
-		System.out.println("code: " + code);
 	}
 }

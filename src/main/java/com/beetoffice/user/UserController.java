@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +76,7 @@ public class UserController {
    @RequestMapping(value="/insertUser.do", method = {RequestMethod.GET, RequestMethod.POST})
 
 
-   public String insertUser(UserVO vo) throws IllegalStateException, IOException {
+   public String insertUser(UserVO vo,  HttpServletRequest request) throws IllegalStateException, IOException {
       if(vo.getDeparture()==null) {
     	  return "signup";
       }
@@ -109,10 +110,22 @@ public class UserController {
 	     
  		System.out.println("uploadFile : " + uploadFile);
  		if (!uploadFile.isEmpty()) {//파일이 있으면
- 			String fileName = uploadFile.getOriginalFilename();
- 			uploadFile.transferTo(new File("C:/Users/HB04-01/git/beetPlatform/src/main/resources/static/image/" + fileName));
+ 			String uploadsDir = "/WEB-INF/board/";
+            String realPathtoUploads =  request.getServletContext().getRealPath(uploadsDir);
+            if(! new File(realPathtoUploads).exists())
+            {
+                new File(realPathtoUploads).mkdir();
+            }
+
+            
+
+
+            String orgName = uploadFile.getOriginalFilename();
+            String filePath = realPathtoUploads + orgName;
+            File dest = new File(filePath);
+            uploadFile.transferTo(dest);
  			
- 			vo.setUser_picture(fileName);
+ 			vo.setUser_picture(orgName);
  		} 
 	   
       userService.insertUser(vo);

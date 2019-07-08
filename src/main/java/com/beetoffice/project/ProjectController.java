@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.beetoffice.project.vo.PagingVO;
 import com.beetoffice.project.vo.ProjectVO;
 import com.beetoffice.project.vo.SourceVO;
 
@@ -26,37 +25,21 @@ public class ProjectController {
 		Map<String, String> conditionMap = new HashMap<String, String>();
 		conditionMap.put("프로젝트명", "project_name");
 		conditionMap.put("담당자", "project_manager");
+		conditionMap.put("진행상황", "project_progress");
 		
 		return conditionMap;
 	}
 	
 	@RequestMapping("getProjectList.do")
-	public String getProjectSearchList(ProjectVO vo, Model model, @RequestParam String currentPage, @RequestParam String searchCondition, @RequestParam String searchKeyword) {
+	public String getProjectSearchList(ProjectVO vo, PagingProcess pages, Model model) {
 		System.out.println(">> Controller: getProjectList()");
-		System.out.println(">>>> searchCondition: " + searchCondition);
-		System.out.println(">>>> searchKeyword: " + searchKeyword);
 		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchCondition", searchCondition);
-		map.put("searchKeyword", searchKeyword);
+		pages.setTotalPost(projectService.getTotalPost(pages));
 		
-		int totalPost = projectService.getTotalPost(map);
-		PagingVO pages = new PagingVO(totalPost, Integer.parseInt(currentPage));
-		
-		pages.setSearchCondition(searchCondition);
-		pages.setSearchKeyword(searchKeyword);
 		List<ProjectVO> projectList = projectService.getProjectList(pages);
-		
-//		int i = 0;
-//		for (ProjectVO pvo : projectList) {
-//			System.out.println(i + ": " + pvo.toString());
-//			i++;
-//		}
-		
 		model.addAttribute("projectList", projectList);
 		model.addAttribute("pages", pages);
 		
-		System.out.println(">>>> pages: " + pages);
 		return "project/getProjectList";
 	}
 	
@@ -166,6 +149,10 @@ public class ProjectController {
 	public String insertCodeExample2() {
 		
 		return "project/insertCodeExample2";
+	}
+	@RequestMapping("/insertFunction")
+	public String insertFunction() {
+		return "project/insertFunction";
 	}
 	
 }

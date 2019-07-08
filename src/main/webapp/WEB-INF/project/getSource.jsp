@@ -160,9 +160,23 @@
 		min-height: 350px;
 	}
 </style>
+<style>
+	.flex_div {
+		display: flex;
+	}
+	#flex_div_children1 {
+		width: 50%;
+	}
+	#flex_div_children2 {
+		width: 50%;
+		display: flex;
+		justify-content: flex-end;
+	}
+</style>
 </head>
 <body>
 	<h1>소스코드 상세보기</h1>
+	<div class="container">
 	<table class="table table-bordered">
 		<tbody>
 			<tr>
@@ -179,9 +193,6 @@
 			</tr>
 		</tbody>
 	</table>
-	<div>
-		<a href="modifySource.do?source_idx=${source.source_idx }"><input type="button" value="코드수정"></a>
-	</div>		
 	
 	<div class="container">
 
@@ -230,6 +241,20 @@
 
 </div>
 
+	</div>
+	<div class="container">
+		<div class="flex_div">
+			<div id="flex_div_children1">
+				<a href="modifySource.do?source_idx=${source.source_idx }"><input type="button" value="수정"></a>
+				<a href="deleteSource.do?project_idx=${project.project_idx }"><input type="button" value="삭제"></a>
+			</div>
+			<div id="flex_div_children2">
+				<a href="getProject.do?project_idx=${project.project_idx }"><input type="button" value="프로젝트"></a>
+				<a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null"><input type="button" value="목록"></a>
+				<a href="getCommute.do"><input type="button" value="메인"></a>
+			</div>
+		</div>
+	</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
