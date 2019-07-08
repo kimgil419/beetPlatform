@@ -118,7 +118,7 @@
 		<p>이름 : ${com.user_name }</p>
 		<p>날짜 : ${com.write_date }</p>
 		<p>내용 : ${com.board_content }</p>
-		<input type="submit" value="댓글삭제">
+		<input type="submit" value="댓글삭제" ${(com.user_id == user_id) ? '':'hidden' }>
 		
 		<input type="hidden" name="reply_seq" value="${com.reply_seq }">
 		

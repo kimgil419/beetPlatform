@@ -58,7 +58,7 @@ public class DpBoardController {
 		int a = vo.getSeq();
 		String b = String.valueOf(a);
 		session.setAttribute("mySeq", b);
-		boardService.dpgetBoardInsert(vo);
+		
 		String pd = vo.getT_password();
 		//session.setAttribute("c1",curPage);
 		System.out.println("이게 뭘까요????????????????????????????????????????????????????????????????????????????????" + vo.getT_password().toString());
@@ -91,6 +91,7 @@ public class DpBoardController {
 		if(!"".equals(vo.getT_password())) {
 			String user_position = (String) session.getAttribute("user_position");
 			if("과장".equals(user_position) || "차장".equals(user_position) || "부장".equals(user_position) || "이사".equals(user_position) || "대표이사".equals(user_position)) {
+				boardService.dpgetBoardInsert(vo);
 				return "dpboard/dpgetBoard";
 				
 			}else {
@@ -99,7 +100,7 @@ public class DpBoardController {
 		            return "redirect:dpgetBoardList.do";
 			}
 		}
-		
+		boardService.dpgetBoardInsert(vo);
 		return "dpboard/dpgetBoard";
 	}
 	
@@ -137,8 +138,24 @@ public class DpBoardController {
 		//페이지 처리를 위한 Paging 객체 생성해서 값 설정
 		Paging p = new Paging();
 		//p.setNumPerPage(2);
-
-
+        
+		if("original".equals(vo.getLi())) {
+			System.out.println("keyword: -" + vo.getLi() + "-");
+        	session.removeAttribute("search");
+        	session.removeAttribute("content");
+        }else if(!"original".equals(vo.getLi())) {
+        	
+		if(vo.getSearchKeyword() == null) {
+			
+        String sea = (String) session.getAttribute("search");
+        vo.setSearchKeyword(sea);
+        if(session.getAttribute("content") != null) {
+        String content = (String) session.getAttribute("content");
+        vo.setSearchCondition(content);
+        }
+		}
+        }
+		
 		//1. 전체 게시물의 수를 구하기
 		p.setTotalRecord(boardService.dpgetTotalCount(vo));
 		p.setTotalPage(); //전체 페이지 갯수 구하기
@@ -192,6 +209,10 @@ public class DpBoardController {
 		if(!"".equals(vo.getSearchKeyword())) {
 		p.setTotalRecord(boardService.dpgetTotalCounts(vo));
 		p.setTotalPage(); //전체 페이지 갯수 구하기
+		session.setAttribute("search", vo.getSearchKeyword());
+		if("CONTENT".equals(vo.getSearchCondition())) {
+			session.setAttribute("content", vo.getSearchCondition());
+		}
 		}
 		//---------
 		//4-1 끝페이지(endPage)가 전체페이지수(totalPage) 보다 크면
@@ -354,60 +375,28 @@ public class DpBoardController {
 	
 	
 	@RequestMapping(value="/dpdeleteBoard.do", method=RequestMethod.POST)
-	public String dpdeleteBoard(DpBoardVO vo, HttpSession session,Model model,@RequestParam String password,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
+	public String dpdeleteBoard(DpBoardVO vo, HttpSession session,Model model,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
-		String user_password = (String) session.getAttribute("user_password");
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()" + password);
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()" + user_password);
-		if(!password.equals(user_password)) {
-			 model.addAttribute("dlmsg", "비밀번호");
-			 model.addAttribute("cc", curPage);
-	    	  return "dpboard/dpdeleteBoards";
-		} else {
+	
 		boardService.dpdeleteBoard(vo);
 		redirectAttributes.addAttribute("curPage", curPage);
 		return "redirect:dpgetBoardList.do";
-		}
-	}
-	
-	@RequestMapping("/dpdeleteBoards.do")
-	public String dpdeleteBoards(DpBoardVO vo,Model model,@RequestParam String curPage) {
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
-		boardService.dpgetBoard(vo);
-		model.addAttribute("board", vo);
-		model.addAttribute("cc", curPage);
-		return "dpboard/dpdeleteBoards";
-	}
-	
-	@RequestMapping("/dpdpdeleteComments.do")
-	public String dpdeleteComments(CommentVO vo,Model model,@RequestParam String curPage) {
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
-		model.addAttribute("s", vo.getSeq());
-		model.addAttribute("rs", vo.getReply_seq());
-		model.addAttribute("cc1", curPage);
-		return "dpboard/dpdeleteComments";
 	}
+
 	
 	@RequestMapping(value="/dpdpdeleteComment.do", method=RequestMethod.POST)
-	public String dpdeleteComment(DpCommentVO vo, HttpSession session,Model model,@RequestParam String password,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
+	public String dpdeleteComment(DpCommentVO vo, HttpSession session,Model model,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
-		String user_password = (String) session.getAttribute("user_password");
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()" + password);
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()" + user_password);
-		if(!password.equals(user_password)) {
-			 model.addAttribute("dlcmmsg", "비밀번호");
-			 model.addAttribute("cc1", curPage);
-	    	  return "dpboard/dpdeleteComments";
-		} else {
+
 		commentService.dpdeleteComment(vo);
 		int a1 = vo.getSeq();
 		String bdseq1 = String.valueOf(a1);
 		session.setAttribute("mySeq", bdseq1);
 		redirectAttributes.addAttribute("curPage", curPage);
 		return "redirect:dpgetBoard.do";
-		}
+		
 	}
 }

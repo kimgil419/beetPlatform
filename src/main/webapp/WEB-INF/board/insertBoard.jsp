@@ -31,6 +31,33 @@ function categoryChange() {
 	}
 }
 
+function send_go(frm) {
+	if (frm.t_title.value.trim() == "") {
+		
+		alert("제목을 입력안하셨습니다.\n입력하세요.");
+		frm.t_title.value = "";
+		frm.t_title.focus();
+		
+		frm.action = "redirect:insertBoard";
+		frm.submit();
+		
+	} else if(frm.user_name.value.trim() == "") {
+		alert("작성자를 입력안하셨습니다.\n입력하세요.");
+		frm.user_name.value = "";
+		frm.user_name.focus();
+		
+		frm.action = "redirect:insertBoard";
+		frm.submit();
+	} else if(frm.t_content.value.trim() == "") {
+		alert("내용을 입력안하셨습니다.\n입력하세요.");
+		frm.t_content.value = "";
+		frm.t_content.focus();
+		
+		frm.action = "redirect:insertBoard";
+		frm.submit();
+	}
+}
+
 var result = '${bdmsg}';
 var results = '${bdfsmsg}';
 if(result == '공지') {
@@ -86,7 +113,7 @@ alert(result + '를 쓸 수 없는 권한입니다'); //아무 조건도 안걸�
 		</tr>
 		<tr>
 			<td colspan="2" class="center">
-				<input type="submit" value="새글 등록">
+				<input type="submit" value="새글 등록" onclick="send_go(this.form)">
 			</td>
 		</tr>
 	</table>
