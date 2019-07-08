@@ -74,7 +74,7 @@ alert(result + '을 열람할 수 있는 권한이 아닙니다'); //아무 조�
 
 
 	<!-- 검색을 위한 폼 -->
-	<form action="dpgetBoardList.do?curPage=${pvo.nowPage }" method="POST">
+	<form action="dpgetBoardList.do?curPage=1" method="POST">
 	<h1>${dept} 부서 게시판</h1>
 	<table class="border-none">
 		<tr>
@@ -164,10 +164,9 @@ alert(result + '을 열람할 수 있는 권한이 아닙니다'); //아무 조�
 					</c:otherwise>
 					
 				</c:choose>
+				<li><a href="dpgetBoardList.do?curPage=${pvo.nowPage }&li=original">목록으로</a></li>
+				<li><a href="dpinsertBoardf.do?curPage=${pvo.nowPage }">새글 등록</a></li>				
 				</ol>
-			</td>
-			<td>
-				<p><a href="dpinsertBoardf.do?curPage=${pvo.nowPage }">새글 등록</a></p>
 			</td>
 		</tr>
 	</tfoot>	

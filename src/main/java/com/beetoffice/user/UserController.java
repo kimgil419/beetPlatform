@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -71,15 +72,14 @@ public class UserController {
       
     
    }
-   
+   @RequestMapping("/finsertUser.do")
+   public String finsertUser() {
+	   return "signup";
+   }
    
    @RequestMapping(value="/insertUser.do", method = {RequestMethod.GET, RequestMethod.POST})
-
-
    public String insertUser(UserVO vo,  HttpServletRequest request) throws IllegalStateException, IOException {
-      if(vo.getDeparture()==null) {
-    	  return "signup";
-      }
+    
       
       if("".equals(vo.getDeparture())) {
     	  vo.setDeparture("0000-00-00");
@@ -130,6 +130,8 @@ public class UserController {
  			vo.setUser_picture(orgName);
  		} 
 	   
+ 		vo.setUser_email(vo.getUser_email1() + "@" + vo.getUser_email2());
+ 		vo.setUser_addr(vo.getAddr1()+","+vo.getAddr2()+","+vo.getAddr3());
       userService.insertUser(vo);
       return "redirect:getCommute.do";
    }

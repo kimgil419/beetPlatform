@@ -91,7 +91,7 @@
 	<p>
 		<a href="insertBoardf.do?curPage=${c1 }">글쓰기</a>&nbsp;&nbsp;
 		
-		<a href="deleteBoards.do?seq=${board.seq }&curPage=${c1 }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
+		<a href="deleteBoard.do?seq=${board.seq }&curPage=${c1 }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
 		
 		<a href="getBoardList.do?curPage=${c1 }">글목록</a>
 	</p>
@@ -114,11 +114,11 @@
 
 <c:forEach var="com" items="${cm_list }">
 <div class="comment">
-	<form action="deleteComments.do" method="post">
+	<form action="deleteComment.do" method="post">
 		<p>이름 : ${com.user_name }</p>
 		<p>날짜 : ${com.write_date }</p>
 		<p>내용 : ${com.board_content }</p>
-		<input type="submit" value="댓글삭제">
+		<input type="submit" ${(com.user_id == user_id) ? '':'hidden' } value="댓글삭제">
 		
 		<input type="hidden" name="reply_seq" value="${com.reply_seq }">
 		

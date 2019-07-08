@@ -112,13 +112,27 @@ public class BoardController {
 	//데이타 저장타입 : ModleAndView -> Model
 	@RequestMapping("/getBoardList.do")
 	public String getBoardList(BoardVO vo, 
-			Model model,@RequestParam String curPage) {
+			Model model,@RequestParam String curPage, HttpSession session) {
 		System.out.println(">>> 글 목록 조회 처리- getBoardList()");
 		//페이지 처리를 위한 Paging 객체 생성해서 값 설정
 		Paging p = new Paging();
 		//p.setNumPerPage(2);
-
-
+		if("original".equals(vo.getLi())) {
+			System.out.println("keyword: -" + vo.getLi() + "-");
+        	session.removeAttribute("search");
+        	session.removeAttribute("content");
+        }else if(!"original".equals(vo.getLi())) {
+        	
+		if(vo.getSearchKeyword() == null) {
+			
+        String sea = (String) session.getAttribute("search");
+        vo.setSearchKeyword(sea);
+        if(session.getAttribute("content") != null) {
+        String content = (String) session.getAttribute("content");
+        vo.setSearchCondition(content);
+        }
+		}
+        }
 		//1. 전체 게시물의 수를 구하기
 		p.setTotalRecord(boardService.getTotalCount());
 		p.setTotalPage(); //전체 페이지 갯수 구하기
@@ -170,9 +184,14 @@ public class BoardController {
 		System.out.println("null처리후 keyword: -" + vo.getSearchKeyword() + "-");
 		
 		if(!"".equals(vo.getSearchKeyword())) {
-		p.setTotalRecord(boardService.getTotalCounts(vo));
-		p.setTotalPage(); //전체 페이지 갯수 구하기
-		}
+			p.setTotalRecord(boardService.getTotalCounts(vo));
+			p.setTotalPage(); //전체 페이지 갯수 구하기
+			session.setAttribute("search", vo.getSearchKeyword());
+			if("CONTENT".equals(vo.getSearchCondition())) {
+				session.setAttribute("content", vo.getSearchCondition());
+			}
+			}
+		
 		//---------
 		//4-1 끝페이지(endPage)가 전체페이지수(totalPage) 보다 크면
 		//endPage <- totalPage 설정
@@ -321,61 +340,32 @@ public class BoardController {
 	
 	
 	
-	@RequestMapping(value="/deleteBoard.do", method=RequestMethod.POST)
-	public String deleteBoard(BoardVO vo, HttpSession session,Model model,@RequestParam String password,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
+	@RequestMapping(value="/deleteBoard.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String deleteBoard(BoardVO vo, HttpSession session,Model model,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
-		String user_password = (String) session.getAttribute("user_password");
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()" + password);
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()" + user_password);
-		if(!password.equals(user_password)) {
-			 model.addAttribute("dlmsg", "비밀번호");
-			 model.addAttribute("cc", curPage);
-	    	  return "board/deleteBoards";
-		} else {
+
 		boardService.deleteBoard(vo);
 		redirectAttributes.addAttribute("curPage", curPage);
 		return "redirect:getBoardList.do";
-		}
+		
 	}
 	
-	@RequestMapping("/deleteBoards.do")
-	public String deleteBoards(BoardVO vo,Model model,@RequestParam String curPage) {
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
-		boardService.getBoard(vo);
-		model.addAttribute("board", vo);
-		model.addAttribute("cc", curPage);
-		return "board/deleteBoards";
-	}
+
 	
-	@RequestMapping("/deleteComments.do")
-	public String deleteComments(CommentVO vo,Model model,@RequestParam String curPage) {
+
+	
+	@RequestMapping(value="/deleteComment.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String deleteComment(CommentVO vo, HttpSession session,Model model,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
-		model.addAttribute("s", vo.getSeq());
-		model.addAttribute("rs", vo.getReply_seq());
-		model.addAttribute("cc1", curPage);
-		return "board/deleteComments";
-	}
-	
-	@RequestMapping(value="/deleteComment.do", method=RequestMethod.POST)
-	public String deleteComment(CommentVO vo, HttpSession session,Model model,@RequestParam String password,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
-		
-		String user_password = (String) session.getAttribute("user_password");
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()" + password);
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()" + user_password);
-		if(!password.equals(user_password)) {
-			 model.addAttribute("dlcmmsg", "비밀번호");
-			 model.addAttribute("cc1", curPage);
-	    	  return "board/deleteComments";
-		} else {
+
 		commentService.deleteComment(vo);
 		int a1 = vo.getSeq();
 		String bdseq1 = String.valueOf(a1);
 		session.setAttribute("mySeq", bdseq1);
 		redirectAttributes.addAttribute("curPage", curPage);
 		return "redirect:getBoard.do";
-		}
+		
 	}
 }

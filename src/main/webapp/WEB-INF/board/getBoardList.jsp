@@ -68,7 +68,7 @@
 
 
 	<!-- 검색을 위한 폼 -->
-	<form action="getBoardList.do?curPage=${pvo.nowPage }" method="POST">
+	<form action="getBoardList.do?curPage=1" method="POST">
 	<h1>사내게시판</h1>
 	<table class="border-none">
 		<tr>
@@ -159,7 +159,7 @@
 					
 					
 				</c:choose>
-				    <li><a href="getBoardList.do?curPage=${pvo.nowPage }">목록으로</a></li>
+				    <li><a href="getBoardList.do?curPage=${pvo.nowPage }&li=original">목록으로</a></li>
 					<li><a href="insertBoardf.do?curPage=${pvo.nowPage }">새글 등록</a></li>
 				</ol>
 			</td>

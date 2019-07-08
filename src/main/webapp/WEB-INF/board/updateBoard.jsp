@@ -81,7 +81,7 @@
 	<p>
 		<a href="insertBoardf.do?curPage=${c3 }">글쓰기</a>&nbsp;&nbsp;
 		
-		<a href="deleteBoards.do?seq=${board.seq }&curPage=${c3 }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
+		<a href="deleteBoard.do?seq=${board.seq }&curPage=${c3 }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
 		
 		<a href="getBoardList.do?curPage=${c3 }">글목록</a>
 	</p>
