@@ -110,7 +110,7 @@ public class UserController {
 	     
  		System.out.println("uploadFile : " + uploadFile);
  		if (!uploadFile.isEmpty()) {//파일이 있으면
- 			String uploadsDir = "/WEB-INF/board/";
+ 			String uploadsDir = "/WEB-INF/image/";
             String realPathtoUploads =  request.getServletContext().getRealPath(uploadsDir);
             if(! new File(realPathtoUploads).exists())
             {
@@ -118,7 +118,9 @@ public class UserController {
             }
 
             
+      
 
+    
 
             String orgName = uploadFile.getOriginalFilename();
             String filePath = realPathtoUploads + orgName;

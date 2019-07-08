@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -226,7 +227,7 @@ public class DpBoardController {
 	}	
 	
 	@RequestMapping("/dpinsertBoard.do")
-	public String dpinsertBoard(DpBoardVO vo, HttpSession session, Model model,@RequestParam String curPage,RedirectAttributes redirectAttributes) 
+	public String dpinsertBoard(DpBoardVO vo, HttpSession session, Model model,@RequestParam String curPage,RedirectAttributes redirectAttributes,  HttpServletRequest request) 
 			throws IllegalStateException, IOException {
 		System.out.println(">>> 글 등록 처리 - insertBoard()");
 		
@@ -271,10 +272,24 @@ public class DpBoardController {
 		MultipartFile uploadFile = vo.getT_imgs();
 		System.out.println("uploadFile : " + uploadFile);
 		if (!uploadFile.isEmpty()) {//파일이 있으면
-			String fileName = uploadFile.getOriginalFilename();
-			uploadFile.transferTo(new File("C:/Users/HB04-01/git/beetPlatform/src/main/resources/static/image/" + fileName));
+			String uploadsDir = "/WEB-INF/image/";
+            String realPathtoUploads =  request.getServletContext().getRealPath(uploadsDir);
+            if(! new File(realPathtoUploads).exists())
+            {
+                new File(realPathtoUploads).mkdir();
+            }
+
+            
+      
+
+    
+
+            String orgName = uploadFile.getOriginalFilename();
+            String filePath = realPathtoUploads + orgName;
+            File dest = new File(filePath);
+            uploadFile.transferTo(dest);
 			
-			vo.setT_img(fileName);
+			vo.setT_img(orgName);
 		} 
 		
 		boardService.dpinsertBoard(vo);
@@ -292,7 +307,7 @@ public class DpBoardController {
 	}
 	
 	@RequestMapping("/dpupdateBoard.do")
-	public String dpupdateBoard(DpBoardVO vo, HttpSession session,@RequestParam String curPage,RedirectAttributes redirectAttributes) throws IllegalStateException, IOException {
+	public String dpupdateBoard(DpBoardVO vo, HttpSession session,@RequestParam String curPage,RedirectAttributes redirectAttributes, HttpServletRequest request) throws IllegalStateException, IOException {
 		System.out.println(">>> 글 수정 처리 - updateBoard()");
 		
 		DpBoardVO bvo = boardService.dpgetBoard(vo);
@@ -300,10 +315,24 @@ public class DpBoardController {
 		MultipartFile uploadFile = vo.getT_imgs();
 		System.out.println("uploadFile : " + uploadFile);
 		if (!uploadFile.isEmpty()) {//파일이 있으면
-			String fileName = uploadFile.getOriginalFilename();
-			uploadFile.transferTo(new File("C:/Users/HB04-01/git/beetPlatform/src/main/resources/static/image/" + fileName));
+			String uploadsDir = "/WEB-INF/image/";
+            String realPathtoUploads =  request.getServletContext().getRealPath(uploadsDir);
+            if(! new File(realPathtoUploads).exists())
+            {
+                new File(realPathtoUploads).mkdir();
+            }
+
+            
+      
+
+    
+
+            String orgName = uploadFile.getOriginalFilename();
+            String filePath = realPathtoUploads + orgName;
+            File dest = new File(filePath);
+            uploadFile.transferTo(dest);
 			
-			vo.setT_img(fileName);
+			vo.setT_img(orgName);
 			System.out.println("수정요청 vo : " + uploadFile.getName());
 			System.out.println("수정요청 vo : " + vo);
 			
