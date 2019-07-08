@@ -20,5 +20,6 @@ public interface ProjectService {
 	void insertFunction(SourceVO svo);
 	void insertSource(SourceVO svo);
 	void updateSource(SourceVO svo);
+	void deleteSource(SourceVO svo);
 
 }

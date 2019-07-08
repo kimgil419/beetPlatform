@@ -137,4 +137,10 @@
 		 WHERE SOURCE_IDX=#{source_idx}
 	</update>
 	
+	<delete id="deleteSource" parameterType="source">
+		DELETE 
+		  FROM PROJECT_SOURCE
+		 WHERE SOURCE_IDX=#{source_idx}
+	</delete>
+	
 </mapper>

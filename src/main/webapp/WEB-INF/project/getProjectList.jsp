@@ -22,7 +22,10 @@
 </style>
 </head>
 <body>
-	<div class="container">
+
+<div id="page-wrapper">
+<jsp:include page="../menu.jsp"/>
+	
 		<h4>프로젝트목록</h4>
 		<h4>조건, ${pages.searchCondition }, 문구, ${pages.searchKeyword }</h4>
 		<h6>전체게시물: ${pages.totalPost }, 현재게시물: ${pages.viewPost }, 현재페이지: ${pages.currentPage }, 전체페이지: ${pages.totalPage }, 시작페이지: ${pages.startPage }, 끝페이지: ${pages.endPage }</h6>
@@ -74,6 +77,7 @@
 			<div id="flex_div_children2">
 				<c:choose>
 					<c:when test="${userInfo.user_position == '과장' || userInfo.user_position == '차장' || userInfo.user_position == '부장' || userInfo.user_position == '이사' || userInfo.user_position == '대표이사' }">
+						<a href="/mail"><button type="button">메일작성</button></a>
 						<a href="writeProject.do"><button type="button">작성</button></a>
 						<a href="getCommute.do"><button type="button">메인</button></a>
 					</c:when>
