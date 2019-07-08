@@ -69,7 +69,8 @@ alert(result + '을 열람할 수 있는 권한이 아닙니다'); //아무 조�
 </script>
 </head>
 <body>
-
+<div id="page-wrapper">
+<jsp:include page="../menu.jsp"/>
 <div id="cotainer">
 
 
@@ -175,6 +176,6 @@ alert(result + '을 열람할 수 있는 권한이 아닙니다'); //아무 조�
 	
 </div>
 
-
+</div>
 </body>
 </html>

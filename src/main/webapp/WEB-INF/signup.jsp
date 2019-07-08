@@ -10,6 +10,7 @@
 <!--  jQuery UI 라이브러리 js파일-->
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="css/bootstrap.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 $(function() {
@@ -257,6 +258,9 @@ function send_go(frm) {
 </head>
 <body>
 
+<div id="page-wrapper">
+<jsp:include page="menu.jsp"/>
+
 <h1>성공입니다</h1>
 
 	<form action="idcheck.do" method="post">
@@ -377,5 +381,6 @@ function send_go(frm) {
 		</tr>
 	</table>
 	</form>
+</div>
 </body>
 </html>

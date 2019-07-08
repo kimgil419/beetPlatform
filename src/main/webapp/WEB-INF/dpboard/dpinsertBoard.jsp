@@ -72,7 +72,8 @@ alert(result + '를 쓸 수 없는 권한입니다'); //아무 조건도 안걸�
 </script>
 </head>
 <body>
-
+<div id="page-wrapper">
+<jsp:include page="../menu.jsp"/>
 <div id="container">
 	<h1>글등록</h1>
 	<p><a href="dplogout.do">Log-out</a></p>
@@ -130,7 +131,7 @@ alert(result + '를 쓸 수 없는 권한입니다'); //아무 조건도 안걸�
 	</form>
 	<p><a href="dpgetBoardList.do?curPage=${c2 }">글 목록 가기</a></p>
 </div>
-
+</div>
 </body>
 </html>
 

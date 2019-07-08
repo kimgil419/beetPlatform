@@ -44,7 +44,8 @@
 </style>
 </head>
 <body>
-
+<div id="page-wrapper">
+<jsp:include page="../menu.jsp"/>
 <div id="container">
 	<h1>글 상세</h1>
 	<p><a href="logout.do">Log-out</a></p>
@@ -128,6 +129,6 @@
 	</form>
 </div>
 </c:forEach>
-
+</div>
 </body>
 </html>
