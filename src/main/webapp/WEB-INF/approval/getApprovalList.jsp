@@ -18,7 +18,8 @@
 </style>
 </head>
 <body>
-
+<div id="page-wrapper">
+<jsp:include page="../menu.jsp"/>
 <div class="container">
 	<h1>전자 결재 서류 목록</h1>
 	<h3>[${userInfo.user_name }]님 환영합니다....<a href="logout.do">Log-out</a></h3>
@@ -276,6 +277,6 @@
 	<p><a href="getCommute.do">메인메뉴이동</a></p>
 </div>
 
-
+</div>
 </body>
 </html>
