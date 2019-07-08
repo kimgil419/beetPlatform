@@ -11,28 +11,15 @@
 <head>
 <meta charset="UTF-8">
 <title>글목록</title>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <style>
-	#container {
-		width: 700px;
-		margin: 0 auto;
-	}
-	h1, h3, p { text-align: center; }
-	table { border-collapse: collapse; }
-	table, th, td {
-		border: 1px solid black;
-		margin: 0 auto;
-	}
-	th { background-color: orange; }
-	.border-none, .border-none td { border: none; }
-	.center { text-align: center; }
-	.left { text-align: left; }
-	.right { text-align: right; }
-	.orange { background-color: orange; }
+	S
 </style>
 </head>
-<body>
+<body>S
 
-<div id="cotainer">
+<div class="container">
 	<h1>전자 결재 서류 목록</h1>
 	<h3>[${userInfo.user_name }]님 환영합니다....<a href="logout.do">Log-out</a></h3>
 
@@ -61,7 +48,12 @@
 	</form>
 	
 	<!-- 데이타 표시 -->
-	<table>
+	<table class="table table-hover">
+		
+		<tr>
+		
+		<th colspan="7">직렬결재서류</th>
+		</tr>
 		<tr>
 			<th width="100">번호</th>
 			<th width="200">제목</th>
@@ -70,12 +62,7 @@
 			<th width="50">결재2</th>
 			<th width="50">결재3</th>
 			<th width="50">등록일</th>			
-		</tr>
-		<tr>
-		
-		<th colspan="7">직렬결재서류</th>
-		</tr>
-			
+		</tr>	
 		<c:forEach var="approval" items="${approvalList}">
 		
 		<c:if test="${(approval.option == 0 ) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
@@ -97,12 +84,23 @@
 		</tr>
 		</c:if>
 		</c:forEach>
-		
+		</table>
+		<hr>
+		<hr>
+		<table class="table">
 		
 		<tr>
 		<th colspan="7">병렬 결재 서류</th>
 		</tr>	
-		
+		<tr>
+			<th width="100">번호</th>
+			<th width="200">제목</th>
+			<th width="150">작성자</th>
+			<th width="50">결재1</th>
+			<th width="50">결재2</th>
+			<th width="50">결재3</th>
+			<th width="50">등록일</th>			
+		</tr>
 		
 		<c:forEach var="approval" items="${approvalList}">
 		
@@ -125,11 +123,22 @@
 		</tr>
 		</c:if>
 		</c:forEach>
-		
+		</table>
+		<hr>
+		<hr>
+		<table class="table">
 		<tr>
 		<th colspan="7">반려서류</th>
 		</tr>
-			
+		<tr>
+			<th width="100">번호</th>
+			<th width="200">제목</th>
+			<th width="150">작성자</th>
+			<th width="50">결재1</th>
+			<th width="50">결재2</th>
+			<th width="50">결재3</th>
+			<th width="50">등록일</th>			
+		</tr>	
 		<c:forEach var="approval" items="${approvalList}">
 		
 		<c:if test="${(not empty approval.refuse) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
@@ -151,10 +160,22 @@
 		</tr>
 		</c:if>
 		</c:forEach>
+		</table>
+		<hr>
+		<hr>
+		<table class="table">
 		<tr>
 		<th colspan="7">긴급결재서류</th>
 		</tr>
-			
+		<tr>
+			<th width="100">번호</th>
+			<th width="200">제목</th>
+			<th width="150">작성자</th>
+			<th width="50">결재1</th>
+			<th width="50">결재2</th>
+			<th width="50">결재3</th>
+			<th width="50">등록일</th>			
+		</tr>	
 		<c:forEach var="approval" items="${approvalList}">
 		
 		<c:if test="${(not empty approval.urgent) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
@@ -176,12 +197,23 @@
 		</tr>
 		</c:if>
 		</c:forEach>
-		
+		</table>
+		<hr>
+		<hr>
+		<table class="table">
 		
 		<tr>
 		<th colspan="7">지난 서류</th>
 		</tr>
-			
+		<tr>
+			<th width="100">번호</th>
+			<th width="200">제목</th>
+			<th width="150">작성자</th>
+			<th width="50">결재1</th>
+			<th width="50">결재2</th>
+			<th width="50">결재3</th>
+			<th width="50">등록일</th>			
+		</tr>	
 		<c:forEach var="approval" items="${approvalList}">
 		
 		<c:if test="${ (approval.user_id1 == userInfo.user_id and not empty approval.ok1) 
@@ -203,10 +235,22 @@
 		</tr>
 		</c:if>
 		</c:forEach>
+		</table>
+		<hr>
+		<hr>
+		<table class="table">
 		<tr>
 		<th colspan="7">내가쓴 서류</th>
 		</tr>
-			
+		<tr>
+			<th width="100">번호</th>
+			<th width="200">제목</th>
+			<th width="150">작성자</th>
+			<th width="50">결재1</th>
+			<th width="50">결재2</th>
+			<th width="50">결재3</th>
+			<th width="50">등록일</th>			
+		</tr>	
 		<c:forEach var="approval" items="${approvalList}">
 		
 		<c:if test="${approval.user_id == userInfo.user_id}" >
