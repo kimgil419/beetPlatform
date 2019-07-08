@@ -146,6 +146,17 @@ public class ProjectController {
 		return "redirect:getSource.do?source_idx=" + vo.getSource_idx();
 	}
 	
+	@RequestMapping("deleteSource.do")
+	public String deleteSource(SourceVO svo) {
+		System.out.println(">> Controller: deleteSource");
+		
+		System.out.println(">>>> svo.getProject_idx(): " + svo.getProject_idx());
+		projectService.deleteSource(svo);
+		System.out.println(">>>> svo.getProject_idx(): " + svo.getProject_idx());
+		
+		return "redirect:getProject.do?project_idx=" + svo.getProject_idx();
+	}
+	
 	@RequestMapping("/insert")
 	public String insertExample() {
 		

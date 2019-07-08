@@ -246,7 +246,7 @@
 		<div class="flex_div">
 			<div id="flex_div_children1">
 				<a href="modifySource.do?source_idx=${source.source_idx }"><input type="button" value="수정"></a>
-				<a href="deleteSource.do?project_idx=${source.project_idx }"><input type="button" value="삭제"></a>
+				<a href="deleteSource.do?source_idx=${source.source_idx }&project_idx=${source.project_idx }"><input type="button" value="삭제"></a>
 			</div>
 			<div id="flex_div_children2">
 				<a href="getProject.do?project_idx=${source.project_idx }"><input type="button" value="프로젝트"></a>

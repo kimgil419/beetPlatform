@@ -96,6 +96,13 @@ public class ProjectServiceImpl implements ProjectService {
 		projectDAO.updateSource(svo);
 	}
 
+	@Override
+	public void deleteSource(SourceVO svo) {
+		System.out.println(">> Service: deleteSource()");
+		projectDAO.deleteSource(svo);
+	}
+
+	
 	
 	
 }

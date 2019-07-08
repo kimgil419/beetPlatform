@@ -88,4 +88,9 @@ public class ProjectDAO {
 		System.out.println(">> DAO: updateSource()");
 		mybatis.update("ProjectDAO.updateSource", svo);
 	}
+	
+	public void deleteSource(SourceVO svo) {
+		System.out.println(">> DAO: deleteSource()");
+		mybatis.update("ProjectDAO.deleteSource", svo);
+	}
 }
