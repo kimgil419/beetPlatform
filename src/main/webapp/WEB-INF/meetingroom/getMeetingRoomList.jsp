@@ -24,6 +24,12 @@
 <link href='/library/timepicker/dist/wickedpicker.min.css' rel='stylesheet'/>
 <script src="/js/clickedRoom.js"></script>
 <script src="/js/booklist.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js" data-auto-replace-svg="nest"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script>
 
     var list = ${meetingRoomList};
@@ -150,40 +156,120 @@
         max-width: 900px;
         margin: 40px auto;
     }
+
+    tr {
+        text-align: center;
+    }
+
+    .form-control {
+        width: 120px;
+        text-align: center;
+    }
+
+    .roomimg {
+        margin: 5px;
+    }
+
+    .imgcontainer {
+        position: relative;
+        width: 50%;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: .5s ease;
+        background-color: #4e555b;
+    }
+
+    .imgcontainer:hover .overlay {
+        opacity: 1;
+    }
+
+    .text {
+        color: white;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
 </style>
 <body>
-<div id="leftcontainer" style="float:left">
-    예약하실 회의실을 선택해주세요.
+<div id="leftcontainer" style="float:left; margin:50px">
+    <label>예약하실 회의실을 선택해주세요.</label>
     <br/>
-    <div style="">
-        <img src="/image/mr1.jpg" id="i1"></a>
-        <img src="/image/mr2.jpg" id="i2"></a><br/>
-        <img src="/image/mr3.jpg" id="i3"></a>
-        <img src="/image/mr4.jpg" id="i4"></a>
+    <div>
+        <div class="imgcontainer" style="float: left;">
+            <img src="/image/mr1.jpg" id="i1" class="roomimg"></a>
+            <div class="overlay">
+                <div class="text">Room1</div>
+            </div>
+        </div>
+
+        <div class="imgcontainer" style="display:inline-block;">
+            <img src="/image/mr2.jpg" id="i2" class="roomimg"></a>
+            <div class="overlay">
+                <div class="text">Room2</div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="imgcontainer" style="float: left;">
+            <img src="/image/mr3.jpg" id="i3" class="roomimg"></a>
+            <div class="overlay">
+                <div class="text">Room3</div>
+            </div>
+        </div>
+
+        <div class="imgcontainer" style="display:inline-block;">
+            <img src="/image/mr4.jpg" id="i4" class="roomimg"></a>
+            <div class="overlay">
+                <div class="text">Room4</div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
     </div>
+    </br>
     <div>
         <form id="bookdata" method="post" action="/saveMeetingRoom.do">
-            회의실 : <select name="room_num" id="room_num">
-            <option value="room1">Room A</option>
-            <option value="room2">Room B</option>
-            <option value="room3">Room C</option>
-            <option value="room4">Room D</option>
-        </select><br/>
-            날짜 : <input type="text" id="datepicker" name="book_date"/><br/>
-            시간 : <input type="text" id="timePicker1" name="start"/> ~ <input type="text" id="timePicker2"
-                                                                             name="end"/><br/>
-            목적 : <input type="text" name="title" placeholder="회의실 대여 목적을 입력해주세요."/><br/>
-            <input type=button value="예약" onclick="addList()"/>
-
+            <div style="margin-left:10px;float:left">
+                <label>회의실 : </label><select name="room_num" id="room_num" class="form-control">
+                <option value="room1">Room A</option>
+                <option value="room2">Room B</option>
+                <option value="room3">Room C</option>
+                <option value="room4">Room D</option>
+            </select>
+            </div>
+            <div style="margin-left:40px;float:left;">
+                <label>날짜 : </label><input type="text" id="datepicker" class="form-control" name="book_date"/><br/>
+                <label>시작시간 : </label><input type="text" id="timePicker1" class="form-control" name="start"/><br/>
+                <label>종료시간 :
+                </label><input type="text" id="timePicker2" class="form-control" name="end"/>
+            </div>
+            <div style="margin-left:40px;float:left">
+                <label>목적 : </label><input type="text" name="title" class="form-control" style="width:250px"
+                                           placeholder="회의실 대여 목적을 입력해주세요."/><br/>
+                <input type=button value="예약" style="float:right;" onclick="addList()"/>
+                <div style="clear: both;"></div>
+            </div>
         </form>
     </div>
 </div>
-<div id="calendar" style="margin:30px;width:700px;float:left"></div>
+
+<div style="float:left">
+<div id="calendar" style="margin:30px;width:700px;"></div>
+
+<div style="clear:both;"></div>
 <div id="booklist"></div>
-
-
-<table id="table" style="border:solid black 1px"/>
-
+<table id="table" class="table table-hover" style="margin-left:20px;width:720px"/>
+</div>
 
 </body>
 
