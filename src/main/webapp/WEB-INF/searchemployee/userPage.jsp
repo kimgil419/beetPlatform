@@ -64,7 +64,7 @@
 </script>
 <body>
 <div id="page-wrapper">
-    <jsp:include page="menu.jsp"/>
+    <jsp:include page="../menu.jsp"/>
 
 
 <div style="width:20%">

@@ -50,7 +50,6 @@
             background-color: #eee;
         }
 
-        F
     </style>
 <body>
 <div id="page-wrapper">
