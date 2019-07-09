@@ -56,22 +56,9 @@
 	background-color: #eee;
 }
 
-	#container {
-		width: 700px;
-		margin: 0 auto;
-	}
-	h1, h3, p { text-align: center; }
-	table { border-collapse: collapse; }
-	table, th, td {
-		border: 1px solid black;
-		margin: 0 auto;
-	}
-	th { background-color: #F5A9E1; }
-	.border-none, .border-none td { border: none; }
-	.center { text-align: center; }
-	.left { text-align: left; }
-	.right { text-align: right; }
-	.orange { background-color: orange; }
+	
+
+	
 	.notie { background-color: #808080; }
 </style>
 <body>
@@ -143,10 +130,12 @@
 		
 		<div style="width:700px; height:500px; border:1px solid white; float: left;">
 		<form name="frm" method="post" action="getBoardList.do?curPage=1&li=original">
+		<p>게시판목록</p>
+		<hr>
 		<table> 
         <tr>
 
-					<th colspan="5">사내전체게시판</th><th><input type="submit" value="더보기" onclick="send_go()"></th>
+					<th colspan="3">사내전체게시판</th><th><input type="submit" value="더보기" onclick="send_go()"></th>
 		</tr>
 		<tr>
 			
@@ -179,7 +168,7 @@
 	<thead>
 	    <tr>
 
-					<th colspan="5">부서게시판</th><th><input type="submit" value="더보기" ></th>
+					<th colspan="3">부서게시판</th><th><input type="submit" value="더보기" ></th>
 		</tr>
 		<tr>
 			
@@ -205,6 +194,7 @@
 		</c:forEach>
 	</tbody>
 	</table>
+	
 	</form>
 	</div><div id="root" class="col-md-8"></div><div style="clear:both;"></div><!-- 딸려오는것을 막기 위한 소스  => <div style="clear:both;"></div> -->
 	<script src="/js/youtube-bundle.js"></script>
