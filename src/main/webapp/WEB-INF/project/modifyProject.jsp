@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>프로젝트수정</title>
 <link rel="stylesheet" href="css/bootstrap.css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script>
@@ -39,14 +39,16 @@
 	        cols += '<td><input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">' +
             		'<input type="text" class="form_control" name="user_id">' +
             		'<input type="text" class="form_control" name="user_name" readonly="readonly"></td>';
-            cols += '<td><input type="text" name="source_name" class="form-control"></td>';
+            cols += '<td><input type="text" name="source_name" class="form-control">' +
+            		'<input type="text" name="source_idx" value="new">' +
+            		'</td>'
             cols += '<td><select name="source_progress">' +
             			'<option value="예정">예정</option>'+
             			'<option value="진행">진행</option>' +
             			'<option value="완료">완료</option>' +
             			'<option value="보류">보류</option>' +
             			'<option value="폐기">폐기</option>';
-            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger " value="삭제"></td>';
 	        newRow.append(cols);
 	        $("table#function_table").append(newRow);
 	        counter++;
@@ -125,7 +127,7 @@
 			        </tr>
 			    </thead>
 			    <tbody>
-			    	<c:forEach var="source" items="${sourceList }">
+			    	<c:forEach var="source" items="${sourceList }" varStatus="status">
 			    		<tr>
 			    			<td class="col-sm-">
 				                <input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">
@@ -134,15 +136,38 @@
 			            	</td>
 				            <td class="col-sm-">
 				                <input type="text" name="source_name" class="form-control" value="${source.source_name }">
+				                <input type="text" name="source_idx" value="${source.source_idx }">
 				            </td>
 				            <td class="col-sm-">
-				            	<select name="source_progress">
+				            	<select id="source_progress${status.index }" name="source_progress">
 				            		<option value="예정">예정</option>
 				            		<option value="진행">진행</option>
 				            		<option value="완료">완료</option>
 				            		<option valeu="보류">보류</option>
 				            		<option value="폐기">폐기</option>
 				            	</select>
+				            	<script>
+				            		switch ("${source.source_progress }") {
+				            		case "예정":
+				            			$("#source_progress${status.index } option:eq(0)").attr("selected", "selected");
+				            			break;
+				            		case "진행":
+				            			$("#source_progress${status.index } option:eq(1)").attr("selected", "selected");
+				            			break;
+				            		case "완료":
+				            			$("#source_progress${status.index } option:eq(2)").attr("selected", "selected");
+				            			break;
+				            		case "보류":
+				            			$("#source_progress${status.index } option:eq(3)").attr("selected", "selected");
+				            			break;
+				            		case "폐기":
+				            			$("#source_progress${status.index } option:eq(4)").attr("selected", "selected");
+				            			break;
+				            		default:
+				            			alert("source_progress selector error");
+				            			break;
+				            		}
+				            	</script>
 				            </td>
 				            <td class="col-sm-">
 				            	<a class="deleteRow"></a>

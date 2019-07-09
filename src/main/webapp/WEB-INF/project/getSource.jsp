@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>코드상세보기</title>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/css/css.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.min.css"></script>
 <script src="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"></script>
@@ -175,25 +175,27 @@
 </style>
 </head>
 <body>
-	<h1>소스코드 상세보기</h1>
+<div id="page-wrapper">
+<jsp:include page="../menu.jsp"/>
 	<div class="container">
-	<table class="table table-bordered">
-		<tbody>
-			<tr>
-				<th>No.</th>
-				<td>${source.source_idx }</td>
-				<th>담당자</th>
-				<td>${source.user_name }</td>
-			</tr>
-			<tr>
-				<th>기능</th>
-				<td>${source.source_name }</td>
-				<th>진행상황</th>
-				<td>${source.source_progress }</td>
-			</tr>
-		</tbody>
-	</table>
-	
+		<h4>소스코드 상세보기</h4>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<th>No.</th>
+					<td>${source.source_idx }</td>
+					<th>담당자</th>
+					<td>${source.user_name }</td>
+				</tr>
+				<tr>
+					<th>기능</th>
+					<td>${source.source_name }</td>
+					<th>진행상황</th>
+					<td>${source.source_progress }</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	<div class="container">
 
 <div class="row">
@@ -258,5 +260,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</div>
 </body>
 </html>

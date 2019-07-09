@@ -94,14 +94,14 @@ public class ProjectController {
 	public String modifyProject(ProjectVO vo, Model model) {
 		System.out.println(">> Controller: modifyProject()");
 		
-		model.addAttribute("project", projectService.modifyProject(vo));
+		model.addAttribute("project", projectService.getProject(vo));
 		model.addAttribute("sourceList", projectService.getSourceList(vo));
 		
 		return "project/modifyProject";
 	}
 	
 	@RequestMapping("updateProject.do")
-	public String updateProject(ProjectVO vo, SourceVO svo, Model model, @RequestParam String[] user_id,
+	public String updateProject(ProjectVO vo, SourceVO svo, Model model, @RequestParam String[] source_idx, @RequestParam String[] user_id,
 			@RequestParam String[] source_name, @RequestParam String[] source_progress) {
 		System.out.println(">> Controller: updateProject()");
 		
@@ -109,11 +109,22 @@ public class ProjectController {
 		
 		int project_idx = vo.getProject_idx();
 		for (int i = 0; i < user_id.length; i++) {
-			svo.setProject_idx(project_idx);
-			svo.setUser_id(user_id[i]);
-			svo.setSource_name(source_name[i]);
-			svo.setSource_progress(source_progress[i]);
-			projectService.insertFunction(svo);
+			if (source_idx[i].equalsIgnoreCase("new")) {
+				System.out.println(">>>>" + i + " " + user_id[i] + " " + source_name[i] + " " + source_progress[i] + " " + source_idx[i]);
+				svo.setProject_idx(project_idx);
+				svo.setUser_id(user_id[i]);
+				svo.setSource_name(source_name[i]);
+				svo.setSource_progress(source_progress[i]);
+				projectService.insertFunction(svo);
+			} else if (!source_idx[i].equalsIgnoreCase("new")) {
+				System.out.println(">>>>" + i + " " + user_id[i] + " " + source_name[i] + " " + source_progress[i] + " " + source_idx[i]);
+				svo.setSource_idx(Integer.parseInt(source_idx[i]));
+				svo.setProject_idx(project_idx);
+				svo.setUser_id(user_id[i]);
+				svo.setSource_name(source_name[i]);
+				svo.setSource_progress(source_progress[i]);
+				projectService.updateSource(svo);
+			}
 		}
 		
 		model.addAttribute("project", projectService.getProject(vo));

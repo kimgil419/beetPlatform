@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>코드수정</title>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/css/css.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.min.css"></script>
 <script src="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"></script>
@@ -31,6 +31,9 @@ $(document).ready(function() {
 		break;
 	case "보류":
 			$("#progress_select option:eq(3)").attr("selected", "selected");
+		break;
+	case "폐기":
+			$("#progress_select option:eq(4)").attr("selected", "selected");
 		break;
 	default:
 		alert("progress select error");
@@ -195,31 +198,36 @@ blockquote {
 </style>
 </head>
 <body>
-<h1>코드수정</h1>
+<div id="page-wrapper">
+<jsp:include page="../menu.jsp"/>
 	<form action="updateSource.do">
-		<table class="table table-bordered">
-			<tr>
-				<td>No.</td>
-				<td><input type="text" name="source_idx" value="${source.source_idx }" readonly="readonly"></td>
-				<td>작성자</td>
-				<td><input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">
-				<input type="text" name="user_id" value="${source.user_id }">찾기로수정해서쓰게
-				<input type="text" name="source_idx" value="${source.user_name }" readonly="readonly"></td>
-			</tr>
-			<tr>
-				<td>기능</td>
-				<td><input type="text" name="source_name" value="${source.source_name }"></td>
-				<th>진행상황</th>
-				<td>
-					<select id="progress_select" name="source_progress">
-						<option value="예정">예정</option>
-						<option value="완료">완료</option>
-						<option value="보류">보류</option>
-						<option value="폐기">폐기</option>
-					</select>
-				</td>
-			</tr>
-		</table>
+		<div class="container">
+			<h4>코드수정</h4>
+			<table class="table table-bordered">
+				<tr>
+					<td>No.</td>
+					<td><input type="text" name="source_idx" value="${source.source_idx }" readonly="readonly"></td>
+					<td>작성자</td>
+					<td><input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">
+					<input type="text" name="user_id" value="${source.user_id }">찾기로수정해서쓰게
+					<input type="text" name="source_idx" value="${source.user_name }" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td>기능</td>
+					<td><input type="text" name="source_name" value="${source.source_name }"></td>
+					<th>진행상황</th>
+					<td>
+						<select id="progress_select" name="source_progress">
+							<option value="예정">예정</option>
+							<option value="진행">진행</option>
+							<option value="완료">완료</option>
+							<option value="보류">보류</option>
+							<option value="폐기">폐기</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+		</div>
 <div class="container">
 
 <div class="row">
@@ -231,7 +239,7 @@ blockquote {
 <ul class="nav nav-pills" id="heading">
     <li><a role="button" data-val="bold" data-toggle="tooltip" data-placement="bottom" title="Bold"><i class="fa fa-bold"></i></a></li>
     <li><a role="button" data-val="italic" data-toggle="tooltip" data-placement="bottom" title="Italic"><i class="fa fa-italic"></i></a></li>
-    <li><a role="button" data-val="link" disabled="disabled" data-toggle="tooltip" data-placement="bottom" title="link"><i class="fa fa-link"></i></a></li>
+    <!-- <li><a role="button" data-val="link" disabled="disabled" data-toggle="tooltip" data-placement="bottom" title="link"><i class="fa fa-link"></i></a></li> -->
     <li><a role="button" data-val="quote" data-toggle="tooltip" data-placement="bottom" title="Quote"><i class="fa fa-quote-left"></i></a></li>
     <li><a role="button" data-val="code" data-toggle="tooltip" data-placement="bottom" title="Code">{ }</a></li>
     <li><a role="button" data-val="hr" data-toggle="tooltip" data-placement="bottom" title="hr"><i class="fa fa-minus"></i></a></li>
@@ -268,10 +276,13 @@ blockquote {
 </div>
 
 
-
-		<input type="submit" value="수정하기">
+		
+		<div class="container">
+			<input type="submit" value="수정하기">
+		</div>
 	</form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</div>
 </body>
 </html>

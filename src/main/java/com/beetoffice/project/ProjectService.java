@@ -14,7 +14,6 @@ public interface ProjectService {
 	List<ProjectVO> getProjectList(PagingProcess pages);
 	SourceVO getSource(SourceVO vo);
 	List<SourceVO> getSourceList(ProjectVO vo);
-	ProjectVO modifyProject(ProjectVO vo);
 	int getTotalPost(PagingProcess pages);
 	int getProject_idx(ProjectVO vo);
 	void insertFunction(SourceVO svo);

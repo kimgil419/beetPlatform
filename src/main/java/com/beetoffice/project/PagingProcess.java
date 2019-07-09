@@ -16,7 +16,6 @@ public class PagingProcess {
 
 	public PagingProcess() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void setCountPost(int countPost) {

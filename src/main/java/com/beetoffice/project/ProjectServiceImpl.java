@@ -61,12 +61,6 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public ProjectVO modifyProject(ProjectVO vo) {
-		System.out.println(">> Service: modifyProject()");
-		return projectDAO.modifyProject(vo);
-	}
-
-	@Override
 	public void insertSource(SourceVO svo) {
 		System.out.println(">> Service: insertSource()");
 		projectDAO.insertSource(svo);

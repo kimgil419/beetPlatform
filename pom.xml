@@ -21,7 +21,7 @@
 	</properties>
 
 	<dependencies>
-	
+
 		<!-- email -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -34,9 +34,9 @@
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
-			</dependency>
+		</dependency>
 		<!-- email -->
-		
+
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>

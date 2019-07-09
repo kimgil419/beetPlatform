@@ -56,6 +56,13 @@
 				       )
 		       ) AS PV
 		</when>
+		<when test="searchCondition == 'project_progress' ">
+		  FROM (
+		        SELECT *
+		          FROM PROJECT_VIEW
+		         WHERE PROJECT_PROGRESS LIKE CONCAT('%', #{searchKeyword}, '%')
+		       ) AS PV
+		</when>
 		<otherwise>
 		  FROM PROJECT_VIEW AS PV
 		</otherwise>
@@ -84,13 +91,6 @@
 		  FROM PROJECT_SOURCE AS PS, USER_DB AS UD
 		 WHERE SOURCE_IDX=#{source_idx}
 		   AND PS.USER_ID = UD.USER_ID
-	</select>
-	
-	<select id="modifyProject" parameterType="project" resultType="project">
-		SELECT PV.*, UD.USER_NAME
-		  FROM PROJECT_VIEW AS PV, USER_DB AS UD
-		 WHERE PROJECT_IDX = #{project_idx}
-		   AND PV.PROJECT_MANAGER = UD.USER_ID
 	</select>
 	
 	<select id="getManager" parameterType="project" resultType="project">
