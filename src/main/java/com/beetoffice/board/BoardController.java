@@ -272,6 +272,10 @@ public class BoardController {
     
 
             String orgName = uploadFile.getOriginalFilename();
+            String[] strSplit1 = orgName.split("\\\\");
+            
+			
+			orgName	 = strSplit1[strSplit1.length-1].toString();
             String filePath = realPathtoUploads + orgName;
             File dest = new File(filePath);
             uploadFile.transferTo(dest);
@@ -315,6 +319,10 @@ public class BoardController {
     
 
             String orgName = uploadFile.getOriginalFilename();
+            String[] strSplit1 = orgName.split("\\\\");
+            
+			
+			orgName	 = strSplit1[strSplit1.length-1].toString();
             String filePath = realPathtoUploads + orgName;
             File dest = new File(filePath);
             uploadFile.transferTo(dest);

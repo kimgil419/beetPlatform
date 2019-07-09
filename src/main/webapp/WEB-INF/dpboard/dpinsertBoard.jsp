@@ -31,29 +31,29 @@ function categoryChange() {
 	}
 }
 
-function send_go(frm) {
-	if (frm.t_title.value.trim() == "") {
+function send_go() {
+	if (document.frm.t_title.value.trim() == "") {
 		
 		alert("제목을 입력안하셨습니다.\n입력하세요.");
-		frm.t_title.value = "";
-		frm.t_title.focus();
+
+		document.frm.t_title.focus();
 		
-		frm.action = "redirect:insertBoard";
-		frm.submit();
+		return false;
 		
-	} else if(frm.user_name.value.trim() == "") {
+	} else if(document.frm.user_name.value.trim() == "") {
 		alert("작성자를 입력안하셨습니다.\n입력하세요.");
-		frm.user_name.value = "";
-		frm.user_name.focus();
+
+		document.frm.user_name.focus();
 		
-		frm.action = "redirect:insertBoard";
-		frm.submit();
-	} else if(frm.t_content.value.trim() == "") {
+		return false;
+	} else if(document.frm.t_content.value.trim() == "") {
 		alert("내용을 입력안하셨습니다.\n입력하세요.");
-		frm.t_content.value = "";
-		frm.t_content.focus();
+
+		document.frm.t_content.focus();
 		
-		frm.action = "redirect:insertBoard";
+		return false;
+	}else {
+		frm.action = "dpinsertBoard.do?curPage=${c2}";
 		frm.submit();
 	}
 }
@@ -76,58 +76,28 @@ alert(result + '를 쓸 수 없는 권한입니다'); //아무 조건도 안걸�
 <jsp:include page="../menu.jsp"/>
 <div id="container">
 	<h1>글등록</h1>
-	<p><a href="dplogout.do">Log-out</a></p>
+	<p><a href="logout.do">Log-out</a></p>
 	<hr>
-	<form action="dpinsertBoard.do?curPage=${c2 }" method="post"
+	<form method="post" name ="frm"
 	        enctype="multipart/form-data">
-	<table>
-		<tr>
-			<th width="70">제목</th>
-			<td>
-				<input type="text" name="t_title" size="30">
-			</td>
-		</tr>
-		<tr>
-			<th>작성자</th>
-			<td>
-				<input type="text" name="user_name" value="${user_name }">
-			</td>
-		</tr>
-		<tr>
-			<th>비밀번호</th>
-			<td>
-				<input type="text" name="t_password">
-			</td>
-		</tr>
-		<tr>
-		    <th>본문</th>
-		    <td>
-		        <select name="ss" id="ss" onchange="categoryChange()">
+		<fieldset>
+		<legend>게시판</legend>
+		<p>제목 : <input type="text" name="t_title" size="30"></p>
+		<p>작성자 : <input type="text" name="user_name" value="${user_name }"></p>
+			
+		<p>비밀번호 : <input type="text" name="t_password"></p>
+		<p>본문 : <select name="ss" id="ss" onchange="categoryChange()">
                     <option value="X">선택사항</option>
                     <option value="Y">공지사항</option>
                     <option value="N">일반글</option>      
                 </select>
-                <input type="hidden" name="t_noti" id="category">
-		    </td>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td>
-				<textarea name="t_content" rows="10" cols="40"></textarea>
-			</td>
-		</tr>
-		<tr>
-		    <th>업로드</th>
-		    <td>
-		        <input type="file" name="t_imgs">
-		    </td>
-		</tr>
-		<tr>
-			<td colspan="2" class="center">
-				<input type="submit" value="새글 등록" onclick="send_go(this.form)">
-			</td>
-		</tr>
-	</table>
+                <input type="hidden" name="t_noti" id="category"></p>
+	<p>내용 : <textarea name="t_content" rows="10" cols="40"></textarea></p>
+	<p>업로드 : <input type="file" name="t_imgs"></p>
+		
+				<input type="button" value="새글 등록" onclick="send_go()">
+	
+	</fieldset>
 	</form>
 	<p><a href="dpgetBoardList.do?curPage=${c2 }">글 목록 가기</a></p>
 </div>
