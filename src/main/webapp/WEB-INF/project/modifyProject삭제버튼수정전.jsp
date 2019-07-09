@@ -182,6 +182,9 @@
 					            		}
 					            	</script>
 					            </td>
+					            <td class="col-sm-">
+					            	<a class="deleteRow"></a>
+								</td>
 								<td>
 									<input type="button" class="ibtnDel btn btn-md btn-danger "  value="삭제">
 								</td>

@@ -1,29 +1,47 @@
-<html lang="UTF-8">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
 <head>
-<title>CodeMirror in Action</title>
+<meta charset="UTF-8">
+<title>코드수정</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/css/css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.min.css"></script>
+<script src="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"></script>
 
-<script src="js/vendor/jquery-1.9.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/xml/xml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/htmlmixed/htmlmixed.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/css/css.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.0/holder.js"></script>
 
-<!-- More examples at http://codemirror.net/demo/ -->
 
-<!-- add basic CodeMirror functionality -->
-<script src="js/vendor/codemirror-4.1/lib/codemirror.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/vendor/codemirror-4.1/addon/selection/active-line.js" type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" href="js/vendor/codemirror-4.1/lib/codemirror.css" />
-
-<!-- add Javascript-mode dependencies -->
-<script src="js/vendor/codemirror-4.1/mode/javascript/javascript.js" type="text/javascript" charset="utf-8"></script>
-
-<!-- add PHP-mode dependencies (replace dependency loading by require.js!) -->
-<script src="js/vendor/codemirror-4.1/mode/xml/xml.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/vendor/codemirror-4.1/mode/htmlmixed/htmlmixed.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/vendor/codemirror-4.1/mode/clike/clike.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/vendor/codemirror-4.1/mode/php/php.js" type="text/javascript" charset="utf-8"></script>
-
-<!-- add SPARQL-mode dependencies -->
-<script src="js/vendor/codemirror-4.1/mode/sparql/sparql.js" type="text/javascript" charset="utf-8"></script>
+<!-- https://codepen.io/wolfgang1983/pen/mVmxpp -->
 <script>
-//////////////////////////////////editor 옵션 퍼온것/////////////////////////
+$(document).ready(function() {
+	switch ("${source.source_progress }") {
+	case "예정":
+			$("#progress_select option:eq(0)").attr("selected", "selected");
+		break;
+	case "진행":
+			$("#progress_select option:eq(1)").attr("selected", "selected");
+		break;
+	case "완료":
+			$("#progress_select option:eq(2)").attr("selected", "selected");
+		break;
+	case "보류":
+			$("#progress_select option:eq(3)").attr("selected", "selected");
+		break;
+	case "폐기":
+			$("#progress_select option:eq(4)").attr("selected", "selected");
+		break;
+	default:
+		alert("progress select error");
+		break;
+	}
+});
+	
+	//////////////////////////////////editor 옵션 퍼온것/////////////////////////
 $(document).ready(function() {	
     // tooltips on hover
     $('[data-toggle=\'tooltip\']').tooltip({container: 'body', html: true});
@@ -122,35 +140,6 @@ $(document).ready(function() {
 });
 
 </script>
-<style type="text/css" media="screen">
-    
-    #container {
-        padding: 15px;
-    }
-    h5 {
-        margin: 7px 0px;
-    }
-    #editor1-pane, 
-    #editor2-pane {
-        position:relative;
-        display: block;
-        width: 600px;
-        height: 200px;
-        border: solid 1px #bbb;
-    }
-    
-    #editor1, 
-    #editor2 {
-        font-size: 9pt;
-    }
-    #editor1 .CodeMirror {
-        height: 198px;
-    }
-    
-    #editor2 .CodeMirror {
-        height: 198px; 
-    }
-</style>
 <style>
 .container {
 	margin-top: 2rem;
@@ -209,22 +198,37 @@ blockquote {
 </style>
 </head>
 <body>
-<script>
-var textarea = document.getElementById('editor');
-var editor = CodeMirror.fromTextArea(textarea, {
-    lineNumbers: true,
-    lineWrapping: true,
-    theme: "eclipse",
-    val: textarea.value
-});
-</script>
-<div>
-<form action="getCode.do" method="post">
-<textarea rows="40" cols="150" id="editor" name="code"></textarea>
-<input type="submit">
-</form>
-</div>
-<div class="container">
+	<div id="page-wrapper" class="container-fluid">
+	<jsp:include page="../menu.jsp"/>
+		<form action="updateSource.do">
+			<div>
+				<h4>코드수정</h4>
+				<table class="table table-bordered">
+					<tr>
+						<td>No.</td>
+						<td><input type="text" name="source_idx" value="${source.source_idx }" readonly="readonly"></td>
+						<td>작성자</td>
+						<td><input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">
+						<input type="text" name="user_id" value="${source.user_id }">찾기로수정해서쓰게
+						<input type="text" name="source_idx" value="${source.user_name }" readonly="readonly"></td>
+					</tr>
+					<tr>
+						<td>기능</td>
+						<td><input type="text" name="source_name" value="${source.source_name }"></td>
+						<th>진행상황</th>
+						<td>
+							<select id="progress_select" name="source_progress">
+								<option value="예정">예정</option>
+								<option value="진행">진행</option>
+								<option value="완료">완료</option>
+								<option value="보류">보류</option>
+								<option value="폐기">폐기</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="panel panel-default"  onLoad="text_editor();">
@@ -255,5 +259,19 @@ var editor = CodeMirror.fromTextArea(textarea, {
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div id="question-preview">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<input type="submit" value="수정하기">
+			</div>
+		</form>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	</div>
 </body>
 </html>

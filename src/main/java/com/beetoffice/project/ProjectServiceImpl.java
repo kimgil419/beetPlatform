@@ -61,12 +61,6 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public ProjectVO modifyProject(ProjectVO vo) {
-		System.out.println(">> Service: modifyProject()");
-		return projectDAO.modifyProject(vo);
-	}
-
-	@Override
 	public void insertSource(SourceVO svo) {
 		System.out.println(">> Service: insertSource()");
 		projectDAO.insertSource(svo);
@@ -102,6 +96,13 @@ public class ProjectServiceImpl implements ProjectService {
 		projectDAO.deleteSource(svo);
 	}
 
+	@Override
+	public List<Integer> getSource_idxList(ProjectVO vo) {
+		System.out.println(">> Service: getSource_idxList()");
+		return projectDAO.getSource_idxList(vo);
+	}
+	
+	
 	
 	
 	

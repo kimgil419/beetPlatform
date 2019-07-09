@@ -19,13 +19,13 @@
 		$("#addrow").on("click", function () {
 			var newRow = $("<tr>");
 	        var cols = "";
-	        cols += '<td class="col-sm-"><input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">' +
+	        cols += '<td><input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">' +
             		'<input type="text" name="user_id">' +
             		'<input type="text" name="user_name" readonly="readonly"></td>';
-            cols += '<td class="col-sm-"><input type="text" name="source_name">' +
-            		'<input type="hidden" name="source_idx" value="-1">' +
+            cols += '<td><input type="text" name="source_name">' +
+            		'<input type="hidden" name="source_idx" value="new">' +
             		'</td>'
-            cols += '<td class="col-sm-"><select name="source_progress">' +
+            cols += '<td><select name="source_progress">' +
             			'<option value="예정">예정</option>'+
             			'<option value="진행">진행</option>' +
             			'<option value="완료">완료</option>' +
@@ -130,6 +130,28 @@
 				        </tr>
 				    </thead>
 				    <tbody>
+				        <tr>
+				            <td class="col-sm-">
+				                <input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">
+				                <input type="text" class="form_control" name="user_id">
+				                <input type="text" class="form_control" name="user_name" readonly="readonly">
+				            </td>
+				            <td class="col-sm-">
+				                <input type="text" name="source_name">
+				            </td>
+				            <td class="col-sm-">
+				            	<select name="source_progress">
+				            		<option value="예정">예정</option>
+				            		<option value="진행">진행</option>
+				            		<option value="완료">완료</option>
+				            		<option valeu="보류">보류</option>
+				            		<option value="폐기">폐기</option>
+				            	</select>
+				            </td>
+				            <td class="col-sm-"><a class="deleteRow"></a>
+				
+				            </td>
+				        </tr>
 				    </tbody>
 				    <tfoot>
 				        <tr>

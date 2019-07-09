@@ -14,12 +14,12 @@ public interface ProjectService {
 	List<ProjectVO> getProjectList(PagingProcess pages);
 	SourceVO getSource(SourceVO vo);
 	List<SourceVO> getSourceList(ProjectVO vo);
-	ProjectVO modifyProject(ProjectVO vo);
 	int getTotalPost(PagingProcess pages);
 	int getProject_idx(ProjectVO vo);
 	void insertFunction(SourceVO svo);
 	void insertSource(SourceVO svo);
 	void updateSource(SourceVO svo);
 	void deleteSource(SourceVO svo);
+	List<Integer> getSource_idxList(ProjectVO vo); 
 
 }

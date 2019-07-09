@@ -2,7 +2,7 @@ package com.beetoffice.project;
 
 public class PagingProcess {
 
-	private int countPost = 5;
+	private int countPost = 10;
 	private int countPage = 5;
 	private int totalPost;
 	private int totalPage;
@@ -16,7 +16,6 @@ public class PagingProcess {
 
 	public PagingProcess() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void setCountPost(int countPost) {

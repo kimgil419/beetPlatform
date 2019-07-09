@@ -1,7 +1,6 @@
 package com.beetoffice.project;
 
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,5 +91,10 @@ public class ProjectDAO {
 	public void deleteSource(SourceVO svo) {
 		System.out.println(">> DAO: deleteSource()");
 		mybatis.update("ProjectDAO.deleteSource", svo);
+	}
+	
+	public List<Integer> getSource_idxList(ProjectVO vo) {
+		System.out.println(">> DAO: getSource_idxList()");
+		return mybatis.selectList("ProjectDAO.getSource_idxList", vo);
 	}
 }
