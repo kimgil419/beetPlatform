@@ -67,10 +67,10 @@
     <jsp:include page="../menu.jsp"/>
 
 
-<div style="width:20%">
+<div style="width:20%;margin:auto;float:left;">
     <img src="/image/mr1.jpg">
 </div>
-<div class="form-group" style="width:80% ">
+<div class="form-group" style="width:80%;margin:auto;float:left;">
     이름: ${list.user_name} <br/>
     부서: ${list.dept} <br/>
     직급: ${list.user_position} <br/>

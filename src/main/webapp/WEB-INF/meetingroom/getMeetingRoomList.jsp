@@ -203,6 +203,8 @@
     }
 </style>
 <body>
+<div id="page-wrapper">
+    <jsp:include page="../menu.jsp"/>
 <div id="leftcontainer" style="float:left; margin:50px">
     <label>예약하실 회의실을 선택해주세요.</label>
     <br/>
@@ -270,7 +272,7 @@
 <div id="booklist"></div>
 <table id="table" class="table table-hover" style="margin-left:20px;width:720px"/>
 </div>
-
+</div>
 </body>
 
 </html>
