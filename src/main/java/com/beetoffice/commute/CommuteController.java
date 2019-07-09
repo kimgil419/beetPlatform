@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.beetoffice.approval.ApprovalService;
+import com.beetoffice.approval.ApprovalVO;
 import com.beetoffice.user.UserVO;
 import javax.servlet.http.HttpSession;
 
@@ -28,6 +30,11 @@ import javax.servlet.http.HttpSession;
 public class CommuteController {
 	@Autowired
 	private CommuteService commuteService;
+	
+
+	@Autowired
+	private ApprovalService approvalService;
+
 	
 	 @ModelAttribute("conditionMap")
 		public Map<String, String> searchConditionMap() {
@@ -46,13 +53,6 @@ public class CommuteController {
 	public String getCommuteList(CommuteVO vo, 
 			Model model) {
 		
-		System.out.println(">>>  목록 조회 처리- getUserList()");
-		System.out.println("날짜 검색" + vo.getIn_time1() + " ~ " + vo.getIn_time2());
-		System.out.println("condition: " + vo.getSearchCondition());
-		System.out.println("keyword: -" + vo.getSearchKeyword() + "-");
-		
-		//null체크 
-		
 		if (vo.getSearchCondition() == null) {
 			vo.setSearchCondition("user_name");
 		}
@@ -63,7 +63,7 @@ public class CommuteController {
 		System.out.println("null처리 condition: " + vo.getSearchCondition());
 		System.out.println("null처리 keyword: -" + vo.getSearchKeyword() + "-");		
 		List<CommuteVO> commuteList = commuteService.getCommuteList(vo);
-		System.out.println(commuteList);
+		
 		model.addAttribute("commuteList", commuteList);
 		
 		return "commute/getCommuteList";
@@ -82,10 +82,6 @@ public class CommuteController {
 	@RequestMapping("/getCommute.do")
 	public String getCommute(CommuteVO vo, Model model, HttpSession session) {
 		
-
-	
-
-		
 		UserVO user = (UserVO) session.getAttribute("userInfo");
 		String id = user.getUser_id();
 		vo.setUser_id(id);
@@ -99,8 +95,14 @@ public class CommuteController {
 		if ( getCommute != null) {
 			model.addAttribute("getCommute", getCommute);
 		}
-
 		
+		ApprovalVO vo1 = null;
+		
+		List<ApprovalVO> approvalList = approvalService.getApprovalList(vo1);
+		
+		model.addAttribute("approvalList", approvalList);
+
+		System.out.println(approvalList);
 		return "main";
 	}
 	

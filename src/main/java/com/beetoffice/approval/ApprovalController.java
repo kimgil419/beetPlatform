@@ -36,13 +36,6 @@ public class ApprovalController {
 		return conditionMap;
 	}
 
-	@RequestMapping("/Main.do")
-	public String getMain(ApprovalVO vo, Model model) {
-		
-		return "main";
-	}
-	
-
 
 	
 	@RequestMapping("/getApproval.do")
