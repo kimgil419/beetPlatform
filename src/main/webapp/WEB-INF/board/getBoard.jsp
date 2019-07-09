@@ -116,11 +116,11 @@
 <c:forEach var="com" items="${cm_list }">
 <div class="comment">
 	<form action="deleteComment.do" method="post">
-		<p>이름 : ${com.user_name }</p>
+		<p>이름 : ${com.user_name }</p> 
 		<p>날짜 : ${com.write_date }</p>
 		<p>내용 : ${com.board_content }</p>
 		<input type="submit" ${(com.user_id == user_id) ? '':'hidden' } value="댓글삭제">
-		
+		<input type="button" value="답글" hidden="false">
 		<input type="hidden" name="reply_seq" value="${com.reply_seq }">
 		
 		<input type="hidden" name="curPage" value="${c1 }">
