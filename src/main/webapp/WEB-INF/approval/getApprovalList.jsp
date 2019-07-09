@@ -74,7 +74,7 @@
 					${approval.a_title }
 				</a>
 			</td>
-			<td>${approval.user_id}</td>
+			<td>${approval.user_name}</td>
 			<td>${approval.user_id1}</td>
 			<td>${approval.user_id2}</td>
 			<td>${approval.user_id3}</td>
@@ -114,7 +114,7 @@
 					${approval.a_title }
 				</a>
 			</td>
-			<td>${approval.user_id}</td>
+			<td>${approval.user_name}</td>
 			<td>${approval.user_id1}</td>
 			<td>${approval.user_id2}</td>
 			<td>${approval.user_id3}</td>
@@ -153,7 +153,7 @@
 					${approval.a_title }
 				</a>
 			</td>
-			<td>${approval.user_id}</td>
+			<td>${approval.user_name}</td>
 			<td>${approval.user_id1}</td>
 			<td>${approval.user_id2}</td>
 			<td>${approval.user_id3}</td>
@@ -190,7 +190,7 @@
 					${approval.a_title }
 				</a>
 			</td>
-			<td>${approval.user_id}</td>
+			<td>${approval.user_name}</td>
 			<td>${approval.user_id1}</td>
 			<td>${approval.user_id2}</td>
 			<td>${approval.user_id3}</td>
@@ -229,7 +229,7 @@
 					${approval.a_title }
 				</a>
 			</td>
-			<td>${approval.user_id}</td>
+			<td>${approval.user_name}</td>
 			<td>${approval.user_id1}</td>
 			<td>${approval.user_id2}</td>
 			<td>${approval.user_id3}</td>
@@ -264,7 +264,7 @@
 					${approval.a_title }
 				</a>
 			</td>
-			<td>${approval.user_id}</td>
+			<td>${approval.user_name}</td>
 			<td>${approval.user_id1}</td>
 			<td>${approval.user_id2}</td>
 			<td>${approval.user_id3}</td>

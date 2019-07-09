@@ -88,7 +88,7 @@
 					<th colspan="7">직렬결재서류</th>
 				</tr>
 				<tr>
-					<th width="30">번호</th>
+					<th width="50">번호</th>
 					<th width="100">제목</th>
 					<th width="80">작성자</th>
 					<th width="90">등록일</th>
@@ -104,7 +104,7 @@
 							<td class="center">${approval.a_num }</td>
 							<td><a href="getApproval.do?a_num=${approval.a_num }">
 									${approval.a_title } </a></td>
-							<td>${approval.user_id}</td>
+							<td>${approval.user_name}</td>
 							<td>${approval.regdate}</td>
 						</tr>
 					</c:if>
@@ -116,7 +116,7 @@
 					<th colspan="7">병렬결재서류</th>
 				</tr>
 				<tr>
-					<th width="30">번호</th>
+					<th width="50">번호</th>
 					<th width="100">제목</th>
 					<th width="80">작성자</th>
 					<th width="90">등록일</th>
@@ -131,7 +131,7 @@
 							<td class="center">${approval.a_num }</td>
 							<td><a href="getApproval.do?a_num=${approval.a_num }">
 									${approval.a_title } </a></td>
-							<td>${approval.user_id}</td>
+							<td>${approval.user_name}</td>
 							<td>${approval.regdate}</td>
 						</tr>
 					</c:if>
