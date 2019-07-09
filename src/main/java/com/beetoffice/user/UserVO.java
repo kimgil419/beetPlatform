@@ -13,7 +13,7 @@ public class UserVO {
 
 
 private String user_id,firstjoin, departure, user_password, dept, birth, job_id,
-                  user_name, user_position, phone, cphone, user_email, user_grd,user_addr;
+                  user_name, user_position, phone, cphone, user_email, user_grd,user_addr,user_email1,user_email2,addr1,addr2,addr3;
 	
 private MultipartFile user_pictures;
     
@@ -131,6 +131,46 @@ private MultipartFile user_pictures;
 		this.user_addr = user_addr;
 	}
 
+	public String getUser_email1() {
+		return user_email1;
+	}
+
+	public void setUser_email1(String user_email1) {
+		this.user_email1 = user_email1;
+	}
+
+	public String getUser_email2() {
+		return user_email2;
+	}
+
+	public void setUser_email2(String user_email2) {
+		this.user_email2 = user_email2;
+	}
+
+	public String getAddr1() {
+		return addr1;
+	}
+
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+
+	public String getAddr2() {
+		return addr2;
+	}
+
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
+
+	public String getAddr3() {
+		return addr3;
+	}
+
+	public void setAddr3(String addr3) {
+		this.addr3 = addr3;
+	}
+
 	public MultipartFile getUser_pictures() {
 		return user_pictures;
 	}
@@ -153,8 +193,12 @@ private MultipartFile user_pictures;
 				+ ", user_password=" + user_password + ", dept=" + dept + ", birth=" + birth + ", job_id=" + job_id
 				+ ", user_name=" + user_name + ", user_position=" + user_position + ", phone=" + phone + ", cphone="
 				+ cphone + ", user_email=" + user_email + ", user_grd=" + user_grd + ", user_addr=" + user_addr
-				+ ", user_pictures=" + user_pictures + ", user_picture=" + user_picture + "]";
+				+ ", user_email1=" + user_email1 + ", user_email2=" + user_email2 + ", addr1=" + addr1 + ", addr2="
+				+ addr2 + ", addr3=" + addr3 + ", user_pictures=" + user_pictures + ", user_picture=" + user_picture
+				+ "]";
 	}
+
+
 
 
 

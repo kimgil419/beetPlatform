@@ -5,9 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-<script src="//code.jquery.com/jquery.min.js"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -77,8 +76,8 @@
 			<li><a href="getApprovalList.do">전자결재(김길중)</a></li>
 			<li><a href="getCommuteList.do">출결관리(김길중)</a></li>
 			<li><a href="getProjectList.do?currentPage=1">프로젝트 관리(김동현)</a></li>
-			<li><a href="getBoardList.do?curPage=1">사내게시판 (한재정) </a></li>
-			<li><a href="dpgetBoardList.do?curPage=1">부서게시판 (한재정) </a></li>
+			<li><a href="getBoardList.do?curPage=1&li=original">사내게시판 (한재정) </a></li>
+			<li><a href="dpgetBoardList.do?curPage=1&li=original">부서게시판 (한재정) </a></li>
 
 			<li><a
 				${((userInfo.dept=='인사' && userInfo.user_position=='부장') 
@@ -86,7 +85,7 @@
     || (userInfo.dept=='인사' && userInfo.user_position=='대리') 
     || (userInfo.dept=='인사' && userInfo.user_position=='과장') 
     || (userInfo.dept=='인사' && userInfo.user_position=='차장')) ? '' : 'hidden'}
-				href="insertUser.do"> 사원등록 (한재정) </a></li>
+				href="finsertUser.do"> 사원등록 (한재정) </a></li>
 
 			<li><a href="getMeetingRoomList.do">회의실예약(김범현)</a></li>
 			<li><a href="showEmployee.do">사원검색(김범현)</a></li>

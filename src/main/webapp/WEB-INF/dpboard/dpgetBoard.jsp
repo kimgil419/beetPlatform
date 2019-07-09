@@ -44,7 +44,8 @@
 </style>
 </head>
 <body>
-
+<div id="page-wrapper">
+<jsp:include page="../menu.jsp"/>
 <div id="container">
 	<h1>글 상세</h1>
 	<p><a href="logout.do">Log-out</a></p>
@@ -118,7 +119,7 @@
 		<p>이름 : ${com.user_name }</p>
 		<p>날짜 : ${com.write_date }</p>
 		<p>내용 : ${com.board_content }</p>
-		<input type="submit" value="댓글삭제">
+		<input type="submit" value="댓글삭제" ${(com.user_id == user_id) ? '':'hidden' }>
 		
 		<input type="hidden" name="reply_seq" value="${com.reply_seq }">
 		
@@ -128,6 +129,6 @@
 	</form>
 </div>
 </c:forEach>
-
+</div>
 </body>
 </html>

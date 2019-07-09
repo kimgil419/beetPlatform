@@ -30,6 +30,34 @@ function categoryChange() {
 		$("#category").val(sel); 
 	}
 }
+
+function send_go(frm) {
+	if (frm.t_title.value.trim() == "") {
+		
+		alert("제목을 입력안하셨습니다.\n입력하세요.");
+		frm.t_title.value = "";
+		frm.t_title.focus();
+		
+		frm.action = "redirect:insertBoard";
+		frm.submit();
+		
+	} else if(frm.user_name.value.trim() == "") {
+		alert("작성자를 입력안하셨습니다.\n입력하세요.");
+		frm.user_name.value = "";
+		frm.user_name.focus();
+		
+		frm.action = "redirect:insertBoard";
+		frm.submit();
+	} else if(frm.t_content.value.trim() == "") {
+		alert("내용을 입력안하셨습니다.\n입력하세요.");
+		frm.t_content.value = "";
+		frm.t_content.focus();
+		
+		frm.action = "redirect:insertBoard";
+		frm.submit();
+	}
+}
+
 var resultss = '${bdfsmsg}';
 var result = '${bdmsg}';
 var results = '${bdssmsg}';
@@ -44,7 +72,8 @@ alert(result + '를 쓸 수 없는 권한입니다'); //아무 조건도 안걸�
 </script>
 </head>
 <body>
-
+<div id="page-wrapper">
+<jsp:include page="../menu.jsp"/>
 <div id="container">
 	<h1>글등록</h1>
 	<p><a href="dplogout.do">Log-out</a></p>
@@ -95,14 +124,14 @@ alert(result + '를 쓸 수 없는 권한입니다'); //아무 조건도 안걸�
 		</tr>
 		<tr>
 			<td colspan="2" class="center">
-				<input type="submit" value="새글 등록">
+				<input type="submit" value="새글 등록" onclick="send_go(this.form)">
 			</td>
 		</tr>
 	</table>
 	</form>
 	<p><a href="dpgetBoardList.do?curPage=${c2 }">글 목록 가기</a></p>
 </div>
-
+</div>
 </body>
 </html>
 

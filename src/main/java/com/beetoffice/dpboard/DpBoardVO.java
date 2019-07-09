@@ -23,7 +23,7 @@ public class DpBoardVO {
 	@Getter @Setter
 	private int seq,cnt;
 	@Getter @Setter
-	private String t_title,user_name,t_content,t_regdate,user_id,dept,t_password,t_noti,user_position,t_img;
+	private String t_title,user_name,t_content,t_regdate,user_id,dept,t_password,t_noti,user_position,t_img,li;
 	@Getter @Setter
 	private int begin = 0; //현재 페이지상의 시작 글번호
 	@Getter @Setter
