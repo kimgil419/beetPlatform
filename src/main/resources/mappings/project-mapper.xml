@@ -143,4 +143,10 @@
 		 WHERE SOURCE_IDX=#{source_idx}
 	</delete>
 	
+	<select id="getSource_idxList" parameterType="project" resultType="int">
+		SELECT SOURCE_IDX
+		  FROM PROJECT_SOURCE
+		 WHERE PROJECT_IDX=#{project_idx}
+	</select>
+	
 </mapper>

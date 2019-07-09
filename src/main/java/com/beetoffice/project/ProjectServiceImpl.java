@@ -96,6 +96,13 @@ public class ProjectServiceImpl implements ProjectService {
 		projectDAO.deleteSource(svo);
 	}
 
+	@Override
+	public List<Integer> getSource_idxList(ProjectVO vo) {
+		System.out.println(">> Service: getSource_idxList()");
+		return projectDAO.getSource_idxList(vo);
+	}
+	
+	
 	
 	
 	

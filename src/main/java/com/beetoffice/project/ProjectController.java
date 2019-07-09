@@ -63,7 +63,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping("insertProject.do")
-	public String insertProject(ProjectVO vo, SourceVO svo, @RequestParam String[] user_id,
+	public String insertProject(ProjectVO vo, SourceVO svo, @RequestParam String[] source_idx, @RequestParam String[] user_id,
 			@RequestParam String[] source_name, @RequestParam String[] source_progress) {
 		System.out.println(">> Controller: insertProject()");
 		
@@ -107,17 +107,30 @@ public class ProjectController {
 		
 		projectService.updateProject(vo);
 		
+		List<Integer> list = projectService.getSource_idxList(vo); 
+		for (int i = 0; i < list.size(); i++) {
+			int idx = list.get(i);
+			int j = 0;
+			for (int k = 0; k < source_idx.length; k++) {
+				if (idx == Integer.parseInt(source_idx[k])) {
+					j++;
+				}
+			}
+			if (j != 1) {
+				svo.setSource_idx(idx);
+				projectService.deleteSource(svo);
+			}
+		}
+		
 		int project_idx = vo.getProject_idx();
 		for (int i = 0; i < user_id.length; i++) {
-			if (source_idx[i].equalsIgnoreCase("new")) {
-				System.out.println(">>>>" + i + " " + user_id[i] + " " + source_name[i] + " " + source_progress[i] + " " + source_idx[i]);
+			if (source_idx[i].equalsIgnoreCase("-1")) {
 				svo.setProject_idx(project_idx);
 				svo.setUser_id(user_id[i]);
 				svo.setSource_name(source_name[i]);
 				svo.setSource_progress(source_progress[i]);
 				projectService.insertFunction(svo);
-			} else if (!source_idx[i].equalsIgnoreCase("new")) {
-				System.out.println(">>>>" + i + " " + user_id[i] + " " + source_name[i] + " " + source_progress[i] + " " + source_idx[i]);
+			} else if (!source_idx[i].equalsIgnoreCase("-1")) {
 				svo.setSource_idx(Integer.parseInt(source_idx[i]));
 				svo.setProject_idx(project_idx);
 				svo.setUser_id(user_id[i]);
@@ -126,7 +139,6 @@ public class ProjectController {
 				projectService.updateSource(svo);
 			}
 		}
-		
 		model.addAttribute("project", projectService.getProject(vo));
 		
 		return "forward:getProject.do";
@@ -167,25 +179,23 @@ public class ProjectController {
 		
 		return "redirect:getProject.do?project_idx=" + svo.getProject_idx();
 	}
-	
-	@RequestMapping("/insert")
-	public String insertExample() {
-		
-		return "project/insertExample";
-	}
 	@RequestMapping("/code")
 	public String insertCodeExample() {
 		
 		return "project/insertCodeExample";
 	}
-	@RequestMapping("/code2")
-	public String insertCodeExample2() {
+	@RequestMapping("getCode.do")
+	public String getCode(Model model, @RequestParam String code) {
+		System.out.println(">>>>>>>>>>>>>>>>>>> getCode.do");
+		model.addAttribute("code", code);
+		System.out.println(">>>>>>>>>>>>>>>>>>> getCode.do");
 		
-		return "project/insertCodeExample2";
+		return "project/getCodeExample";
 	}
-	@RequestMapping("/insertFunction")
-	public String insertFunction() {
-		return "project/insertFunction";
+	
+	@RequestMapping("/code2")
+	public String insertCode2() {
+		return "project/insertCode2";
 	}
 	
 }

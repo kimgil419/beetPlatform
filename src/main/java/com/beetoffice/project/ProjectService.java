@@ -20,5 +20,6 @@ public interface ProjectService {
 	void insertSource(SourceVO svo);
 	void updateSource(SourceVO svo);
 	void deleteSource(SourceVO svo);
+	List<Integer> getSource_idxList(ProjectVO vo); 
 
 }
