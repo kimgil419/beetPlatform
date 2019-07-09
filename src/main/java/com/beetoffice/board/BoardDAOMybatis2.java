@@ -66,6 +66,10 @@ public class BoardDAOMybatis2 {
 	public int getTotalCounts(BoardVO vo) {
 		// TODO Auto-generated method stub
 		return mybatis.selectOne("BoardDAO.totalCounts",vo);
+	}
+	public List<BoardVO> getBoardListm() {
+		System.out.println("===> Mybatis2로 getBoardListm() 실행");
+		return mybatis.selectList("BoardDAO.getBoardListm");
 	}	
 }
 

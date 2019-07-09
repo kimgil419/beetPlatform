@@ -71,7 +71,7 @@
 	<!-- 사이드바 -->
 	<div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
-			<li class="sidebar-brand"><a href="#"><img
+			<li class="sidebar-brand"><a href="getCommute.do"><img
 					src="image/K-074.png" width="100"></a></li>
 			<li><a href="getApprovalList.do">전자결재(김길중)</a></li>
 			<li><a href="getCommuteList.do">출결관리(김길중)</a></li>
@@ -96,7 +96,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<h1>비트플랫폼 인트라넷</h1>
+				<h1><a href="getCommute.do">비트플랫폼 인트라넷</a></h1>
 			</div>
 			<div>
 <form>

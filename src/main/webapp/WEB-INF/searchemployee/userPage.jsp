@@ -5,6 +5,9 @@
     <title>Mypage</title>
 </head>
 <script src="js/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 <script>
 
     $(function () {
@@ -13,7 +16,6 @@
 
             var user_password = $("input[name='originalpassword']").val();
 
-            console.log(user_password);
             $.ajax({
                 url: "checkpassword.do",
                 method: "post",
@@ -61,12 +63,14 @@
 
 </script>
 <body>
+<div id="page-wrapper">
+    <jsp:include page="../menu.jsp"/>
 
 
-<div style="width:20%">
+<div style="width:20%;margin:auto;float:left;">
     <img src="/image/mr1.jpg">
 </div>
-<div style="width:80%">
+<div class="form-group" style="width:80%;margin:auto;float:left;">
     이름: ${list.user_name} <br/>
     부서: ${list.dept} <br/>
     직급: ${list.user_position} <br/>
@@ -84,6 +88,6 @@
         </form>
     </fieldset>
 </div>
-
+</div>
 </body>
 </html>

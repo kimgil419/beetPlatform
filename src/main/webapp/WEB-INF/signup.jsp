@@ -13,6 +13,14 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+$(document).ready(function(){
+	
+	 if( $("#user_id").val().length == 0 )
+		 {
+		 $("#user_id").focus();
+		 }
+});
+
 $(function() {
 	var idck = 0;
 	
@@ -137,120 +145,105 @@ function execPostCode() {
     }).open();
 }
 
-function send_go(frm) {
-	if (frm.user_id.value.trim() == "") {
+function send_go() {
+	if (document.frm.user_id.value.trim() == "") {
 		
 		alert("아이디(ID)를 입력안하셨습니다.\n입력하세요.");
-		frm.user_id.value = "";
-		frm.user_id.focus();
+		document.frm.user_id.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-		
-	} else if(frm.user_password.value.trim() == "") {
+		return false;
+	} else if(document.frm.user_password.value.trim() == "") {
 		alert("비밀번호를 입력안하셨습니다.\n입력하세요.");
-		frm.user_password.value = "";
-		frm.user_password.focus();
+
+		document.frm.user_password.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	} else if(frm.dept.value.trim() == "") {
+		return false;
+	} else if(document.frm.dept.value.trim() == "") {
 		alert("소속부서를 입력안하셨습니다.\n입력하세요.");
-		frm.dept.value = "";
-		frm.dept.focus();
+	
+		document.frm.dept.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	} else if(frm.birth.value.trim() == "") {
+		return false;
+	} else if(document.frm.birth.value.trim() == "") {
 		alert("생년월일을 입력안하셨습니다.\n입력하세요.");
-		frm.birth.value = "";
-		frm.birth.focus();
+
+		document.frm.birth.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	}else if(frm.job_id.value.trim() == "") {
+		return false;
+	}else if(document.frm.job_id.value.trim() == "") {
 		alert("직무를 입력안하셨습니다.\n입력하세요.");
-		frm.job_id.value = "";
-		frm.job_id.focus();
+
+		document.frm.job_id.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	}else if(frm.firstjoin.value.trim() == "") {
+		return false;
+	}else if(document.frm.firstjoin.value.trim() == "") {
 		alert("입사일을 입력안하셨습니다.\n입력하세요.");
-		frm.firstjoin.value = "";
-		frm.firstjoin.focus();
+
+		document.frm.firstjoin.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	}else if(frm.user_name.value.trim() == "") {
+		return false;
+	}else if(document.frm.user_name.value.trim() == "") {
 		alert("이름을 입력안하셨습니다.\n입력하세요.");
-		frm.user_name.value = "";
-		frm.user_name.focus();
+
+		document.frm.user_name.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	}else if(frm.user_position.value.trim() == "") {
+		return false;
+	}else if(document.frm.user_position.value.trim() == "") {
 		alert("직급을 입력안하셨습니다.\n입력하세요.");
-		frm.user_position.value = "";
-		frm.user_position.focus();
+
+		document.frm.user_position.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	}else if(frm.phone.value.trim() == "") {
+		return false;
+	}else if(document.frm.phone.value.trim() == "") {
 		alert("전화번호를 입력안하셨습니다.\n입력하세요.");
-		frm.phone.value = "";
-		frm.phone.focus();
+
+		document.frm.phone.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	}else if(frm.cphone.value.trim() == "") {
+		return false;
+	}else if(document.frm.cphone.value.trim() == "") {
 		alert("내선번호를 입력안하셨습니다.\n입력하세요.");
-		frm.cphone.value = "";
-		frm.cphone.focus();
+
+		document.frm.cphone.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	}else if(frm.user_email1.value.trim() == "") {
+		return false;
+	}else if(document.frm.user_email1.value.trim() == "") {
 		alert("이메일용아이디를 입력안하셨습니다.\n입력하세요.");
-		frm.user_email1.value = "";
-		frm.user_email1.focus();
+
+		document.frm.user_email1.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	}else if(frm.user_email2.value.trim() == "") {
+		return false;
+	}else if(document.frm.user_email2.value.trim() == "") {
 		alert("이메일을 입력안하셨습니다.\n입력하세요.");
-		frm.user_email2.value = "";
-		frm.user_email2.focus();
+
+		document.frm.user_email2.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	}else if(frm.addr1.value.trim() == "") {
+		return false;
+	}else if(document.frm.addr1.value.trim() == "") {
 		alert("우편번호를 입력안하셨습니다.\n입력하세요.");
-		frm.addr1.value = "";
-		frm.addr1.focus();
+
+		document.frm.addr1.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	}else if(frm.addr2.value.trim() == "") {
+		return false;
+	}else if(document.frm.addr2.value.trim() == "") {
 		alert("도로명 주소를 입력안하셨습니다.\n입력하세요.");
-		frm.addr2.value = "";
-		frm.addr2.focus();
+
+		document.frm.addr2.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	}else if(frm.addr3.value.trim() == "") {
+		return false;
+	}else if(document.frm.addr3.value.trim() == "") {
 		alert("상세주소를 입력안하셨습니다.\n입력하세요.");
-		frm.addr3.value = "";
-		frm.addr3.focus();
+
+		document.frm.addr3.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
-	}else if(frm.user_pictures.value.trim() == "") {
+		return false;
+	}else if(document.frm.user_pictures.value.trim() == "") {
 		alert("프로필사진을 업로드안하셨습니다.\n업로드하세요.");
-		frm.user_pictures.value = "";
-		frm.user_pictures.focus();
+
+		document.frm.user_pictures.focus();
 		
-		frm.action = "redirect:signup";
+		return false;
+	} else {
+		frm.action = "insertUser.do";
 		frm.submit();
 	}
 }
@@ -265,35 +258,30 @@ function send_go(frm) {
 
 	<form action="idcheck.do" method="post">
 	<div id="divInputId" >
+	<fieldset>
+	    <legend>아이디 중복체크</legend>
 			<input type="text" name="user_id"  id="user_id">
 			<input type="submit" value="아이디중복체크" id="idck">
-			</div>
-			</form>
+		</fieldset>
+	</div>
+	</form>
 	
 	
-	<form action="insertUser.do" method="post"
+	<form method="post" name="frm"
 	        enctype="multipart/form-data">
-	<table>
-
-		<tr>
-			<th>아이디</th>
-			
-			<td>
-		
-			<input type="text" name="user_id"  id="user_ids">
+	
+	<fieldset>
+	    <legend>회원가입</legend>
+	
+			<p>아이디 : <input type="text" name="user_id"  id="user_ids"></p>
 			
 			
-			</td>
-		
-		</tr>
+	
 		  
-		<tr>
-			<th>패스워드</th>
-			<td><input type="text" name="user_password"></td>
-		</tr>
-		<tr>
-			<th>소속부서</th>
-			<td><select id="ssd" onchange="categoryChanged()">
+		<p>패스워드 : <input type="text" name="user_password"></p>
+			
+			<p>소속부서 :
+			<select id="ssd" onchange="categoryChanged()">
                     <option value="X">선택사항</option>
                     <option value="사업">사업부</option>
                     <option value="해외사업">해외사업부</option> 
@@ -303,32 +291,20 @@ function send_go(frm) {
                     <option value="시설관리">시설관리부</option>    
                     <option value="인재개발">인재개발부</option>   
                     <option value="회계">회계부</option>      
-                </select><input type="hidden" name="dept"  id="categoryd"></td>
-		</tr>
-		<tr>
-			<th>생년월일</th>
-			<td><input type="text" id="testDatepicker" name="birth"></td>
-		</tr>
-		<tr>
-			<th>직무</th>
-			<td><input type="text" name="job_id"></td>
-		</tr>
-		<tr>
-			<th>입사날짜</th>
-			<td><input type="text" id="testDatepicker1" name="firstjoin"></td>
-		</tr>
-		<tr>
-			<th>퇴사날짜</th>
-			<td><input type="text" id="testDatepicker2" name="departure"></td>
-		</tr>
-		<tr>
-			<th>이름</th>
-			<td><input type="text" name="user_name"></td>
-		</tr>
-		<tr>
-			<th>직급</th>
-			<td>
-		        <select id="ss" onchange="categoryChange()">
+                </select><input type="hidden" name="dept"  id="categoryd"></p>
+		
+		<p>생년월일 : <input type="text" id="testDatepicker" name="birth"></p>
+		
+		<p>직무 : 
+			<input type="text" name="job_id"></p>
+		
+		<p>입사날짜 : <input type="text" id="testDatepicker1" name="firstjoin"></p>
+		
+		<p>퇴사날짜 : <input type="text" id="testDatepicker2" name="departure"></p>
+		
+		<p>이름 : <input type="text" name="user_name"></p>
+		
+		<p>직급 : <select id="ss" onchange="categoryChange()">
                     <option value="X">선택사항</option>
                     <option value="사원">사원</option>
                     <option value="주임">주임</option> 
@@ -339,24 +315,17 @@ function send_go(frm) {
                     <option value="이사">이사</option>   
                     <option value="대표이사">대표이사</option>      
                 </select>
-                <input type="hidden" name="user_position" id="category">
-		    </td>
-		</tr>
-		<tr>
-			<th>전화번호('-'없이 입력해주세요)</th>
-			<td><input type="text" name="phone"></td>
-		</tr>
-		<tr>
-			<th>내선전화번호</th>
-			<td><input type="text" name="cphone"></td>
-		</tr>
-		<tr>
-			<th>이메일</th>
-			<td><input type="text" name="user_email1">@<input type="text" name="user_email2"></td>
-		</tr>
-		<tr>
-			<th>주소</th>
-			<td><div class="form-group">                   
+                <input type="hidden" name="user_position" id="category"></p>
+		
+		
+			<p>전화번호('-'없이 입력해주세요) : <input type="text" name="phone"></p>
+		
+			<p>내선전화번호 : <input type="text" name="cphone"></p>
+		
+			<p>이메일 : <input type="text" name="user_email1">@<input type="text" name="user_email2"></p>
+		
+			<p>주소 :
+			   <div class="form-group">                   
                 <input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="addr1" id="addr1" type="text" readonly="readonly" >
                                             <button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
                 </div>
@@ -365,21 +334,14 @@ function send_go(frm) {
                 </div>
                 <div class="form-group">
                                             <input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text"  />
-                </div>
-        </td>
-		</tr>
-		<tr>
-		    <th>프로필사진</th>
-		    <td>
-		        <input type="file" name="user_pictures">
-		    </td>
-		</tr>
-		<tr>
-			<td colspan="2" class="center">
-				<input type="submit" value="직원등록" onclick="send_go(this.form)">
-			</td>
-		</tr>
-	</table>
+                </div></p>
+       
+		   <p> 프로필사진 : <input type="file" name="user_pictures"></p>
+		
+				<input type="button" value="직원등록" onclick="send_go()">
+			
+		
+	</fieldset>
 	</form>
 </div>
 </body>

@@ -20,7 +20,7 @@
 <body>
 <div id="page-wrapper">
 <jsp:include page="../menu.jsp"/>
-<div class="container">
+<div style="width: 1050px">
 	<h1>전자 결재 서류 목록</h1>
 	<h3>[${userInfo.user_name }]님 환영합니다....<a href="logout.do">Log-out</a></h3>
 
@@ -47,7 +47,44 @@
 		</tr>
 	</table>
 	</form>
+	<p><a href="ApprovalForm.do">결재 문서 등록</a></p>
+	<table class="table">
+		<tr>
+		<th colspan="7">긴급결재서류</th>
+		</tr>
+		<tr>
+			<th width="50">번호</th>
+			<th width="200">제목</th>
+			<th width="150">작성자</th>
+			<th width="50">결재1</th>
+			<th width="50">결재2</th>
+			<th width="50">결재3</th>
+			<th width="150">등록일</th>			
+		</tr>	
+		<c:forEach var="approval" items="${approvalList}">
+		
+		<c:if test="${(not empty approval.urgent) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
+		or (approval.user_id2 == userInfo.user_id and not empty approval.ok1 and empty approval.ok2) 
+		or (approval.user_id3 == userInfo.user_id and not empty approval.ok1 and not empty approval.ok2 and empty approval.ok3)}" >
+		
+		<tr>
+			<td class="center">${approval.a_num }</td>
+			<td>
+				<a href="getApproval.do?a_num=${approval.a_num }">
+					${approval.a_title }
+				</a>
+			</td>
+			<td>${approval.user_name}</td>
+			<td>${approval.user_id1}</td>
+			<td>${approval.user_id2}</td>
+			<td>${approval.user_id3}</td>
+			<td>${approval.regdate}</td>
+		</tr>
+		</c:if>
+		</c:forEach>
+		</table>
 	
+		<hr>
 	<!-- 데이타 표시 -->
 	<table class="table table-hover">
 		
@@ -56,13 +93,13 @@
 		<th colspan="7">직렬결재서류</th>
 		</tr>
 		<tr>
-			<th width="100">번호</th>
+			<th width="50">번호</th>
 			<th width="200">제목</th>
 			<th width="150">작성자</th>
 			<th width="50">결재1</th>
 			<th width="50">결재2</th>
 			<th width="50">결재3</th>
-			<th width="50">등록일</th>			
+			<th width="150">등록일</th>			
 		</tr>	
 		<c:forEach var="approval" items="${approvalList}">
 		
@@ -77,7 +114,7 @@
 					${approval.a_title }
 				</a>
 			</td>
-			<td>${approval.user_id}</td>
+			<td>${approval.user_name}</td>
 			<td>${approval.user_id1}</td>
 			<td>${approval.user_id2}</td>
 			<td>${approval.user_id3}</td>
@@ -94,13 +131,13 @@
 		<th colspan="7">병렬 결재 서류</th>
 		</tr>	
 		<tr>
-			<th width="100">번호</th>
+			<th width="50">번호</th>
 			<th width="200">제목</th>
 			<th width="150">작성자</th>
 			<th width="50">결재1</th>
 			<th width="50">결재2</th>
 			<th width="50">결재3</th>
-			<th width="50">등록일</th>			
+			<th width="150">등록일</th>			
 		</tr>
 		
 		<c:forEach var="approval" items="${approvalList}">
@@ -116,7 +153,7 @@
 					${approval.a_title }
 				</a>
 			</td>
-			<td>${approval.user_id}</td>
+			<td>${approval.user_name}</td>
 			<td>${approval.user_id1}</td>
 			<td>${approval.user_id2}</td>
 			<td>${approval.user_id3}</td>
@@ -125,20 +162,20 @@
 		</c:if>
 		</c:forEach>
 		</table>
-		<hr>
+		
 		<hr>
 		<table class="table">
 		<tr>
 		<th colspan="7">반려서류</th>
 		</tr>
 		<tr>
-			<th width="100">번호</th>
+			<th width="50">번호</th>
 			<th width="200">제목</th>
 			<th width="150">작성자</th>
 			<th width="50">결재1</th>
 			<th width="50">결재2</th>
 			<th width="50">결재3</th>
-			<th width="50">등록일</th>			
+			<th width="150">등록일</th>			
 		</tr>	
 		<c:forEach var="approval" items="${approvalList}">
 		
@@ -153,7 +190,7 @@
 					${approval.a_title }
 				</a>
 			</td>
-			<td>${approval.user_id}</td>
+			<td>${approval.user_name}</td>
 			<td>${approval.user_id1}</td>
 			<td>${approval.user_id2}</td>
 			<td>${approval.user_id3}</td>
@@ -163,57 +200,21 @@
 		</c:forEach>
 		</table>
 		<hr>
-		<hr>
-		<table class="table">
-		<tr>
-		<th colspan="7">긴급결재서류</th>
-		</tr>
-		<tr>
-			<th width="100">번호</th>
-			<th width="200">제목</th>
-			<th width="150">작성자</th>
-			<th width="50">결재1</th>
-			<th width="50">결재2</th>
-			<th width="50">결재3</th>
-			<th width="50">등록일</th>			
-		</tr>	
-		<c:forEach var="approval" items="${approvalList}">
+	
 		
-		<c:if test="${(not empty approval.urgent) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
-		or (approval.user_id2 == userInfo.user_id and not empty approval.ok1 and empty approval.ok2) 
-		or (approval.user_id3 == userInfo.user_id and not empty approval.ok1 and not empty approval.ok2 and empty approval.ok3)}" >
-		
-		<tr>
-			<td class="center">${approval.a_num }</td>
-			<td>
-				<a href="getApproval.do?a_num=${approval.a_num }">
-					${approval.a_title }
-				</a>
-			</td>
-			<td>${approval.user_id}</td>
-			<td>${approval.user_id1}</td>
-			<td>${approval.user_id2}</td>
-			<td>${approval.user_id3}</td>
-			<td>${approval.regdate}</td>
-		</tr>
-		</c:if>
-		</c:forEach>
-		</table>
-		<hr>
-		<hr>
 		<table class="table">
 		
 		<tr>
 		<th colspan="7">지난 서류</th>
 		</tr>
 		<tr>
-			<th width="100">번호</th>
+			<th width="50">번호</th>
 			<th width="200">제목</th>
 			<th width="150">작성자</th>
 			<th width="50">결재1</th>
 			<th width="50">결재2</th>
 			<th width="50">결재3</th>
-			<th width="50">등록일</th>			
+			<th width="150">등록일</th>			
 		</tr>	
 		<c:forEach var="approval" items="${approvalList}">
 		
@@ -228,7 +229,7 @@
 					${approval.a_title }
 				</a>
 			</td>
-			<td>${approval.user_id}</td>
+			<td>${approval.user_name}</td>
 			<td>${approval.user_id1}</td>
 			<td>${approval.user_id2}</td>
 			<td>${approval.user_id3}</td>
@@ -238,19 +239,19 @@
 		</c:forEach>
 		</table>
 		<hr>
-		<hr>
+		
 		<table class="table">
 		<tr>
 		<th colspan="7">내가쓴 서류</th>
 		</tr>
 		<tr>
-			<th width="100">번호</th>
+			<th width="50">번호</th>
 			<th width="200">제목</th>
 			<th width="150">작성자</th>
 			<th width="50">결재1</th>
 			<th width="50">결재2</th>
 			<th width="50">결재3</th>
-			<th width="50">등록일</th>			
+			<th width="150">등록일</th>			
 		</tr>	
 		<c:forEach var="approval" items="${approvalList}">
 		
@@ -263,7 +264,7 @@
 					${approval.a_title }
 				</a>
 			</td>
-			<td>${approval.user_id}</td>
+			<td>${approval.user_name}</td>
 			<td>${approval.user_id1}</td>
 			<td>${approval.user_id2}</td>
 			<td>${approval.user_id3}</td>
@@ -273,7 +274,7 @@
 		</c:forEach>	
 	</table>
 	<br>
-	<p><a href="ApprovalForm.do">새글 등록</a></p>
+	
 	<p><a href="getCommute.do">메인메뉴이동</a></p>
 </div>
 

@@ -10,7 +10,6 @@
 <head>
 <meta charset="UTF-8">
 <title>글목록</title>
-<link rel="stylesheet" href="css/bootstrap.css">
 <style>
 	#container {
 		width: 700px;

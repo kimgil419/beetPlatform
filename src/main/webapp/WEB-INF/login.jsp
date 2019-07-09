@@ -32,28 +32,29 @@ $(document).ready(function(){
 
 
 
-function send_go(frm) {
-	if (frm.user_id.value.trim() == "") {
+function send_go() {
+	if (document.frm.user_id.value.trim() == "") {
 		
 		alert("아이디(ID)는 필수 입력항목입니다.\n입력하세요.");
-		frm.user_id.value = "";
-		frm.user_id.focus();
+	
+	
+		document.frm.user_id.focus();
 		
-		frm.action = "redirect:login";
-		frm.submit();
+		return false;
 		
-	} else if(frm.user_password.value.trim() == "") {
+		
+	} else if(document.frm.user_password.value.trim() == "") {
 		alert("비밀번호도 필수 입력항목입니다.\n입력하세요.");
-		frm.user_password.value = "";
-		frm.user_password.focus();
+	
+		document.frm.user_password.focus();
 		
-		frm.action = "redirect:login";
-		frm.submit();
-	} else{
+		return false;
+	} else {
 		frm.action = "login.do";
 		frm.submit();
 	}
 }
+
 var result = '${lgmsg}';
 if(result == '아이디') {
 alert(result + '나 비밀번호가 틀리셨습니다 인사과에 문의해주세요'); //아무 조건도 안걸면 계속 나온다 전달도 안된다
@@ -62,27 +63,22 @@ alert(result + '나 비밀번호가 틀리셨습니다 인사과에 문의해주
 </head>
 <body>
 
-<div id="container">
+
 	<h1>로그인</h1>
 	<hr>
-	<form method="post">
-	<table>
-		<tr>
-			<th>아이디</th>
-			<td><input type="text" name="user_id" id="user_id"></td>
-		</tr>
-		<tr>
-			<th>패스워드</th>
-			<td><input type="text" name="user_password"></td>
-		</tr>
-		<tr>
-			<td colspan="2" class="center">
-				<input type="submit" value="로그인" onclick="send_go(this.form)">
-			</td>
-		</tr>
-	</table>
+	<form name="frm" method="post">
+	<fieldset>
+		<legend>로그인</legend>
+		<p>아이디: <input type="text" name="user_id" id="user_id"></p>
+		<p>비번: <input type="text" name="user_password"></p>
+	
+		
+		<input type="button" value="회원가입" onclick="send_go()">
+
+	</fieldset>
+	
 	</form>
-</div>
+
 
 </body>
 </html>

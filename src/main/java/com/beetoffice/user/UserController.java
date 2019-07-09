@@ -123,7 +123,14 @@ public class UserController {
     
 
             String orgName = uploadFile.getOriginalFilename();
+            String[] strSplit1 = orgName.split("\\\\");
+        
+    			
+    				orgName	 = strSplit1[strSplit1.length-1].toString();
+    		
+            System.out.println("uploadFile : " + orgName);
             String filePath = realPathtoUploads + orgName;
+            System.out.println("uploadFile : " + filePath);
             File dest = new File(filePath);
             uploadFile.transferTo(dest);
  			

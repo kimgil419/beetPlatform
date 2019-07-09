@@ -11,7 +11,7 @@
 	</select>
 	
 	<select id="getApprovalList" parameterType="approval" resultType="approval">
-	 SELECT * FROM APPROVAL
+	 SELECT * FROM APPROVAL A, USER_DB U WHERE A.USER_ID = U.USER_ID
 	</select>
 	
 	
