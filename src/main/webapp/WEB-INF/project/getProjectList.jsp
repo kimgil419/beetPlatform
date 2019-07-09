@@ -52,7 +52,7 @@
 					<c:forEach var="project" items="${projectList }">
 						<tr>
 							<td>${project.project_idx }</td>
-							<td><a href="getProject.do?project_idx=${project.project_idx }">${project.project_name }</a></td>
+							<td><a href="getProject.do?project_idx=${project.project_idx }&currentPage=${pages.currentPage }&searchCondition=${pages.searchCondition }&searchKeyword=${pages.searchKeyword }">${project.project_name }</a></td>
 							<td>${project.user_name }</td>
 							<td>기간미작성</td>
 							<td>${project.project_reg_date }</td>

@@ -9,8 +9,8 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
 <script src="http://codemirror.net/lib/codemirror.js"></script>
-<script src="http://codemirror.net/addon/edit/matchbrackets.js"></script>
-<script src="http://codemirror.net/addon/edit/continuecomment.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.0/addon/edit/matchbrackets.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.0/addon/comment/continuecomment.js"></script>
 <script src="http://codemirror.net/mode/javascript/javascript.js"></script>
 <script>
 	window.onload = function () {

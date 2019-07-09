@@ -77,7 +77,9 @@
 					<a href="deleteProject.do?project_idx=${project.project_idx }"><input type="button" value="삭제"></a>
 				</div>
 				<div id="flex_div_children2">
-					<a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null"><input type="button" value="목록"></a>
+					<a href="getProjectList.do?currentPage=${pages.currentPage }&searchCondition=${pages.searchCondition }&searchKeyword=${pages.searchKeyword }"><input type="button" value="돌아가기"></a>
+					<a href="getProjectList.do?currentPage=1"><input type="button" value="목록"></a>
+<!-- 					<a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null"><input type="button" value="목록"></a> -->
 					<a href="getCommute.do"><input type="button" value="메인"></a>
 				</div>
 			</div>

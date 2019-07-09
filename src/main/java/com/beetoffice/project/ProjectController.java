@@ -44,9 +44,10 @@ public class ProjectController {
 	}
 	
 	@RequestMapping("getProject.do")
-	public String getProject(ProjectVO vo, Model model) {
+	public String getProject(ProjectVO vo, PagingProcess pages, Model model) {
 		System.out.println(">> Controller: getProject()");
 		
+		model.addAttribute("pages", pages);
 		model.addAttribute("project", projectService.getProject(vo));
 		model.addAttribute("sourceList", projectService.getSourceList(vo));
 		
@@ -59,7 +60,8 @@ public class ProjectController {
 		
 		projectService.deleteProject(vo);
 		
-		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
+//		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
+		return "redirect:getProjectList.do?currentPage=1";
 	}
 	
 	@RequestMapping("insertProject.do")
