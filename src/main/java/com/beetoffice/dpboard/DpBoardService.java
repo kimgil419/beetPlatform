@@ -15,4 +15,5 @@ public interface DpBoardService {
 	List<DpBoardVO> dpgetBoardList(DpBoardVO vo); //조회(글목록)
 	int dpgetTotalCount(DpBoardVO vo);
 	int dpgetTotalCounts(DpBoardVO vo);
+	List<DpBoardVO> dpgetBoardListm(String dept);
 }

@@ -31,6 +31,10 @@
             } else { //no
             }
         };
+        
+        
+
+        }
     </script>
 <style>
 .video-item img {
@@ -51,6 +55,24 @@
 .list-group-item:hover {
 	background-color: #eee;
 }
+
+	#container {
+		width: 700px;
+		margin: 0 auto;
+	}
+	h1, h3, p { text-align: center; }
+	table { border-collapse: collapse; }
+	table, th, td {
+		border: 1px solid black;
+		margin: 0 auto;
+	}
+	th { background-color: #F5A9E1; }
+	.border-none, .border-none td { border: none; }
+	.center { text-align: center; }
+	.left { text-align: left; }
+	.right { text-align: right; }
+	.orange { background-color: orange; }
+	.notie { background-color: #808080; }
 </style>
 <body>
 
@@ -58,7 +80,7 @@
 	
 		<jsp:include page="menu.jsp" />
 		
-		<div style="width: 500" class="col-md-8">
+		<div style="width: 500; height:500px; border:1px solid white; float: left; margin-right:100px;" class="col-md-8">
 			<table class="table table-hover">
 
 				<tr>
@@ -117,9 +139,76 @@
 			</table>
 
 		</div>
-		<div id="root" class="col-md-8"></div>
-	</div>
+		
+		
+		<div style="width:700px; height:500px; border:1px solid white; float: left;">
+		<form name="frm" method="post" action="getBoardList.do?curPage=1&li=original">
+		<table> 
+        <tr>
 
+					<th colspan="5">사내전체게시판</th><th><input type="submit" value="더보기" onclick="send_go()"></th>
+		</tr>
+		<tr>
+			
+			<th width="200">제목</th>
+			<th width="150">작성자</th>
+			<th width="150">등록일</th>
+			<th width="100">조회수</th>
+		</tr>
+
+
+		<c:forEach var="board" items="${BdList }">
+		<tr>
+		
+			<td class=${(board.t_noti == 'Y') ? 'notie' : '' }>
+				<a href="getBoardInsert.do?seq=${board.seq }&curPage=1">
+					${board.t_title }
+				</a>
+			</td>
+			<td class=${(board.t_noti == 'Y') ? 'notie' : '' }>${board.user_name }</td>
+			<td class=${(board.t_noti == 'Y') ? 'notie' : '' }>${board.t_regdate }</td>
+			<td class=${(board.t_noti == 'Y') ? 'notie' : '' }>${board.cnt }</td>
+		</tr>
+		</c:forEach>
+
+	
+    </table>
+    </form>
+    <form name="frmmm" method="post" action="dpgetBoardList.do?curPage=1&li=original">
+    <table>
+	<thead>
+	    <tr>
+
+					<th colspan="5">부서게시판</th><th><input type="submit" value="더보기" ></th>
+		</tr>
+		<tr>
+			
+			<th width="200">제목</th>
+			<th width="150">작성자</th>
+			<th width="150">등록일</th>
+			<th width="100">조회수</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach var="board" items="${DpboardList }">
+		<tr>
+		
+			<td class=${(board.t_noti == 'Y') ? 'notie' : '' }>
+				<img class="fancy"  style="display: ${(board.t_password == null) ? 'none':'' };" src ="image/icon_secret.gif" alt="titleImage"><a href="dpgetBoardInsert.do?seq=${board.seq }&curPage=1&t_password=${board.t_password}">
+					${board.t_title }
+				</a>
+			</td>
+			<td class=${(board.t_noti == 'Y') ? 'notie' : '' }>${board.user_name }</td>
+			<td class=${(board.t_noti == 'Y') ? 'notie' : '' }>${board.t_regdate }</td>
+			<td class=${(board.t_noti == 'Y') ? 'notie' : '' }>${board.cnt }</td>
+		</tr>
+		</c:forEach>
+	</tbody>
+	</table>
+	</form>
+	</div><div id="root" class="col-md-8"></div><div style="clear:both;"></div><!-- 딸려오는것을 막기 위한 소스  => <div style="clear:both;"></div> -->
 	<script src="/js/youtube-bundle.js"></script>
+	
+	</div>
 </body>
 </html>

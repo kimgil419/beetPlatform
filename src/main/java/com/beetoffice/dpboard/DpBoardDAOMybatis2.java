@@ -1,14 +1,12 @@
 package com.beetoffice.dpboard;
 
 import java.util.List;
-import java.util.Map;
 
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.beetoffice.board.BoardVO;
 
 
 
@@ -66,7 +64,12 @@ public class DpBoardDAOMybatis2 {
 	public int dpgetTotalCounts(DpBoardVO vo) {
 		// TODO Auto-generated method stub
 		return mybatis.selectOne("BoardDAO.dptotalCounts", vo);
-	}	
+	}
+	public List<DpBoardVO> dpgetBoardListm(String dept) {
+		System.out.println("===> Mybatis2로 dpgetBoardListm() 실행");
+		return mybatis.selectList("BoardDAO.dpgetBoardListm", dept);
+	}
+	
 }
 
 

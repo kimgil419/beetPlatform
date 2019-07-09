@@ -129,6 +129,29 @@
 		 WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
 	
+		<select id="getBoardListm" 
+		resultType="board">
+		
+	SELECT *
+		  FROM (SELECT ROW_NUMBER() OVER() R_NUM, BBS.*
+		          FROM  (SELECT * 
+		                  FROM BOARD 
+		                  WHERE T_NOTI = 'Y' AND DEPT IS NULL
+
+		                   
+		
+		                  UNION ALL
+		
+		                  SELECT * 
+		                  FROM BOARD 
+		                  WHERE T_NOTI = 'N' AND DEPT IS NULL
+		
+		                  ORDER BY T_NOTI = 'N',T_NOTI = 'Y'
+		                   ) BBS
+		       ) S
+		 WHERE R_NUM BETWEEN 0 AND 3
+	</select>
+	
 	<select id="dpgetBoardList" parameterType="dpboard"
 		resultType="dpboard">
 		
@@ -161,6 +184,30 @@
 		                   ) BBS 
 		       ) S
 		 WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+		<select id="dpgetBoardListm" parameterType="String"
+		resultType="dpboard">
+		
+		SELECT *
+		  FROM (SELECT ROW_NUMBER() OVER() R_NUM, BBS.*
+		          FROM ( (SELECT * 
+		                  FROM BOARD 
+		                  WHERE T_NOTI = 'Y' AND DEPT = #{dept}
+		  
+		                  )
+		
+		                  UNION ALL
+		
+		                  (SELECT * 
+		                  FROM BOARD 
+		                  WHERE T_NOTI = 'N' AND DEPT = #{dept}
+		        )
+		
+		                  ORDER BY T_NOTI = 'N',T_NOTI = 'Y'
+		                   ) BBS 
+		       ) S
+		 WHERE R_NUM BETWEEN 0 AND 3
 	</select>
 	
 	<!--  <select id="ugetBoard" parameterType="user"
