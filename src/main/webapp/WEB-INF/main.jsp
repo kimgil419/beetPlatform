@@ -56,18 +56,22 @@
 	background-color: #eee;
 }
 
-	
+#board2 {
+height: 200px;
+overflow: hidden;
+}
 
 	
 	.notie { background-color: #808080; }
 </style>
 <body>
 
-	<div id="page-wrapper">
+	<div id="page-wrapper" >
 	
 		<jsp:include page="menu.jsp" />
 		
-		<div style="width: 500; height:500px; border:1px solid white; float: left; margin-right:100px;" class="col-md-8">
+		<div id="board1" class="col-md-4" >
+		<div id="board2" >
 			<table class="table table-hover">
 
 				<tr>
@@ -80,7 +84,7 @@
 					<th width="80">작성자</th>
 					<th width="90">등록일</th>
 				</tr>
-				<c:forEach var="approval" items="${approvalList}" end="5">
+				<c:forEach var="approval" items="${approvalList}" >
 
 					<c:if
 						test="${(approval.option == 0 ) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
@@ -97,6 +101,9 @@
 					</c:if>
 				</c:forEach>
 			</table>
+			</div>
+			<div id="board2" >
+			
 			<table class="table table-hover">
 				<tr>
 
@@ -108,7 +115,7 @@
 					<th width="80">작성자</th>
 					<th width="90">등록일</th>
 				</tr>
-				<c:forEach var="approval" items="${approvalList}" end="5">
+				<c:forEach var="approval" items="${approvalList}" >
 
 					<c:if
 						test="${ (approval.option == 1 ) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
@@ -124,25 +131,25 @@
 					</c:if>
 				</c:forEach>
 			</table>
+			</div>
 
 		</div>
 		
 		
-		<div style="width:700px; height:500px; border:1px solid white; float: left;">
+		<div id="board1"  class="col-md-4">
 		<form name="frm" method="post" action="getBoardList.do?curPage=1&li=original">
-		<p>게시판목록</p>
-		<hr>
-		<table> 
+		
+		<table class="table table-hover" > 
         <tr>
 
 					<th colspan="3">사내전체게시판</th><th><input type="submit" value="더보기" onclick="send_go()"></th>
 		</tr>
 		<tr>
 			
-			<th width="200">제목</th>
-			<th width="150">작성자</th>
-			<th width="150">등록일</th>
-			<th width="100">조회수</th>
+			<th width="150">제목</th>
+			<th width="80">작성자</th>
+			<th width="100">등록일</th>
+			<th width="50">조회수</th>
 		</tr>
 
 
@@ -164,7 +171,7 @@
     </table>
     </form>
     <form name="frmmm" method="post" action="dpgetBoardList.do?curPage=1&li=original">
-    <table>
+    <table class="table table-hover">
 	<thead>
 	    <tr>
 
@@ -172,10 +179,10 @@
 		</tr>
 		<tr>
 			
-			<th width="200">제목</th>
-			<th width="150">작성자</th>
-			<th width="150">등록일</th>
-			<th width="100">조회수</th>
+			<th width="150">제목</th>
+			<th width="80">작성자</th>
+			<th width="100">등록일</th>
+			<th width="50">조회수</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -196,7 +203,9 @@
 	</table>
 	
 	</form>
-	</div><div id="root" class="col-md-8"></div><div style="clear:both;"></div><!-- 딸려오는것을 막기 위한 소스  => <div style="clear:both;"></div> -->
+	</div>
+	
+	<div id="root" class="col-md-8"></div>
 	<script src="/js/youtube-bundle.js"></script>
 	
 	</div>
