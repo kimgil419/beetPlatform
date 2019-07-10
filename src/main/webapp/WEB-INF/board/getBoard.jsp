@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap.css">
 <meta charset="UTF-8">
 <title>글 상세</title>
 <style>
@@ -42,6 +44,99 @@
 	content:" ";
 }
 </style>
+<script>
+
+//case1
+$(document).on('click', 'a[href="#"]', function(e){
+	e.preventDefault();
+});
+
+// case2
+$('a[href="#"]').click(function(e) {
+	e.preventDefault();
+});
+/*
+ * 댓글 등록하기(Ajax)
+ */
+function fn_comment(code){
+    
+    $.ajax({
+    	async: false,
+        type:'POST',
+        url : "<c:url value='/addComment.do'/>",
+        data:$("#commentForm").serialize(),
+        success : function(data){
+            if(data=="success")
+            {
+                getCommentList();
+                $("#comment").val("");
+            }
+        },
+        error:function(request,status,error){
+            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+       }
+        
+    });
+}
+ 
+/**
+ * 초기 페이지 로딩시 댓글 불러오기
+ */
+$(function(){
+    
+    getCommentList();
+    
+});
+ 
+/**
+ * 댓글 불러오기(Ajax)
+ */
+function getCommentList(){
+    
+    $.ajax({
+    	async: false,
+        type:'GET',
+        url : "<c:url value='/commentList.do'/>",
+        dataType : "json",
+        data:$("#commentForm").serialize(),
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+        success : function(data){
+            
+            var html = "";
+            var cCnt = data.length;
+            
+            if(data.length > 0){
+                
+                for(i=0; i<data.length; i++){
+                    html += "<div>";
+                    html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
+                    html += data[i].comment + "<tr><td></td></tr>";
+                    html += "</table></div>";
+                    html += "</div>";
+                    
+                    
+                }
+               
+            } else {
+                
+                html += "<div>";
+                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+                html += "</table></div>";
+                html += "</div>";
+                
+            }
+            
+            $("#cCnt").html(cCnt);
+            $("#commentList").html(html);
+            
+        },
+        error:function(request,status,error){
+            
+       }
+        
+    });
+}
+</script>
 </head>
 <body>
 <div id="page-wrapper">
@@ -98,37 +193,47 @@
 	</p>
 </div>
 
-<%--댓글 입력 폼 --%>
-<form method="post" action="insertComment.do">
-	<p>이름 : <input type="text" name="user_name" value="${user_name }"></p>
-	<p>내용 : <textarea name="board_content" rows="4" cols="55"></textarea></p>
-	<input type="submit" value="댓글저장">
-	
-	<input type="hidden" name="seq" value="${board.seq }">
-	<input type="hidden" name="curPage" value="${c1 }">
-</form>
 
-<%--댓글 출력(동적 태그 작성) --%>
-<hr>
-댓글들
-<hr>
 
-<c:forEach var="com" items="${cm_list }">
-<div class="comment">
-	<form action="deleteComment.do" method="post">
-		<p>이름 : ${com.user_name }</p> 
-		<p>날짜 : ${com.write_date }</p>
-		<p>내용 : ${com.board_content }</p>
-		<input type="submit" ${(com.user_id == user_id) ? '':'hidden' } value="댓글삭제">
-		<input type="button" value="답글" hidden="false">
-		<input type="hidden" name="reply_seq" value="${com.reply_seq }">
-		
-		<input type="hidden" name="curPage" value="${c1 }">
-		<%--삭제처리 후 게시글 상세페이지로 이동시 사용 --%>
-		<input type="hidden" name="seq" value="${com.seq }">
-	</form>
+
+
+    <div>
+  <form id="commentForm" name="commentForm" method="post">
+    <br><br>
+        <div>
+            <div>
+                <span><strong>Comments</strong></span> <span id="cCnt"></span>
+            </div>
+            <div>
+                <table class="table">                    
+                    <tr>
+                        <td>
+                            <textarea style="width: 1100px" rows="3" cols="30" id="comment" name="board_content" placeholder="${com.board_content }"></textarea>
+                            <br>
+                            <div>
+                                <a href='#' onClick="fn_comment('${board.seq}')" class="btn pull-right btn-success">등록</a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" id="b_code" name="b_code" value="${board.seq}" />
+        <input type="hidden" name="seq" value="${board.seq}">        
+    </form>
 </div>
-</c:forEach>
+<div class="container">
+    <form id="commentListForm" name="commentListForm" method="post">
+        <div id="commentList">
+        </div>
+    </form>
+    </div>
+
+
+
+
+
+
 </div>
 </body>
 </html>

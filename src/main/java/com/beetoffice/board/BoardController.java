@@ -2,6 +2,7 @@ package com.beetoffice.board;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,18 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.beetoffice.board.CommentService;
-import com.beetoffice.board.CommentVO;
 
 
 
@@ -368,7 +372,7 @@ public class BoardController {
 		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
 		
 
-		commentService.deleteComment(vo);
+		//commentService.deleteComment(vo);
 		int a1 = vo.getSeq();
 		String bdseq1 = String.valueOf(a1);
 		session.setAttribute("mySeq", bdseq1);
@@ -376,4 +380,73 @@ public class BoardController {
 		return "redirect:getBoard.do";
 		
 	}
+	
+	@RequestMapping(value="/addComment.do")
+    @ResponseBody
+    public String ajax_addComment(@ModelAttribute("vol") CommentVO vol, HttpServletRequest request) throws Exception{
+        
+        HttpSession session = request.getSession();
+        String user_name = (String)session.getAttribute("user_name");
+        String user_id = (String) session.getAttribute("user_id");
+        try{
+            
+            vol.setUser_name(user_name);
+
+            vol.setUser_id(user_id);
+          
+
+            commentService.addComment(vol);
+            
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        return "success";
+    }
+    
+    /**
+     * 게시물 댓글 불러오기(Ajax)
+     * @param boardVO
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/commentList.do", produces="application/json; charset=utf8")
+    @ResponseBody
+    public ResponseEntity<String> ajax_commentList(@ModelAttribute("vol") CommentVO vol, HttpServletRequest request) throws Exception{
+        
+        HttpHeaders responseHeaders = new HttpHeaders();
+        ArrayList<HashMap> hmlist = new ArrayList<HashMap>();
+        
+        // 해당 게시물 댓글
+        System.out.println("vol"+vol);
+        List<CommentVO> commentVO = commentService.selectBoardCommentByCode(vol);
+        
+        if(commentVO.size() > 0){
+            for(int i=0; i<commentVO.size(); i++){
+                HashMap<String, Comparable> hm = new HashMap();
+                hm.put("c_code", commentVO.get(i).getReply_seq());
+                hm.put("comment", commentVO.get(i).getBoard_content());
+                hm.put("writer", commentVO.get(i).getUser_name());
+                
+                hmlist.add(hm);
+            }
+            
+        }
+        System.out.println("hmlist"+hmlist);
+        JSONArray json = new JSONArray(hmlist);   
+        
+        return new ResponseEntity<String>(json.toString(), responseHeaders, HttpStatus.CREATED);
+        
+    }
+    
+    @RequestMapping("/delete/{cno}") //댓글 삭제  
+    @ResponseBody
+    private int mCommentServiceDelete(@PathVariable int cno) throws Exception{
+        
+        return commentService.deleteComment(cno);
+    }
+
+
+
 }

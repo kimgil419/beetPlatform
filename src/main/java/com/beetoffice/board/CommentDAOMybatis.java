@@ -22,9 +22,19 @@ public class CommentDAOMybatis {
 		return mybatis.selectList("CommentDAO.getCommentList", vo);
 	}
 
-	public void deleteComment(CommentVO vo) {
+	public int deleteComment(int vo) {
 		System.out.println("===> Mybatis로 deleteComment() 실행");
-		mybatis.delete("CommentDAO.deleteComment", vo);
+		return mybatis.delete("CommentDAO.deleteComment", vo);
+	}
+
+	public void addComment(CommentVO vol) {
+		System.out.println("===> Mybatis로 addComment() 실행");
+		mybatis.insert("CommentDAO.addComment", vol);
+	}
+
+	public List<CommentVO> selectBoardCommentByCode(CommentVO vol) {
+		System.out.println("===> Mybatis로 selectBoardCommentByCode() 실행");
+		return mybatis.selectList("CommentDAO.selectBoardCommentByCode", vol);
 	}
 
 }

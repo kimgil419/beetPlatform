@@ -20,7 +20,7 @@
 	</select>
 	
 	
-    <delete id="deleteComment"  parameterType="comment">
+    <delete id="deleteComment"  parameterType="int">
     
 		DELETE FROM COMMENT WHERE REPLY_SEQ = #{reply_seq}
 	</delete>
@@ -35,7 +35,7 @@
 	
 	<select id="dpgetCommentList" parameterType="dpcomment"
 		resultType="comment">
-		SELECT * FROM COMMENT WHERE SEQ = #{seq}
+		SELECT * FROM COMMENT WHERE SEQ = #{seq} AND SSREPLY IS NULL
 	</select>
 	
 	
@@ -43,4 +43,18 @@
     
 		DELETE FROM COMMENT WHERE REPLY_SEQ = #{reply_seq}
 	</delete>
+	
+	
+	<insert id="addComment"  parameterType="comment">
+		INSERT INTO COMMENT (SEQ,USER_ID,BOARD_CONTENT,WRITE_DATE,USER_NAME) 
+		VALUES (#{seq}, 
+				#{user_id}, #{board_content}, NOW(), 
+				#{user_name})
+	</insert>
+	
+	
+	<select id="selectBoardCommentByCode" parameterType="comment"
+		resultType="comment">
+		SELECT * FROM COMMENT WHERE SEQ = #{seq}
+	</select>
 	</mapper>

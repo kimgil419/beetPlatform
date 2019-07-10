@@ -21,7 +21,17 @@
 	</properties>
 
 	<dependencies>
+<!-- https://mvnrepository.com/artifact/org.json/json -->
 
+<dependency>
+
+    <groupId>org.json</groupId>
+
+    <artifactId>json</artifactId>
+
+    <version>20180130</version>
+
+</dependency>
 		<!-- email -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
