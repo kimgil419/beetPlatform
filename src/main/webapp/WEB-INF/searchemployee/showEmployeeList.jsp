@@ -10,31 +10,28 @@
 <script src="/js/pagination.min.js"></script>
 <link href="css/pagination.css" rel='stylesheet'/>
 <script src="/js/searchpeople.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js" data-auto-replace-svg="nest"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
 <style>
-    ul, li {
-        list-style: none;
+
+    .table {
+        font-size: 14px;
     }
 
-    #wrapper {
-        width: 900px;
-        margin: 20px auto;
+    input:focus {
+        border: solid 1px lightskyblue;
+        border-radius: 1px;
     }
 
-    #pagination-data-container {
-        margin-top: 5px;
+    #pagination-bar{
+        align-content: center;
     }
 
-    #pagination-data-container ul {
-        padding: 0;
-        margin: 0;
-    }
-
-    #pagination-data-container li {
-        margin-bottom: 5px;
-        padding: 5px 10px;
-        background: #eee;
-        color: #666;
-        width: 800px;
+    td {
+        text-align: center;
     }
 </style>
 <script>
@@ -61,7 +58,9 @@
                 searchkeyword();
             }
         })
+
     })
+
 
     function searchkeyword() {
 
@@ -85,27 +84,19 @@
 </script>
 
 <body>
-
-<form>
-    <input type="text" name="search" id="searchbar"/>
-    <input type="button" value="검색" onclick="searchkeyword()"/>
-</form>
-<div>
-    <table>
-        <tr>
-            <th>이름</th>
-            <th>부서</th>
-            <th>직급</th>
-            <th>입사일</th>
-            <th>이메일</th>
-            <th>핸드폰번호</th>
-            <th>내선번호</th>
-        </tr>
-    </table>
+<div id="page-wrapper">
+    <jsp:include page="../menu.jsp"/>
+    <div class="container" style="margin-top:30px;">
+        <div style="float:right;">
+            <input type="text" name="search" id="searchbar" style="border:none; width:130px;" placeholder="search keyword...">
+            <div style="float: right; padding-top:4px;" onclick="searchkeyword()"><span><i class="fas fa-search" style="color: lightgrey;"></i></span></div>
+        </div>
+        <div style="clear:both"></div>
+        </form>
+        <br/>
+        <div id="here"></div>
+        <div id="pagination-bar" style="margin-left:540px;"></div>
+    </div>
 </div>
-<div id="wrapper">
-</div>
-<div id="pagination-data-container"></div>
-<div id="pagination-bar"></div>
 </body>
 </html>

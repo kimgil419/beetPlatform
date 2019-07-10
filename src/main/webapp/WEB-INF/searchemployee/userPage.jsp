@@ -24,12 +24,12 @@
                 success: function (data) {
                     if (data == null) {
                         $("input[name='originalpassword']").css("border", "solid 2px red");
-                        $("#forerror").css({"font-size": "14px", "color": "red"}).text("잘못된 비밀번호입니다.");
+                        $("#forerror").css({"font-size": "12px", "color": "red"}).text("잘못된 비밀번호입니다.");
                         $("input[name='changepassword']").attr('disabled', true);
 
                     } else {
                         $("input[name='originalpassword']").css("border", "solid 2px green");
-                        $("#forerror").text("");
+                        $("#forerror").css({"font-size": "12px", "color": "green"}).text("변경할 비밀번호를 입력하세요.");
                         $("input[name='changepassword']").attr('disabled', false);
                     }
                 }
@@ -62,31 +62,55 @@
     })
 
 </script>
+<style>
+.container {
+    font-size: 16px;
+}
+</style>
 <body>
 <div id="page-wrapper">
     <jsp:include page="../menu.jsp"/>
 
+<div class="container">
+<div style="float:left;">
+    <img class="img-fluid float-left" src="image/${list.user_picture}" alt="프로필 사진">
 
-<div style="width:20%;margin:auto;float:left;">
-    <img src="/image/mr1.jpg">
 </div>
-<div class="form-group" style="width:80%;margin:auto;float:left;">
-    이름: ${list.user_name} <br/>
-    부서: ${list.dept} <br/>
-    직급: ${list.user_position} <br/>
-    이메일: ${list.user_email} <br/>
-    입사일: ${list.firstjoin} <br/>
-    핸드폰번호: ${list.phone}
-    <fieldset>
-        <legend>비밀변호 변경</legend>
-        <form>
-            기존비밀번호: <input type="text" name="originalpassword">
-            <span id="forerror"></span>
+<div style="margin-left:50px;float:left;">
+    <ul class="list-group">
+        이름
+    <li class="list-group-item">${list.user_name}</li>
+        <br/>
+        부서
+    <li class="list-group-item">${list.dept} </li>
+        <br/>
+        직급
+    <li class="list-group-item">${list.user_position}</li>
+        <br/>
+        이메일
+    <li class="list-group-item">${list.user_email} </li>
+        <br/>
+        입사일
+    <li class="list-group-item">${list.firstjoin} </li>
+        <br/>
+        핸드폰번호
+    <li class="list-group-item">${list.phone}</li>
+        <br/>
+        비밀번호 변경
+        <li class="list-group-item">
+        <form style="margin-bottom: 7px;">
+            기존 비밀번호<br/>
+            <input type="text" name="originalpassword" style="margin-top:7px;">
+            <div id="forerror"></div>
             <br/>
-            변경비밀번호: <input type="text" name = "passwordwannachange">
+            변경 비밀번호<br/>
+            <input type="text" name = "passwordwannachange">
             <input type="button" value="변경" name="changepassword" disabled>
         </form>
-    </fieldset>
+        </li>
+
+    </ul>
+</div>
 </div>
 </div>
 </body>

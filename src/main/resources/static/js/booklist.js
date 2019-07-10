@@ -3,15 +3,15 @@ function bookList(allList) {
     var allList = allList;
     var string1 =
         "<tr>" +
-        "<th scope='col'>예약번호</th>" +
-        "<th scope='col'>회의실번호</th>" +
-        "<th scope='col'>시작시간</th>" +
-        "<th scope='col'>종료시간</th>" +
-        "<th scope='col'>부서</th>" +
-        "<th scope='col'>예약일</th>" +
-        "<th scope='col'>이름</th>" +
-        "<th scope='col'>목적</th>" +
-        "<th scope='col'>삭제</th>" +
+        "<th scope='col' style='text-align: center'>예약번호</th>" +
+        "<th scope='col' style='text-align: center'>회의실번호</th>" +
+        "<th scope='col' style='text-align: center'>시작시간</th>" +
+        "<th scope='col' style='text-align: center'>종료시간</th>" +
+        "<th scope='col' style='text-align: center'>부서</th>" +
+        "<th scope='col' style='text-align: center'>예약일</th>" +
+        "<th scope='col' style='text-align: center'>이름</th>" +
+        "<th scope='col' style='text-align: center'>목적</th>" +
+        "<th scope='col' style='text-align: center'>삭제</th>" +
         "</tr>";
     $("#table").append(string1);
 

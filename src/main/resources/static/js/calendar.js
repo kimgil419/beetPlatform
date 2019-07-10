@@ -6,6 +6,7 @@ calendar = new FullCalendar.Calendar(calendarEl, {
   locale: 'ko',
   defaultView: 'timeGridWeek',
   defaultDate: currentDate,
+  weekends: false,
   minTime: "08:00:00",
   maxTime: "20:00:00",
   height: 600,
