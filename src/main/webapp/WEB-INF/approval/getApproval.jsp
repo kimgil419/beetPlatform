@@ -9,8 +9,12 @@
 <head>
 <meta charset="UTF-8">
 <title>글 상세</title>
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <script>
 $(function(){
 	
@@ -41,38 +45,13 @@ function refuse(frm){
 </script>
 
 <style>
-#container {
-   width: 700px;
-   margin: 0 auto;
-}
-h1, h3, p {
-   text-align: center;
-}
-table {
-   border-collapse: collapse;
-}
-table, th, td {
-   border: 1px solid black;
-   margin: 0 auto;
-}
-th {
-   background-color: orange;
-}
-.center {
-   text-align: center;
-}
-.left {
-   text-align: left;
-}
-.orange {
-   background-color: orange;
-}
+
 </style>
 </head>
 <body>
 <div id="page-wrapper">
 <jsp:include page="../menu.jsp"/>
-   <div id="container">
+   <div class="col-md-8">
       <h1>결재</h1>
       <p>
          <a href="logout.do">Log-out</a>
@@ -108,7 +87,7 @@ th {
             </tr>
 
          </table>
-         <table>
+         <table class="table table-hover">
             <tr>
                <th>제목</th>
                <td colspan="2"><input type="text" name="a_title"
@@ -121,7 +100,7 @@ th {
 
             <tr>
                <th>내용</th>
-               <td colspan="3"><textarea rows="10" cols="40" name="a_content">${approval.a_content}</textarea>
+               <td colspan="3"><textarea rows="10" cols="40" name="a_content" style="width: 800px; height: 500px;">${approval.a_content}</textarea>
                </td>
             </tr>
             <tr>
@@ -145,7 +124,7 @@ th {
             <td colspan="2" class="center">
             <c:if
 							test="${ (not empty approval.ok1 or not empty approval.ok2 or not approval.ok3)
-             and (approval.user_id1 == userInfo.user_id or approval.user_id2 == userInfo.user_id or approval.user_id2 == userInfo.user_id  ) }">
+             and (approval.user_id1 == userInfo.user_id or approval.user_id2 == userInfo.user_id or approval.user_id3 == userInfo.user_id  ) }">
 							<input type="submit" value="결재">
 						</c:if> <input type="button" value="반려" onclick="refuse(this.form)">
                   
