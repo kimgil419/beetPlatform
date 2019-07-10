@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <title>프로젝트수정</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" type="text/css" /> 
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 <script>
 	$(document).ready(function(){
 		switch ("${project.project_progress }") {
@@ -26,6 +26,7 @@
 			break;
 		case "폐기":
  			$("#progress_select option:eq(4)").attr("selected", "selected");
+ 			break;
 		default:
 			alert("progress select error");
 			break;
@@ -40,7 +41,7 @@
             		'<input type="text" name="user_id">' +
             		'<input type="text" name="user_name" readonly="readonly"></td>';
             cols += '<td><input type="text" name="source_name">' +
-            		'<input type="hidden" name="source_idx" value="new">' +
+            		'<input type="hidden" name="source_idx" value="-1">' +
             		'</td>'
             cols += '<td><select name="source_progress">' +
             			'<option value="예정">예정</option>'+
@@ -134,9 +135,9 @@
 			    <table id="function_table" class=" table order-list">
 				    <thead>
 				        <tr>
-				            <td>담당자</td>
-				            <td>기능</td>
-				            <td>진행상태</td>
+				            <th>담당자</td>
+				            <th>기능</td>
+				            <th>진행상태</td>
 				        </tr>
 				    </thead>
 				    <tbody>
@@ -201,7 +202,7 @@
 			<div>
 			    <div class="flex_div">
 					<div id="flex_div_children1">
-						<a href="updateProject.do?project_idx=${project.project_idx }"><button type="button">수정</button></a>
+						<button type="submit">수정</button></a>
 						<a href="deleteProject.do?project_idx=${project.project_idx }"><button type="button">삭제</button></a>
 					</div>
 					<div id="flex_div_children2">

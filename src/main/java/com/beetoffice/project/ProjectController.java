@@ -44,9 +44,10 @@ public class ProjectController {
 	}
 	
 	@RequestMapping("getProject.do")
-	public String getProject(ProjectVO vo, Model model) {
+	public String getProject(ProjectVO vo, PagingProcess pages, Model model) {
 		System.out.println(">> Controller: getProject()");
 		
+		model.addAttribute("pages", pages);
 		model.addAttribute("project", projectService.getProject(vo));
 		model.addAttribute("sourceList", projectService.getSourceList(vo));
 		
@@ -59,7 +60,8 @@ public class ProjectController {
 		
 		projectService.deleteProject(vo);
 		
-		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
+//		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
+		return "redirect:getProjectList.do?currentPage=1";
 	}
 	
 	@RequestMapping("insertProject.do")
@@ -103,7 +105,6 @@ public class ProjectController {
 	@RequestMapping("updateProject.do")
 	public String updateProject(ProjectVO vo, SourceVO svo, Model model, @RequestParam String[] source_idx, @RequestParam String[] user_id,
 			@RequestParam String[] source_name, @RequestParam String[] source_progress) {
-		System.out.println(">> Controller: updateProject()");
 		
 		projectService.updateProject(vo);
 		
@@ -136,6 +137,7 @@ public class ProjectController {
 				svo.setUser_id(user_id[i]);
 				svo.setSource_name(source_name[i]);
 				svo.setSource_progress(source_progress[i]);
+				System.out.println(">>>>>>>>>>>>>>>>>>svo: " + svo);
 				projectService.updateSource(svo);
 			}
 		}
@@ -156,13 +158,13 @@ public class ProjectController {
 		
 		vo = projectService.getSource(vo);
 		model.addAttribute("source", vo);
-		System.out.println(">>>> sourceVO: " + vo);
 		return "project/modifySource";
 	}
 	
 	@RequestMapping("updateSource.do")
 	public String updateSource(SourceVO vo, Model model) {
 		System.out.println(">> Controller: updateSource");
+		System.out.println(">>>>>>>>>>>: " + vo);
 		
 		projectService.updateSource(vo);
 		
@@ -179,24 +181,15 @@ public class ProjectController {
 		
 		return "redirect:getProject.do?project_idx=" + svo.getProject_idx();
 	}
-	@RequestMapping("/code")
-	public String insertCodeExample() {
+	
+	@RequestMapping("modal")
+	public String modal() {
 		
-		return "project/insertCodeExample";
-	}
-	@RequestMapping("getCode.do")
-	public String getCode(Model model, @RequestParam String code) {
-		System.out.println(">>>>>>>>>>>>>>>>>>> getCode.do");
-		model.addAttribute("code", code);
-		System.out.println(">>>>>>>>>>>>>>>>>>> getCode.do");
-		
-		return "project/getCodeExample";
+		return "project/modal";
 	}
 	
-	@RequestMapping("/code2")
-	public String insertCode2() {
-		return "project/insertCode2";
-	}
+
+
 	
 }
 

@@ -5,9 +5,9 @@
 <meta charset="UTF-8">
 <title>프로젝트작성</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" type="text/css" /> 
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 <script>
 	function search() {
 		$('div.modal').modal({
@@ -19,13 +19,13 @@
 		$("#addrow").on("click", function () {
 			var newRow = $("<tr>");
 	        var cols = "";
-	        cols += '<td><input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">' +
+	        cols += '<td class="col-sm-"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalCart">검색</button>' +
             		'<input type="text" name="user_id">' +
             		'<input type="text" name="user_name" readonly="readonly"></td>';
-            cols += '<td><input type="text" name="source_name">' +
-            		'<input type="hidden" name="source_idx" value="new">' +
+            cols += '<td class="col-sm-"><input type="text" name="source_name">' +
+            		'<input type="hidden" name="source_idx" value="-1">' +
             		'</td>'
-            cols += '<td><select name="source_progress">' +
+            cols += '<td class="col-sm-"><select name="source_progress">' +
             			'<option value="예정">예정</option>'+
             			'<option value="진행">진행</option>' +
             			'<option value="완료">완료</option>' +
@@ -130,28 +130,6 @@
 				        </tr>
 				    </thead>
 				    <tbody>
-				        <tr>
-				            <td class="col-sm-">
-				                <input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">
-				                <input type="text" class="form_control" name="user_id">
-				                <input type="text" class="form_control" name="user_name" readonly="readonly">
-				            </td>
-				            <td class="col-sm-">
-				                <input type="text" name="source_name">
-				            </td>
-				            <td class="col-sm-">
-				            	<select name="source_progress">
-				            		<option value="예정">예정</option>
-				            		<option value="진행">진행</option>
-				            		<option value="완료">완료</option>
-				            		<option valeu="보류">보류</option>
-				            		<option value="폐기">폐기</option>
-				            	</select>
-				            </td>
-				            <td class="col-sm-"><a class="deleteRow"></a>
-				
-				            </td>
-				        </tr>
 				    </tbody>
 				    <tfoot>
 				        <tr>
@@ -174,6 +152,7 @@
 					<a href="getCommute.do"><input type="button" value="메인"></a>
 				</div>
 			</div>
+
 		</form>
 	</div>
 </body>
