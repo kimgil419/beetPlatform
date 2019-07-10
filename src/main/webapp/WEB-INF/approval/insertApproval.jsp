@@ -6,36 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>글등록</title>
-<style>
-#container {
-	width: 700px;
-	margin: 0 auto;
-}
 
-h1, h3, p {
-	text-align: center;
-}
-
-table {
-	border-collapse: collapse;
-}
-
-table, th, td {
-	border: 1px solid black;
-	margin: 0 auto;
-}
-
-th {
-	background-color: orange;
-}
-
-.center {
-	text-align: center;
-}
-
-.border-none, .border-none td {
-	border: none;
-}
 </style>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
