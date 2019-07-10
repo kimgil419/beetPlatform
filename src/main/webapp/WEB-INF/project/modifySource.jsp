@@ -5,20 +5,26 @@
 <meta charset="UTF-8">
 <title>코드수정</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.0/theme/eclipse.css" integrity="sha256-WhzJFLQmMeYNz3p+/UEqGJczEHrgZQiYawzX76gjnuo=" crossorigin="anonymous" />
 <script src="http://codemirror.net/lib/codemirror.js"></script>
-<script src="http://codemirror.net/addon/edit/matchbrackets.js"></script>
-<script src="http://codemirror.net/addon/edit/continuecomment.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.0/addon/edit/matchbrackets.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.0/addon/comment/continuecomment.js"></script>
 <script src="http://codemirror.net/mode/javascript/javascript.js"></script>
 <script>
 	window.onload = function () {
 	    var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
 	        mode: "javascript",
-	        theme: "default",
-	        lineNumbers: true
+	        theme: "eclipse",
+	        lineNumbers: true,
+	        lineWrapping: true,
+	        autofocus: true
 	    });
+	    editableCodeMirror.setSize(1000, 600);
 	};
 	$(document).ready(function() {
 		switch ("${source.source_progress }") {
@@ -76,14 +82,12 @@
 				</table>
 			</div>
 			<div>
-				<textarea rows="4" cols="50" name="source_code" id="codesnippet_editable"></textarea>
+				<textarea rows="4" cols="50" name="source_code" id="codesnippet_editable">${source.source_code }</textarea>
 			</div>
 			<div class="container">
 				<input type="submit" value="수정하기">
 			</div>
 		</form>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	</div>
 </body>
 </html>

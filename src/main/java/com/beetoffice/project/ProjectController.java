@@ -4,14 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.beetoffice.project.vo.ProjectVO;
@@ -108,7 +105,6 @@ public class ProjectController {
 	@RequestMapping("updateProject.do")
 	public String updateProject(ProjectVO vo, SourceVO svo, Model model, @RequestParam String[] source_idx, @RequestParam String[] user_id,
 			@RequestParam String[] source_name, @RequestParam String[] source_progress) {
-		System.out.println(">> Controller: updateProject()");
 		
 		projectService.updateProject(vo);
 		
@@ -141,6 +137,7 @@ public class ProjectController {
 				svo.setUser_id(user_id[i]);
 				svo.setSource_name(source_name[i]);
 				svo.setSource_progress(source_progress[i]);
+				System.out.println(">>>>>>>>>>>>>>>>>>svo: " + svo);
 				projectService.updateSource(svo);
 			}
 		}
@@ -161,13 +158,13 @@ public class ProjectController {
 		
 		vo = projectService.getSource(vo);
 		model.addAttribute("source", vo);
-		System.out.println(">>>> sourceVO: " + vo);
 		return "project/modifySource";
 	}
 	
 	@RequestMapping("updateSource.do")
 	public String updateSource(SourceVO vo, Model model) {
 		System.out.println(">> Controller: updateSource");
+		System.out.println(">>>>>>>>>>>: " + vo);
 		
 		projectService.updateSource(vo);
 		
