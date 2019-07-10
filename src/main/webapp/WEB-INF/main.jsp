@@ -57,8 +57,11 @@
 }
 
 #board2 {
+width: 600px;
 height: 200px;
 overflow: hidden;
+float:left;
+display: inline-block;
 }
 
 	
@@ -67,10 +70,12 @@ overflow: hidden;
 <body>
 
 	<div id="page-wrapper" >
+	<jsp:include page="menu.jsp" />
+	<div class="row">
 	
-		<jsp:include page="menu.jsp" />
 		
-		<div id="board1" class="col-md-4" >
+		
+		<div id="board1" class="col-md-4" style="float: left;">
 		<div id="board2" >
 			<table class="table table-hover">
 
@@ -136,7 +141,7 @@ overflow: hidden;
 		</div>
 		
 		
-		<div id="board1"  class="col-md-4">
+		<div id="board1"  class="col-md-4" style="float: left;">
 		<form name="frm" method="post" action="getBoardList.do?curPage=1&li=original">
 		
 		<table class="table table-hover" > 
@@ -207,7 +212,7 @@ overflow: hidden;
 	
 	<div id="root" class="col-md-8"></div>
 	<script src="/js/youtube-bundle.js"></script>
-	
+	</div>
 	</div>
 </body>
 </html>

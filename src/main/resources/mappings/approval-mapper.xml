@@ -13,8 +13,13 @@
 	<select id="getApprovalList" parameterType="approval" resultType="approval">
 	 SELECT * FROM APPROVAL A, USER_DB U WHERE A.USER_ID = U.USER_ID
 	</select>
-	
-	
+	<select id="getMyApprovalList" parameterType="approval" resultType="approval">
+	 SELECT * FROM APPROVAL A, USER_DB U WHERE (A.USER_ID = U.USER_ID) AND A.USER_ID = #{user_id}
+	</select>
+	<select id="getDoneApprovalList" parameterType="approval" resultType="approval">
+	 SELECT * FROM APPROVAL A, USER_DB U WHERE (A.USER_ID = U.USER_ID) 
+	 AND (A.USER_ID1 = #{user_id} AND OK1 = NOT NULL) OR (USER_ID2 = #{user_id} AND OK2 = NOT NULL) OR (USER_ID3 = #{user_id} AND OK3 = NOT NULL)
+	</select>
 	<insert id="insertApproval" parameterType="approval">
 	INSERT INTO APPROVAL VALUES (NULL, #{user_id}, #{a_title},  #{a_content}, #{user_id1}, #{user_id2},  #{user_id3}, #{option},
 	NULL, NULL, NULL, NOW(), #{urgent}, NULL)

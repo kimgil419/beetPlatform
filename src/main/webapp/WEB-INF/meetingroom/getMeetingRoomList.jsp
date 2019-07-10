@@ -166,13 +166,13 @@
         text-align: center;
     }
 
-    .roomimg {
-        margin: 5px;
-    }
-
     .imgcontainer {
         position: relative;
-        width: 50%;
+    }
+
+    .d-block {
+        width:250px;
+        height: 200px;
     }
 
     .overlay {
@@ -201,37 +201,37 @@
         transform: translate(-50%, -50%);
         text-align: center;
     }
+
 </style>
 <body>
 <div id="page-wrapper">
     <jsp:include page="../menu.jsp"/>
-<div id="leftcontainer" style="float:left; margin:50px">
-    <label>예약하실 회의실을 선택해주세요.</label>
+<div id="leftcontainer" style="float:left;">
+    <i class="far fa-calendar-alt"></i> 회의실 예약
     <br/>
-    <div>
-        <div class="imgcontainer" style="float: left;">
-            <img src="/image/mr1.jpg" id="i1" class="roomimg"></a>
+    <div style="margin-left:15px;">
+        <div class="imgcontainer" style="float: left;margin: 5px;">
+            <img src="/image/mr1.jpg" id="i1" class="mx-auto d-block"></a>
             <div class="overlay">
                 <div class="text">Room1</div>
             </div>
         </div>
-
-        <div class="imgcontainer" style="display:inline-block;">
-            <img src="/image/mr2.jpg" id="i2" class="roomimg"></a>
+        <div class="imgcontainer" style="display:inline-block;margin: 5px;">
+            <img src="/image/mr2.jpg" id="i2" class="mx-auto d-block" style=""></a>
             <div class="overlay">
                 <div class="text">Room2</div>
             </div>
         </div>
         <div style="clear:both;"></div>
-        <div class="imgcontainer" style="float: left;">
-            <img src="/image/mr3.jpg" id="i3" class="roomimg"></a>
+        <div class="imgcontainer" style="float: left;margin: 5px;">
+            <img src="/image/mr3.jpg" id="i3" class="mx-auto d-block"></a>
             <div class="overlay">
                 <div class="text">Room3</div>
             </div>
         </div>
 
-        <div class="imgcontainer" style="display:inline-block;">
-            <img src="/image/mr4.jpg" id="i4" class="roomimg"></a>
+        <div class="imgcontainer" style="display:inline-block;margin: 5px;">
+            <img src="/image/mr4.jpg" id="i4" class="mx-auto d-block"></a>
             <div class="overlay">
                 <div class="text">Room4</div>
             </div>
@@ -249,7 +249,7 @@
                 <option value="room4">Room D</option>
             </select>
             </div>
-            <div style="margin-left:40px;float:left;">
+            <div style="margin-left:40px;float:left;width:100px;">
                 <label>날짜 : </label><input type="text" id="datepicker" class="form-control" name="book_date"/><br/>
                 <label>시작시간 : </label><input type="text" id="timePicker1" class="form-control" name="start"/><br/>
                 <label>종료시간 :
@@ -266,11 +266,11 @@
 </div>
 
 <div style="float:left">
-<div id="calendar" style="margin:30px;width:700px;"></div>
+<div id="calendar" style="margin:30px;width:630px;"></div>
 
 <div style="clear:both;"></div>
 <div id="booklist"></div>
-<table id="table" class="table table-hover" style="margin-left:20px;width:720px"/>
+<table id="table" class="table table-hover" style="margin-left:20px;width:650px"/>
 </div>
 </div>
 </body>
