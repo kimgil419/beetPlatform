@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.beetoffice.project.vo.ProjectVO;
@@ -181,24 +184,15 @@ public class ProjectController {
 		
 		return "redirect:getProject.do?project_idx=" + svo.getProject_idx();
 	}
-	@RequestMapping("/code")
-	public String insertCodeExample() {
+	
+	@RequestMapping("modal")
+	public String modal() {
 		
-		return "project/insertCodeExample";
-	}
-	@RequestMapping("getCode.do")
-	public String getCode(Model model, @RequestParam String code) {
-		System.out.println(">>>>>>>>>>>>>>>>>>> getCode.do");
-		model.addAttribute("code", code);
-		System.out.println(">>>>>>>>>>>>>>>>>>> getCode.do");
-		
-		return "project/getCodeExample";
+		return "project/modal";
 	}
 	
-	@RequestMapping("/code2")
-	public String insertCode2() {
-		return "project/insertCode2";
-	}
+
+
 	
 }
 

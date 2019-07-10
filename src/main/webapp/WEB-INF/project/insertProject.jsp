@@ -154,75 +154,36 @@
 			</div>
 		</form>
 	</div>
+	<hr>
+	<hr>
 
 
-
-
-<div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<button class="btn btn-default" data-target="#layerpop" data-toggle="modal">모달출력버튼</button><br/>
+<div class="modal fade" id="layerpop" >
+  <div class="modal-dialog">
     <div class="modal-content">
-      <!--Header-->
+      <!-- header -->
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Your cart</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
+        <!-- 닫기(x) 버튼 -->
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <!-- header title -->
+        <h4 class="modal-title">Header</h4>
       </div>
-      <!--Body-->
+      <!-- body -->
       <div class="modal-body">
-
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Product name</th>
-              <th>Price</th>
-              <th>Remove</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Product 1</td>
-              <td>100$</td>
-              <td><a><i class="fas fa-times"></i></a></td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Product 2</td>
-              <td>100$</td>
-              <td><a><i class="fas fa-times"></i></a></td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Product 3</td>
-              <td>100$</td>
-              <td><a><i class="fas fa-times"></i></a></td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>Product 4</td>
-              <td>100$</td>
-              <td><a><i class="fas fa-times"></i></a></td>
-            </tr>
-            <tr class="total">
-              <th scope="row">5</th>
-              <td>Total</td>
-              <td>400$</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-
+            Body
       </div>
-      <!--Footer-->
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary">Checkout</button>
-      </div> -->
+      <!-- Footer -->
+      <div class="modal-footer">
+        Footer
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
     </div>
   </div>
 </div>
+
+
+
+
 </body>
 </html>
