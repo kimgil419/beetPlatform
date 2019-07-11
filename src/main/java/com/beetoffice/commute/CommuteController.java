@@ -96,8 +96,7 @@ public class CommuteController {
 		if ( getCommute == null ) {
 		String ccc = "x";
 		model.addAttribute("ccc", ccc);
-		}
-		if ( getCommute != null) {
+		} else if ( getCommute != null) {
 			model.addAttribute("getCommute", getCommute);
 		}
 		

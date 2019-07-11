@@ -7,9 +7,6 @@
 <meta charset="UTF-8">
 <title>글등록</title>
 
-</style>
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <script src="/js/jquery-3.4.1.min.js"></script>
 <script src="/js/multiselect.min.js"></script>
 <script>

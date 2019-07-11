@@ -9,11 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <title>글 상세</title>
-<%--<link rel="stylesheet"--%>
-<%--	href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">--%>
 <script src="//code.jquery.com/jquery.min.js"></script>
-<%--<script--%>
-<%--	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>--%>
+
+
 
 <script>
 $(function(){
