@@ -25,9 +25,7 @@
 	border: 1px solid #ddd;
 	border-radius: 4px;
 }
-.list-group {
- padding: 10px;
-}
+
 
 .list-group-item {
 	cursor: pointer;
@@ -48,7 +46,7 @@ ul {
 }
 #root {
 	position: absolute;
-	
+	right: 0;
 	
 }
 </style>
@@ -64,7 +62,7 @@ ul {
 <div id="row" >
 
  <!-- 전자결재 -->
-				<div id="board1" class="col-md-6" >
+				<div class="col-md-6" >
 						<table class="table table-hover">
 						<tr> <th colspan="7">직렬결재서류</th></tr>
 							<tr><th width="100">제목</th>
@@ -121,7 +119,7 @@ ul {
 
 
 <!-- 게시판 -->
-				<div id="board1" class="col-md-6" >
+				<div class="col-md-6" >
 					<form name="frm" method="post"
 						action="getBoardList.do?curPage=1&li=original">
 
