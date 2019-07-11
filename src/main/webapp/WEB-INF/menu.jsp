@@ -60,11 +60,12 @@
             </div>
 
             <!-- commute -->
+            <form action="commute.do" method="post">
+            
             <div style="float: right; margin-top: 15px;">
                 <ul class="list-group" style="border:none;float:right;">
-                    <li class="list-group-item" style="border:none;"><input type="text" name="user_id"
-                                                                            value=" ${userInfo.user_id } "
-                                                                            readonly="readonly"
+                    <li class="list-group-item" style="border:none;">
+                    <input type="text" name="user_id" value=" ${userInfo.user_id } " readonly="readonly"
                                                                             style="width:80px;">
                         <input
                                 type="text" name="user_name" value=" ${userInfo.user_name } 님 "
@@ -81,6 +82,7 @@
                     </li>
                 </ul>
             </div>
+            </form>
             <div style="clear: both;"></div>
         </div>
     </header>
@@ -106,4 +108,25 @@
 
 </div>
 </body>
+<script>
+function in_commute(frm) {
+	var result = confirm('출근 하시겠습니까?');
+
+	if (result) {
+		frm.action = "insertCommute.do"
+		frm.submit();
+	} else { //no
+	}
+};
+
+function out_commute(frm) {
+	var result = confirm('퇴근 하시겠습니까?');
+
+	if (result) {
+		frm.action = "updateCommute.do"
+		frm.submit();
+	} else { //no
+	}
+};
+</script>
 </html>
