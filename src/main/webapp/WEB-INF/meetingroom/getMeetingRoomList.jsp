@@ -128,7 +128,7 @@
                     allList = JSON.parse(data.allList);
                     clicked("room1");
 
-                    $("#table").empty();
+                    $("#booktable").empty();
                     if (userDept === '인사') {
                         bookList(allList);
                     }
@@ -268,8 +268,8 @@
         <div style="float:left;">
             <div>
                 <div id="calendar" style="margin:30px;width:630px;"></div>
-                <div id="booklist"></div>
-                <table id="booktable" class="table table-hover" style="margin-left:20px;width:650px"/>
+                <div id="booklist"> <table id="booktable" class="table table-hover" style="margin-left:20px;width:650px"/></div>
+
             </div>
         </div>
     </div>
