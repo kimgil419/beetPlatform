@@ -37,6 +37,14 @@
 
     function addList() {
 
+        const useDate = new Date();
+        const nowTime = useDate.getHours() + ":" + useDate.getMinutes();
+
+        if($("#timePicker1").val() < nowTime){
+            alert("시작시간이 현재보다 이른 시간입니다.");
+            return false;
+        }
+
         for (var i = 0; i < allList.length; i++) {
             if ($("#datepicker").val() == allList[i].book_date) {
                 if (!($("#timePicker2").val() <= allList[i].start || $("#timePicker1").val() >= allList[i].end)) {
