@@ -5,9 +5,8 @@
     <title>Mypage</title>
 </head>
 <script src="js/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+
+
 <script>
 
     $(function () {
@@ -71,7 +70,7 @@
 <div id="page-wrapper">
     <jsp:include page="../menu.jsp"/>
 
-<div class="container">
+<div class="container col-md-4" style="margin-top:30px";>
 <div style="float:left;">
     <img class="img-fluid float-left" src="image/${list.user_picture}" alt="프로필 사진">
 

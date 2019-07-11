@@ -12,6 +12,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <script>
+	
         function in_commute(frm) {
             var result = confirm('출근 하시겠습니까?');
 
@@ -32,9 +33,7 @@
             }
         };
         
-        
 
-        }
     </script>
 <style>
 .video-item img {
@@ -64,6 +63,9 @@ float:left;
 display: inline-block;
 }
 
+ul {
+	float: right;
+}
 	
 	.notie { background-color: #808080; }
 </style>
@@ -71,74 +73,75 @@ display: inline-block;
 
 	<div id="page-wrapper" >
 	<jsp:include page="menu.jsp" />
+		<div class="container" style="margin-top:30px;">
 	<div class="row">
 	
 		
-		
-		<div id="board1" class="col-md-4" style="float: left;">
-		<div id="board2" >
-			<table class="table table-hover">
+<%--		--%>
+<%--		<div id="board1" class="col-md-4" style="float: left;">--%>
+<%--		<div id="board2" >--%>
+<%--			<table class="table table-hover">--%>
 
-				<tr>
+<%--				<tr>--%>
 
-					<th colspan="7">직렬결재서류</th>
-				</tr>
-				<tr>
-					<th width="50">번호</th>
-					<th width="100">제목</th>
-					<th width="80">작성자</th>
-					<th width="90">등록일</th>
-				</tr>
-				<c:forEach var="approval" items="${approvalList}" >
+<%--					<th colspan="7">직렬결재서류</th>--%>
+<%--				</tr>--%>
+<%--				<tr>--%>
+<%--					<th width="50">번호</th>--%>
+<%--					<th width="100">제목</th>--%>
+<%--					<th width="80">작성자</th>--%>
+<%--					<th width="90">등록일</th>--%>
+<%--				</tr>--%>
+<%--				<c:forEach var="approval" items="${approvalList}" >--%>
 
-					<c:if
-						test="${(approval.option == 0 ) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
-		or (approval.user_id2 == userInfo.user_id and not empty approval.ok1 and empty approval.ok2) 
-		or (approval.user_id3 == userInfo.user_id and not empty approval.ok1 and not empty approval.ok2 and empty approval.ok3)}">
+<%--					<c:if--%>
+<%--						test="${(approval.option == 0 ) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) --%>
+<%--		or (approval.user_id2 == userInfo.user_id and not empty approval.ok1 and empty approval.ok2) --%>
+<%--		or (approval.user_id3 == userInfo.user_id and not empty approval.ok1 and not empty approval.ok2 and empty approval.ok3)}">--%>
 
-						<tr>
-							<td class="center">${approval.a_num }</td>
-							<td><a href="getApproval.do?a_num=${approval.a_num }">
-									${approval.a_title } </a></td>
-							<td>${approval.user_name}</td>
-							<td>${approval.regdate}</td>
-						</tr>
-					</c:if>
-				</c:forEach>
-			</table>
-			</div>
-			<div id="board2" >
-			
-			<table class="table table-hover">
-				<tr>
+<%--						<tr>--%>
+<%--							<td class="center">${approval.a_num }</td>--%>
+<%--							<td><a href="getApproval.do?a_num=${approval.a_num }">--%>
+<%--									${approval.a_title } </a></td>--%>
+<%--							<td>${approval.user_name}</td>--%>
+<%--							<td>${approval.regdate}</td>--%>
+<%--						</tr>--%>
+<%--					</c:if>--%>
+<%--				</c:forEach>--%>
+<%--			</table>--%>
+<%--			</div>--%>
+<%--			<div id="board2" >--%>
+<%--			--%>
+<%--			<table class="table table-hover">--%>
+<%--				<tr>--%>
 
-					<th colspan="7">병렬결재서류</th>
-				</tr>
-				<tr>
-					<th width="50">번호</th>
-					<th width="100">제목</th>
-					<th width="80">작성자</th>
-					<th width="90">등록일</th>
-				</tr>
-				<c:forEach var="approval" items="${approvalList}" >
+<%--					<th colspan="7">병렬결재서류</th>--%>
+<%--				</tr>--%>
+<%--				<tr>--%>
+<%--					<th width="50">번호</th>--%>
+<%--					<th width="100">제목</th>--%>
+<%--					<th width="80">작성자</th>--%>
+<%--					<th width="90">등록일</th>--%>
+<%--				</tr>--%>
+<%--				<c:forEach var="approval" items="${approvalList}" >--%>
 
-					<c:if
-						test="${ (approval.option == 1 ) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
-		or (approval.option == 1 ) and  (approval.user_id2 == userInfo.user_id and empty approval.ok2) 
-		or (approval.option == 1 ) and  (approval.user_id3 == userInfo.user_id and empty approval.ok3)}">
-						<tr>
-							<td class="center">${approval.a_num }</td>
-							<td><a href="getApproval.do?a_num=${approval.a_num }">
-									${approval.a_title } </a></td>
-							<td>${approval.user_name}</td>
-							<td>${approval.regdate}</td>
-						</tr>
-					</c:if>
-				</c:forEach>
-			</table>
-			</div>
+<%--					<c:if--%>
+<%--						test="${ (approval.option == 1 ) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) --%>
+<%--		or (approval.option == 1 ) and  (approval.user_id2 == userInfo.user_id and empty approval.ok2) --%>
+<%--		or (approval.option == 1 ) and  (approval.user_id3 == userInfo.user_id and empty approval.ok3)}">--%>
+<%--						<tr>--%>
+<%--							<td class="center">${approval.a_num }</td>--%>
+<%--							<td><a href="getApproval.do?a_num=${approval.a_num }">--%>
+<%--									${approval.a_title } </a></td>--%>
+<%--							<td>${approval.user_name}</td>--%>
+<%--							<td>${approval.regdate}</td>--%>
+<%--						</tr>--%>
+<%--					</c:if>--%>
+<%--				</c:forEach>--%>
+<%--			</table>--%>
+<%--			</div>--%>
 
-		</div>
+<%--		</div>--%>
 		
 		
 		<div id="board1"  class="col-md-4" style="float: left;">
@@ -212,6 +215,7 @@ display: inline-block;
 	
 	<div id="root" class="col-md-8"></div>
 	<script src="/js/youtube-bundle.js"></script>
+	</div>
 	</div>
 	</div>
 </body>

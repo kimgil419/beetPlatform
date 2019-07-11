@@ -5,5 +5,7 @@ import java.util.List;
 public interface CommentService {
     void insertComment(CommentVO vo);
     List<CommentVO> getCommentList(CommentVO vo);
-    void deleteComment(CommentVO vo);
+    int deleteComment(int cno);
+	void addComment(CommentVO vol);
+	List<CommentVO> selectBoardCommentByCode(CommentVO vol);
 }

@@ -133,7 +133,15 @@
 	
 	<update id="updateSource" parameterType="source">
 		UPDATE PROJECT_SOURCE
-		   SET SOURCE_NAME=#{source_name}, SOURCE_CODE=#{source_code}, SOURCE_PROGRESS=#{source_progress}, USER_ID=#{user_id}
+		<choose>
+		<when test="source_code == null">
+		   SET
+		</when>
+		<otherwise>
+		   SET SOURCE_CODE=#{source_code},
+		</otherwise>
+		</choose>
+			   SOURCE_NAME=#{source_name}, SOURCE_PROGRESS=#{source_progress}, USER_ID=#{user_id}
 		 WHERE SOURCE_IDX=#{source_idx}
 	</update>
 	

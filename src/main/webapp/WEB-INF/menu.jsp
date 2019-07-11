@@ -5,108 +5,70 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <script
-            src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
     <style>
-        /* 사이드바 래퍼 스타일 */
-        body {
-            width: 80%;
-            margin: auto;
-            margin-top: 30px;
+        .blog-header {
+            line-height: 1;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
         }
 
-        #page-wrapper {
-            padding-left: 250px;
+        .nav-scroller .nav {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: 4px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+        .nav-scroller .nav-link {
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            font-size: .875rem;
         }
 
-        #sidebar-wrapper {
-            position: fixed;
-            width: 250px;
-            height: 100%;
-            margin-left: -250px;
-            overflow-x: hidden;
-            overflow-y: auto;
+        nav>a {
+            margin-right: 15px;
+            font-size: 16px;
         }
 
-        #page-content-wrapper {
-            width: 100%;
-            padding: 20px;
-        }
 
-        /* 사이드바 스타일 */
-        .sidebar-nav {
-            /*width: 250px;*/
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .sidebar-nav li {
-            text-indent: 1.5em;
-            line-height: 2.8em;
-        }
-
-        .sidebar-nav li a {
-            display: block;
-            text-decoration: none;
-            color: #999;
-        }
-
-        .sidebar-nav li a:hover {
-            color: #007bff;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .sidebar-nav > .sidebar-brand {
-            font-size: 1.3em;
-            line-height: 3em;
-        }
     </style>
 </head>
 <body>
 
+<div class="container" style="max-width: 1240px;">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <!-- Logo -->
+            <div class="logo" style="float:left;">
+                <a href="getCommute.do"><img src="image/logo.png" height="81px" alt=""></a>
+            </div>
 
-<!-- 사이드바 -->
-<div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-        <li class="sidebar-brand"><a href="getCommute.do"><img
-                src="image/K-074.png" width="100"></a></li>
-        <li><a href="getApprovalList.do">전자결재(김길중)</a></li>
-        <li><a href="getCommuteList.do">출결관리(김길중)</a></li>
-        <li><a href="getProjectList.do?currentPage=1">프로젝트 관리(김동현)</a></li>
-        <li><a href="getBoardList.do?curPage=1&li=original">사내게시판 (한재정) </a></li>
-        <li><a href="dpgetBoardList.do?curPage=1&li=original">부서게시판 (한재정) </a></li>
-
-        <li><a
-        ${((userInfo.dept=='인사' && userInfo.user_position=='부장')
-                || (userInfo.dept=='인사' && userInfo.user_position=='대표이사')
-                || (userInfo.dept=='인사' && userInfo.user_position=='대리')
-                || (userInfo.dept=='인사' && userInfo.user_position=='과장')
-                || (userInfo.dept=='인사' && userInfo.user_position=='차장')) ? '' : 'hidden'}
-                href="finsertUser.do"> 사원등록 (한재정) </a></li>
-
-        <li><a href="getMeetingRoomList.do">회의실예약(김범현)</a></li>
-        <li><a href="showEmployee.do">사원검색(김범현)</a></li>
-        <li><a href="showEachEmployee.do">마이페이지(김범현)</a></li>
-    </ul>
-</div>
-
-<nav class="navbar navbar-default navbar-left" style="width:900px; border:none;">
-    <div class="container">
-        <div class="navbar-header" style="">
-            <a src="#" href="getCommute.do"><img src="image/logo.png" style="width:300px;"></a>
-        </div>
-        <div style="clear:both;">
-            <form>
-                <ul class="nav navbar-nav navbar-left" style="">
-                    <li><input type="text" name="user_id"
-                               value=" ${userInfo.user_id } " readonly="readonly" style="width:80px;"> <input
-                            type="text" name="user_name" value=" ${userInfo.user_name } 님 "
-                            readonly="readonly" style="width:80px;">
+            <!-- commute -->
+            <div style="float: right; margin-top: 15px;">
+                <ul class="list-group" style="border:none;float:right;">
+                    <li class="list-group-item" style="border:none;"><input type="text" name="user_id"
+                                                                            value=" ${userInfo.user_id } "
+                                                                            readonly="readonly"
+                                                                            style="width:80px;">
+                        <input
+                                type="text" name="user_name" value=" ${userInfo.user_name } 님 "
+                                readonly="readonly" style="width:80px;">
 
                         <c:if test="${ccc == 'x' }">
                             <input type="button" value="출근" onclick="in_commute(this.form)">
@@ -118,9 +80,30 @@
                         </c:if>
                     </li>
                 </ul>
-            </form>
+            </div>
+            <div style="clear: both;"></div>
         </div>
+    </header>
+    <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between" style="float: right;">
+            <a class="p-2 text-muted" href="getApprovalList.do">전자결재</a>
+            <a class="p-2 text-muted" href="getCommuteList.do">출결관리</a>
+            <a class="p-2 text-muted" href="getProjectList.do?currentPage=1">프로젝트 관리</a>
+            <a class="p-2 text-muted" href="getBoardList.do?curPage=1&li=original">사내게시판</a>
+            <a class="p-2 text-muted" href="dpgetBoardList.do?curPage=1&li=original">부서게시판</a>
+            <a class="p-2 text-muted"
+            ${((userInfo.dept=='인사' && userInfo.user_position=='부장')
+                    || (userInfo.dept=='인사' && userInfo.user_position=='대표이사')
+                    || (userInfo.dept=='인사' && userInfo.user_position=='대리')
+                    || (userInfo.dept=='인사' && userInfo.user_position=='과장')
+                    || (userInfo.dept=='인사' && userInfo.user_position=='차장')) ? '' : 'hidden'}
+               href="finsertUser.do"> 사원등록</a></li>
+            <a class="p-2 text-muted" href="getMeetingRoomList.do">회의실 예약</a>
+            <a class="p-2 text-muted" href="showEmployee.do">사원검색</a>
+            <a class="p-2 text-muted" href="showEachEmployee.do">마이페이지</a>
+        </nav>
     </div>
-</nav>
+
+</div>
 </body>
 </html>

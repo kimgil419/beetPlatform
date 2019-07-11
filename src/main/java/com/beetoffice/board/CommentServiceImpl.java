@@ -26,10 +26,25 @@ public class CommentServiceImpl implements CommentService {
 		return commentDAO.getCommentList(vo);
 	}
 
+
+
 	@Override
-	public void deleteComment(CommentVO vo) {
-		commentDAO.deleteComment(vo);
+	public void addComment(CommentVO vol) {
+		commentDAO.addComment(vol);
 		
 	}
+
+	@Override
+	public List<CommentVO> selectBoardCommentByCode(CommentVO vol) {
+		return commentDAO.selectBoardCommentByCode(vol);
+	}
+
+	@Override
+	public int deleteComment(int cno) {
+		// TODO Auto-generated method stub
+		return commentDAO.deleteComment(cno);
+	}
+
+	
 
 }

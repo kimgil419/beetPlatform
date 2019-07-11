@@ -326,14 +326,17 @@ alert(result + '나 비밀번호가 틀리셨습니다 인사과에 문의해주
 
     <!-- Icon -->
     <div class="fadeIn first">
+     <img src="image/K-074.png" id="icon" alt="User Icon" style="width: 150px;" />
      <p>Login</p>
     </div>
 
     <!-- Login Form -->
     <form name="frm" method="post">
+    
       <input type="text" id="login" class="fadeIn second" name="user_id" placeholder="login">
       <input type="text" id="password" class="fadeIn third" name="user_password" placeholder="password">
       <input type="button" class="fadeIn fourth" value="Log In" onclick="send_go()">
+      <a href="#" onclick="commentDelete(data[i].c_code);"> 삭제 </a>
     </form>
 
     <!-- Remind Passowrd -->

@@ -13,7 +13,7 @@ function bookList(allList) {
         "<th scope='col' style='text-align: center'>목적</th>" +
         "<th scope='col' style='text-align: center'>삭제</th>" +
         "</tr>";
-    $("#table").append(string1);
+    $("#booktable").append(string1);
 
     allList.forEach(function (item) {
         var string2 =
@@ -26,9 +26,9 @@ function bookList(allList) {
             "<td>" + item.book_date + "</td>" +
             "<td>" + item.user_name + "</td>" +
             "<td>" + item.title + "</td>" +
-            "<td><button class='deletebutton'><i class='fas fa-trash-alt'></i></td>" +
+            "<td><span class='deletebutton'><i class='fas fa-trash-alt'></i></span></td>" +
             "</tr>";
-        $("#table").append(string2);
+        $("#booktable").append(string2);
 
     })
 
