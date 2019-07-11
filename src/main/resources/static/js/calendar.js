@@ -47,7 +47,7 @@ function saveajax() {
       allList = JSON.parse(data.allList);
       $("input[name=title]").val("");
       clicked("room1");
-      $("#table").empty();
+      $("#booklist").empty();
       bookList(allList);
     }
   })

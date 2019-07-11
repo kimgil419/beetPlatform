@@ -37,6 +37,14 @@
 
     function addList() {
 
+        const useDate = new Date();
+        const nowTime = useDate.getHours() + ":" + useDate.getMinutes();
+
+        if($("#timePicker1").val() < nowTime){
+            alert("시작시간이 현재보다 이른 시간입니다.");
+            return false;
+        }
+
         for (var i = 0; i < allList.length; i++) {
             if ($("#datepicker").val() == allList[i].book_date) {
                 if (!($("#timePicker2").val() <= allList[i].start || $("#timePicker1").val() >= allList[i].end)) {
@@ -128,7 +136,7 @@
                     allList = JSON.parse(data.allList);
                     clicked("room1");
 
-                    $("#table").empty();
+                    $("#booktable").empty();
                     if (userDept === '인사') {
                         bookList(allList);
                     }
@@ -268,8 +276,8 @@
         <div style="float:left;">
             <div>
                 <div id="calendar" style="margin:30px;width:630px;"></div>
-                <div id="booklist"></div>
-                <table id="booktable" class="table table-hover" style="margin-left:20px;width:650px"/>
+                <div id="booklist"> <table id="booktable" class="table table-hover" style="margin-left:20px;width:650px"/></div>
+
             </div>
         </div>
     </div>
