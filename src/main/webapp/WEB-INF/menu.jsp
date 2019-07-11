@@ -61,7 +61,7 @@
 
             <!-- commute -->
             <div style="float: right; margin-top: 15px;">
-                <ul class="list-group">
+                <ul class="list-group" style="border:none;float:right;">
                     <li class="list-group-item" style="border:none;"><input type="text" name="user_id"
                                                                             value=" ${userInfo.user_id } "
                                                                             readonly="readonly"
