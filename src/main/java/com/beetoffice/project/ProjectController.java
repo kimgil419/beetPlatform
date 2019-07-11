@@ -65,14 +65,14 @@ public class ProjectController {
 	}
 	
 	@RequestMapping("insertProject.do")
-	public String insertProject(ProjectVO vo, SourceVO svo, @RequestParam String[] source_idx, @RequestParam String[] user_id,
-			@RequestParam String[] source_name, @RequestParam String[] source_progress) {
+	public String insertProject(ProjectVO vo, SourceVO svo, @RequestParam String[] source_idx, 
+			@RequestParam String[] user_id, @RequestParam String[] source_name, @RequestParam String[] source_progress) {
 		System.out.println(">> Controller: insertProject()");
 		
 		projectService.insertProject(vo);
 		
 		int project_idx = projectService.getProject_idx(vo);
-		for (int i = 0; i < user_id.length; i++) {
+		for (int i = 1; i < user_id.length; i++) {
 			svo.setProject_idx(project_idx);
 			svo.setUser_id(user_id[i]);
 			svo.setSource_name(source_name[i]);
