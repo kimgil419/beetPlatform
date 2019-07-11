@@ -14,12 +14,19 @@
 			remote : '/html/layer.html'
 		});
 	} */
+	
+	$("#search_btn").click(function() {
+		alert("버튼1을 누르셨습니다.");
+	});
 	$(document).ready(function() {
+			$('div.modal').modal({
+				remote : '/html/layer.html'
+			});
 		var counter = 0;
 		$("#addrow").on("click", function () {
 			var newRow = $("<tr>");
 	        var cols = "";
-	        cols += '<td class="col-sm-"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalCart">검색</button>' +
+	        cols += '<td class="col-sm-"><button type="button" id="search_btn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">검색</button>' +
             		'<input type="text" name="user_id">' +
             		'<input type="text" name="user_name" readonly="readonly"></td>';
             cols += '<td class="col-sm-"><input type="text" name="source_name">' +
@@ -69,50 +76,9 @@
 </style>
 </head>
 <body>
-
-
-
-
-
-
-
-
+<button type="button" id="search_btn" class="btn btn-primary">검색</button>
 	<div id="page-wrapper" class="container-fluid">
 	<jsp:include page="../menu.jsp"/>
-	
-	
-	
-		<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-	
-	
-	
-	
-	
-	
 		<form action="insertProject.do" method="post">
 			<h4>프로젝트 작성</h4>
 			<div>
@@ -154,8 +120,6 @@
 					</tbody>
 				</table>
 			</div>
-			
-			
 			<div>
 			    <table id="function_table" class=" table order-list">
 				    <thead>
@@ -166,6 +130,14 @@
 				        </tr>
 				    </thead>
 				    <tbody>
+				    	<tr style="display:none;">
+				    		<td>
+				    			<input type="text" name="source_idx" value="-9">
+				    			<input type="text" name="user_id" value="-9">
+				    			<input type="text" name="source_name" value="array_dummy">
+				    			<input type="text" name="source_progress" value="array_dummy">
+				    		</td>
+				    	</tr>
 				    </tbody>
 				    <tfoot>
 				        <tr>
@@ -188,17 +160,33 @@
 					<a href="getCommute.do"><input type="button" value="메인"></a>
 				</div>
 			</div>
-
 		</form>
-		
-		
-		
-
-			
-			
-			
 	</div>
-	
+
+
+<!-- 		
+<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter">검색</button>
+
+Modal
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>	 -->
 	
 	
 </body>
