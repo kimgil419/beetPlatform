@@ -25,9 +25,13 @@
 	border: 1px solid #ddd;
 	border-radius: 4px;
 }
+.list-group {
+ padding: 10px;
+}
 
 .list-group-item {
 	cursor: pointer;
+	
 }
 
 .list-group-item:hover {
@@ -42,27 +46,29 @@ ul {
 .notie {
 	background-color: #808080;
 }
+#root {
+	position: absolute;
+	
+	
+}
 </style>
 <body>
 
 	<div id="page-wrapper">
 		<jsp:include page="menu.jsp" />
 		<div class="container" style="margin-top: 30px;">
+			<!-- 유튜브 -->
+<div id="root" class="col-md-8" ></div>
+				<script src="/js/youtube-bundle.js"></script>
 			
+<div id="row" >
 
-				<div id="board1" class="col-md-2" >
-				
+ <!-- 전자결재 -->
+				<div id="board1" class="col-md-6" >
 						<table class="table table-hover">
-
-							<tr>
-
-								<th colspan="7">직렬결재서류</th>
-							</tr>
-							<tr>
-
-								<th width="100">제목</th>
-
-								<th width="90">등록일</th>
+						<tr> <th colspan="7">직렬결재서류</th></tr>
+							<tr><th width="100">제목</th>
+							<th width="90">등록일</th>
 							</tr>
 							<c:forEach var="approval" items="${approvalList}">
 
@@ -114,7 +120,8 @@ ul {
 				</div>
 
 
-				<div id="board1" class="col-md-2" >
+<!-- 게시판 -->
+				<div id="board1" class="col-md-6" >
 					<form name="frm" method="post"
 						action="getBoardList.do?curPage=1&li=original">
 
@@ -127,9 +134,9 @@ ul {
 							<tr>
 
 								<th width="150">제목</th>
-								<th width="80">작성자</th>
+								
 								<th width="100">등록일</th>
-								<th width="50">조회수</th>
+								
 							</tr>
 
 
@@ -160,9 +167,9 @@ ul {
 								<tr>
 
 									<th width="150">제목</th>
-									<th width="80">작성자</th>
+									
 									<th width="100">등록일</th>
-									<th width="50">조회수</th>
+									
 								</tr>
 							</thead>
 							<tbody>
@@ -184,12 +191,37 @@ ul {
 						</table>
 
 					</form>
-				</div>
-
-				<div id="root" class="col-md-8"></div>
-				<script src="/js/youtube-bundle.js"></script>
+				
+</div>
+			
 			</div>
+			
 		</div>
-	
+		
+	</div>
 </body>
+<script>
+$(document).ready(function() {
+
+	// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+	var floatPosition = parseInt($("#root").css('top'));
+	// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+
+	$(window).scroll(function() {
+		// 현재 스크롤 위치를 가져온다.
+		var scrollTop = $(window).scrollTop();
+		var newPosition = scrollTop + floatPosition + "px";
+
+		/* 애니메이션 없이 바로 따라감
+		 $("#floatMenu").css('top', newPosition);
+		 */
+
+		$("#root").stop().animate({
+			"top" : newPosition
+		}, 500);
+
+	}).scroll();
+
+});
+</script>
 </html>
