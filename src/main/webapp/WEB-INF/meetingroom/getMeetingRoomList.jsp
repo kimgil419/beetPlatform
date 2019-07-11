@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang='en'>
-
+<!DOCTYPE>
+<html>
 <head>
     <meta charset='utf-8'/>
 </head>
@@ -25,11 +24,7 @@
 <script src="/js/clickedRoom.js"></script>
 <script src="/js/booklist.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js" data-auto-replace-svg="nest"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 <script>
 
     var list = ${meetingRoomList};
@@ -145,17 +140,6 @@
 
 </script>
 <style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-        font-size: 14px;
-    }
-
-    #calendar {
-        max-width: 900px;
-        margin: 40px auto;
-    }
 
     tr {
         text-align: center;
@@ -171,7 +155,7 @@
     }
 
     .d-block {
-        width:250px;
+        width: 250px;
         height: 200px;
     }
 
@@ -202,77 +186,93 @@
         text-align: center;
     }
 
+    .deletebutton:hover {
+        cursor: pointer;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    input {
+        font-size: 0.85rem;
+    }
+
 </style>
 <body>
 <div id="page-wrapper">
     <jsp:include page="../menu.jsp"/>
-<div id="leftcontainer" style="float:left;">
-    <i class="far fa-calendar-alt"></i> 회의실 예약
-    <br/>
-    <div style="margin-left:15px;">
-        <div class="imgcontainer" style="float: left;margin: 5px;">
-            <img src="/image/mr1.jpg" id="i1" class="mx-auto d-block"></a>
-            <div class="overlay">
-                <div class="text">Room1</div>
-            </div>
-        </div>
-        <div class="imgcontainer" style="display:inline-block;margin: 5px;">
-            <img src="/image/mr2.jpg" id="i2" class="mx-auto d-block" style=""></a>
-            <div class="overlay">
-                <div class="text">Room2</div>
-            </div>
-        </div>
-        <div style="clear:both;"></div>
-        <div class="imgcontainer" style="float: left;margin: 5px;">
-            <img src="/image/mr3.jpg" id="i3" class="mx-auto d-block"></a>
-            <div class="overlay">
-                <div class="text">Room3</div>
-            </div>
-        </div>
+    <div class="container" style="margin-top:30px;padding-left: 0px;padding-right: 0px;max-width: 1240px;">
+        <div style="float:left;">
+            <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-calendar-alt"></i> <b>회의실 예약</b>
+                <br/>
+                <div style="margin-left:15px;">
+                    <div class="imgcontainer" style="float: left;margin: 5px;">
+                        <img src="/image/mr1.jpg" id="i1" class="mx-auto d-block"></a>
+                        <div class="overlay">
+                            <div class="text">Room1</div>
+                        </div>
+                    </div>
+                    <div class="imgcontainer" style="display:inline-block;margin: 5px;">
+                        <img src="/image/mr2.jpg" id="i2" class="mx-auto d-block" style=""></a>
+                        <div class="overlay">
+                            <div class="text">Room2</div>
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="imgcontainer" style="float: left;margin: 5px;">
+                        <img src="/image/mr3.jpg" id="i3" class="mx-auto d-block"></a>
+                        <div class="overlay">
+                            <div class="text">Room3</div>
+                        </div>
+                    </div>
 
-        <div class="imgcontainer" style="display:inline-block;margin: 5px;">
-            <img src="/image/mr4.jpg" id="i4" class="mx-auto d-block"></a>
-            <div class="overlay">
-                <div class="text">Room4</div>
+                    <div class="imgcontainer" style="display:inline-block;margin: 5px;">
+                        <img src="/image/mr4.jpg" id="i4" class="mx-auto d-block"></a>
+                        <div class="overlay">
+                            <div class="text">Room4</div>
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+            <div>
+                <form id="bookdata" method="post" action="/saveMeetingRoom.do">
+                    <div style="margin-left:20px;float:left">
+                        <label style="font-size: 0.85rem">회의실 : </label><select name="room_num" id="room_num" class="form-control" style="font-size: 0.85rem;">
+                        <option value="room1">Room A</option>
+                        <option value="room2">Room B</option>
+                        <option value="room3">Room C</option>
+                        <option value="room4">Room D</option>
+                    </select>
+                    </div>
+                    <div style="margin-left:30px;float:left;width:100px;">
+                        <label style="font-size: 0.85rem">날짜 : </label><input type="text" id="datepicker" class="form-control"
+                                                   name="book_date" style="font-size: 0.85rem;"/><br/>
+                        <label style="font-size: 0.85rem">시작시간 : </label><input type="text" id="timePicker1" class="form-control"
+                                                     name="start" style="font-size: 0.85rem;"/><br/>
+                        <label style="font-size: 0.85rem">종료시간 :
+                        </label><input type="text" id="timePicker2" class="form-control" name="end" style="font-size: 0.85rem;"/>
+                    </div>
+                    <div style="margin-left:30px;float:left">
+                        <label style="font-size: 0.85rem">목적 : </label><input type="text" name="title" class="form-control"
+                                                   style="width:250px;font-size: 0.85rem"
+                                                   placeholder="회의실 대여 목적을 입력해주세요."/><br/>
+                        <input type=button value="예약" style="float:right;" onclick="addList()"/>
+                        <div style="clear: both;"></div>
+                    </div>
+                </form>
             </div>
         </div>
-        <div style="clear:both;"></div>
+        <div style="float:left;">
+            <div>
+                <div id="calendar" style="margin:30px;width:630px;"></div>
+                <div id="booklist"></div>
+                <table id="booktable" class="table table-hover" style="margin-left:20px;width:650px"/>
+            </div>
+        </div>
     </div>
-    </br>
-    <div>
-        <form id="bookdata" method="post" action="/saveMeetingRoom.do">
-            <div style="margin-left:10px;float:left">
-                <label>회의실 : </label><select name="room_num" id="room_num" class="form-control">
-                <option value="room1">Room A</option>
-                <option value="room2">Room B</option>
-                <option value="room3">Room C</option>
-                <option value="room4">Room D</option>
-            </select>
-            </div>
-            <div style="margin-left:40px;float:left;width:100px;">
-                <label>날짜 : </label><input type="text" id="datepicker" class="form-control" name="book_date"/><br/>
-                <label>시작시간 : </label><input type="text" id="timePicker1" class="form-control" name="start"/><br/>
-                <label>종료시간 :
-                </label><input type="text" id="timePicker2" class="form-control" name="end"/>
-            </div>
-            <div style="margin-left:40px;float:left">
-                <label>목적 : </label><input type="text" name="title" class="form-control" style="width:250px"
-                                           placeholder="회의실 대여 목적을 입력해주세요."/><br/>
-                <input type=button value="예약" style="float:right;" onclick="addList()"/>
-                <div style="clear: both;"></div>
-            </div>
-        </form>
-    </div>
-</div>
-
-<div style="float:left">
-<div id="calendar" style="margin:30px;width:630px;"></div>
-
-<div style="clear:both;"></div>
-<div id="booklist"></div>
-<table id="table" class="table table-hover" style="margin-left:20px;width:650px"/>
-</div>
 </div>
 </body>
-
 </html>

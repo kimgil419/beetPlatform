@@ -5,12 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>직원등록</title>
-<link rel="stylesheet"
-	href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-<script src="//code.jquery.com/jquery.min.js"></script>
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
-<script>
+<%--<link rel="stylesheet"--%>
+<%--	href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">--%>
+<%--<script src="//code.jquery.com/jquery.min.js"></script>--%>
+<%--<script--%>
+<%--	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>--%>
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <!--  jQuery UI 라이브러리 js파일-->
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -263,7 +262,7 @@ function send_go(frm) {
 <body>
 	<div id="page-wrapper" >
 	<jsp:include page="menu.jsp" />
-
+<div class="container">
 <h1>성공입니다</h1>
 
 	<form action="idcheck.do" method="post">
@@ -384,7 +383,7 @@ function send_go(frm) {
 		</tr>
 	</table>
 	</form>
-
+</div>
 </div>
 </body>
 </html>

@@ -36,6 +36,7 @@
 <body>
 	<div id="page-wrapper" class="container-fluid">
 	<jsp:include page="../menu.jsp"/>
+		<div class="container">
 		<div class="container-fluid">
 			<h3>프로젝트목록</h3>
 			<table class="table table-striped">
@@ -159,7 +160,8 @@
 			</div>
 		</form>
 	</div>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+	</div>
+<%--<script type="text/javascript" src="js/bootstrap.js"></script>--%>
 </body>
 </html>
 

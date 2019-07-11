@@ -6,13 +6,13 @@ function searchpeople(){
             "<td scopr='col'>" +
             `<img style="width:30px;height:40px;" src="image/${img}" alt="프로필 사진">` +
             "</td>" +
-            "<td scope='col' style='padding-top:18px;'>" + item.user_name + "</td>" +
-            "<td scope='col' style='padding-top:18px;'>" + item.dept + "</td>" +
-            "<td scope='col' style='padding-top:18px;'>" + item.user_position + "</td>" +
-            "<td scope='col' style='padding-top:18px;'>" + item.firstjoin + "</td>" +
-            "<td scope='col' style='padding-top:18px;'>" + item.user_email + "</td>" +
-            "<td scope='col' style='padding-top:18px;'>" + item.cphone + "</td>" +
-            "<td scope='col' style='padding-top:18px;'>" + item.phone + "</td>" +
+            "<td scope='col' style='padding-top:20px;'>" + item.user_name + "</td>" +
+            "<td scope='col' style='padding-top:20px;'>" + item.dept + "</td>" +
+            "<td scope='col' style='padding-top:20px;'>" + item.user_position + "</td>" +
+            "<td scope='col' style='padding-top:20px;'>" + item.firstjoin + "</td>" +
+            "<td scope='col' style='padding-top:20px;'>" + item.user_email + "</td>" +
+            "<td scope='col' style='padding-top:20px;'>" + item.cphone + "</td>" +
+            "<td scope='col' style='padding-top:20px;'>" + item.phone + "</td>" +
             "</tr>";
         list.push(string);
     })

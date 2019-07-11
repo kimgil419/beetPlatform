@@ -10,10 +10,7 @@
 <script src="/js/pagination.min.js"></script>
 <link href="css/pagination.css" rel='stylesheet'/>
 <script src="/js/searchpeople.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js" data-auto-replace-svg="nest"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+
 
 <style>
 
@@ -86,7 +83,7 @@
 <body>
 <div id="page-wrapper">
     <jsp:include page="../menu.jsp"/>
-    <div class="container" style="margin-top:30px;">
+    <div class="container" style="margin-top:30px;max-width: 1240px">
         <div style="float:right;">
             <input type="text" name="search" id="searchbar" style="border:none; width:130px;" placeholder="search keyword...">
             <div style="float: right; padding-top:4px;" onclick="searchkeyword()"><span><i class="fas fa-search" style="color: lightgrey;"></i></span></div>

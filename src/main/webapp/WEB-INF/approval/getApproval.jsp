@@ -9,11 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>글 상세</title>
-<link rel="stylesheet"
-	href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<%--<link rel="stylesheet"--%>
+<%--	href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">--%>
 <script src="//code.jquery.com/jquery.min.js"></script>
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+<%--<script--%>
+<%--	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>--%>
 
 <script>
 $(function(){
@@ -51,6 +51,7 @@ function refuse(frm){
 <body>
 <div id="page-wrapper">
 <jsp:include page="../menu.jsp"/>
+   <div class="container">
    <div class="col-md-8">
       <h1>결재</h1>
       <p>
@@ -147,6 +148,7 @@ function refuse(frm){
          <a href="getApprovalList.do">글목록</a>
          <p><a href="Main.do">메인메뉴이동</a></p>
      
+   </div>
    </div>
 </div>
 </body>
