@@ -11,15 +11,13 @@
 <script>
 	function search(){
 		$('div.modal').modal({
-			remote: '/html/layer.html'
+			remote: 'http://localhost:9999/html/layer.html'
 		});
 	}
 </script>
 </head>
 <body>
 <input type="button" value="검색" onclick="search()">
-<button type="button" onclick="search()">검색</button>
-<button class="btn btn-outline-primary" id="search">modal</button><br/>
 <div class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">

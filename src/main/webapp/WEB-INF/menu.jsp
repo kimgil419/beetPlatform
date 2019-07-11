@@ -58,14 +58,16 @@
             <div class="logo" style="float:left;">
                 <a href="getCommute.do"><img src="image/logo.png" height="81px" alt=""></a>
             </div>
-
+            <div style="clear: both;"></div>
             <!-- commute -->
             <form action="commute.do" method="post">
             
             <div style="float: right; margin-top: 15px;">
+
                 <ul class="list-group" style="border:none;float:right;">
                     <li class="list-group-item" style="border:none;">
                     <input type="text" name="user_id" value=" ${userInfo.user_id } " readonly="readonly"
+
                                                                             style="width:80px;">
                         <input
                                 type="text" name="user_name" value=" ${userInfo.user_name } 님 "
@@ -82,8 +84,10 @@
                     </li>
                 </ul>
             </div>
+
             </form>
             <div style="clear: both;"></div>
+
         </div>
     </header>
     <div class="nav-scroller py-1 mb-2">
