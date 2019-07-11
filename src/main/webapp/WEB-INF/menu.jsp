@@ -60,11 +60,10 @@
             </div>
             <div style="clear: both;"></div>
             <!-- commute -->
-            <form action="commute.do" method="post">
-            
+            <div style="clear: both;"></div>
             <div style="float: right; margin-top: 15px;">
-
-                <ul class="list-group" style="border:none;float:right;">
+                <form action="commute.do" method="post">
+                <ul class="list-group" style="border:none;">
                     <li class="list-group-item" style="border:none;">
                     <input type="text" name="user_id" value=" ${userInfo.user_id } " readonly="readonly"
 
@@ -84,10 +83,11 @@
                         </c:if>
                     </li>
                 </ul>
+                </form>
             </div>
 
-            </form>
-            <div style="clear: both;"></div>
+
+
 
         </div>
     </header>
