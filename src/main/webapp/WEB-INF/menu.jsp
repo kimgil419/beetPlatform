@@ -58,11 +58,11 @@
             <div class="logo" style="float:left;">
                 <a href="getCommute.do"><img src="image/logo.png" height="81px" alt=""></a>
             </div>
-
+            <div style="clear: both;"></div>
             <!-- commute -->
             <div style="float: right; margin-top: 15px;">
-                <ul class="list-group" style="border:none;float:right;">
-                    <li class="list-group-item" style="border:none;"><input type="text" name="user_id"
+                <ul class="list-group" style="float:right;">
+                    <li class="list-group-item"><input type="text" name="user_id"
                                                                             value=" ${userInfo.user_id } "
                                                                             readonly="readonly"
                                                                             style="width:80px;">
@@ -81,7 +81,6 @@
                     </li>
                 </ul>
             </div>
-            <div style="clear: both;"></div>
         </div>
     </header>
     <div class="nav-scroller py-1 mb-2">
