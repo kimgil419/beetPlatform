@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.beetoffice.project.vo.ProjectVO;
 import com.beetoffice.project.vo.SourceVO;
+import com.beetoffice.searchemployee.SearchEmployeeService;
+import com.beetoffice.searchemployee.SearchEmployeeVO;
 
 @Controller
 public class ProjectController {
 
 	@Autowired
 	private ProjectService projectService;
+	@Autowired
+	private SearchEmployeeService searchEmployeeService;
 	
 	@ModelAttribute("conditionMap")
 	public Map<String, String> searchConditionMap() {
@@ -63,9 +67,29 @@ public class ProjectController {
 //		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
 		return "redirect:getProjectList.do?currentPage=1";
 	}
-	
+
+	//modal 넣기전 ajax팝업 성공하면 여기로 다시 돌아와야 할 듯
+//	@RequestMapping("insertProject.do")
+//	public String insertProject(ProjectVO vo, SourceVO svo, @RequestParam String[] source_idx, 
+//			@RequestParam String[] user_id, @RequestParam String[] source_name, @RequestParam String[] source_progress) {
+//		System.out.println(">> Controller: insertProject()");
+//		
+//		projectService.insertProject(vo);
+//		
+//		int project_idx = projectService.getProject_idx(vo);
+//		for (int i = 1; i < user_id.length; i++) {
+//			svo.setProject_idx(project_idx);
+//			svo.setUser_id(user_id[i]);
+//			svo.setSource_name(source_name[i]);
+//			svo.setSource_progress(source_progress[i]);
+//			projectService.insertFunction(svo);
+//		}
+//		
+//		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
+//	}
+	//modal로 한페이지에서 억지로(?) 직원 검색하는 insert
 	@RequestMapping("insertProject.do")
-	public String insertProject(ProjectVO vo, SourceVO svo, @RequestParam String[] source_idx, 
+	public String insertProject(Model model, ProjectVO vo, SourceVO svo, @RequestParam String[] source_idx, 
 			@RequestParam String[] user_id, @RequestParam String[] source_name, @RequestParam String[] source_progress) {
 		System.out.println(">> Controller: insertProject()");
 		
@@ -81,6 +105,17 @@ public class ProjectController {
 		}
 		
 		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
+	}
+	
+	@RequestMapping("writeProject.do")
+	public String writeProject(Model model, SearchEmployeeVO uvo) {
+		List<SearchEmployeeVO> employeeList = searchEmployeeService.getUserList(uvo);
+		for (SearchEmployeeVO sevo: employeeList) {
+			System.out.println(sevo.toString());
+		}
+		model.addAttribute("employeeList", employeeList);
+		
+		return "project/insertProject";
 	}
 	
 	@RequestMapping("getSource.do")
@@ -144,12 +179,6 @@ public class ProjectController {
 		model.addAttribute("project", projectService.getProject(vo));
 		
 		return "forward:getProject.do";
-	}
-	
-	@RequestMapping("writeProject.do")
-	public String insertProject() {
-		
-		return "project/insertProject";
 	}
 	
 	@RequestMapping("modifySource.do")

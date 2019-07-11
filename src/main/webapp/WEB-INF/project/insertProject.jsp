@@ -1,32 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>프로젝트작성</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/9c3276f165.js"></script>
 <script>
-	/* function search() {
-		$('div.modal').modal({
-			remote : '/html/layer.html'
-		});
-	} */
-	
-	$("#search_btn").click(function() {
-		alert("버튼1을 누르셨습니다.");
-	});
 	$(document).ready(function() {
-			$('div.modal').modal({
-				remote : '/html/layer.html'
-			});
 		var counter = 0;
 		$("#addrow").on("click", function () {
 			var newRow = $("<tr>");
 	        var cols = "";
-	        cols += '<td class="col-sm-"><button type="button" id="search_btn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">검색</button>' +
+	        cols += '<td class="col-sm-"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-search-plus"></i></button>' +
+	        /* cols += '<td class="col-sm-"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalCart">검색</button>' + */
             		'<input type="text" name="user_id">' +
             		'<input type="text" name="user_name" readonly="readonly"></td>';
             cols += '<td class="col-sm-"><input type="text" name="source_name">' +
@@ -38,7 +26,8 @@
             			'<option value="완료">완료</option>' +
             			'<option value="보류">보류</option>' +
             			'<option value="폐기">폐기</option>';
-            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger " value="삭제"></td>';
+            cols += '<td><button type="button" class="ibtnDel"><i class="fas fa-eraser"></i></button></td>';
+/*             cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger " value="삭제"></td>'; */
 	        newRow.append(cols);
 	        $("table#function_table").append(newRow);
 	        counter++;
@@ -76,9 +65,9 @@
 </style>
 </head>
 <body>
-<button type="button" id="search_btn" class="btn btn-primary">검색</button>
-	<div id="page-wrapper" class="container-fluid">
+<div id="page-wrapper">
 	<jsp:include page="../menu.jsp"/>
+	<div class="container" style="margin-top:30px;">
 		<form action="insertProject.do" method="post">
 			<h4>프로젝트 작성</h4>
 			<div>
@@ -141,8 +130,8 @@
 				    </tbody>
 				    <tfoot>
 				        <tr>
-				            <td colspan="5" style="text-align: left;">
-				                <input type="button" class="btn btn-lg btn-block " id="addrow" value="추가" />
+				            <td colspan="5" style="text-align: center;">
+				                <button type="button" id="addrow"><i class="fas fa-folder-plus fa-2x"></i></button>
 				            </td>
 				        </tr>
 				    </tfoot>
@@ -162,32 +151,64 @@
 			</div>
 		</form>
 	</div>
-
-
-<!-- 		
-<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter">검색</button>
-
-Modal
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>	 -->
-	
-	
+	<%-- <table>
+		<tbody>
+			<tr>
+				<th>부서</th>
+				<th>이름</th>
+				<th>사번</th>
+			</tr>
+			<c:forEach var="employee" items="${employeeList }">
+				<tr>
+					<td>${employee.dept }</td>
+					<td>${employee.user_name }</td>
+					<td>${employee.user_id }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table> --%>
+</div>
+<!-- Button trigger modal -->
+<!-- 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-search-plus"></i></button>
+ -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table>
+					<tbody>
+						<tr>
+							<th>부서</th>
+							<th>이름</th>
+							<th>사번</th>
+						</tr>
+						<c:forEach var="userSearchList" items="${userSearchList }">
+							<tr>
+								<td>${userSearchList.dept }</td>
+								<td>${userSearchList.user_name }</td>
+								<td>${userSearchList.user_id }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary"
+					data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>

@@ -5,10 +5,6 @@
 <meta charset="UTF-8">
 <title>코드상세보기</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
-
 <link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.0/theme/eclipse.css" integrity="sha256-WhzJFLQmMeYNz3p+/UEqGJczEHrgZQiYawzX76gjnuo=" crossorigin="anonymous" />
 <script src="http://codemirror.net/lib/codemirror.js"></script>
@@ -43,27 +39,26 @@
 </style>
 </head>
 <body>
-	<div id="page-wrapper" class="container-fluid">
+<div id="page-wrapper">
 	<jsp:include page="../menu.jsp"/>
-		<div>
-			<h3>소스코드 상세보기</h3>
-			<table class="table table-bordered">
-				<tbody>
-					<tr>
-						<th>No.</th>
-						<td>${source.source_idx }</td>
-						<th>담당자</th>
-						<td>${source.user_name }</td>
-					</tr>
-					<tr>
-						<th>기능</th>
-						<td>${source.source_name }</td>
-						<th>진행상황</th>
-						<td>${source.source_progress }</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+	<div class="container" style="margin-top:30px;">
+		<h3>소스코드 상세보기</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<th>No.</th>
+					<td>${source.source_idx }</td>
+					<th>담당자</th>
+					<td>${source.user_name }</td>
+				</tr>
+				<tr>
+					<th>기능</th>
+					<td>${source.source_name }</td>
+					<th>진행상황</th>
+					<td>${source.source_progress }</td>
+				</tr>
+			</tbody>
+		</table>
 		<div>
 			<textarea row="4" cols="50" id="codesnippet_readonly">${source.source_code }</textarea>		
 		</div>
@@ -81,5 +76,6 @@
 			</div>
 		</div>
 	</div>
+</div>
 </body>
 </html>
