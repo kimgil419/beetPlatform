@@ -6025,7 +6025,7 @@ Docs & License: https://fullcalendar.io/
                         var buttonEl;
                         var buttonAriaAttr;
                         if (buttonName === 'title') {
-                            groupChildren.push(htmlToElement('<h2>&nbsp;</h2>')); // we always want it to take up height
+                            groupChildren.push(htmlToElement('<h4>&nbsp;</h4>')); // we always want it to take up height
                             isOnlyButtons = false;
                         }
                         else {
@@ -6105,7 +6105,7 @@ Docs & License: https://fullcalendar.io/
             this.toggleButtonEnabled('next', isNextEnabled);
         };
         Toolbar.prototype.updateTitle = function (text) {
-            findElements(this.el, 'h2').forEach(function (titleEl) {
+            findElements(this.el, 'h4').forEach(function (titleEl) {
                 titleEl.innerText = text;
             });
         };

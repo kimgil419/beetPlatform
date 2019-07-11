@@ -4,7 +4,6 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%--(실습) 스크립트릿, 표현식 사용하지 말고 EL, JSTL 사용 형태로 전환 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +11,7 @@
 <meta charset="UTF-8">
 <title>글목록</title>
 <link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<%--	href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">--%>
 <style>
 	
 </style>
@@ -20,6 +19,7 @@
 <body>
 <div id="page-wrapper">
 <jsp:include page="../menu.jsp"/>
+	<div class="container">
 <div style="width: 1050px">
 	<h1>전자 결재 서류 목록</h1>
 	<h3>[${userInfo.user_name }]님 환영합니다....<a href="logout.do">Log-out</a></h3>
@@ -277,7 +277,7 @@
 	
 	<p><a href="getCommute.do">메인메뉴이동</a></p>
 </div>
-
+	</div>
 </div>
 </body>
 </html>
