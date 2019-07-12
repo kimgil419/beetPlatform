@@ -10,6 +10,7 @@
 <script src="/js/pagination.min.js"></script>
 <link href="css/pagination.css" rel='stylesheet'/>
 <script src="/js/searchpeople.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js" data-auto-replace-svg="nest"></script>
 
 
 <style>
@@ -86,7 +87,7 @@
     <div class="container" style="margin-top:30px;max-width: 1240px">
         <div style="float:right;">
             <input type="text" name="search" id="searchbar" style="border:none; width:130px;" placeholder="search keyword...">
-            <div style="float: right; padding-top:4px;" onclick="searchkeyword()"><span><i class="fas fa-search" style="color: lightgrey;"></i></span></div>
+            <div style="padding-top:4px;display:inline-block;" onclick="searchkeyword()"><span><i class="fas fa-search" style="color: lightgrey;"></i></span></div>
         </div>
         <div style="clear:both"></div>
         </form>

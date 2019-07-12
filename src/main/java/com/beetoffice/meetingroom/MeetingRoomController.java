@@ -30,6 +30,7 @@ public class MeetingRoomController {
         String meetingroomjson = gson.toJson(meetingroom);
 
         List<MeetingRoomVO> allList =  meetingRoomService.getAll(vo);
+
         String allListjson = gson.toJson(allList);
 
         model.addAttribute("userDept",dept);

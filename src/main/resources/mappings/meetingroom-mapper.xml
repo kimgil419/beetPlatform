@@ -37,7 +37,7 @@
     <select id="selectAll" parameterType="meetingroom" resultType="meetingroom">
         SELECT
         idx, room_num, start, end, dept, user_id, book_date, user_name, title
-        FROM MEETINGROOM WHERE BOOK_DATE >= NOW()
+        FROM MEETINGROOM
     </select>
 
     <select id="selectTime" parameterType="meetingroom" resultType="meetingroom">
