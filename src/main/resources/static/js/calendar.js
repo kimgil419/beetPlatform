@@ -46,8 +46,10 @@ function saveajax() {
       list = data.meetingroom;
       allList = JSON.parse(data.allList);
       $("input[name=title]").val("");
-      clicked("room1");
+      clicked($("#room_num").val());
       $("#booklist").empty();
+      console.log("세이브으응");
+      console.log(allList);
       bookList(allList);
     }
   })
