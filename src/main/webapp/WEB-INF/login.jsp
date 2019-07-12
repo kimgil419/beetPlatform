@@ -336,7 +336,7 @@ alert(result + '나 비밀번호가 틀리셨습니다 인사과에 문의해주
       <input type="text" id="login" class="fadeIn second" name="user_id" placeholder="login">
       <input type="text" id="password" class="fadeIn third" name="user_password" placeholder="password">
       <input type="button" class="fadeIn fourth" value="Log In" onclick="send_go()">
-      <a href="#" onclick="commentDelete(data[i].c_code);"> 삭제 </a>
+      
     </form>
 
     <!-- Remind Passowrd -->
