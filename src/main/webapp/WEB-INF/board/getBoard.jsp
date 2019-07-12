@@ -11,37 +11,44 @@
 <meta charset="UTF-8">
 <title>글 상세</title>
 <style>
-	#container {
-		width: 700px;
-		margin: 0 auto;
-	}
-	h1, h3, p { text-align: center; }
-	table { border-collapse: collapse; }
-	table, th, td {
-		border: 1px solid black;
-		margin: 0 auto;
-	}
-	th { background-color: orange; }
-	.center { text-align: center; }
-	.left { text-align: left; }
-	.orange { background-color: orange; }
-	
-	.fancy{
-	position:relative;
-	display:inline-block;
-	font-size:0;
-	line-height:0;
+.project-tab {
+    padding: 10%;
+    margin-top: -8%;
 }
-
-.fancy:after{
-	position:absolute;
-	top:1px;
-	left:1px;
-	bottom:1px;
-	right:1px;
-	border:1px solid rgba(255,255,255,0.5);
-	outline:1px solid rgba(0,0,0,0.2);
-	content:" ";
+.project-tab #tabs{
+    background: #007b5e;
+    color: #eee;
+}
+.project-tab #tabs h6.section-title{
+    color: #eee;
+}
+.project-tab #tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #0062cc;
+    background-color: transparent;
+    border-color: transparent transparent #f3f3f3;
+    border-bottom: 3px solid !important;
+    font-size: 16px;
+    font-weight: bold;
+}
+.project-tab .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: #0062cc;
+    font-size: 16px;
+    font-weight: 600;
+}
+.project-tab .nav-link:hover {
+    border: none;
+}
+.project-tab thead{
+    background: #f3f3f3;
+    color: #333;
+}
+.project-tab a{
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
 }
 </style>
 <script>
@@ -141,27 +148,33 @@ function getCommentList(){
 <body>
 <div id="page-wrapper">
 <jsp:include page="../menu.jsp"/>
-<div id="container">
+<section id="tabs" class="project-tab">
+            <div class="container">
 	<h1>글 상세</h1>
 	<p><a href="logout.do">Log-out</a></p>
 	<hr>
 	<form action="updateBoardf.do" method="post">
 	<input type="hidden" name="seq" value="${board.seq}">
 	<input type="hidden" name="curPage" value="${c1 }">
-	<table>
+	<table class="table" cellspacing="0">
+	<thead>
 		<tr>
-			<th width="70">제목</th>
-			<td>${board.t_title}>
-			</td>
+			<th colspan="6">${board.t_title}</th>
+			
 		</tr>
+		</thead>
 		<tr>
 			<th>작성자</th>
 			<td>${user_name }</td>
+			<th>등록일</th>
+			<td>${board.t_regdate}</td>
+			<th>조회수</th>
+			<td>${board.cnt }</td>
 		</tr>
 		<tr>
 			<th>내용</th>
 			
-			<td style="width: 700px; height: 500px;">
+			<td colspan="6" style="width: 500px; height: 500px;">
 			<div style="border: 5px solid #A9F5A9; padding: 7px; display: ${(board.t_img == null) ? 'none':'' };" >
 			<img class="fancy"  style="display: ${(board.t_img == null) ? 'none':'' };" src ="${pageContext.request.contextPath}/image/${board.t_img}" width="500px;" height="350px;" alt="boardImage"> </div> <!-- $는 .equals는 반응하지 않는다 'null'은 안된다 -->
 					<p>
@@ -169,15 +182,7 @@ function getCommentList(){
 			</td>
 		</tr>
 		<tr>
-			<th>등록일</th>
-			<td>${board.t_regdate}</td>
-		</tr>
-		<tr>
-			<th>조회수</th>
-			<td>${board.cnt }</td>
-		</tr>
-		<tr>
-			<td colspan="2" class="center">
+			<td colspan="6" class="center">
 				<input type="submit" ${(board.user_id == user_id) ? '':'hidden' } value="글 수정">
 			</td>
 		</tr>
@@ -191,7 +196,7 @@ function getCommentList(){
 		
 		<a href="getBoardList.do?curPage=${c1 }">글목록</a>
 	</p>
-</div>
+
 
 
 
@@ -230,8 +235,8 @@ function getCommentList(){
     </div>
 
 
-
-
+</div>
+</section>
 
 
 </div>

@@ -10,11 +10,20 @@
 <%--<script src="//code.jquery.com/jquery.min.js"></script>--%>
 <%--<script--%>
 <%--	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>--%>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <!--  jQuery UI 라이브러리 js파일-->
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<style>
+body {background-color:#eee;}
+.container-fluid {padding:10px;}
+.container{background-color:white;padding:10px;   }
+#title{font-family: 'Lobster', cursive;;}
+#ea{background-color: #D8D8D8;}
+</style>
 <script>
 $(function() {
 	var idck = 0;
@@ -262,128 +271,139 @@ function send_go(frm) {
 <body>
 	<div id="page-wrapper" >
 	<jsp:include page="menu.jsp" />
-<div class="container">
-<h1>성공입니다</h1>
-
-	<form action="idcheck.do" method="post">
-	<div id="divInputId" >
-			<input type="text" name="user_id"  id="user_id">
-			<input type="submit" value="아이디중복체크" id="idck">
-			</div>
-			</form>
-	
-	
-	<form action="insertUser.do" method="post"
+	<div class="container-fluid">
+		<div class="container">
+			<h2 class="text-center" id="title">Create account</h2>
+			 <p class="text-center">
+				<small id="passwordHelpInline" class="text-muted"> Developer: follow me on facebook <a href="https://www.facebook.com/JheanYu"> John niro yumang</a> inspired from <a href="https://p.w3layouts.com/">https://p.w3layouts.com/</a>.</small>
+			</p>
+ 			<hr>
+			<div class="row">
+				<div class="col-md-5">
+ 					
+						<fieldset>							
+							<p class="text-uppercase pull-center"> 아이디중복체크</p>	
+							<form action="idcheck.do" method="post">
+ 							<div class="form-group">
+								<input type="text" name="user_id"  id="user_id" class="form-control input-lg" placeholder="id">
+							    
+							    <input type="submit" class="btn btn-lg btn-primary   value="아이디중복체크" id="idck">
+							</div>
+                            </form>
+                            
+          
+						
+ 							
+						</fieldset>
+				
+				</div>
+				
+				<div class="col-md-2">
+					<!-------null------>
+				</div>
+				
+				<div class="col-md-5">
+ 				 		                  <form action="insertUser.do" method="post"
 	        enctype="multipart/form-data">
-	<table>
-
-		<tr>
-			<th>아이디</th>
-			
-			<td>
-		
-			<input type="text" name="user_id"  id="user_ids">
-			
-			
-			</td>
-		
-		</tr>
-		  
-		<tr>
-			<th>패스워드</th>
-			<td><input type="text" name="user_password"></td>
-		</tr>
-		<tr>
-			<th>소속부서</th>
-			<td><select id="ssd" onchange="categoryChanged()">
-                    <option value="X">선택사항</option>
-                    <option value="사업">사업부</option>
-                    <option value="해외사업">해외사업부</option> 
-                    <option value="개발">개발부</option>
-                    <option value="총무">총무부</option>    
-                    <option value="인사">인사부</option>
-                    <option value="시설관리">시설관리부</option>    
-                    <option value="인재개발">인재개발부</option>   
-                    <option value="회계">회계부</option>      
-                </select><input type="hidden" name="dept"  id="categoryd"></td>
-		</tr>
-		<tr>
-			<th>생년월일</th>
-			<td><input type="text" id="testDatepicker" name="birth"></td>
-		</tr>
-		<tr>
-			<th>직무</th>
-			<td><input type="text" name="job_id"></td>
-		</tr>
-		<tr>
-			<th>입사날짜</th>
-			<td><input type="text" id="testDatepicker1" name="firstjoin"></td>
-		</tr>
-		<tr>
-			<th>퇴사날짜</th>
-			<td><input type="text" id="testDatepicker2" name="departure"></td>
-		</tr>
-		<tr>
-			<th>이름</th>
-			<td><input type="text" name="user_name"></td>
-		</tr>
-		<tr>
-			<th>직급</th>
-			<td>
-		        <select id="ss" onchange="categoryChange()">
-                    <option value="X">선택사항</option>
-                    <option value="사원">사원</option>
-                    <option value="주임">주임</option> 
-                    <option value="대리">대리</option>
-                    <option value="과장">과장</option>    
-                    <option value="차장">차장</option>
-                    <option value="부장">부장</option>    
-                    <option value="이사">이사</option>   
-                    <option value="대표이사">대표이사</option>      
-                </select>
-                <input type="hidden" name="user_position" id="category">
-		    </td>
-		</tr>
-		<tr>
-			<th>전화번호('-'없이 입력해주세요)</th>
-			<td><input type="text" name="phone"></td>
-		</tr>
-		<tr>
-			<th>내선전화번호</th>
-			<td><input type="text" name="cphone"></td>
-		</tr>
-		<tr>
-			<th>이메일</th>
-			<td><input type="text" name="user_email1">@<input type="text" name="user_email2"></td>
-		</tr>
-		<tr>
-			<th>주소</th>
-			<td><div class="form-group">                   
-                <input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="addr1" id="addr1" type="text" readonly="readonly" >
+						<fieldset>							
+							<p class="text-uppercase"> 아이디 </p>	
+ 								
+							<div class="form-group">
+								<input type="text" name="user_id"  id="user_ids" class="form-control input-lg" placeholder="id">
+							</div>
+							<p class="text-uppercase"> 비번 </p>	
+							<div class="form-group">
+								<input type="password" name="user_password" id="password" class="form-control input-lg" placeholder="Password">
+							</div>
+							<p class="text-uppercase"> 소속부서</p>	
+							<div class="form-group">
+								<select id="ssd" onchange="categoryChanged()" class="form-control" required="required">
+                                    <option value="X">선택사항</option>
+                                    <option value="사업">사업부</option>
+                                    <option value="해외사업">해외사업부</option> 
+                                    <option value="개발">개발부</option>
+                                    <option value="총무">총무부</option>    
+                                    <option value="인사">인사부</option>
+                                    <option value="시설관리">시설관리부</option>    
+                                    <option value="인재개발">인재개발부</option>   
+                                    <option value="회계">회계부</option>      
+                                </select><input type="hidden" name="dept"  id="categoryd">
+							</div>
+							<p class="text-uppercase"> 생년월일</p>	
+							<div class="form-group">
+								<input type="text" id="testDatepicker" name="birth" class="form-control input-lg" placeholder="birth">
+							</div>
+							<p class="text-uppercase"> 직무</p>	
+							<div class="form-group">
+								<input type="text" name="job_id" class="form-control input-lg" placeholder="job_id">
+							</div>
+							<p class="text-uppercase"> 입사날짜</p>	
+							<div class="form-group">
+								<input type="text" id="testDatepicker1" name="firstjoin" class="form-control input-lg" placeholder="firstjoin">
+							</div>
+							<p class="text-uppercase"> 이름</p>	
+							<div class="form-group">
+								<input type="text" name="user_name" class="form-control input-lg" placeholder="user_name">
+							</div>
+							<p class="text-uppercase"> 직급</p>	
+							<div class="form-group">
+								<select id="ss" onchange="categoryChange()" class="form-control input-lg">
+                                    <option value="X">선택사항</option>
+                                    <option value="사원">사원</option>
+                                    <option value="주임">주임</option> 
+                                    <option value="대리">대리</option>
+                                    <option value="과장">과장</option>    
+                                    <option value="차장">차장</option>
+                                    <option value="부장">부장</option>    
+                                    <option value="이사">이사</option>   
+                                    <option value="대표이사">대표이사</option>      
+                                </select>
+                                <input type="hidden" name="user_position" id="category" >
+							</div>
+							<p class="text-uppercase"> 전화번호('-'없이 입력해주세요)</p>	
+							<div class="form-group">
+								<input type="text" name="phone" class="form-control input-lg" placeholder="phone">
+							</div>
+							<p class="text-uppercase"> 내선전화번호</p>	
+							<div class="form-group">
+								<input type="text" name="cphone" class="form-control input-lg" placeholder="cphone">
+							</div>
+							<p class="text-uppercase"> 이메일</p>	
+							<div class="form-group">
+								<input type="email" name="user_email" class="form-control input-lg" placeholder="user_email">
+							</div>
+							<p class="text-uppercase"> 주소 </p>	
+							<div class="form-group">                   
+                                <input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="addr1" id="addr1" type="text" readonly="readonly" >
                                             <button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
-                </div>
-                <div class="form-group">
+                            </div>
+                            <div class="form-group">
                                             <input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" />
-                </div>
-                <div class="form-group">
+                            </div>
+                            <div class="form-group">
                                             <input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text"  />
-                </div>
-        </td>
-		</tr>
-		<tr>
-		    <th>프로필사진</th>
-		    <td>
-		        <input type="file" name="user_pictures">
-		    </td>
-		</tr>
-		<tr>
-			<td colspan="2" class="center">
-				<input type="submit" value="직원등록" onclick="send_go(this.form)">
-			</td>
-		</tr>
-	</table>
-	</form>
-</div>
+                             </div>
+                             <p class="text-uppercase"> 프로필사진</p>	
+							 <div class="form-group">
+								  <input type="file" name="user_pictures" class="form-control input-lg" placeholder="Password2">
+							 </div>
+						
+ 					
+							
+							<div>
+								<input type="submit" class="btn btn-md" id="ea" value="Sign In" onclick="send_go(this.form)">
+							</div>
+			
+ 						</fieldset>
+ 						</form>
+				
+				</div>
+			</div>
+		</div>
+		<p class="text-center">
+			<small id="passwordHelpInline" class="text-muted"> Developer:<a href="http://www.psau.edu.ph/"> Pampanga state agricultural university ?</a> BS. Information and technology students @2017 Credits: <a href="https://v4-alpha.getbootstrap.com/">boostrap v4.</a></small>
+		</p>
+	</div>
 </div>
 </body>
 </html>
