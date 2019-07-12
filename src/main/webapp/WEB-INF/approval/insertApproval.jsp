@@ -13,8 +13,6 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="js/multiselect.min.js"></script>
 
-
-
 <script>
 	var employeeData;
 
@@ -181,7 +179,10 @@
 </head>
 <body>
 <div id="page-wrapper">
-		<jsp:include page="../menu.jsp" />
+
+		<%-- <jsp:include page="../menu.jsp" />
+		<br>
+		<hr> --%>
 	<div class="container">
 		<h1>글등록</h1>
 		<p>
@@ -195,7 +196,7 @@
 			</p>
 
 
-			<table id="p2">
+			<table id="p2" >
 
 				<tr>
 					<td><input type="checkbox" name="urgent" value="1"> 긴급
@@ -210,12 +211,14 @@
 					</td>
 					<td width="140" id="empSearch">결재2 <select id="user_id2"
 						name="user_id2">
+						<option value='' selected disabled >선택하세요 </option>
 					</select></td>
 
 
 
 					<td width="140" id="empSearch">결재3 <select id="user_id3"
 						name="user_id3">
+						<option value='' selected disabled >선택하세요 </option>
 					</select></td>
 
 
@@ -255,7 +258,7 @@
 
 
 
-			<table>
+			<table class="table table-hover">
 				<tr>
 					<th>제목</th>
 					<td colspan="2"><input type="text" name="a_title"></td>
