@@ -40,6 +40,10 @@
         const useDate = new Date();
         const nowTime = useDate.getHours() + ":" + useDate.getMinutes();
 
+        console.log(nowTime);
+        console.log($("#timePicker1").val());
+        console.log($("#timePicker1").val() < nowTime);
+
         if($("#timePicker1").val() < nowTime){
             alert("시작시간이 현재보다 이른 시간입니다.");
             return false;
@@ -117,7 +121,7 @@
         });
 
         initCalendar();
-
+console.log(userDept);
         if (userDept === '인사') {
             bookList(allList);
         }

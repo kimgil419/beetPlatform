@@ -1,5 +1,5 @@
 function bookList(allList) {
-
+console.log(allList);
     var allList = allList;
     var string1 =
         "<tr>" +
