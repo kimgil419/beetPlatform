@@ -1,5 +1,4 @@
 function clicked(room_num) {
-
         $.ajax({
             url: "/selectroom.do",
             data: "room_num=" + room_num,
@@ -7,11 +6,11 @@ function clicked(room_num) {
             success: function (data) {
                 list = JSON.parse(data.meetingroom);
                 allList = JSON.parse(data.allList);
-
                 $("#calendar").empty();
                 calendar = new FullCalendar.Calendar(calendarEl, {
                     plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
                     locale: 'ko',
+                    weekends: false,
                     defaultView: 'timeGridWeek',
                     defaultDate: currentDate,
                     minTime: "08:00:00",
@@ -35,6 +34,10 @@ function clicked(room_num) {
                     events: list
                 });
                 calendar.render();
+                $("#booktable").empty();
+                if (userDept === '인사') {
+                    bookList(allList);
+                }
             }
         })
 }
