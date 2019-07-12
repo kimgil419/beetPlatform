@@ -7,8 +7,14 @@
 <meta charset="UTF-8">
 <title>글등록</title>
 
-<script src="/js/jquery-3.4.1.min.js"></script>
-<script src="/js/multiselect.min.js"></script>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="js/multiselect.min.js"></script>
+
+
+
 <script>
 	var employeeData;
 
@@ -174,8 +180,9 @@
 </script>
 </head>
 <body>
-
-	<div id="container">
+<div id="page-wrapper">
+		<jsp:include page="../menu.jsp" />
+	<div class="container">
 		<h1>글등록</h1>
 		<p>
 			<a href="logout.do">Log-out</a>
@@ -184,7 +191,7 @@
 		<form action="insertApproval.do" method="post">
 			<p>
 				<input type="button" name="p" id="p" value=" 결재 방식 전환 "
-					onclick="employeeSearch()">
+					>
 			</p>
 
 
@@ -278,5 +285,7 @@
 		</p>
 
 	</div>
+	</div>
 </body>
+   
 </html>
