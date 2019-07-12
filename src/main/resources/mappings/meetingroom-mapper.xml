@@ -37,7 +37,7 @@
     <select id="selectAll" parameterType="meetingroom" resultType="meetingroom">
         SELECT
         idx, room_num, start, end, dept, user_id, book_date, user_name, title
-        FROM MEETINGROOM
+        FROM MEETINGROOM WHERE BOOK_DATE >= CURDATE() AND ROOM_NUM = #{room_num}
     </select>
 
     <select id="selectTime" parameterType="meetingroom" resultType="meetingroom">

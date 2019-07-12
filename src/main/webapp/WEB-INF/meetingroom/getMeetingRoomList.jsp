@@ -40,10 +40,6 @@
         const useDate = new Date();
         const nowTime = useDate.getHours() + ":" + useDate.getMinutes();
 
-        console.log(nowTime);
-        console.log($("#timePicker1").val());
-        console.log($("#timePicker1").val() < nowTime);
-
         if($("#timePicker1").val() < nowTime){
             alert("시작시간이 현재보다 이른 시간입니다.");
             return false;
@@ -80,6 +76,11 @@
             $("#room_num").val("room1")
             room_num = $("#room_num").val();
             clicked(room_num);
+            $("#booktable").empty();
+            if (userDept === '인사') {
+                bookList(allList);
+            }
+
         })
         $("#i2").on("click", function () {
             $("#room_num").val("room2")
@@ -121,7 +122,6 @@
         });
 
         initCalendar();
-console.log(userDept);
         if (userDept === '인사') {
             bookList(allList);
         }
@@ -221,28 +221,27 @@ console.log(userDept);
                 <br/>
                 <div style="margin-left:15px;">
                     <div class="imgcontainer" style="float: left;margin: 5px;">
-                        <img src="/image/mr1.jpg" id="i1" class="mx-auto d-block"></a>
-                        <div class="overlay">
+                        <img src="/image/mr1.jpg" class="mx-auto d-block"></a>
+                        <div class="overlay" id="i1">
                             <div class="text">Room1</div>
                         </div>
                     </div>
                     <div class="imgcontainer" style="display:inline-block;margin: 5px;">
-                        <img src="/image/mr2.jpg" id="i2" class="mx-auto d-block" style=""></a>
-                        <div class="overlay">
+                        <img src="/image/mr2.jpg"  class="mx-auto d-block" style=""></a>
+                        <div class="overlay" id="i2">
                             <div class="text">Room2</div>
                         </div>
                     </div>
                     <div style="clear:both;"></div>
                     <div class="imgcontainer" style="float: left;margin: 5px;">
-                        <img src="/image/mr3.jpg" id="i3" class="mx-auto d-block"></a>
-                        <div class="overlay">
+                        <img src="/image/mr3.jpg"  class="mx-auto d-block"></a>
+                        <div class="overlay" id="i3">
                             <div class="text">Room3</div>
                         </div>
                     </div>
-
                     <div class="imgcontainer" style="display:inline-block;margin: 5px;">
-                        <img src="/image/mr4.jpg" id="i4" class="mx-auto d-block"></a>
-                        <div class="overlay">
+                        <img src="/image/mr4.jpg"  class="mx-auto d-block"></a>
+                        <div class="overlay" id="i4">
                             <div class="text">Room4</div>
                         </div>
                     </div>
