@@ -1,5 +1,4 @@
 function bookList(allList) {
-console.log(allList);
     var allList = allList;
     var string1 =
         "<tr>" +
@@ -14,7 +13,7 @@ console.log(allList);
         "<th scope='col' style='text-align: center'>삭제</th>" +
         "</tr>";
     $("#booktable").append(string1);
-
+    console.log($("#booktable"));
     allList.forEach(function (item) {
         var string2 =
             "<tr scope='row'>" +
