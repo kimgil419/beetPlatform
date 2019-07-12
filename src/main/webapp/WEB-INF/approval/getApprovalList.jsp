@@ -47,8 +47,10 @@
 		</tr>
 	</table>
 	</form>
-	<p><a href="ApprovalForm.do">결재 문서 등록</a></p>
-	<table class="table">
+	
+	<p><a href="ApprovalForm.do" target="_blank" onclick="window.open(this.href,'','width=510, height=620, scrollbars=yes'); return false;" href="ApprovalForm.do">
+	결재 문서 등록</a></p>
+	<table class="table table-hover">
 		<tr>
 		<th colspan="7">긴급결재서류</th>
 		</tr>

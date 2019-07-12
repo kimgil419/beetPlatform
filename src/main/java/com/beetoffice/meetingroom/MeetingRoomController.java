@@ -52,6 +52,8 @@ public class MeetingRoomController {
 
         meetingRoomService.insertReserveInfo(vo);
 
+
+
         List<MeetingRoomVO> meetingroom =  meetingRoomService.getReserveInfo(vo);
         List<MeetingRoomVO> allList =  meetingRoomService.getAll(vo);
 

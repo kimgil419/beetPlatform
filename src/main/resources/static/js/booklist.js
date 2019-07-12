@@ -1,5 +1,4 @@
 function bookList(allList) {
-console.log(allList);
     var allList = allList;
     var string1 =
         "<tr>" +
@@ -23,7 +22,7 @@ console.log(allList);
             "<td>" + item.start + "</td>" +
             "<td>" + item.end + "</td>" +
             "<td>" + item.dept + "</td>" +
-            "<td>" + item.book_date + "</td>" +
+            "<td>" + String(item.book_date).substr(5,5) + "</td>" +
             "<td>" + item.user_name + "</td>" +
             "<td>" + item.title + "</td>" +
             "<td><span class='deletebutton'><i class='fas fa-trash-alt'></i></span></td>" +
