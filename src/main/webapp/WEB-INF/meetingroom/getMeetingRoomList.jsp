@@ -227,11 +227,7 @@
                         </div>
                     </div>
                     <div class="imgcontainer" style="display:inline-block;margin: 5px;">
-<<<<<<< HEAD
-                        <img src="/image/mr2.jpg" class="mx-auto d-block" style=""></a>
-=======
                         <img src="/image/mr2.jpg"  class="mx-auto d-block" style=""></a>
->>>>>>> 586420cec13e1f367de34a1f7848bab3d74320ed
                         <div class="overlay" id="i2">
                             <div class="text">Room2</div>
                         </div>
@@ -244,13 +240,8 @@
                         </div>
                     </div>
                     <div class="imgcontainer" style="display:inline-block;margin: 5px;">
-<<<<<<< HEAD
-                        <img src="/image/mr4.jpg" class="mx-auto d-block"></a>
-                        <div class="overlay"  id="i4">
-=======
                         <img src="/image/mr4.jpg"  class="mx-auto d-block"></a>
                         <div class="overlay" id="i4">
->>>>>>> 586420cec13e1f367de34a1f7848bab3d74320ed
                             <div class="text">Room4</div>
                         </div>
                     </div>
