@@ -20,7 +20,7 @@
             PHONE regexp #{keyword} OR
             CPHONE regexp #{keyword} OR
             FIRSTJOIN regexp #{keyword} OR
-            USER_EMAIL regexp #{keyword};
+            USER_EMAIL regexp #{keyword}
     </select>
     
      <select id="selectAllForSearch" resultType="searchemployee" parameterType="searchemployee">
@@ -28,5 +28,17 @@
         FROM USER_DB
     </select>
 
+
+    <select id="listforpaging" parameterType="Map" resultType="searchemployee">
+        SELECT * FROM USER_DB
+        WHERE USER_NAME regexp #{keyword} OR
+            USER_NAME regexp #{keyword} OR
+            DEPT regexp #{keyword}  OR
+            USER_POSITION regexp #{keyword} OR
+            PHONE regexp #{keyword} OR
+            CPHONE regexp #{keyword} OR
+            FIRSTJOIN regexp #{keyword} OR
+            USER_EMAIL regexp #{keyword} LIMIT #{start}, #{length}
+    </select>
 
 </mapper>

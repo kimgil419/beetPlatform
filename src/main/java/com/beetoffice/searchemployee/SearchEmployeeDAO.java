@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository("SearchEmployeeDAO")
 public class SearchEmployeeDAO {
@@ -26,5 +27,7 @@ public class SearchEmployeeDAO {
     public List<SearchEmployeeVO> getListForSearch(SearchEmployeeVO vo){
         return mybatis.selectList("searchemployee.selectAllForSearch", vo);
     }
-    
+    public List<SearchEmployeeVO> getListForPaging(Map num) {
+        return mybatis.selectList("searchemployee.listforpaging", num);
+    }
 }
