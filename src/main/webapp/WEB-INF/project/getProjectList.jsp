@@ -46,12 +46,12 @@
 				<thead>
 					<tr>
 						<th>No.</th>
-						<th>제목</th>
+						<th>프로젝트명</th>
 						<th>담당자</th>
-						<th>등록일</th>
+						<th>시작일</th>
+						<th>종료일</th>
 						<th>기간</th>
-						<th>남은기한</th>
-						<th>진행기간</th>
+						<th>진행</th>
 						<th>진행상황</th>
 					</tr>
 				</thead>
@@ -64,9 +64,9 @@
 							<td>${project.project_idx }</td>
 							<td><a href="getProject.do?project_idx=${project.project_idx }&currentPage=${pages.currentPage }&searchCondition=${pages.searchCondition }&searchKeyword=${pages.searchKeyword }">${project.project_name }</a></td>
 							<td>${project.user_name }</td>
-							<td>${project.project_reg_date }</td>
-							<td>${project.project_period } 일</td>
-							<td>${project.project_deadline } 일</td>
+							<td>${project.project_start_date }</td>
+							<td>${project.project_end_date }</td>
+							<td>${project.project_period }</td>
 							<td>
 								<div class="progress" style="">
 									<div class="progress-bar bg-success" style="width:${percentage }%">${percentage }</div>
