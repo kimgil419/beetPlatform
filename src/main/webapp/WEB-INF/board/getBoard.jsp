@@ -71,9 +71,9 @@ function fn_comment(code){
     	async: false,
         type:'POST',
         url : "<c:url value='/addComment.do'/>",
-        data:$("#commentForm").serialize(),
-        success : function(data){
-            if(data=="success")
+        data:$("#commentForm").serialize(), //여기까지가 AJAX로 데이타를 갖고 간다는 뜻이다
+        success : function(data){ //이 부분부터 받는다는 뜻이다
+            if(data=="success")  //받는 데이타의 조건문이다
             {
                 getCommentList();
                 $("#comment").val("");
@@ -89,9 +89,9 @@ function fn_comment(code){
 /**
  * 초기 페이지 로딩시 댓글 불러오기
  */
-$(function(){
+$(function(){ //할상 실행시킨다는 뜻이다 //펑션레디안해도 자동으로 실행된다
     
-    getCommentList();
+    getCommentList(); 
     
 });
  
@@ -118,7 +118,7 @@ function getCommentList(){
                     html += "<div>";
                     html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
                     html += data[i].comment + "<tr><td></td></tr>";
-                    html += "</table></div>";
+                    html += "</table></div><input type='button' onclick='sendgos("+data[i].c_code+")' value='삭제'>";
                     html += "</div>";
                     
                     
@@ -143,6 +143,32 @@ function getCommentList(){
         
     });
 }
+
+function sendgos(codesData){
+	//var ccd = codes;
+	var ccd ={
+			codes	:codesData
+			
+	}
+	console.log(ccd);
+	$.ajax({
+		
+		type:'POST',
+		url : "deleteComment.do",
+		data: ccd,
+		success : function(data){
+			if(data=="success")
+			{
+                getCommentList();
+                $("#comment").val("");
+            }
+        },
+        error:function(request,status,error){
+            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+       }
+	});
+}
+
 </script>
 </head>
 <body>

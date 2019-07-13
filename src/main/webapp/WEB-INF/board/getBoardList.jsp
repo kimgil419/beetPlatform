@@ -151,8 +151,8 @@
 				<form action="getBoardList.do?curPage=1" method="POST">
 		<div class="center-block" style='width:1500px; background:#F2F2F2; padding-left: 40%;'>
 		<select name="searchCondition">
-				<c:forEach var="option" items="${conditionMap }">
-					<option value="${option.value }">${option.key }
+				<c:forEach var="option" items="${conditionMap }"><!-- map에 저장된 여러 키값과 벨류값을 c:foreach문으로 조정이 가능하다 -->
+					<option value="${option.value }">${option.key }<!-- submit으로 하면 저정로 벨류값을 갖고 갈 수있다 -->
 				</c:forEach>
 				</select>
 				

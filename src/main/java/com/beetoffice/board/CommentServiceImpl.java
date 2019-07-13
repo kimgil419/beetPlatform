@@ -15,11 +15,7 @@ public class CommentServiceImpl implements CommentService {
 		System.out.println(">> CommentServiceImpl 객체 생성");
 	}
 
-	@Override
-	public void insertComment(CommentVO vo) {
-		commentDAO.insertComment(vo);
-		
-	}
+
 
 	@Override
 	public List<CommentVO> getCommentList(CommentVO vo) {
@@ -39,11 +35,14 @@ public class CommentServiceImpl implements CommentService {
 		return commentDAO.selectBoardCommentByCode(vol);
 	}
 
+
+
 	@Override
-	public int deleteComment(int cno) {
-		// TODO Auto-generated method stub
-		return commentDAO.deleteComment(cno);
+	public void deleteComment(String ccd) {
+		commentDAO.deleteComment(ccd);
+		
 	}
+
 
 	
 

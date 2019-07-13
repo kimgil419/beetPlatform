@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.mapping.ParameterMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.http.HttpHeaders;
@@ -19,13 +20,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+//
 
 
 
@@ -51,6 +56,7 @@ public class BoardController {
 		Map<String, String> conditionMap = new HashMap<>();
 		conditionMap.put("제목", "TITLE");
 		conditionMap.put("내용", "CONTENT"); //단지 getboardlist.jsp에서 검색 옵션을 보여주기 위한것 
+		conditionMap.put("작성자", "WRITTER");
 		
 		return conditionMap;
 	}
@@ -90,20 +96,7 @@ public class BoardController {
 		return "board/getBoard";
 	}
 	
-	@RequestMapping("/insertComment.do")
-	public String insertComment(CommentVO vo, HttpSession session,@RequestParam String curPage, Model model) {
-		String id = (String) session.getAttribute("user_id");
-		vo.setUser_id(id);
-		
-		commentService.insertComment(vo);
-		
-		List<CommentVO> list = commentService.getCommentList(vo);
-		
-		model.addAttribute("cm_list", list);
-		model.addAttribute("c1", curPage);
-		return "board/getBoard";
-	}
-	
+
 	@RequestMapping("/updateBoardf.do")
 	public String updateBoardf(BoardVO vo, Model model, HttpSession session,@RequestParam String curPage) {
 		
@@ -125,6 +118,7 @@ public class BoardController {
 			System.out.println("keyword: -" + vo.getLi() + "-");
         	session.removeAttribute("search");
         	session.removeAttribute("content");
+        	session.removeAttribute("writter");
         }else if(!"original".equals(vo.getLi())) {
         	
 		if(vo.getSearchKeyword() == null) {
@@ -134,6 +128,9 @@ public class BoardController {
         if(session.getAttribute("content") != null) {
         String content = (String) session.getAttribute("content");
         vo.setSearchCondition(content);
+        }else if(session.getAttribute("writter") != null) {
+        	String writter = (String) session.getAttribute("writter");
+            vo.setSearchCondition(writter);
         }
 		}
         }
@@ -193,6 +190,8 @@ public class BoardController {
 			session.setAttribute("search", vo.getSearchKeyword());
 			if("CONTENT".equals(vo.getSearchCondition())) {
 				session.setAttribute("content", vo.getSearchCondition());
+			}else if("WRITTER".equals(vo.getSearchCondition())) {
+				session.setAttribute("writter", vo.getSearchCondition());
 			}
 			}
 		
@@ -367,19 +366,6 @@ public class BoardController {
 	
 
 	
-	@RequestMapping(value="/deleteComment.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String deleteComment(CommentVO vo, HttpSession session,Model model,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
-		
-
-		//commentService.deleteComment(vo);
-		int a1 = vo.getSeq();
-		String bdseq1 = String.valueOf(a1);
-		session.setAttribute("mySeq", bdseq1);
-		redirectAttributes.addAttribute("curPage", curPage);
-		return "redirect:getBoard.do";
-		
-	}
 	
 	@RequestMapping(value="/addComment.do")
     @ResponseBody
@@ -440,13 +426,24 @@ public class BoardController {
         
     }
     
-    @RequestMapping("/delete/{cno}") //댓글 삭제  
+
+	@RequestMapping(value="/deleteComment.do")
     @ResponseBody
-    private int mCommentServiceDelete(@PathVariable int cno) throws Exception{
+    public String ajax_deleteComment(@RequestBody Map<String, Object> params, ParameterMap paramMap,String ccd, HttpServletRequest request) throws Exception{
+		 ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+     System.out.println(params.toString());
+        try{
+     
+          
+
+            commentService.deleteComment(ccd);
+            
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         
-        return commentService.deleteComment(cno);
+        return "success";
     }
-
-
 
 }
