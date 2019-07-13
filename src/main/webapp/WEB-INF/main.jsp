@@ -176,7 +176,7 @@ ul {
 
 										<td class=${(board.t_noti == 'Y') ? 'notie' : '' }><img
 											class="fancy"
-											style="display: ${(board.t_password == null) ? 'none':'' };"
+											style="display: ${(board.t_password == '구분') ? 'none':'' };"
 											src="image/icon_secret.gif" alt="titleImage"><a
 											href="dpgetBoardInsert.do?seq=${board.seq }&curPage=1&t_password=${board.t_password}">
 												${board.t_title } </a></td>
