@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +11,9 @@
         .flex_div {
             display: flex;
         }
-
         #flex_div_children1 {
             width: 50%;
         }
-
         #flex_div_children2 {
             width: 50%;
             display: flex;
@@ -43,9 +42,9 @@
                     <th>프로젝트명</th>
                     <td>${project.project_name }</td>
                     <th>계약금액</th>
-                    <td>${project.project_contract_amount } 원</td>
+                    <td><fmt:formatNumber pattern="##,###,###,###" value="${project.project_contract_amount }" />원</td>
                     <th>계약기간</th>
-                    <td>${project.project_start_date }&nbsp;/&nbsp;${project.project_end_date }</td>
+                    <td>${project.project_start_date }&nbsp;&nbsp;~&nbsp;${project.project_end_date }</td>
                 </tr>
                 <tr>
                     <th>책임자</th>
