@@ -1,11 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>프로젝트목록</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
+<script>
+	$(document).ready(function(){
+		var = ${project}
+	});
+</script>
 <style>
 	.flex_div {
 		display: flex;
@@ -42,19 +48,30 @@
 						<th>No.</th>
 						<th>제목</th>
 						<th>담당자</th>
-						<th>기간</th>
 						<th>등록일</th>
+						<th>기간</th>
+						<th>남은기한</th>
+						<th>진행기간</th>
 						<th>진행상황</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="project" items="${projectList }">
+					<c:set var="period" value="${project.project_period }" />
+					<c:set var="deadline" value="${project.project_deadline }" />
+					<fmt:formatNumber pattern="###.#" var="percentage" value="${(1 - deadline / period) * 100 }" />
 						<tr>
 							<td>${project.project_idx }</td>
 							<td><a href="getProject.do?project_idx=${project.project_idx }&currentPage=${pages.currentPage }&searchCondition=${pages.searchCondition }&searchKeyword=${pages.searchKeyword }">${project.project_name }</a></td>
 							<td>${project.user_name }</td>
-							<td>기간미작성</td>
 							<td>${project.project_reg_date }</td>
+							<td>${project.project_period } 일</td>
+							<td>${project.project_deadline } 일</td>
+							<td>
+								<div class="progress" style="">
+									<div class="progress-bar bg-success" style="width:${percentage }%">${percentage }</div>
+								</div>
+							</td>
 							<td>${project.project_progress }</td>
 						</tr>
 					</c:forEach>

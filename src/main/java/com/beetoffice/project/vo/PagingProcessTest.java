@@ -2,7 +2,7 @@ package com.beetoffice.project.vo;
 
 import com.beetoffice.project.PagingProcess;
 
-public class PagingMain {
+public class PagingProcessTest {
 
 	public static void main(String[] shockWave) {
 		
