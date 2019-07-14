@@ -21,7 +21,7 @@
 	        autofocus: true,
 	        readOnly: true
 	    });
-		readOnlyCodeMirror.setSize(1000, 600);
+		readOnlyCodeMirror.setSize(1000, 550);
 	};
 </script>
 <style>
@@ -36,13 +36,19 @@
 		display: flex;
 		justify-content: flex-end;
 	}
+	th {
+		background-color: WhiteSmoke;
+	}
+	#sourceCode {
+		margin-bottom: 10px;
+	}
 </style>
 </head>
 <body>
 <div id="page-wrapper">
 	<jsp:include page="../menu.jsp"/>
 	<div class="container" style="margin-top:30px;">
-		<h3>소스코드 상세보기</h3>
+		<h5>기능명 소스코드</h5>
 		<table class="table table-bordered">
 			<tbody>
 				<tr>
@@ -59,7 +65,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<div>
+		<div id="sourceCode">
 			<textarea row="4" cols="50" id="codesnippet_readonly">${source.source_code }</textarea>		
 		</div>
 		<div>

@@ -8,9 +8,9 @@
 <title>프로젝트목록</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
 <script>
-	$(document).ready(function(){
+	/* $(document).ready(function(){
 		var = ${project}
-	});
+	}); */
 </script>
 <style>
 	.flex_div {
@@ -34,6 +34,12 @@
 		display: flex;
 		justify-content: center;
 	}
+	tr {
+		text-align: center;
+	}
+	th {
+		background-color: WhiteSmoke; 
+	}
 </style>
 </head>
 <body>
@@ -41,8 +47,8 @@
 	<jsp:include page="../menu.jsp"/>
 	<div class="container" style="margin-top:30px;">
 		<div class="container-fluid">
-			<h4>프로젝트목록</h4>
-			<table class="table table-striped">
+			<h5>프로젝트목록</h5>
+			<table class="table table-bordered">
 				<thead>
 					<tr>
 						<th>No.</th>
@@ -52,29 +58,38 @@
 						<th>종료일</th>
 						<th>기간</th>
 						<th>진행</th>
-						<th>진행상황</th>
+						<th>상황</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="project" items="${projectList }">
-					<c:set var="period" value="${project.project_period }" />
-					<c:set var="deadline" value="${project.project_deadline }" />
-					<fmt:formatNumber pattern="###.#" var="percentage" value="${(1 - deadline / period) * 100 }" />
 						<tr>
-							<td>${project.project_idx }</td>
-							<td><a href="getProject.do?project_idx=${project.project_idx }&currentPage=${pages.currentPage }&searchCondition=${pages.searchCondition }&searchKeyword=${pages.searchKeyword }">${project.project_name }</a></td>
+							<td style="width:50px;">${project.project_idx }</td>
+							<td style="text-align:left;padding-left:30px;width:240px;"><a href="getProject.do?project_idx=${project.project_idx }&currentPage=${pages.currentPage }&searchCondition=${pages.searchCondition }&searchKeyword=${pages.searchKeyword }">${project.project_name }</a></td>
 							<td>${project.user_name }</td>
 							<td>${project.project_start_date }</td>
 							<td>${project.project_end_date }</td>
-							<td>${project.project_period }</td>
-							<td>
-								<div class="progress" style="">
-									<div class="progress-bar bg-success" style="width:${percentage }%">${percentage }</div>
-								</div>
-							</td>
-							<td>${project.project_progress }</td>
+							<td style="width:90px">${project.project_total_period }</td>
+							<c:choose>
+								<c:when test="${project.project_progress_percentage <= 0 }">
+									<td style="width:135px;">
+										<div class="progress" style="">
+											<div class="progress-bar bg-success" style="width:0%">0%</div>
+										</div>
+									</td>
+								</c:when>							
+								<c:otherwise>
+									<td style="width:135px;">
+										<div class="progress" style="">
+											<div class="progress-bar bg-success" style="width:${project.project_progress_percentage }%">${project.project_progress_percentage }%</div>
+										</div>
+									</td>
+								</c:otherwise>
+							</c:choose>
+							<td style="width:70px;">${project.project_progress }</td>
 						</tr>
 					</c:forEach>
+
 				</tbody>
 			</table>
 		</div>
