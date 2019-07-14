@@ -3,7 +3,7 @@ function searchpeople(){
         var img = item.user_picture;
         var string =
             "<tr>" +
-            "<td scopr='col'>" +
+            "<td scope='col'>" +
             `<img style="width:30px;height:40px;" src="image/${img}" alt="프로필 사진">` +
             "</td>" +
             "<td scope='col' style='padding-top:20px;'>" + item.user_name + "</td>" +
