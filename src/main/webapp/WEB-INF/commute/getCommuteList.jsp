@@ -212,8 +212,12 @@
     </style>
 
     <script>
-        $(document).ready(function () {
+   
 
+        $(function () {
+        	$(".chkbox2").click(function() {
+        		document.sub1.submit();
+    		});
             //datepicker 한국어로 사용하기 위한 언어설정
             $.datepicker.setDefaults($.datepicker.regional['ko']);
 
@@ -237,6 +241,7 @@
                     $("#" + eleId).datepicker("option", optionName, selectedDate);
                     $(".searchDate").find(".chkbox2").removeClass("on");
                 }
+            
             });
 
             //시작일.
@@ -314,6 +319,8 @@
             $("#searchStartDate").datepicker("option", "maxDate", endDate);
 
         }
+        
+        
 
 
     </script>
@@ -325,7 +332,8 @@
 <div id="page-wrapper">
     <jsp:include page="../menu.jsp"></jsp:include>
     <div class="container" style="margin-top:30px;">
-        <form action="getCommuteList.do" method="POST">
+        <form action="getCommuteList.do" method="POST" name="sub1">
+        
 
             <!-- search -->
             <table class="searchBox">
@@ -339,6 +347,7 @@
                     <th>조회기간</th>
                     <td>
                         <ul class="searchDate">
+                        
                             <li>
                                 <span class="chkbox2">
                                     <input type="radio" name="dateType" id="dateType1" onclick="setSearchDate('0d')"/>

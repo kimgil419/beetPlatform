@@ -96,6 +96,7 @@
 		</tr>
 		</c:if>
 		</c:forEach>
+		<tr>
 		<th colspan="7">긴급결재서류</th>
 		</tr>
 			
