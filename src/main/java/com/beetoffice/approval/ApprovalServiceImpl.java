@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.beetoffice.approval.ApprovalService;
 import com.beetoffice.approval.ApprovalVO;
+import com.beetoffice.approval.PagingProcessApproval;
 
 
 //@Service : @Component를 상속받아 만든 
@@ -43,12 +44,36 @@ public class ApprovalServiceImpl implements ApprovalService {
 	public ApprovalVO getApproval(ApprovalVO vo) {
 		return approvalDAO.getApproval(vo);
 	}
-
+	
 	@Override
 	public List<ApprovalVO> getApprovalList(ApprovalVO vo) {
 		return approvalDAO.getApprovalList(vo);
 	}
 
+	@Override
+	public List<ApprovalVO> getApprovalListDone(PagingProcessApproval pages) {
+		return approvalDAO.getApprovalListDone(pages);
+	}
+	
+	@Override
+	public List<ApprovalVO> getApprovalListMy(PagingProcessApproval pages) {
+		return approvalDAO.getApprovalListMy(pages);
+	}
+	
+	
+	@Override
+	public int getTotalPostDone(PagingProcessApproval pages) {
+		System.out.println(">> Service: getTotalPostDone()");
+		return approvalDAO.getTotalPostDone(pages);
+	}
+	
+	@Override
+	public int getTotalPostMy(PagingProcessApproval pages) {
+		System.out.println(">> Service: getTotalPostDone()");
+		return approvalDAO.getTotalPostMy(pages);
+	}
+
+	
 }
 
 

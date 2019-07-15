@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 
+
+
+
 @Controller
 
 @SessionAttributes("approval")
 public class ApprovalController {
+	
 	
 	
 	@Autowired
@@ -30,8 +34,8 @@ public class ApprovalController {
 		//key: ?���?, value: TITLE
 		//key: ?��?��, value: CONTENT
 		Map<String, String> conditionMap = new HashMap<>();
-		conditionMap.put("제목", "TITLE");
-		conditionMap.put("내용", "CONTENT");
+		conditionMap.put("제목", "a_title");
+		conditionMap.put("내용", "a_content");
 		
 		return conditionMap;
 	}
@@ -46,15 +50,27 @@ public class ApprovalController {
 		return "approval/getApproval";
 	}
 	
-	
-	@RequestMapping("/getApprovalList.do")
-	public String getApprovalList(ApprovalVO vo, 
-			Model model) {
+	@RequestMapping("/getApprovalDone.do")
+	public String getApprovalDone(ApprovalVO vo, Model model) {
 		
+		model.addAttribute("approval", approvalService.getApproval(vo)); 
+		
+		return "approval/getApprovalDoneMy";
+	}
+	@RequestMapping("/getApprovalMy.do")
+	public String getApprovalMy(ApprovalVO vo, Model model) {
+		
+		model.addAttribute("approval", approvalService.getApproval(vo)); 
+		
+		return "approval/getApprovalDoneMy";
+	}
+	@RequestMapping("/getApprovalList.do")
+	public String getApprovalList(ApprovalVO vo, /*PagingProcess pages,*/
+			Model model) {
 		
 		//null체크 ?�� 초기�? ?��?��
 		if (vo.getSearchCondition() == null) {
-			vo.setSearchCondition("TITLE");
+			vo.setSearchCondition("a_title");
 		}
 		if (vo.getSearchKeyword() == null) {
 			vo.setSearchKeyword("");
@@ -62,10 +78,67 @@ public class ApprovalController {
 		
 		
 		List<ApprovalVO> approvalList = approvalService.getApprovalList(vo);
-		
 		model.addAttribute("approvalList", approvalList);
+
 		
 		return "approval/getApprovalList";
+	}	
+	@RequestMapping("/getApprovalListDone.do")
+	public String getApprovalListDone(ApprovalVO vo, PagingProcessApproval pages,
+			Model model, HttpServletRequest request) {
+		
+		
+		
+		if (pages.getSearchCondition() == null) {
+			pages.setSearchCondition("a_title");
+		}
+		if (pages.getSearchKeyword() == null) {
+			pages.setSearchKeyword("");
+		}
+		String user_id =  (String) request.getSession().getAttribute("user_id");
+		pages.setUser_id(user_id);
+	
+		int totalpages = approvalService.getTotalPostDone(pages);
+		pages.setTotalPost(totalpages);
+		
+		System.out.println(totalpages);
+		
+		List<ApprovalVO> approvalListDone = approvalService.getApprovalListDone(pages);
+		model.addAttribute("approvalListDone", approvalListDone);
+		
+		System.out.println(pages);
+		model.addAttribute("pages", pages);
+
+		
+	return "approval/getApprovalListDone";
+	}	
+	
+	@RequestMapping("/getApprovalListMy.do")
+	public String getApprovalListMy(ApprovalVO vo, PagingProcessApproval pages,
+			Model model, HttpServletRequest request ) {
+		
+		
+		//null체크 ?�� 초기�? ?��?��
+		if (pages.getSearchCondition() == null) {
+			pages.setSearchCondition("a_title");
+		}
+		if (pages.getSearchKeyword() == null) {
+			pages.setSearchKeyword("");
+		}
+		
+		String user_id =  (String) request.getSession().getAttribute("user_id");
+		pages.setUser_id(user_id);
+		
+		pages.setTotalPost(approvalService.getTotalPostDone(pages));
+		
+		List<ApprovalVO> approvalListMy = approvalService.getApprovalListMy(pages);
+		model.addAttribute("approvalListMy", approvalListMy);
+		
+		
+		model.addAttribute("pages", pages);
+
+		
+		return "approval/getApprovalListMy";
 	}	
 	
 	@RequestMapping("/insertApproval.do")

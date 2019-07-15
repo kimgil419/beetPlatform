@@ -64,17 +64,30 @@ public class SearchEmployeeController {
 
     @RequestMapping(value = "/userList.do", produces = "application/json; charset=utf8")
     @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080", "http://localhost:5050"})
-    public @ResponseBody String userList(SearchEmployeeVO vo, Model model) {
+    public @ResponseBody Map userList(SearchEmployeeVO vo) {
 
         List<SearchEmployeeVO> employeelist = searchEmployeeService.getUserList(vo);
-        Gson json = new Gson();
 
         Map data = new HashMap<>();
-        data.put("firstData", employeelist.subList(0, 10));
+        data.put("firstData", employeelist);
         data.put("dataLength", employeelist.size());
 
-        System.out.println(json.toJson(data));
-        return json.toJson(data);
+        return data;
+    }
+
+    @RequestMapping(value = "/searchUserList.do", produces = "application/json; charset=utf8")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080", "http://localhost:5050"})
+    public @ResponseBody
+    Map searchUserList(String keyword) {
+
+        List<SearchEmployeeVO> list = searchEmployeeService.getUserListbyKeyword(keyword);
+
+        Map data = new HashMap<>();
+        data.put("firstData", list);
+        data.put("dataLength", list.size());
+
+
+        return data;
     }
 
     @RequestMapping(value = "/eachUserList.do", produces = "application/json; charset=utf8")
