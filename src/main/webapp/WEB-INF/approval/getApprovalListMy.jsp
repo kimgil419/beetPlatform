@@ -60,9 +60,9 @@
 							&currentPage=${pages.currentPage }&searchCondition=${pages.searchCondition }
 							&searchKeyword=${pages.searchKeyword }">${approvalList.a_title }</a></td>
 							<td>${approvalList.user_name }</td>
-							<td>${approvalList.user_id1} </td>
-							<td>${approvalList.user_id2} </td>
-							<td>${approvalList.user_id3} </td>							
+							<td>${approvalList.user_name1} </td>
+							<td>${approvalList.user_name2} </td>
+							<td>${approvalList.user_name3} </td>							
 							<td>${approvalList.regdate }</td>
 						</tr>
 					</c:forEach>

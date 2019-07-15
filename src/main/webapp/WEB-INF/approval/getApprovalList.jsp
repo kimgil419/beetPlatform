@@ -15,6 +15,9 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 <style>
 	
 </style>
+<script>
+
+</script>
 </head>
 <body>
 <div id="page-wrapper">
@@ -28,8 +31,8 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 	<p>
 	
 	<button onclick="window.open('ApprovalForm.do','결재 문서 작성','width=510, height=700, location=no, status=no, scrollbars=yes');"> 결재 문서 작성 </button>
-	<button onclick="window.open('getApprovalListDone.do?currentPage=1','지난 문서 목록','width=510, height=700, location=no, status=no, scrollbars=yes');"> 지난 문서 목록 </button>
-	<button onclick="window.open('getApprovalListMy.do?currentPage=1','내가 쓴 문서 목록','width=510, height=700, location=no, status=no, scrollbars=yes');"> 내가쓴 문서 목록 </button>
+	<button onclick="window.open('getApprovalListDone.do?currentPage=1','지난 문서 목록','width=1000, height=700, location=no, status=no, scrollbars=yes');"> 지난 문서 목록 </button>
+	<button onclick="window.open('getApprovalListMy.do?currentPage=1','내가 쓴 문서 목록','width=1000, height=700, location=no, status=no, scrollbars=yes');"> 내가쓴 문서 목록 </button>
 	
 	</p>
 	<table class="table table-hover">
@@ -59,9 +62,9 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 				</a>
 			</td>
 			<td>${approval.user_name}</td>
-			<td>${approval.user_id1}</td>
-			<td>${approval.user_id2}</td>
-			<td>${approval.user_id3}</td>
+			<td>${approval.user_name1}</td>
+			<td>${approval.user_name2}</td>
+			<td>${approval.user_name3}</td>
 			<td>${approval.regdate}</td>
 		</tr>
 		</c:if>
@@ -99,9 +102,9 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 				</a>
 			</td>
 			<td>${approval.user_name}</td>
-			<td>${approval.user_id1}</td>
-			<td>${approval.user_id2}</td>
-			<td>${approval.user_id3}</td>
+			<td>${approval.user_name1}</td>
+			<td>${approval.user_name2}</td>
+			<td>${approval.user_name3}</td>
 			<td>${approval.regdate}</td>
 		</tr>
 		</c:if>
@@ -138,9 +141,9 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 				</a>
 			</td>
 			<td>${approval.user_name}</td>
-			<td>${approval.user_id1}</td>
-			<td>${approval.user_id2}</td>
-			<td>${approval.user_id3}</td>
+			<td>${approval.user_name1}</td>
+			<td>${approval.user_name2}</td>
+			<td>${approval.user_name3}</td>
 			<td>${approval.regdate}</td>
 		</tr>
 		</c:if>
@@ -175,9 +178,9 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 				</a>
 			</td>
 			<td>${approval.user_name}</td>
-			<td>${approval.user_id1}</td>
-			<td>${approval.user_id2}</td>
-			<td>${approval.user_id3}</td>
+			<td>${approval.user_name1}</td>
+			<td>${approval.user_name2}</td>
+			<td>${approval.user_name3}</td>
 			<td>${approval.regdate}</td>
 		</tr>
 		</c:if>

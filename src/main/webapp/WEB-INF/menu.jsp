@@ -48,6 +48,12 @@
 
 
     </style>
+    <script>
+ if ( "${user_id}" == "" ) {
+	 alert("잘못된 접근 다시 로그인 하세요");
+	 location.href = "/";
+ };
+ </script>
 </head>
 <body>
 
