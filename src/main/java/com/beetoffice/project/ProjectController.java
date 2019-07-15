@@ -204,7 +204,15 @@ public class ProjectController {
 		return "redirect:getProject.do?project_idx=" + svo.getProject_idx();
 	}
 	
-	@RequestMapping(value = "selectEmployee.do", produces = "application/json; charset=utf8")
+	@RequestMapping(value="selectEmployee", produces="application/json; charset=utf8")
+	public String selectEmployee(SearchEmployeeVO vo, Model model) {
+		List<SearchEmployeeVO> employeeList = searchEmployeeService.getUserList(vo);
+		Gson json = new Gson();
+		
+		model.addAttribute("employeeList", json.toJson(employeeList));
+		
+		return null;
+	}
 	@RequestMapping("modal")
 	public String modal() {
 		
