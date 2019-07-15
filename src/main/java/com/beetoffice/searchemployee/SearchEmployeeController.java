@@ -65,7 +65,7 @@ public class SearchEmployeeController {
     @RequestMapping(value = "/userList.do", produces = "application/json; charset=utf8")
     @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080", "http://localhost:5050"})
     public @ResponseBody Map userList(SearchEmployeeVO vo) {
-
+    	
         List<SearchEmployeeVO> employeelist = searchEmployeeService.getUserList(vo);
         Gson json = new Gson();
 
