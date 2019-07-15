@@ -71,29 +71,53 @@ alert(result + '를 쓸 수 없는 권한입니다'); //아무 조건도 안걸�
 <div id="page-wrapper">
 <jsp:include page="../menu.jsp"/>
 <div id="container">
+
 	<h1>글등록</h1>
 	<p><a href="logout.do">Log-out</a></p>
 	<hr>
+	<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	<form method="post" name ="frm"
 	        enctype="multipart/form-data">
-		<fieldset>
-		<legend>게시판</legend>
-		<p>제목 : <input type="text" name="t_title" size="30"></p>
-		<p>작성자 : <input type="text" name="user_name" value="${user_name }"></p>
-		<p>본문 : <select name="ss" id="ss" onchange="categoryChange()">
+	        
+	    
+		
+		<div class="form-group">
+		<label>제목</label>
+		<input type="text" class="form-control"  name="t_title"  size="30">
+		</div>
+		<div class="form-group">
+		<label>작성자</label>
+		<input type="text" class="form-control"  name="user_name" value="${user_name }">
+		</div>
+		<div class="form-group">
+		<label>본문</label>
+		        <select class="form-control"  name="ss" id="ss" onchange="categoryChange()">
                     <option value="X">선택사항</option>
                     <option value="Y">공지사항</option>
                     <option value="N">일반글</option>      
                 </select>
-                <input type="hidden" name="t_noti" id="category"></p>
-	<p>내용 : <textarea name="t_content" rows="10" cols="40"></textarea></p>
-	<p>업로드 : <input type="file" name="t_imgs"></p>
+                <input type="hidden" name="t_noti" id="category">
+        </div>
+        <div class="form-group">    
+        <label>내용</label>    
+	     <textarea name="t_content" class="form-control"  rows="10" cols="40"></textarea>
+	    </div>
+	    <div class="form-group">
+	    <label>업로드</label>
+	    <input type="file" class="form-control"  name="t_imgs">
 		
-				<input type="button" value="새글 등록" onclick="send_go()">
+				
+	    </div>
+
 	
-	</fieldset>
 	</form>
+	</div>
+	</div>
+	<hr>
+	<input type="button" value="새글 등록" onclick="send_go()">
 	<p><a href="getBoardList.do?curPage=${c2 }">글 목록 가기</a></p>
+
 </div>
 </div>
 </body>

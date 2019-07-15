@@ -47,7 +47,7 @@ public class DpBoardController {
 		Map<String, String> conditionMap = new HashMap<>();
 		conditionMap.put("제목", "TITLE");
 		conditionMap.put("내용", "CONTENT"); //단지 getboardlist.jsp에서 검색 옵션을 보여주기 위한것 
-		
+		conditionMap.put("작성자", "WRITTER");
 		return conditionMap;
 	}
 	
@@ -61,7 +61,7 @@ public class DpBoardController {
 		
 		String pd = vo.getT_password();
 		//session.setAttribute("c1",curPage);
-		System.out.println("이게 뭘까요????????????????????????????????????????????????????????????????????????????????" + vo.getT_password().toString());
+		
 
 		redirectAttributes.addAttribute("curPage", curPage);
 		session.setAttribute("pd", pd);
@@ -87,7 +87,7 @@ public class DpBoardController {
 		model.addAttribute("cm_list", list);
 		String pd = (String) session.getAttribute("pd");
 		vo.setT_password(pd);
-		System.out.println("이게 뭘까요????????????????????????????????????????????????????????????????????????????????" + vo.getT_password().toString());
+		
 		if(!"".equals(vo.getT_password())) {
 			String user_position = (String) session.getAttribute("user_position");
 			if("과장".equals(user_position) || "차장".equals(user_position) || "부장".equals(user_position) || "이사".equals(user_position) || "대표이사".equals(user_position)) {
@@ -104,19 +104,7 @@ public class DpBoardController {
 		return "dpboard/dpgetBoard";
 	}
 	
-	@RequestMapping("/dpinsertComment.do")
-	public String dpinsertComment(DpCommentVO vo, HttpSession session,@RequestParam String curPage, Model model) {
-		String id = (String) session.getAttribute("user_id");
-		vo.setUser_id(id);
-		
-		commentService.dpinsertComment(vo);
-		
-		List<DpCommentVO> list = commentService.dpgetCommentList(vo);
-		
-		model.addAttribute("cm_list", list);
-		model.addAttribute("c1", curPage);
-		return "dpboard/dpgetBoard";
-	}
+
 	
 	@RequestMapping("/dpupdateBoardf.do")
 	public String dpupdateBoardf(DpBoardVO vo, Model model, HttpSession session,@RequestParam String curPage) {
@@ -143,6 +131,7 @@ public class DpBoardController {
 			System.out.println("keyword: -" + vo.getLi() + "-");
         	session.removeAttribute("search");
         	session.removeAttribute("content");
+        	session.removeAttribute("writter");
         }else if(!"original".equals(vo.getLi())) {
         	
 		if(vo.getSearchKeyword() == null) {
@@ -152,6 +141,9 @@ public class DpBoardController {
         if(session.getAttribute("content") != null) {
         String content = (String) session.getAttribute("content");
         vo.setSearchCondition(content);
+        }else if(session.getAttribute("writter") != null) {
+        	String writter = (String) session.getAttribute("writter");
+        	vo.setSearchCondition(writter);
         }
 		}
         }
@@ -212,6 +204,8 @@ public class DpBoardController {
 		session.setAttribute("search", vo.getSearchKeyword());
 		if("CONTENT".equals(vo.getSearchCondition())) {
 			session.setAttribute("content", vo.getSearchCondition());
+		}else if("WRITTER".equals(vo.getSearchCondition())) {
+			session.setAttribute("writter", vo.getSearchCondition());
 		}
 		}
 		//---------
@@ -283,6 +277,8 @@ public class DpBoardController {
 		if(!"".equals(vo.getT_password())) {
 			String str = "[건의사항]" + vo.getT_title();
 			vo.setT_title(str);
+		}else if("".equals(vo.getT_password())) {
+			vo.setT_password("구분");
 		}
 		/* ***** 파일 업로드 처리 *************
 		 * MultipartFile 인터페이스 주요 메소드
@@ -394,17 +390,5 @@ public class DpBoardController {
 	}
 
 	
-	@RequestMapping(value="/dpdpdeleteComment.do", method=RequestMethod.POST)
-	public String dpdeleteComment(DpCommentVO vo, HttpSession session,Model model,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
-		System.out.println(">>> 글 삭제 처리 - deleteBoard()");
-		
 
-		commentService.dpdeleteComment(vo);
-		int a1 = vo.getSeq();
-		String bdseq1 = String.valueOf(a1);
-		session.setAttribute("mySeq", bdseq1);
-		redirectAttributes.addAttribute("curPage", curPage);
-		return "redirect:dpgetBoard.do";
-		
-	}
 }

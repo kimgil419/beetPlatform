@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("SearchEmployeeService")
 public class SearchEmployeeServiceImpl implements SearchEmployeeService {
@@ -25,5 +26,10 @@ public class SearchEmployeeServiceImpl implements SearchEmployeeService {
     public List<SearchEmployeeVO> getUserListForSearch(SearchEmployeeVO vo) {
         return seDAO.getListForSearch(vo);
     }
-    
+
+    @Override
+    public List<SearchEmployeeVO> getUserListForPaging(Map num) {
+        return seDAO.getListForPaging(num);
+    }
+
 }

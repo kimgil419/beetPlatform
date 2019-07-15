@@ -41,6 +41,9 @@ public class ProjectController {
 		pages.setTotalPost(projectService.getTotalPost(pages));
 		
 		List<ProjectVO> projectList = projectService.getProjectList(pages);
+		for (ProjectVO projectVO : projectList) {
+			System.out.println(projectVO);
+		}
 		model.addAttribute("projectList", projectList);
 		model.addAttribute("pages", pages);
 		
@@ -54,6 +57,7 @@ public class ProjectController {
 		model.addAttribute("pages", pages);
 		model.addAttribute("project", projectService.getProject(vo));
 		model.addAttribute("sourceList", projectService.getSourceList(vo));
+		System.out.println(">>>>>>>>>>>>>>>>>> projectVO: " + projectService.getProject(vo));
 		
 		return "project/getProject";
 	}

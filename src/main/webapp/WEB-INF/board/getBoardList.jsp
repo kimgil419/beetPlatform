@@ -10,98 +10,79 @@
 <head>
 <meta charset="UTF-8">
 <title>글목록</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <style>
-	#container {
-		width: 700px;
-		margin: 0 auto;
-	}
-	h1, h3, p { text-align: center; }
-	table { border-collapse: collapse; }
-	table, th, td {
-		border: 1px solid black;
-		margin: 0 auto;
-	}
-	th { background-color: orange; }
-	.border-none, .border-none td { border: none; }
-	.center { text-align: center; }
-	.left { text-align: left; }
-	.right { text-align: right; }
-	.orange { background-color: orange; }
-	.notie { background-color: #808080; }
-	
-	/****** 페이지 표시 부분 스타일(시작) ********/
-	.paging { list-style: none; }
-	.paging li {
-		float: left;
-		margin-right: 8px;
-	}
-	.paging li a {
-		text-decoration: none;
-		display: block;
-		padding: 3px 7px;
-		border: 1px solid #00B3DC;
-		font-weight: bold;
-		color: black;
-	}
-	.paging li a:hover {
-		background-color: #00B3DC;
-		color: white;
-	}
-	.paging .disable {
-		padding: 3px 7px;
-		border: 1px solid silver;
-		color: silver;
-	}
-	.paging .now {
-		padding: 3px 7px;
-		border: 1px solid #ff4aa5;
-		background-color: #ff4aa5;
-		color: white;
-		font-weight: bold;
-	}
-	/****** 페이지 표시 부분 스타일(끝) ********/
+.pagination>li>a { border-radius: 50% !important;margin: 0 5px;}
+.project-tab {
+    padding: 10%;
+    margin-top: -8%;
+}
+.project-tab #tabs{
+    background: #007b5e;
+    color: #eee;
+}
+.project-tab #tabs h6.section-title{
+    color: #eee;
+}
+.project-tab #tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #0062cc;
+    background-color: transparent;
+    border-color: transparent transparent #f3f3f3;
+    border-bottom: 3px solid !important;
+    font-size: 16px;
+    font-weight: bold;
+}
+.project-tab .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: #0062cc;
+    font-size: 16px;
+    font-weight: 600;
+}
+.project-tab .nav-link:hover {
+    border: none;
+}
+.project-tab thead{
+    background: #585858;
+    color: #FAFAFA;
+}
+.project-tab a.project-tab1{
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+.notie { background-color: #D8D8D8; }
 </style>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 <div id="page-wrapper">
 <jsp:include page="../menu.jsp"/>
-<div id="cotainer">
 
 
-	<!-- 검색을 위한 폼 -->
-	<form action="getBoardList.do?curPage=1" method="POST">
+
+
+<div class="center-block" style='padding-left: 40%;' >
 	<h1>사내게시판</h1>
-	<table class="border-none">
-		<tr>
-			<td>
-				<!--  
-				<select name="searchCondition">
-					<option value="TITLE">제목
-					<option value="CONTENT">내용
-				</select>
-				-->
-				<select name="searchCondition">
-				<c:forEach var="option" items="${conditionMap }">
-					<option value="${option.value }">${option.key }
-				</c:forEach>
-				</select>
-				
-				<input type="text" name="searchKeyword">
-				<input type="submit" value="검색">
-			</td>
-		</tr>
-	</table>
-	</form>
+</div>
 	
+	<section id="tabs" class="project-tab">
+	  <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 	<!-- 데이타 표시 -->
-	<table>
+	<table  class="table" cellspacing="0">
 	<thead>
 		<tr>
 			
 			<th width="200">제목</th>
-			<th width="150">작성자</th>
-			<th width="150">등록일</th>
-			<th width="100">조회수</th>
+			<th width="50">작성자</th>
+			<th width="100">등록일</th>
+			<th width="50">조회수</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -109,7 +90,7 @@
 		<tr>
 		
 			<td class=${(board.t_noti == 'Y') ? 'notie' : '' }>
-				<a href="getBoardInsert.do?seq=${board.seq }&curPage=${pvo.nowPage}">
+				<a class="project-tab1" href="getBoardInsert.do?seq=${board.seq }&curPage=${pvo.nowPage}">
 					${board.t_title }
 				</a>
 			</td>
@@ -119,18 +100,21 @@
 		</tr>
 		</c:forEach>
 	</tbody>
-	<tfoot>
+	
 		<tr>
 			<td colspan="4">
-				<ol class='paging'>
+			<nav aria-label="Page navigation example">
+				
+				
+				<ul class="pagination">
 				<%--[이전으로]에 대한 사용여부 처리 --%>
 				<c:choose>
 					<%--사용불가(disable) : 첫번째 블록인 경우 --%>
 					<c:when test="${pvo.beginPage == 1}">
-						<li class="disable">이전으로</li>
+						<li class="disabled"><a class="page-link"  >«</a></li><!-- href가 이동표시가 있으면 li태그를 비활성화해도 이동표시가 생긴다 -->
 					</c:when>
 					<c:otherwise>
-						<li><a href="getBoardList.do?curPage=${pvo.beginPage - 1 }">이전으로</a></li>
+						<li><a class="page-link" href="getBoardList.do?curPage=${pvo.beginPage - 1 }">«</a></li>
 					</c:otherwise>
 				</c:choose>	
 				
@@ -138,11 +122,11 @@
 				<c:forEach var="k" begin="${pvo.beginPage }" end="${pvo.endPage }">
 				<c:choose>
 					<c:when test="${k == pvo.nowPage }">
-						<li class="now">${k }</li>
+						<li class="page-item"><a class="page-link">${k }</a></li>
 					</c:when>
 					<c:otherwise>
-						<li>
-							<a href="getBoardList.do?curPage=${k }">${k }</a>
+						<li class="page-item">
+							<a class="page-link" href="getBoardList.do?curPage=${k }">${k }</a><!-- 부트스트랩4버전은 클래스 page-link를 써야지 페이징처리표시가 가능해진다 -->
 						</li>
 					</c:otherwise>
 				</c:choose>
@@ -152,25 +136,43 @@
 				<c:choose>
 					<%--사용불가(disable) : endPage가 전체페이지수보다 크거나 같으면 --%>
 					<c:when test="${pvo.endPage >= pvo.totalPage }">
-						<li class="disable">다음으로</li>
+					    <li class="disabled"><a class="page-link"  >»</a></li>
+						
 					</c:when>
 					<c:otherwise>
-						<li><a href="getBoardList.do?curPage=${pvo.endPage + 1 }">다음으로</a></li>
+						<li><a class="page-link" href="getBoardList.do?curPage=${pvo.endPage + 1 }">»</a></li>
 					</c:otherwise>
 					
 					
 				</c:choose>
 				    <li><a href="getBoardList.do?curPage=${pvo.nowPage }&li=original">목록으로</a></li>
 					<li><a href="insertBoardf.do?curPage=${pvo.nowPage }">새글 등록</a></li>
-				</ol>
+				</ul>
+				<form action="getBoardList.do?curPage=1" method="POST">
+		<div class="center-block" style='width:1500px; background:#F2F2F2; padding-left: 40%;'>
+		<select name="searchCondition">
+				<c:forEach var="option" items="${conditionMap }"><!-- map에 저장된 여러 키값과 벨류값을 c:foreach문으로 조정이 가능하다 -->
+					<option value="${option.value }">${option.key }<!-- submit으로 하면 저정로 벨류값을 갖고 갈 수있다 -->
+				</c:forEach>
+				</select>
+				
+				<input type="text" name="searchKeyword">
+				<input type="submit" value="검색">
+		</div>
+		</form>
+		</nav>
 			</td>
 			
 		</tr>
-	</tfoot>	
+		
 	</table>
+	</div>
+	</div>
+</section>
+	
 	<br>
 	
-</div>
+
 
 </div>
 </body>

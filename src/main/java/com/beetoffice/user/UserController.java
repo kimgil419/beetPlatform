@@ -137,7 +137,7 @@ public class UserController {
  			vo.setUser_picture(orgName);
  		} 
 	   
- 		vo.setUser_email(vo.getUser_email1() + "@" + vo.getUser_email2());
+ 		
  		vo.setUser_addr(vo.getAddr1()+","+vo.getAddr2()+","+vo.getAddr3());
       userService.insertUser(vo);
       return "redirect:getCommute.do";

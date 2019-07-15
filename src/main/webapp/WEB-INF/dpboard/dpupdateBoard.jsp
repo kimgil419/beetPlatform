@@ -8,39 +8,66 @@
 <meta charset="UTF-8">
 <title>글 상세</title>
 <style>
-	#container {
-		width: 700px;
-		margin: 0 auto;
-	}
-	h1, h3, p { text-align: center; }
-	table { border-collapse: collapse; }
-	table, th, td {
-		border: 1px solid black;
-		margin: 0 auto;
-	}
-	th.tt { background-color: orange; }
-	.center { text-align: center; }
-	.left { text-align: left; }
-	.orange { background-color: orange; }
+.project-tab {
+    padding: 10%;
+    margin-top: -8%;
+}
+.project-tab #tabs{
+    background: #007b5e;
+    color: #eee;
+}
+.project-tab #tabs h6.section-title{
+    color: #eee;
+}
+.project-tab #tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #0062cc;
+    background-color: transparent;
+    border-color: transparent transparent #f3f3f3;
+    border-bottom: 3px solid !important;
+    font-size: 16px;
+    font-weight: bold;
+}
+.project-tab .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: #0062cc;
+    font-size: 16px;
+    font-weight: 600;
+}
+.project-tab .nav-link:hover {
+    border: none;
+}
+.project-tab .tt{
+    background: #f3f3f3;
+    color: #333;
+}
+.project-tab a{
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
 </style>
 </head>
 <body>
 <div id="page-wrapper">
 <jsp:include page="../menu.jsp"/>
-<div id="container">
+<section id="tabs" class="project-tab">
+            <div class="container">
 	<h1>글 상세</h1>
-	<p><a href="dplogout.do">Log-out</a></p>
+	<p><a href="logout.do">Log-out</a></p>
 	<hr>
 	<form action="dpupdateBoard.do" method="post"
 	enctype="multipart/form-data">
 	<input type="hidden" name="seq" value="${board.seq}">
 	<input type="hidden" name="curPage" value="${c3 }">
-	<table>
+	<table class="table" cellspacing="0">
 		<tr>
-			<th width="70" class="tt">제목</th>
+			<th class="tt">제목</th>
 			<td><input type="text" name="t_title" 
 						value="${board.t_title}">
 			</td>
+			
 		</tr>
 		<tr>
 			<th class="tt">작성자</th>
@@ -82,11 +109,12 @@
 	<p>
 		<a href="dpinsertBoardf.do?curPage=${c3 }">글쓰기</a>&nbsp;&nbsp;
 		
-		<a href="dpdeleteBoards.do?seq=${board.seq }&curPage=${c3 }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
+		<a href="dpdeleteBoard.do?seq=${board.seq }&curPage=${c3 }" ${(board.user_id == user_id) ? '':'hidden' }>글삭제</a>&nbsp;&nbsp;
 		
 		<a href="dpgetBoardList.do?curPage=${c3 }">글목록</a>
 	</p>
 </div>
+</section>
 </div>
 </body>
 </html>

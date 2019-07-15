@@ -40,6 +40,7 @@
 	});
 	function calculateRow(row) {
 	    var price = +row.find('input[name^="price"]').val();
+
 	}
 	function calculateGrandTotal() {
 	    var grandTotal = 3;
@@ -48,50 +49,7 @@
 	    });
 	    $("#grandtotal").text(grandTotal.toFixed(2));
 	}
-	function insertProject(frm) {
-		if(frm.project_name.value.trim()=="") {
-			alert("프로젝트이름을 입력해주세요.");
-			frm.project_name.value="";
-			frm.project_name.focus();
-			return false;
-		}
-		if(frm.project_contractor.value.trim()=="") {
-			alert("계약업체를 입력해주세요.");
-			frm.project_contractor.value="";
-			frm.project_contractor.focus();
-			return false;
-		}
-		if(frm.project_contract_amount.value=="") {
-			alert("계약금액을 입력해주세요.");
-			frm.project_contract_amount.value="";
-			frm.project_contract_amount.focus();
-			return false;
-		}
-		if(frm.project_start_date.value=="") {
-			alert("시작일을 입력해주세요.");
-			frm.project_start_date.focus();
-			return false;
-		}
-		if(frm.project_end_date.value.trim()=="") {
-			alert("종료일을 입력해주세요.");
-			frm.project_end_date.focus();
-			return false;
-		}
-		if(frm.project_start_date.value >= frm.project_end_date.value) {
-			alert("시작일이 종료일과 같거나 늦습니다.");
-			frm.project_start_date.focus();
-			return false;
-		}
-		if(frm.project_contract_amount.value <= 0) {
-			alert("계약금액을 제대로 입력해주세요.");
-			frm.project_name.value="";
-			frm.project_contract_amount.focus();
-			return false;
-		}
-		/* if(frm.souce_name) */
-		frm.action="insertProject.do";
-		frm.submit();
-	}
+	function 
 </script>
 <style>
 	.flex_div {
@@ -111,26 +69,26 @@
 <div id="page-wrapper">
 	<jsp:include page="../menu.jsp"/>
 	<div class="container" style="margin-top:30px;">
-		<form method="post">
+		<form action="insertProject.do" method="post">
 			<h4>프로젝트 작성</h4>
 			<div>
 				<table class="table order-bordered">
 					<tbody>
 						<tr>
-							<th>프로젝트명</th>
-							<td><input type="text" name="project_name"></td>
-						</tr>
-						<tr>
 							<th>계약업체</th>
 							<td><input type="text" name="project_contractor"></td>
 						</tr>
 						<tr>
-							<th>계약금액</th>
-							<td><input type="number" name="project_contract_amount"></td>
-						</tr>
-						<tr>
 							<th>계약기간</th>
 							<td><input type="date" name="project_start_date"><input type="date" name="project_end_date"></td>
+						</tr>
+						<tr>
+							<th>프로젝트명</th>
+							<td><input type="text" name="project_name"></td>
+						</tr>
+						<tr>
+							<th>계약금액</th>
+							<td><input type="number" name="project_contract_amount"></td>
 						</tr>
 						<tr>
 							<th>책임자</th>
@@ -184,8 +142,7 @@
 			</div>
 			<div class="flex_div">
 				<div id="flex_div_children1">
-					<input type="button" value="등록f" onclick="insertProject(this.form); return false;">
-					<input type="button" value="등록" onclick="insertProject(this.form);">
+					<input type="submit" value="등록">
 					<input type="reset" value="재작성">
 				</div>
 				<div id="flex_div_children2">

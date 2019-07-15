@@ -15,21 +15,13 @@ public class DpCommentServiceImpl implements DpCommentService {
 		System.out.println(">> CommentServiceImpl 객체 생성");
 	}
 
-	@Override
-	public void dpinsertComment(DpCommentVO vo) {
-		commentDAO.dpinsertComment(vo);
-		
-	}
+
 
 	@Override
 	public List<DpCommentVO> dpgetCommentList(DpCommentVO vo) {
 		return commentDAO.dpgetCommentList(vo);
 	}
 
-	@Override
-	public void dpdeleteComment(DpCommentVO vo) {
-		commentDAO.dpdeleteComment(vo);
-		
-	}
+
 
 }

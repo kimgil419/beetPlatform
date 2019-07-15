@@ -10,7 +10,11 @@ public class ProjectVO {
 	@Getter @Setter
 	int project_idx, project_contract_amount;
 	@Getter @Setter
-	String project_name, project_contractor, project_progress, project_manager, user_name,
-		project_reg_date, project_start_date, project_end_date;
-//		searchCondition, searchKeyword;
+	String project_name, project_contractor, project_progress, project_manager, user_name;
+	@Getter @Setter
+	String project_reg_date, project_start_date, project_end_date;
+	@Getter @Setter
+	String project_total_period, project_progress_period;
+	@Getter @Setter
+	Double project_progress_percentage;
 }
