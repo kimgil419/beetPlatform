@@ -21,7 +21,7 @@
 	</properties>
 
 	<dependencies>
-<!-- https://mvnrepository.com/artifact/org.json/json -->
+<!-- https://mvnrepository.com/artifact/org.json/json --><!-- jsonarray를 쓰기 위한것 -->
 
 <dependency>
 
