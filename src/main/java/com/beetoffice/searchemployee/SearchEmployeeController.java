@@ -68,17 +68,10 @@ public class SearchEmployeeController {
     	
         List<SearchEmployeeVO> employeelist = searchEmployeeService.getUserList(vo);
 
-        int size = employeelist.size();
-
         Map data = new HashMap<>();
-        if(size<10){
-            data.put("firstData", employeelist.subList(0, size));
-        } else {
-            data.put("firstData", employeelist.subList(0, 10));
-        }
+        data.put("firstData", employeelist);
         data.put("dataLength", employeelist.size());
 
-        System.out.println(data);
         return data;
     }
 
@@ -87,23 +80,12 @@ public class SearchEmployeeController {
     public @ResponseBody
     Map searchUserList(String keyword) {
 
-        System.out.println(keyword);
-
         List<SearchEmployeeVO> list = searchEmployeeService.getUserListbyKeyword(keyword);
 
-        System.out.println(list);
-
-        int size = list.size();
-
         Map data = new HashMap<>();
-        if(size<10){
-            data.put("firstData", list.subList(0, size));
-        } else {
-            data.put("firstData", list.subList(0, 10));
-        }
+        data.put("firstData", list);
         data.put("dataLength", list.size());
 
-        System.out.println(data);
 
         return data;
     }
@@ -115,7 +97,6 @@ public class SearchEmployeeController {
         System.out.println(keyword);
         System.out.println(start);
         System.out.println(length);
-
 
         Map data = new HashMap<>();
         data.put("start", start);
