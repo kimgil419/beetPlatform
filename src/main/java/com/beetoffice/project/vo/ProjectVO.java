@@ -14,9 +14,7 @@ public class ProjectVO {
 	@Getter @Setter
 	String project_reg_date, project_start_date, project_end_date;
 	@Getter @Setter
-	String project_period, project_deadline;
+	String project_total_period, project_progress_period;
 	@Getter @Setter
-	double project_percentage;
-	
-	
+	Double project_progress_percentage;
 }
