@@ -37,14 +37,6 @@
     var employeelist = ${list};
     var list = [];
 
-    function template(data) {
-        var html = '<ul>';
-        $.each(data, function (index, item) {
-            html += '<li>' + item + '</li>';
-        });
-        html += '</ul>';
-        return html;
-    }
 
     $(function () {
 
@@ -90,7 +82,6 @@
             <div style="padding-top:4px;display:inline-block;" onclick="searchkeyword()"><span><i class="fas fa-search" style="color: lightgrey;"></i></span></div>
         </div>
         <div style="clear:both"></div>
-        </form>
         <br/>
         <div id="here"></div>
         <div id="pagination-bar" style="margin-left:540px;"></div>
