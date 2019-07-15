@@ -427,17 +427,17 @@ public class BoardController {
     }
     
 
-	@RequestMapping(value="/deleteComment.do")
+    @RequestMapping(value="/deleteComment.do")
     @ResponseBody
-    public String ajax_deleteComment(@RequestBody Map<String, Object> params, ParameterMap paramMap,String ccd, HttpServletRequest request) throws Exception{
-		 ModelAndView mv = new ModelAndView();
-        HttpSession session = request.getSession();
-     System.out.println(params.toString());
+    public String ajax_deleteComment(@RequestParam("codes") String id) throws Exception{ //requestbody로 하면 제이슨을 스트링으로 받을시 제이슨형태로 받는다
+         ModelAndView mv = new ModelAndView();
+    
+     //System.out.println(params.toString());
         try{
      
           
-
-            commentService.deleteComment(ccd);
+           //System.out.println("ccd.toString()"+ccd.toString());
+            commentService.deleteComment(id.toString());
             
         } catch (Exception e){
             e.printStackTrace();
