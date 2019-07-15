@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>프로젝트수정</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
+<link href="/css/project_common.css" rel="stylesheet" type="text/css" />
+<script src="https://kit.fontawesome.com/9c3276f165.js"></script>
 <script>
 	$(document).ready(function(){
 		switch ("${project.project_progress }") {
@@ -34,7 +36,7 @@
 		$("#addrow").on("click", function () {
 			var newRow = $("<tr>");
 	        var cols = "";
-	        cols += '<td><input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">' +
+	        cols += '<td class="col-sm-"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-search-plus"></i></button>' +
             		'<input type="text" name="user_id">' +
             		'<input type="text" name="user_name" readonly="readonly"></td>';
             cols += '<td><input type="text" name="source_name">' +
@@ -46,7 +48,7 @@
             			'<option value="완료">완료</option>' +
             			'<option value="보류">보류</option>' +
             			'<option value="폐기">폐기</option>';
-            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger " value="삭제"></td>';
+			cols += '<td><button type="button" class="ibtnDel"><i class="fas fa-eraser"></i></button></td>';
 	        newRow.append(cols);
 	        $("table#function_table").append(newRow);
 	        counter++;
@@ -93,8 +95,8 @@
 		<form action="updateProject.do?project_idx=${project.project_idx}" method="post">
 			<div>
 				<div>
-					<h3>프로젝트 수정</h3>
-					<table class="table table-orderlist">
+					<h5>프로젝트 수정</h5>
+					<table class="table table-bordered">
 						<tbody>
 							<tr>
 								<th>계약업체</th>
@@ -130,12 +132,13 @@
 				
 				
 			<div>
-			    <table id="function_table" class=" table order-list">
+			    <table id="function_table" class="table table-bordered">
 				    <thead>
 				        <tr>
 				            <th>담당자</td>
 				            <th>기능</td>
 				            <th>진행상태</td>
+				            <th>삭제</th>
 				        </tr>
 				    </thead>
 				    <tbody>
@@ -182,16 +185,15 @@
 					            	</script>
 					            </td>
 								<td>
-									<input type="button" class="ibtnDel btn btn-md btn-danger "  value="삭제">
+									<button type="button" class="ibtnDel"><i class="fas fa-eraser"></i></button>
 								</td>
 				    		</tr>
 				    	</c:forEach>
-				      
 				    </tbody>
 				    <tfoot>
 				        <tr>
-				            <td colspan="5" style="text-align: left;">
-				                <input type="button" class="btn btn-block " id="addrow" value="추가" />
+				            <td colspan="5" style="text-align: center;">
+				                <button type="button" id="addrow"><i class="fas fa-folder-plus fa-2x"></i></button>
 				            </td>
 				        </tr>
 				    </tfoot>

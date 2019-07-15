@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>코드상세보기</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
+<link href="/css/project_common.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.0/theme/eclipse.css" integrity="sha256-WhzJFLQmMeYNz3p+/UEqGJczEHrgZQiYawzX76gjnuo=" crossorigin="anonymous" />
 <script src="http://codemirror.net/lib/codemirror.js"></script>

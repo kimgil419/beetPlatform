@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>프로젝트작성</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
+<link href="/css/project_common.css" rel="stylesheet" type="text/css" />
 <script src="https://kit.fontawesome.com/9c3276f165.js"></script>
 <script>
 	$(document).ready(function() {
@@ -93,26 +94,13 @@
 		frm.submit();
 	}
 </script>
-<style>
-	.flex_div {
-		display: flex;
-	}
-	#flex_div_children1 {
-		width: 50%;
-	}
-	#flex_div_children2 {
-		width: 50%;
-		display: flex;
-		justify-content: flex-end;
-	}
-</style>
 </head>
 <body>
 <div id="page-wrapper">
 	<jsp:include page="../menu.jsp"/>
 	<div class="container" style="margin-top:30px;">
 		<form method="post">
-			<h4>프로젝트 작성</h4>
+			<h5>프로젝트작성</h5>
 			<div>
 				<table class="table order-bordered">
 					<tbody>
@@ -153,12 +141,13 @@
 				</table>
 			</div>
 			<div>
-			    <table id="function_table" class=" table order-list">
+			    <table id="function_table" class="table table-bordered">
 				    <thead>
 				        <tr>
 				            <th>담당자</th>
 				            <th>기능</th>
 				            <th>진행상태</th>
+				            <th>삭제</th>
 				        </tr>
 				    </thead>
 				    <tbody>
@@ -189,6 +178,8 @@
 					<input type="reset" value="재작성">
 				</div>
 				<div id="flex_div_children2">
+				</div>
+				<div id="flex_div_children3">
 					<a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null"><input type="button" value="목록"></a>
 					<a href="getCommute.do"><input type="button" value="메인"></a>
 				</div>

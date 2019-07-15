@@ -7,40 +7,12 @@
 <meta charset="UTF-8">
 <title>프로젝트목록</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
+<link href="/css/project_common.css" rel="stylesheet" type="text/css" />
 <script>
 	/* $(document).ready(function(){
 		var = ${project}
 	}); */
 </script>
-<style>
-	.flex_div {
-		display: flex;
-	}
-	#flex_div_children1 {
-		width: 20%;
-	}
-	#flex_div_children2 {
-		width: 60%;
-		display: flex;
-		justify-content: center;
-	}
-	
-	#flex_div_children3 {
-		width: 20%;
-		display: flex;
-		justify-content: flex-end;
-	}
-	#flex_div_search {
-		display: flex;
-		justify-content: center;
-	}
-	tr {
-		text-align: center;
-	}
-	th {
-		background-color: WhiteSmoke; 
-	}
-</style>
 </head>
 <body>
 <div id="page-wrapper">
@@ -57,7 +29,7 @@
 						<th>시작일</th>
 						<th>종료일</th>
 						<th>기간</th>
-						<th>진행</th>
+						<th>진행률</th>
 						<th>상황</th>
 					</tr>
 				</thead>
