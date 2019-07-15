@@ -67,10 +67,15 @@ public class SearchEmployeeController {
     public @ResponseBody Map userList(SearchEmployeeVO vo) {
 
         List<SearchEmployeeVO> employeelist = searchEmployeeService.getUserList(vo);
-        Gson json = new Gson();
+
+        int size = employeelist.size();
 
         Map data = new HashMap<>();
-        data.put("firstData", employeelist.subList(0, 10));
+        if(size<10){
+            data.put("firstData", employeelist.subList(0, size));
+        } else {
+            data.put("firstData", employeelist.subList(0, 10));
+        }
         data.put("dataLength", employeelist.size());
 
         System.out.println(data);
@@ -88,8 +93,14 @@ public class SearchEmployeeController {
 
         System.out.println(list);
 
+        int size = list.size();
+
         Map data = new HashMap<>();
-        data.put("firstData", list.subList(0, 10));
+        if(size<10){
+            data.put("firstData", list.subList(0, size));
+        } else {
+            data.put("firstData", list.subList(0, 10));
+        }
         data.put("dataLength", list.size());
 
         System.out.println(data);
