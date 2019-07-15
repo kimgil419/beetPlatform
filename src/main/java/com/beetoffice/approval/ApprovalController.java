@@ -46,7 +46,6 @@ public class ApprovalController {
 		return "approval/getApproval";
 	}
 	
-	
 	@RequestMapping("/getApprovalList.do")
 	public String getApprovalList(ApprovalVO vo, 
 			Model model) {
@@ -66,8 +65,8 @@ public class ApprovalController {
 		model.addAttribute("approvalList", approvalList);
 		
 		return "approval/getApprovalList";
-	}	
-	
+	}
+
 	@RequestMapping("/insertApproval.do")
 	public String insertApproval(ApprovalVO vo, HttpServletRequest request) 
 			throws IllegalStateException, IOException {

@@ -95,7 +95,7 @@
         <nav class="nav d-flex justify-content-between" style="float: right;">
             <a class="p-2 text-muted" href="getApprovalList.do">전자결재</a>
             <a class="p-2 text-muted" href="getCommuteList.do">출결관리</a>
-            <a class="p-2 text-muted" href="getProjectList.do?currentPage=1">프로젝트 관리</a>
+            <a class="p-2 text-muted" href="getProjectList.do?">프로젝트 관리</a>
             <a class="p-2 text-muted" href="getBoardList.do?curPage=1&li=original">사내게시판</a>
             <a class="p-2 text-muted" href="dpgetBoardList.do?curPage=1&li=original">부서게시판</a>
             <a class="p-2 text-muted"

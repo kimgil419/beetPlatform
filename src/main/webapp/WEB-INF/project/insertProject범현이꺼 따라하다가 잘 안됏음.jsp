@@ -11,7 +11,7 @@
 
 <script src="/js/pagination.min.js"></script>
 <link href="css/pagination.css" rel='stylesheet'/>
-<script src="/js/selectEmployee.js"></script>
+<script src="/js/searchpeople.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js" data-auto-replace-svg="nest"></script>
 
 <script>
@@ -99,7 +99,49 @@
 		frm.action="insertProject.do";
 		frm.submit();
 	}
-	
+	var employeelist = ${list};
+    var list = [];
+
+    function template(data) {
+        var html = '<ul>';
+        $.each(data, function (index, item) {
+            html += '<li>' + item + '</li>';
+        });
+        html += '</ul>';
+        return html;
+    }
+    $(function () {
+
+        searchpeople();
+
+        $("#searchbar").keydown(function (key) {
+            if (key.keyCode == 13) {
+                key.preventDefault();
+                searchkeyword();
+            }
+        })
+
+    })
+
+
+    function searchkeyword() {
+
+
+        var keyword = $("#searchbar").val();
+
+        $.ajax({
+            url: "searchEmployee.do",
+            method: "post",
+            data: "keyword=" + keyword,
+            datatype: "json",
+            success: function (data) {
+                employeelist = data;
+                list = [];
+
+                searchpeople();
+            }
+        })
+    }
 	
 </script>
 </head>
@@ -194,7 +236,40 @@
 			</div>
 		</form>
 	</div>
+	<hr /><hr />
+	    <div class="container" style="margin-top:30px;max-width: 1240px">
+        <div style="float:right;">
+            <input type="text" name="search" id="searchbar" style="border:none; width:130px;" placeholder="search keyword...">
+            <div style="padding-top:4px;display:inline-block;" onclick="searchkeyword()"><span><i class="fas fa-search" style="color: lightgrey;"></i></span></div>
+        </div>
+        <div style="clear:both"></div>
+        </form>
+        <br/>
+        <div id="here"></div>
+        <div id="pagination-bar" style="margin-left:540px;"></div>
+    </div>
+    <hr /><hr />
+	<%-- <table>
+		<tbody>
+			<tr>
+				<th>부서</th>
+				<th>이름</th>
+				<th>사번</th>
+			</tr>
+			<c:forEach var="employee" items="${employeeList }">
+				<tr>
+					<td>${employee.dept }</td>
+					<td>${employee.user_name }</td>
+					<td>${employee.user_id }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table> --%>
 </div>
+<!-- Button trigger modal -->
+<!-- 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-search-plus"></i></button>
+ -->
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -208,25 +283,22 @@
 				</button>
 			</div>
 			<div class="modal-body">
-			
-			
-			
-			
-			<div class="container" style="margin-top:30px;max-width: 1240px">
-        <div style="float:right;">
-            <input type="text" name="search" id="searchbar" style="border:none; width:130px;" placeholder="search keyword...">
-            <div style="padding-top:4px;display:inline-block;" onclick="searchkeyword()"><span><i class="fas fa-search" style="color: lightgrey;"></i></span></div>
-        </div>
-        <div style="clear:both"></div>
-        <br/>
-        <div id="here"></div>
-        <div id="pagination-bar" style="margin-left:540px;"></div>
-    </div>
-			
-			
-<!-- 여기에 일단 리스트를 띄우고 싶어요. -->
-			
-								
+				<table>
+					<tbody>
+						<tr>
+							<th>부서</th>
+							<th>이름</th>
+							<th>사번</th>
+						</tr>
+						<c:forEach var="userSearchList" items="${userSearchList }">
+							<tr>
+								<td>${userSearchList.dept }</td>
+								<td>${userSearchList.user_name }</td>
+								<td>${userSearchList.user_id }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary"
