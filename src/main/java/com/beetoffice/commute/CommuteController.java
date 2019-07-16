@@ -20,6 +20,8 @@ import com.beetoffice.board.BoardService;
 import com.beetoffice.board.BoardVO;
 import com.beetoffice.dpboard.DpBoardService;
 import com.beetoffice.dpboard.DpBoardVO;
+import com.beetoffice.project.ProjectService;
+import com.beetoffice.project.vo.ProjectVO;
 import com.beetoffice.user.UserVO;
 
 
@@ -30,7 +32,9 @@ import com.beetoffice.user.UserVO;
 public class CommuteController {
 	@Autowired
 	private CommuteService commuteService;
-	
+
+	@Autowired
+	private ProjectService projectService;
 
 	@Autowired
 	private ApprovalService approvalService;
@@ -124,6 +128,10 @@ public class CommuteController {
 		model.addAttribute("BdList", BdList);
 		
 		model.addAttribute("DpboardList", DpboardList);
+		
+		///////project list///////
+		List<ProjectVO> projectList = projectService.getProjectList();
+		model.addAttribute("projectList", projectList);
 		return "main";
 	}
 	

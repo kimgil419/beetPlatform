@@ -8,7 +8,6 @@
 <title>프로젝트목록</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
 <link href="/css/project_common.css" rel="stylesheet" type="text/css" />
-<script src="https://kit.fontawesome.com/9c3276f165.js"></script>
 <script>
 	/* $(document).ready(function(){
 		var = ${project}

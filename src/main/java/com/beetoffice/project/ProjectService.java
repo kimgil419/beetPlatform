@@ -12,6 +12,7 @@ public interface ProjectService {
 	void deleteProject(ProjectVO vo);
 	ProjectVO getProject(ProjectVO vo);
 	List<ProjectVO> getProjectList(PagingProcess pages);
+	List<ProjectVO> getProjectList();
 	SourceVO getSource(SourceVO vo);
 	List<SourceVO> getSourceList(ProjectVO vo);
 	int getTotalPost(PagingProcess pages);
