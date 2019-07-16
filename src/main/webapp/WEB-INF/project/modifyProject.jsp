@@ -7,6 +7,7 @@
 <title>프로젝트수정</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
 <link href="/css/project_common.css" rel="stylesheet" type="text/css" />
+<script src="https://kit.fontawesome.com/9c3276f165.js"></script>
 <script>
 	$(document).ready(function(){
 		switch ("${project.project_progress }") {
@@ -70,6 +71,22 @@
 	    $("#grandtotal").text(grandTotal.toFixed(2));
 	}
 </script>
+<style>
+	.table-sortable tbody tr {
+	    cursor: move;
+	}
+	.flex_div {
+		display: flex;
+	}
+	#flex_div_children1 {
+		width: 50%;
+	}
+	#flex_div_children2 {
+		width: 50%;
+		display: flex;
+		justify-content: flex-end;
+	}
+</style>
 </head>
 <body>
 <div id="page-wrapper">
@@ -78,10 +95,7 @@
 		<form action="updateProject.do?project_idx=${project.project_idx}" method="post">
 			<div>
 				<div>
-					<h4>
-						<i class="fas fa-arrow-circle-down"></i>
-						<small class="text-muted">프로젝트작성</small>
-					</h4>
+					<h5>프로젝트 수정</h5>
 					<table class="table table-bordered">
 						<tbody>
 							<tr>
@@ -99,7 +113,7 @@
 							</tr>
 							<tr>
 								<th>책임자</th>
-								<td><button type="button" class="searchButton" data-toggle="modal" data-target="#exampleModal" onclick="selectEmployee()"><i class="fas fa-search-plus"></i></button>
+								<td><input type="button" id="pop" name="user_id" value="찾기" onclick="search()">
 									<input type="text" name="project_manager" value="${project.project_manager }" readonly="readonly">
 									<input type="text" name="user_name" value="${project.user_name }" readonly="readonly"></td>
 								<th>진행상황</th>
@@ -131,8 +145,8 @@
 				    	<c:forEach var="source" items="${sourceList }" varStatus="status">
 				    		<tr>
 				    			<td class="col-sm-">
-					                <button type="button" class="searchButton" data-toggle="modal" data-target="#exampleModal" onclick="selectEmployee()"><i class="fas fa-search-plus"></i></button>
-					                <input type="text" name="user_id" value="${source.user_id }" readonly="readonly">
+					                <input type="button" id="pop" name="search_user_id" value="찾기" onclick="search()">
+					                <input type="text" name="user_id" value="${source.user_id }">
 					                <input type="text" name="user_name" value="${source.user_name }" readonly="readonly">
 				            	</td>
 					            <td class="col-sm-">
@@ -176,21 +190,25 @@
 				    		</tr>
 				    	</c:forEach>
 				    </tbody>
+				    <tfoot>
+				        <tr>
+				            <td colspan="5" style="text-align: center;">
+				                <button type="button" id="addrow"><i class="fas fa-folder-plus fa-2x"></i></button>
+				            </td>
+				        </tr>
+				    </tfoot>
 				</table>
 			</div>
 			<div>
 			    <div class="flex_div">
 					<div id="flex_div_children1">
-						<input type="submit" class="btn btn-outline-primary btn-sm" value="수정">
-						<a href="deleteProject.do?project_idx=${project.project_idx }"><button type="button" class="btn btn-outline-primary btn-sm">삭제</button></a>
+						<button type="submit">수정</button></a>
+						<a href="deleteProject.do?project_idx=${project.project_idx }"><button type="button">삭제</button></a>
 					</div>
 					<div id="flex_div_children2">
-						<button type="button" id="addrow"><i class="fas fa-folder-plus fa-lg"></i></button>
-					</div>
-					<div id="flex_div_children3">
-						<a href="getProject.do?project_idx=${project.project_idx }"><button type="button" class="btn btn-outline-primary btn-sm">돌아가기</button></a>
-						<a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null"><button type="button" class="btn btn-outline-primary btn-sm">목록</button></a>
-						<a href="getCommute.do"><button type="button" class="btn btn-outline-primary btn-sm">메인</button></a>
+						<a href="getProject.do?project_idx=${project.project_idx }"><button type="button">돌아가기</button></a>
+						<a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null"><button type="button">목록</button></a>
+						<a href="getCommute.do"><button type="button">메인</button></a>
 					</div>
 				</div>
 			</div>

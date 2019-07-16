@@ -8,6 +8,7 @@
 <title>프로젝트작성</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
 <link href="/css/project_common.css" rel="stylesheet" type="text/css" />
+<script src="https://kit.fontawesome.com/9c3276f165.js"></script>
 
 <!-- <script src="/js/pagination.min.js"></script> -->
 <!-- <link href="css/pagination.css" rel='stylesheet'/> -->
@@ -26,7 +27,7 @@
 	        var cols = "";
 	        cols += 
 	        		'<td class="col-sm-">' +
-	        		'<button type="button" class="searchButton' + index + '" value="' + index + '"data-toggle="modal" data-target="#exampleModal" onclick="selectEmployee(' + index + ')">' +
+	        		'<button type="button" class="btn btn-primary searchButton' + index + '" value="' + index + '"data-toggle="modal" data-target="#exampleModal" onclick="selectEmployee(' + index + ')">' +
 	       		 	'<i class="fas fa-search-plus"></i></button>' +
             		'<input type="text" id="employee_id' + index + '" name="user_id">' +
             		'<input type="text" id="employee_name' + index + '" name="user_name" readonly="readonly"></td>';
@@ -140,12 +141,9 @@
 <body>
 	<div id="page-wrapper">
 		<jsp:include page="../menu.jsp" />
-		<div class="container">
+		<div class="container" style="margin-top: 30px;">
 			<form method="post">
-				<h4>
-					<i class="fas fa-arrow-circle-down"></i>
-					<small class="text-muted">프로젝트작성</small>
-				</h4>
+				<h5>프로젝트작성</h5>
 				<div>
 					<table class="table order-bordered">
 						<tbody>
@@ -204,20 +202,31 @@
 								</td>
 							</tr>
 						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="5" style="text-align: center;">
+									<button type="button" id="addrow">
+										<i class="fas fa-folder-plus fa-2x"></i>
+									</button>
+								</td>
+							</tr>
+						</tfoot>
 					</table>
 				</div>
 				<div></div>
 				<div class="flex_div">
 					<div id="flex_div_children1">
-						<a><button type="button" class="btn btn-outline-primary btn-sm" onclick="insertProject(this.form);">등록</button></a>
-						<a><button type="reset" class="btn btn-outline-primary btn-sm">재작성</button></a>
+						<input type="button" value="등록" onclick="insertProject(this.form);">
+						<input type="reset" value="재작성">
 					</div>
-					<div id="flex_div_children2">
-						<button type="button" id="addrow"><i class="fas fa-folder-plus fa-lg"></i></button>
-					</div>
+					<div id="flex_div_children2"></div>
 					<div id="flex_div_children3">
-						<a href="getProjectList.do"><button type="button" class="btn btn-outline-primary btn-sm">목록</button></a>
-						<a href="getCommute.do"><button type="button" class="btn btn-outline-primary btn-sm">메인</button></a>
+						<a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null">
+							<input type="button" value="목록">
+						</a>
+						<a href="getCommute.do">
+							<input type="button" value="메인">
+						</a>
 					</div>
 				</div>
 			</form>

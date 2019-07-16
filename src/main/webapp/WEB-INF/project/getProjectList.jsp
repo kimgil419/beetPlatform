@@ -17,7 +17,7 @@
 <body>
 <div id="page-wrapper">
 	<jsp:include page="../menu.jsp"/>
-	<div class="container">
+	<div class="container" style="margin-top:10px;">
 		<div class="container-fluid">
 			<h4>
 				<i class="fas fa-arrow-circle-down"></i>
@@ -72,7 +72,7 @@
 				<div id="flex_div_children1">
 					<c:choose>
 						<c:when test="${pages.currentPage == 1 }">
-							<a><button type="button" class="btn btn-outline-primary btn-sm">이전</button></a>
+							<button type="button" class="btn btn-outline-primary btn-sm">이전</button>
 						</c:when>
 						<c:otherwise>
 							<a href="getProjectList.do?currentPage=${pages.currentPage - 1 }&searchCondition=${pages.searchCondition }&searchKeyword=${pages.searchKeyword}"><button type="button" class="btn btn-outline-primary btn-sm">이전</button></a>
@@ -80,7 +80,7 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${pages.currentPage == pages.totalPage }">
-							<a><button type="button" class="btn btn-outline-primary btn-sm">다음</button></a>
+							<button type="button" class="btn btn-outline-primary btn-sm">다음</button>
 						</c:when>
 						<c:otherwise>
 							<a href="getProjectList.do?currentPage=${pages.currentPage + 1 }&searchCondition=${pages.searchCondition }&searchKeyword=${pages.searchKeyword}"><button type="button" class="btn btn-outline-primary btn-sm">다음</button></a>
@@ -138,36 +138,36 @@
 				<div id="flex_div_children3">
 					<c:choose>
 						<c:when test="${userInfo.user_position == '과장' || userInfo.user_position == '차장' || userInfo.user_position == '부장' || userInfo.user_position == '이사' || userInfo.user_position == '대표이사' }">
-							<a href="/mail"><button type="button" class="btn btn-outline-primary btn-sm">메일작성</button></a>
-							<a href="writeProject.do"><button type="button" class="btn btn-outline-primary btn-sm">작성</button></a>
-							<a href="getCommute.do"><button type="button" class="btn btn-outline-primary btn-sm">메인</button></a>
+							<a href="/mail"><button type="button" class="btn btn-outline-primary btn-sm" style="margin-right:2px">메일작성</button></a>
+							<a href="writeProject.do"><button type="button" class="btn btn-outline-primary btn-sm" style="margin-right:2px">작성</button></a>
+							<a href="getCommute.do"><button type="button" class="btn btn-outline-primary btn-sm" style="margin-right:2px">메인</button></a>
 						</c:when>
 						<c:otherwise>
-							<a href="getCommute.do"><button type="button" class="btn btn-outline-primary btn-sm">메인</button></a>
+							<a href="getCommute.do"><button type="button" class="btn btn-outline-primary">메인</button></a>
 						</c:otherwise>
 					</c:choose>
 				</div>
 			</div>
 		</div>
-		<div class="container container-bottom" style="margin-top:0; padding-top:0;">
-			<form action="getProjectList.do?currentPage=1" method="POST">
+		<form action="getProjectList.do?currentPage=1" method="POST">
+			<div class="container" style="margin-bottom:25px;">
 				<div id="flex_div_search">
 					<div class="form-group row">
 						<div class="col-xs-2">
-							<select class="form-control input-sm" style="height:33px;font-size=15px;" name="searchCondition">
+							<select class="form-control input-sm" name="searchCondition">
 								<c:forEach var="option" items="${conditionMap }">
-									<option style="font-size:15px;" value="${option.value }">${option.key }</option>
+									<option value="${option.value }">${option.key }</option>
 								</c:forEach>
 							</select>
 						</div>
 						<div class="col-xs-2">
-							<input class="form-control input-sm" style="height:33px;" type="text" name="searchKeyword">
+							<input style="line-height:20px;" class="form-control input-sm" type="text" name="searchKeyword">
 						</div>
 						<button type="submit"><i class="fas fa-search"></i></button>
 					</div>
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 </div>
 </body>
