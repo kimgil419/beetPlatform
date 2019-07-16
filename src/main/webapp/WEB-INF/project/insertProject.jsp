@@ -29,8 +29,8 @@
 	        		'<td class="col-sm-">' +
 	        		'<button type="button" class="btn btn-primary searchButton' + index + '" value="' + index + '"data-toggle="modal" data-target="#exampleModal" onclick="selectEmployee(' + index + ')">' +
 	       		 	'<i class="fas fa-search-plus"></i></button>' +
-            		'<input type="text" class="employee_id' + index + '" name="user_id">' +
-            		'<input type="text" class="employee_name' + index + '" name="user_name" readonly="readonly"></td>';
+            		'<input type="text" id="employee_id' + index + '" name="user_id">' +
+            		'<input type="text" id="employee_name' + index + '" name="user_name" readonly="readonly"></td>';
             cols += '<td class="col-sm-"><input type="text" name="source_name">' +
             		'<input type="hidden" name="source_idx" value="-1">' +
             		'</td>'
@@ -45,49 +45,40 @@
 	        $("table#function_table").append(newRow);
 	        counter++;
 	        index++;
-	        console.log(index);
 	    });
 
 	    $("table#function_table").on("click", ".ibtnDel", function (event) {
-	    	console.log($('#function_table'));
 	        $(this).closest("tr").remove();
-	        console.log($(this));
 	        counter -= 1
 	    });
-	    
-	    
-	    $(document).on("click", $('.searchButton'), function(){
-	    	$('.searchButton').next().addClass(countRow);
-	    	$('.searchButton').next().next().addClass(countRow);
+
+	    $(document).on("click", '.selectName', function(e){
+	    	const name = $(e.target).text();
+	    	const id = $(e.target).parent().prev().prev().text();
+	    	const idx = $(e.target).parent().prev().prev().prev().text();
+	    	$('#employee_id' + idx).val(id);
+	    	$('#employee_name' + idx).val(name);
 	    });
-	    
-	    /* $(document).on("click", $('.selectName---'), function(){
-	    	var id = $(this).closest('td').prev().text();
-	    	var name = $(this).text();
-	    	console.log('id:' + id);
-	    	console.log('name: ' + name);
-	    	console.log($('.searchButton0').val());
-	    	console.log($('.employee_id0').val());
-	    	console.log($('.employee_name0'));
-	    }); */
+		
 	});
 	function selectEmployee(index){
 		$("#here").empty();
+		const number = index;
+		var idx = 0;
 		employeeList.forEach(function (item){
-			const img = item.user_picture;
 			const string =
 				"<tr class='selectedList'>" +
 				"<td>" +
-				`<img style="width:24px;height:"32px;" src="image/${img}" alt="프로필 사진">` +
 				"</td>" +
-				"<td style='padding-top:10px;display:none;'>" + item.user_id + "</td>" +
-				"<td style='padding-top:10px;'><a href='#' class='selectName'>" + item.user_name + "</a></td>" +
-				"<td style='padding-top:10px;'>" + item.user_position + "</td>" +
-				"<td style='padding-top:10px;'>" + item.dept + "</td>" +
-				"</tr>" +
-				"<input type='text' class='transmit' value='dddddddddd'>";
+				"<td style='width:70px; padding-top:10px;display:none; class='selectIdx'>" + index + "</td>" +
+				"<td style='width:70px; padding-top:10px;display:none; class='selectId'>" + item.user_id + "</td>" +
+				"<td style='width:100px; padding-top:10px;'>" + item.user_position + "</td>" +
+				"<td style='width:100px; padding-top:10px;'><a href='#' id='" + item.user_name + "' class='selectName' value='sss'>" + item.user_name + "</a></td>" +
+				"<td style='width:100px; padding-top:10px;'>" + item.dept + "</td>" +
+				"</tr>";
 			$("#here").append(string);
 		});
+		idx++;
 	};
 	
 	function calculateRow(row) {
@@ -225,9 +216,7 @@
 				<div></div>
 				<div class="flex_div">
 					<div id="flex_div_children1">
-						<input type="button" value="등록f"
-							onclick="insertProject(this.form); return false;"> <input
-							type="button" value="등록" onclick="insertProject(this.form);">
+						<input type="button" value="등록" onclick="insertProject(this.form);">
 						<input type="reset" value="재작성">
 					</div>
 					<div id="flex_div_children2"></div>
