@@ -128,7 +128,8 @@ public class BoardController {
         if(session.getAttribute("content") != null) {
         String content = (String) session.getAttribute("content");
         vo.setSearchCondition(content);
-        }else if(session.getAttribute("writter") != null) {
+        }
+        if(session.getAttribute("writter") != null) {
         	String writter = (String) session.getAttribute("writter");
             vo.setSearchCondition(writter);
         }

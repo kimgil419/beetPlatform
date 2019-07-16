@@ -52,8 +52,9 @@
 <body>
 <div id="page-wrapper">
 <jsp:include page="../menu.jsp"/>
-<section id="tabs" class="project-tab">
-            <div class="container">
+<div class="container">
+<div id="tabs" class="project-tab">
+            
 	<h1>글 상세</h1>
 	<p><a href="logout.do">Log-out</a></p>
 	<hr>
@@ -114,7 +115,7 @@
 		<a href="getBoardList.do?curPage=${c3 }">글목록</a>
 	</p>
 </div>
-</section>
+</div>
 </div>
 </body>
 </html>

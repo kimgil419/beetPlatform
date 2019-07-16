@@ -11,15 +11,7 @@
 		width: 700px;
 		margin: 0 auto;
 	}
-	h1, h3, p { text-align: center; }
-	table { border-collapse: collapse; }
-	table, th, td {
-		border: 1px solid black;
-		margin: 0 auto;
-	}
-	th { background-color: orange; }
-	.center { text-align: center; }
-	.border-none, .border-none td { border: none; }
+	
 </style>
 <script>
 function categoryChange() {
@@ -75,8 +67,7 @@ alert(result + '를 쓸 수 없는 권한입니다'); //아무 조건도 안걸�
 	<h1>글등록</h1>
 	<p><a href="logout.do">Log-out</a></p>
 	<hr>
-	<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
 	<form method="post" name ="frm"
 	        enctype="multipart/form-data">
 	        
@@ -112,8 +103,7 @@ alert(result + '를 쓸 수 없는 권한입니다'); //아무 조건도 안걸�
 
 	
 	</form>
-	</div>
-	</div>
+	
 	<hr>
 	<input type="button" value="새글 등록" onclick="send_go()">
 	<p><a href="getBoardList.do?curPage=${c2 }">글 목록 가기</a></p>

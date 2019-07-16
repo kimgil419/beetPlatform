@@ -10,8 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <title>글목록</title>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <style>
 .pagination>li>a { border-radius: 50% !important;margin: 0 5px;}
@@ -71,11 +72,12 @@
 	<h1>사내게시판</h1>
 </div>
 	
-	<section id="tabs" class="project-tab">
-	  <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+	
+	  <div class = "container" >
+                          
+        <div class="project-tab">                 
 	<!-- 데이타 표시 -->
-	<table  class="table" cellspacing="0">
+	<table  class="table"  >
 	<thead>
 		<tr>
 			
@@ -149,7 +151,7 @@
 					<li><a href="insertBoardf.do?curPage=${pvo.nowPage }">새글 등록</a></li>
 				</ul>
 				<form action="getBoardList.do?curPage=1" method="POST">
-		<div class="center-block" style='width:1500px; background:#F2F2F2; padding-left: 40%;'>
+		<div class="center-block" style='width:1000px; background:#F2F2F2; padding-left: 40%;'>
 		<select name="searchCondition">
 				<c:forEach var="option" items="${conditionMap }"><!-- map에 저장된 여러 키값과 벨류값을 c:foreach문으로 조정이 가능하다 -->
 					<option value="${option.value }">${option.key }<!-- submit으로 하면 저정로 벨류값을 갖고 갈 수있다 -->
@@ -166,14 +168,15 @@
 		</tr>
 		
 	</table>
+	
+</div> 
 	</div>
-	</div>
-</section>
+
 	
 	<br>
 	
 
-
 </div>
+
 </body>
 </html>

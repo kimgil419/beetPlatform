@@ -148,8 +148,9 @@ function getCommentList(){
 <body>
 <div id="page-wrapper">
 <jsp:include page="../menu.jsp"/>
-<section id="tabs" class="project-tab">
-            <div class="container">
+<div class="container">
+<div class="project-tab">
+            
 	<h1>글 상세</h1>
 	<p><a href="logout.do">Log-out</a></p>
 	<hr>
@@ -236,7 +237,7 @@ function getCommentList(){
 
 
 </div>
-</section>
+</div>
 
 
 </div>
