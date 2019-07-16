@@ -71,9 +71,9 @@
 	<h1>${dept} 부서 게시판</h1>
 </div>
 	
-	<section id="tabs" class="project-tab">
-	  <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+	<div class = "container" >
+	 
+                            <div class="project-tab">
 	<!-- 데이타 표시 -->
 	<table  class="table" cellspacing="0">
 	<thead>
@@ -150,7 +150,7 @@
 					<li><a href="dpinsertBoardf.do?curPage=${pvo.nowPage }">새글 등록</a></li>
 				</ul>
 				<form action="dpgetBoardList.do?curPage=1" method="POST">
-		<div class="center-block" style='width:1500px; background:#F2F2F2; padding-left: 40%;'>
+		<div class="center-block" style='width:1000px; background:#F2F2F2; padding-left: 40%;'>
 		<select name="searchCondition">
 				<c:forEach var="option" items="${conditionMap }">
 					<option value="${option.value }">${option.key }
@@ -168,8 +168,8 @@
 		
 	</table>
 	</div>
-	</div>
-</section>
+	
+</div>
 	
 	<br>
 	

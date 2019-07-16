@@ -10,8 +10,9 @@
 <%--<script src="//code.jquery.com/jquery.min.js"></script>--%>
 <%--<script--%>
 <%--	src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>--%>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <!--  jQuery UI 라이브러리 js파일-->
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -19,8 +20,13 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style>
 body {background-color:#eee;}
-.container-fluid {padding:10px;}
-.container{background-color:white;padding:10px;   }
+
+	#container {
+		width: 500px;
+		margin: 0 auto;
+	}
+	
+
 #title{font-family: 'Lobster', cursive;;}
 #ea{background-color: #D8D8D8;}
 </style>
@@ -150,142 +156,105 @@ function execPostCode() {
 }
 
 function send_go(frm) {
-	if (frm.user_id.value.trim() == "") {
+	if (frm.user_ids.value.trim() == "") {
 		
 		alert("아이디(ID)를 입력안하셨습니다.\n입력하세요.");
-		frm.user_id.value = "";
-		frm.user_id.focus();
+		frm.user_ids.value = "";
+		frm.user_ids.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 		
 	} else if(frm.user_password.value.trim() == "") {
 		alert("비밀번호를 입력안하셨습니다.\n입력하세요.");
 		frm.user_password.value = "";
 		frm.user_password.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	} else if(frm.dept.value.trim() == "") {
 		alert("소속부서를 입력안하셨습니다.\n입력하세요.");
 		frm.dept.value = "";
 		frm.dept.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	} else if(frm.birth.value.trim() == "") {
 		alert("생년월일을 입력안하셨습니다.\n입력하세요.");
 		frm.birth.value = "";
 		frm.birth.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	}else if(frm.job_id.value.trim() == "") {
 		alert("직무를 입력안하셨습니다.\n입력하세요.");
 		frm.job_id.value = "";
 		frm.job_id.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	}else if(frm.firstjoin.value.trim() == "") {
 		alert("입사일을 입력안하셨습니다.\n입력하세요.");
 		frm.firstjoin.value = "";
 		frm.firstjoin.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	}else if(frm.user_name.value.trim() == "") {
 		alert("이름을 입력안하셨습니다.\n입력하세요.");
 		frm.user_name.value = "";
 		frm.user_name.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	}else if(frm.user_position.value.trim() == "") {
 		alert("직급을 입력안하셨습니다.\n입력하세요.");
 		frm.user_position.value = "";
 		frm.user_position.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	}else if(frm.phone.value.trim() == "") {
 		alert("전화번호를 입력안하셨습니다.\n입력하세요.");
 		frm.phone.value = "";
 		frm.phone.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	}else if(frm.cphone.value.trim() == "") {
 		alert("내선번호를 입력안하셨습니다.\n입력하세요.");
 		frm.cphone.value = "";
 		frm.cphone.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	}else if(frm.user_email1.value.trim() == "") {
 		alert("이메일용아이디를 입력안하셨습니다.\n입력하세요.");
 		frm.user_email1.value = "";
 		frm.user_email1.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	}else if(frm.user_email2.value.trim() == "") {
 		alert("이메일을 입력안하셨습니다.\n입력하세요.");
 		frm.user_email2.value = "";
 		frm.user_email2.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	}else if(frm.addr1.value.trim() == "") {
 		alert("우편번호를 입력안하셨습니다.\n입력하세요.");
 		frm.addr1.value = "";
 		frm.addr1.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	}else if(frm.addr2.value.trim() == "") {
 		alert("도로명 주소를 입력안하셨습니다.\n입력하세요.");
 		frm.addr2.value = "";
 		frm.addr2.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	}else if(frm.addr3.value.trim() == "") {
 		alert("상세주소를 입력안하셨습니다.\n입력하세요.");
 		frm.addr3.value = "";
 		frm.addr3.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	}else if(frm.user_pictures.value.trim() == "") {
 		alert("프로필사진을 업로드안하셨습니다.\n업로드하세요.");
 		frm.user_pictures.value = "";
 		frm.user_pictures.focus();
 		
-		frm.action = "redirect:signup";
-		frm.submit();
 	}
 }
 </script>
 </head>
 <body>
-	<div id="page-wrapper" >
-	<jsp:include page="menu.jsp" />
-	<div class="container-fluid">
-		<div class="container">
-			<h2 class="text-center" id="title">Create account</h2>
-			 <p class="text-center">
-				<small id="passwordHelpInline" class="text-muted"> Developer: follow me on facebook <a href="https://www.facebook.com/JheanYu"> John niro yumang</a> inspired from <a href="https://p.w3layouts.com/">https://p.w3layouts.com/</a>.</small>
-			</p>
- 			<hr>
-			<div class="row">
-				<div class="col-md-5">
+	<div id="page-wrapper">
+<jsp:include page="../menu.jsp"/>
+<div id="container">
+		
+			
+				
  					
-						<fieldset>							
+												
 							<p class="text-uppercase pull-center"> 아이디중복체크</p>	
 							<form action="idcheck.do" method="post">
  							<div class="form-group">
-								<input type="text" name="user_id"  id="user_id" class="form-control input-lg" placeholder="id">
+								<input type="text" name="user_ids"  id="user_id" class="form-control" placeholder="id">
 							    
 							    <input type="submit" class="btn btn-lg btn-primary   value="아이디중복체크" id="idck">
 							</div>
@@ -294,26 +263,20 @@ function send_go(frm) {
           
 						
  							
-						</fieldset>
+					
 				
-				</div>
 				
-				<div class="col-md-2">
-					<!-------null------>
-				</div>
-				
-				<div class="col-md-5">
  				 		                  <form action="insertUser.do" method="post"
 	        enctype="multipart/form-data">
-						<fieldset>							
-							<p class="text-uppercase"> 아이디 </p>	
+												
+							
  								
 							<div class="form-group">
-								<input type="text" name="user_id"  id="user_ids" class="form-control input-lg" placeholder="id">
+								<input type="hidden" name="user_id"  id="user_ids" class="form-control" placeholder="id">
 							</div>
 							<p class="text-uppercase"> 비번 </p>	
 							<div class="form-group">
-								<input type="password" name="user_password" id="password" class="form-control input-lg" placeholder="Password">
+								<input type="password" name="user_password" id="password" class="form-control" placeholder="Password">
 							</div>
 							<p class="text-uppercase"> 소속부서</p>	
 							<div class="form-group">
@@ -331,23 +294,23 @@ function send_go(frm) {
 							</div>
 							<p class="text-uppercase"> 생년월일</p>	
 							<div class="form-group">
-								<input type="text" id="testDatepicker" name="birth" class="form-control input-lg" placeholder="birth">
+								<input type="text" id="testDatepicker" name="birth" class="form-control" placeholder="birth">
 							</div>
 							<p class="text-uppercase"> 직무</p>	
 							<div class="form-group">
-								<input type="text" name="job_id" class="form-control input-lg" placeholder="job_id">
+								<input type="text" name="job_id" class="form-control" placeholder="job_id">
 							</div>
 							<p class="text-uppercase"> 입사날짜</p>	
 							<div class="form-group">
-								<input type="text" id="testDatepicker1" name="firstjoin" class="form-control input-lg" placeholder="firstjoin">
+								<input type="text" id="testDatepicker1" name="firstjoin" class="form-control" placeholder="firstjoin">
 							</div>
 							<p class="text-uppercase"> 이름</p>	
 							<div class="form-group">
-								<input type="text" name="user_name" class="form-control input-lg" placeholder="user_name">
+								<input type="text" name="user_name" class="form-control" placeholder="user_name">
 							</div>
 							<p class="text-uppercase"> 직급</p>	
 							<div class="form-group">
-								<select id="ss" onchange="categoryChange()" class="form-control input-lg">
+								<select id="ss" onchange="categoryChange()" class="form-control">
                                     <option value="X">선택사항</option>
                                     <option value="사원">사원</option>
                                     <option value="주임">주임</option> 
@@ -362,15 +325,15 @@ function send_go(frm) {
 							</div>
 							<p class="text-uppercase"> 전화번호('-'없이 입력해주세요)</p>	
 							<div class="form-group">
-								<input type="text" name="phone" class="form-control input-lg" placeholder="phone">
+								<input type="text" name="phone" class="form-control" placeholder="phone">
 							</div>
 							<p class="text-uppercase"> 내선전화번호</p>	
 							<div class="form-group">
-								<input type="text" name="cphone" class="form-control input-lg" placeholder="cphone">
+								<input type="text" name="cphone" class="form-control" placeholder="cphone">
 							</div>
 							<p class="text-uppercase"> 이메일</p>	
 							<div class="form-group">
-								<input type="email" name="user_email" class="form-control input-lg" placeholder="user_email">
+								<input type="email" name="user_email" class="form-control" placeholder="user_email">
 							</div>
 							<p class="text-uppercase"> 주소 </p>	
 							<div class="form-group">                   
@@ -385,25 +348,23 @@ function send_go(frm) {
                              </div>
                              <p class="text-uppercase"> 프로필사진</p>	
 							 <div class="form-group">
-								  <input type="file" name="user_pictures" class="form-control input-lg" placeholder="Password2">
+								  <input type="file" name="user_pictures" class="form-control" placeholder="Password2">
 							 </div>
 						
  					
 							
 							<div>
-								<input type="submit" class="btn btn-md" id="ea" value="Sign In" onclick="send_go(this.form)">
+							<hr>
+								<input type="button" class="btn btn-md" id="ea" value="Sign In" onclick="send_go(this.form)">
 							</div>
 			
- 						</fieldset>
+ 					
  						</form>
 				
-				</div>
-			</div>
+			
 		</div>
-		<p class="text-center">
-			<small id="passwordHelpInline" class="text-muted"> Developer:<a href="http://www.psau.edu.ph/"> Pampanga state agricultural university ?</a> BS. Information and technology students @2017 Credits: <a href="https://v4-alpha.getbootstrap.com/">boostrap v4.</a></small>
-		</p>
-	</div>
+		
+	
 </div>
 </body>
 </html>
