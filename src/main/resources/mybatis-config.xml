@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
+        <typeAlias alias="apages" type="com.beetoffice.approval.PagingProcessApproval"/>  
    	    <typeAlias alias="approval" type="com.beetoffice.approval.ApprovalVO"/>          
         <typeAlias alias="user" type="com.beetoffice.user.UserVO"/>
         <typeAlias alias="commute" type="com.beetoffice.commute.CommuteVO"/>

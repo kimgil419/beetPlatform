@@ -48,6 +48,12 @@
 
 
     </style>
+    <script>
+ if ( "${user_id}" == "" ) {
+	 alert("잘못된 접근 다시 로그인 하세요");
+	 location.href = "/";
+ };
+ </script>
 </head>
 <body>
 
@@ -71,6 +77,7 @@
                         <input
                                 type="text" name="user_name" value=" ${userInfo.user_name } 님 "
                                 readonly="readonly" style="width:80px;">
+                                <a href="logout.do">Log-out</a>
 
                         <c:if test="${ccc == 'x' }">
                             <input type="button" value="출근" onclick="in_commute(this.form)">
@@ -85,8 +92,6 @@
                 </ul>
                 </form>
             </div>
-
-
 
 
         </div>
@@ -104,7 +109,7 @@
                     || (userInfo.dept=='인사' && userInfo.user_position=='대리')
                     || (userInfo.dept=='인사' && userInfo.user_position=='과장')
                     || (userInfo.dept=='인사' && userInfo.user_position=='차장')) ? '' : 'hidden'}
-               href="finsertUser.do"> 사원등록</a></li>
+               href="finsertUser.do"> 사원등록</a>
             <a class="p-2 text-muted" href="getMeetingRoomList.do">회의실 예약</a>
             <a class="p-2 text-muted" href="showEmployee.do">사원검색</a>
             <a class="p-2 text-muted" href="showEachEmployee.do">마이페이지</a>

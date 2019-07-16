@@ -1,6 +1,6 @@
-package com.beetoffice.project;
+package com.beetoffice.approval;
 
-public class PagingProcess {
+public class PagingProcessApproval {
 
 	private int countPost = 10;
 	private int countPage = 5;
@@ -12,9 +12,10 @@ public class PagingProcess {
 	private int viewPost;
 	private int startPage;
 	private int endPage;
-	private String searchCondition, searchKeyword;
+	
+	private String user_id, searchCondition, searchKeyword;
 
-	public PagingProcess() {
+	public PagingProcessApproval() {
 		super();
 	}
 	
@@ -124,12 +125,22 @@ public class PagingProcess {
 		this.searchKeyword = searchKeyword;
 	}
 
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id2) {
+		this.user_id = user_id2;
+	}
+
 	@Override
 	public String toString() {
-		return "PagingVO [countPost=" + countPost + ", countPage=" + countPage + "\n, totalPost=" + totalPost
-				+ ", totalPage=" + totalPage + ", currentPage=" + currentPage + "\n, startPost=" + startPost
-				+ ", endPost=" + endPost + ", viewPost=" + viewPost + "\n, startPage=" + startPage + ", endPage="
-				+ endPage + ", searchCondition=" + searchCondition + "\n, searchKeyword=" + searchKeyword + "]";
+		return "PagingProcess [countPost=" + countPost + ", countPage=" + countPage + ", totalPost=" + totalPost
+				+ ", totalPage=" + totalPage + ", currentPage=" + currentPage + ", startPost=" + startPost
+				+ ", endPost=" + endPost + ", viewPost=" + viewPost + ", startPage=" + startPage + ", endPage="
+				+ endPage + ", user_id=" + user_id + ", searchCondition=" + searchCondition + ", searchKeyword="
+				+ searchKeyword + "]";
 	}
 
 	

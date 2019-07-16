@@ -11,15 +11,103 @@
 	</select>
 	
 	<select id="getApprovalList" parameterType="approval" resultType="approval">
-	 SELECT * FROM APPROVAL A, USER_DB U WHERE A.USER_ID = U.USER_ID
+	 SELECT *
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID) AS USER_NAME
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID1) AS USER_NAME1
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID2) AS USER_NAME2
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID3) AS USER_NAME3
+	  FROM APPROVAL A
+	 
 	</select>
-	<select id="getMyApprovalList" parameterType="approval" resultType="approval">
-	 SELECT * FROM APPROVAL A, USER_DB U WHERE (A.USER_ID = U.USER_ID) AND A.USER_ID = #{user_id}
+	<select id="getApprovalListMainSerial" parameterType="approval" resultType="approval">
+	 SELECT * 
+	  FROM APPROVAL
+	  WHERE OPTION = 0
+       AND ((USER_ID1 = #{user_id} AND OK1 IS NULL)
+		OR (USER_ID2 = #{user_id} AND OK1 IS NOT NULL AND OK2 IS NULL)
+		OR (USER_ID3 = #{user_id} AND OK1 IS NOT NULL AND OK2 IS NOT NULL AND OK3 IS NULL))
+	  
+	  ORDER BY A_NUM DESC LIMIT 0, 3
 	</select>
-	<select id="getDoneApprovalList" parameterType="approval" resultType="approval">
-	 SELECT * FROM APPROVAL A, USER_DB U WHERE (A.USER_ID = U.USER_ID) 
-	 AND (A.USER_ID1 = #{user_id} AND OK1 = NOT NULL) OR (USER_ID2 = #{user_id} AND OK2 = NOT NULL) OR (USER_ID3 = #{user_id} AND OK3 = NOT NULL)
+	<select id="getApprovalListMainParallel" parameterType="approval" resultType="approval">
+	 SELECT * 
+	  FROM APPROVAL
+	  WHERE OPTION = 1
+	   AND ((USER_ID1 = #{user_id} AND OK1 IS NULL)
+		OR (USER_ID2 = #{user_id} AND OK2 IS NULL)
+		OR (USER_ID3 = #{user_id} AND OK3 IS NULL))
+	  
+	  ORDER BY A_NUM DESC LIMIT 0, 3
 	</select>
+	<select id="getApprovalListDone" parameterType="apages" resultType="approval">
+		SELECT * 
+		, (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID) AS USER_NAME
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID1) AS USER_NAME1
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID2) AS USER_NAME2
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID3) AS USER_NAME3
+		FROM APPROVAL A		 
+		WHERE ((A.USER_ID1 = #{user_id} AND A.OK1 IS NOT NULL) 
+		 OR (A.USER_ID2 = #{user_id} AND A.OK2 IS NOT NULL)
+		 OR (A.USER_ID3 = #{user_id} AND A.OK3 IS NOT NULL))
+		<choose>
+		<when test="searchCondition == 'a_title' ">
+				AND A.A_TITLE LIKE CONCAT('%', #{searchKeyword}, '%')	  		
+		</when>
+		<when test="searchCondition == 'a_content' ">
+				AND A.A_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')		
+		</when>		
+		</choose> 
+		 ORDER BY A.A_NUM DESC LIMIT #{startPost}, #{viewPost}
+		 
+	</select>
+	<select id="getApprovalListMy" parameterType="apages" resultType="approval">
+		SELECT * 
+		 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID) AS USER_NAME
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID1) AS USER_NAME1
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID2) AS USER_NAME2
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID3) AS USER_NAME3
+		 FROM APPROVAL A
+		WHERE A.USER_ID = #{user_id}
+		<choose>
+		<when test="searchCondition == 'a_title' ">
+				AND A.A_TITLE LIKE CONCAT('%', #{searchKeyword}, '%')	  		
+		</when>
+		<when test="searchCondition == 'a_content' ">
+				AND A.A_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')	  		
+		</when>	
+		</choose>
+		 
+		 ORDER BY A.A_NUM DESC LIMIT #{startPost}, #{viewPost}
+	</select>
+	
+	<select id="getTotalPostDone" parameterType="apages" resultType="int">
+ 		SELECT COUNT(A_NUM) AS TOTALPOST FROM APPROVAL
+ 		WHERE (USER_ID1 = #{user_id} AND OK1 IS NOT NULL) 
+		 OR (USER_ID2 = #{user_id} AND OK2 IS NOT NULL)
+		 OR (USER_ID3 = #{user_id} AND OK3 IS NOT NULL) 
+		<choose>
+		<when test="searchCondition == 'a_title' ">
+		AND A_TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
+		</when>		
+		<when test="searchCondition == 'a_content' ">
+		 AND A_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')
+		</when>
+		</choose>
+	</select>
+	<select id="getTotalPostMy" parameterType="apages" resultType="int">
+ 		SELECT COUNT(A_NUM) AS TOTALPOST FROM APPROVAL
+ 		WHERE USER_ID = #{user_id}
+		<choose>
+		<when test="searchCondition == 'a_title' ">
+		 AND A_TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
+		</when>		
+		<when test="searchCondition == 'a_content' ">
+		 AND A_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')
+		</when>
+		</choose>
+	</select>
+	
+	
 	<insert id="insertApproval" parameterType="approval">
 	INSERT INTO APPROVAL VALUES (NULL, #{user_id}, #{a_title},  #{a_content}, #{user_id1}, #{user_id2},  #{user_id3}, #{option},
 	NULL, NULL, NULL, NOW(), #{urgent}, NULL)

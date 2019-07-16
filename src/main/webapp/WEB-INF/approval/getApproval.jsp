@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글 상세</title>
+<title>결재 문서</title>
 <script src="//code.jquery.com/jquery.min.js"></script>
 
 

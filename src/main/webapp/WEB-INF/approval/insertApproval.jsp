@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글등록</title>
+<title>결재 문서 작성</title>
 
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -175,19 +175,18 @@
 	});
 	//세번째 p태그가 눌리면
 	//세번째 p태그 사라지고, 두번째 p태그 나타나도록 처리
+	if ( "${user_id}" == "" ) {
+	 alert("잘못된 접근 다시 로그인 하세요");
+	 location.href = "/";
+ };
 </script>
 </head>
 <body>
 <div id="page-wrapper">
 
-		<%-- <jsp:include page="../menu.jsp" />
-		<br>
-		<hr> --%>
 	<div class="container">
-		<h1>글등록</h1>
-		<p>
-			<a href="logout.do">Log-out</a>
-		</p>
+		<h1>결재 문서 등록</h1>
+	
 		<hr>
 		<form action="insertApproval.do" method="post">
 			<p>
@@ -281,11 +280,8 @@
 				</tr>
 			</table>
 		</form>
-		<p>
-			<a href="getApprovalList.do">글 목록 가기</a>
-		<p>
-			<a href="Main.do">메인메뉴이동</a>
-		</p>
+		
+		
 
 	</div>
 	</div>
