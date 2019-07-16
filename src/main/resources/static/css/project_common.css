@@ -4,17 +4,24 @@
 }
 #flex_div_children1 {
 	width: 20%;
+	display: flex;
+	justify-content: flex-start;
+}
+#flex_div_children1 button {
+	margin-right: 2px;
 }
 #flex_div_children2 {
 	width: 60%;
 	display: flex;
 	justify-content: center;
 }
-
 #flex_div_children3 {
 	width: 20%;
 	display: flex;
 	justify-content: flex-end;
+}
+#flex_div_children3 button {
+	margin-right: 2px;
 }
 #flex_div_search {
 	display: flex;
@@ -38,4 +45,10 @@ table tr {
 }
 table {
 	font-size:14px;
+}
+.container {
+	margin-top: 10px;
+}
+.container-bottom {
+	margin-bottom: 25px;
 }
