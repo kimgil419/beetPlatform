@@ -206,7 +206,7 @@ public class ProjectController {
 	
 	@RequestMapping(value="selectEmployee", produces="application/json; charset=utf8")
 	public String selectEmployee(SearchEmployeeVO vo, Model model) {
-		List<SearchEmployeeVO> employeeList = searchEmployeeService.getUserList(vo);
+		List<SearchEmployeeVO> employeeList = searchEmployeeService.getUserListForSearch(vo);
 		Gson json = new Gson();
 		
 		model.addAttribute("employeeList", json.toJson(employeeList));
@@ -218,9 +218,5 @@ public class ProjectController {
 		
 		return "project/modal";
 	}
-	
-
-
-	
 }
 

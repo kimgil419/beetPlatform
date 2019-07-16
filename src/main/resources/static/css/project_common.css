@@ -20,7 +20,22 @@
 	display: flex;
 	justify-content: center;
 }
-th {
+table th {
+	background-color: AliceBlue;
 	text-align: center;
-	background-color: WhiteSmoke; 
+}
+table td {
+	background-color: GhostWhite;
+}
+table tr {
+	height: 25px;
+}
+.text-center {
+	text-align: center;
+}
+.text-left {
+	text-align: left;
+}
+table {
+	font-size:14px;
 }

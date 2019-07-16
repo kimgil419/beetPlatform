@@ -8,9 +8,9 @@ public class PagingProcessTest {
 		
 		
 		PagingProcess pu = new PagingProcess();
-		pu.setCurrentPage("9");
+		pu.setCurrentPage("1");
 //		System.out.println(pu);
-		pu.setTotalPost(240);
+		pu.setTotalPost(0);
 		System.out.println(pu);
 		
 		
