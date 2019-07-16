@@ -50,6 +50,7 @@ public class ApprovalController {
 		return "approval/getApproval";
 	}
 	
+
 	@RequestMapping("/getApprovalDone.do")
 	public String getApprovalDone(ApprovalVO vo, Model model) {
 		
@@ -64,6 +65,7 @@ public class ApprovalController {
 		
 		return "approval/getApprovalDoneMy";
 	}
+
 	@RequestMapping("/getApprovalList.do")
 	public String getApprovalList(ApprovalVO vo, /*PagingProcess pages,*/
 			Model model) {
@@ -82,7 +84,10 @@ public class ApprovalController {
 
 		
 		return "approval/getApprovalList";
-	}	
+
+	}
+
+
 	@RequestMapping("/getApprovalListDone.do")
 	public String getApprovalListDone(ApprovalVO vo, PagingProcessApproval pages,
 			Model model, HttpServletRequest request) {
@@ -146,6 +151,7 @@ public class ApprovalController {
 		return "approval/getApprovalListMy";
 	}	
 	
+
 	@RequestMapping("/insertApproval.do")
 	public String insertApproval(ApprovalVO vo, HttpServletRequest request) 
 			throws IllegalStateException, IOException {

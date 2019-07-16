@@ -14,7 +14,7 @@
 			<td>${project.project_idx }</td>
 			<th>계약업체</th>
 			<td>${project.project_contractor }</td>
-			<th>등록일</th>
+			<th>등록일시</th>
 			<td>${project.project_reg_date }</td>
 		</tr>
 		<tr>

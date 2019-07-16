@@ -35,6 +35,11 @@
 		</choose>
 	</select>
 	
+	<select id="getProjectListMain" resultType="project">
+		SELECT * FROM PROJECT_VIEW
+		 ORDER BY PROJECT_IDX DESC LIMIT 0, 3
+	</select>
+	
 	<select id="getProjectList" parameterType="pages" resultType="project">
 		SELECT PV.PROJECT_IDX, PV.PROJECT_NAME, PV.PROJECT_CONTRACTOR, PV.PROJECT_CONTRACT_AMOUNT
 			, PV.PROJECT_PROGRESS, PV.PROJECT_REG_DATE

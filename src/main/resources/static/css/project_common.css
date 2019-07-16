@@ -1,0 +1,41 @@
+@charset "UTF-8";
+.flex_div {
+	display: flex;
+}
+#flex_div_children1 {
+	width: 20%;
+}
+#flex_div_children2 {
+	width: 60%;
+	display: flex;
+	justify-content: center;
+}
+
+#flex_div_children3 {
+	width: 20%;
+	display: flex;
+	justify-content: flex-end;
+}
+#flex_div_search {
+	display: flex;
+	justify-content: center;
+}
+table th {
+	background-color: AliceBlue;
+	text-align: center;
+}
+table td {
+	background-color: GhostWhite;
+}
+table tr {
+	height: 25px;
+}
+.text-center {
+	text-align: center;
+}
+.text-left {
+	text-align: left;
+}
+table {
+	font-size:14px;
+}

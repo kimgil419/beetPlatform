@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import com.beetoffice.project.vo.ProjectVO;
 import com.beetoffice.project.vo.SourceVO;
 import com.beetoffice.searchemployee.SearchEmployeeService;
 import com.beetoffice.searchemployee.SearchEmployeeVO;
+import com.google.gson.Gson;
 
 @Controller
 public class ProjectController {
@@ -38,6 +40,9 @@ public class ProjectController {
 	public String getProjectSearchList(ProjectVO vo, PagingProcess pages, Model model) {
 		System.out.println(">> Controller: getProjectList()");
 		
+		if (pages.getCurrentPage() == null) {
+			pages.setCurrentPage("1");
+		}
 		pages.setTotalPost(projectService.getTotalPost(pages));
 		
 		List<ProjectVO> projectList = projectService.getProjectList(pages);
@@ -68,31 +73,11 @@ public class ProjectController {
 		
 		projectService.deleteProject(vo);
 		
-//		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
-		return "redirect:getProjectList.do?currentPage=1";
+		return "redirect:getProjectList.do?";
 	}
 
-	//modal 넣기전 ajax팝업 성공하면 여기로 다시 돌아와야 할 듯
-//	@RequestMapping("insertProject.do")
-//	public String insertProject(ProjectVO vo, SourceVO svo, @RequestParam String[] source_idx, 
-//			@RequestParam String[] user_id, @RequestParam String[] source_name, @RequestParam String[] source_progress) {
-//		System.out.println(">> Controller: insertProject()");
-//		
-//		projectService.insertProject(vo);
-//		
-//		int project_idx = projectService.getProject_idx(vo);
-//		for (int i = 1; i < user_id.length; i++) {
-//			svo.setProject_idx(project_idx);
-//			svo.setUser_id(user_id[i]);
-//			svo.setSource_name(source_name[i]);
-//			svo.setSource_progress(source_progress[i]);
-//			projectService.insertFunction(svo);
-//		}
-//		
-//		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
-//	}
-	//modal로 한페이지에서 억지로(?) 직원 검색하는 insert
-	@RequestMapping("insertProject.do")
+	@RequestMapping(value = "insertProject.do", produces = "application/json; charset = utf8")
+	@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080", "http://localhost:5050"})
 	public String insertProject(Model model, ProjectVO vo, SourceVO svo, @RequestParam String[] source_idx, 
 			@RequestParam String[] user_id, @RequestParam String[] source_name, @RequestParam String[] source_progress) {
 		System.out.println(">> Controller: insertProject()");
@@ -108,16 +93,20 @@ public class ProjectController {
 			projectService.insertFunction(svo);
 		}
 		
-		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
+//		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
+		return "redirect:getProjectList.do?";
 	}
 	
-	@RequestMapping("writeProject.do")
-	public String writeProject(Model model, SearchEmployeeVO uvo) {
-		List<SearchEmployeeVO> employeeList = searchEmployeeService.getUserList(uvo);
-		for (SearchEmployeeVO sevo: employeeList) {
-			System.out.println(sevo.toString());
+	@RequestMapping(value = "writeProject.do", produces = "application/json; charset = utf8")
+	@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080", "http://localhost:5050"})
+	public String writeProject(Model model, SearchEmployeeVO vo) {
+		List<SearchEmployeeVO> employeeList = searchEmployeeService.getUserList(vo);
+		for (SearchEmployeeVO svo: employeeList) {
+			System.out.println(svo.toString());
 		}
-		model.addAttribute("employeeList", employeeList);
+		Gson json = new Gson();
+		
+		model.addAttribute("employeeList", json.toJson(employeeList));
 		
 		return "project/insertProject";
 	}
@@ -215,14 +204,19 @@ public class ProjectController {
 		return "redirect:getProject.do?project_idx=" + svo.getProject_idx();
 	}
 	
+	@RequestMapping(value="selectEmployee", produces="application/json; charset=utf8")
+	public String selectEmployee(SearchEmployeeVO vo, Model model) {
+		List<SearchEmployeeVO> employeeList = searchEmployeeService.getUserListForSearch(vo);
+		Gson json = new Gson();
+		
+		model.addAttribute("employeeList", json.toJson(employeeList));
+		
+		return null;
+	}
 	@RequestMapping("modal")
 	public String modal() {
 		
 		return "project/modal";
 	}
-	
-
-
-	
 }
 

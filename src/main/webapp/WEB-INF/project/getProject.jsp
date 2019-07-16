@@ -1,28 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>프로젝트상세</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
-<style>
-	.flex_div {
-		display: flex;
-	}
-	#flex_div_children1 {
-		width: 50%;
-	}
-	#flex_div_children2 {
-		width: 50%;
-		display: flex;
-		justify-content: flex-end;
-	}
-	th {
-		background-color: WhiteSmoke;
-	}
-</style>
+<link href="/css/project_common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="page-wrapper">
@@ -77,10 +63,14 @@
             </table>
             <div class="flex_div">
                 <div id="flex_div_children1">
-                    <a href="modifyProject.do?project_idx=${project.project_idx }"><input type="button" value="수정"></a>
-                    <a href="deleteProject.do?project_idx=${project.project_idx }"><input type="button" value="삭제"></a>
+                	<c:if test="${project.project_manager == user_id || fn:contains(user_position, '이사')}">
+	                    <a href="modifyProject.do?project_idx=${project.project_idx }"><input type="button" value="수정"></a>
+	                    <a href="deleteProject.do?project_idx=${project.project_idx }"><input type="button" value="삭제"></a>
+                	</c:if>
                 </div>
                 <div id="flex_div_children2">
+                </div>
+                <div id="flex_div_children3">
                     <a href="getProjectList.do?currentPage=${pages.currentPage }&searchCondition=${pages.searchCondition }&searchKeyword=${pages.searchKeyword }"><input
                             type="button" value="돌아가기"></a>
                     <a href="getProjectList.do?currentPage=1"><input type="button" value="목록"></a>

@@ -20,81 +20,67 @@ public class ProjectDAO {
 	}
 	
 	public List<ProjectVO> getProjectList(PagingProcess pages) {
-		System.out.println(">> DAO: getProjectList()");
-		
 		return mybatis.selectList("ProjectDAO.getProjectList", pages);
 	}
 	
+	public List<ProjectVO> getProjectList() {
+		return mybatis.selectList("ProjectDAO.getProjectListMain");
+	}
+	
 	public ProjectVO getProject(ProjectVO vo) {
-		System.out.println(">> DAO: getProject()");
-		
 		return mybatis.selectOne("ProjectDAO.getProject", vo);
 	}
 
 	public void deleteProject(ProjectVO vo) {
-		System.out.println(">> DAO: deleteProject()");
 		mybatis.delete("ProjectDAO.deleteProject", vo);
 	}
 
 	public void insertProject(ProjectVO vo) {
-		System.out.println(">> DAO: insertProject()");
 		mybatis.insert("ProjectDAO.insertProject", vo);
 	}
 	
 	public void updateProject(ProjectVO vo) {
-		System.out.println(">> DAO: updateProject()");
 		mybatis.update("ProjectDAO.updateProject", vo);
 	}
 	
 	public SourceVO getSource(SourceVO vo) {
-		System.out.println(">> DAO: getSource()");
 		vo = mybatis.selectOne("ProjectDAO.getSource", vo);
-		System.out.println("DAO vo: " + vo);
 		return vo;
 	}
 
 	public List<SourceVO> getSourceList(ProjectVO vo) {
-		System.out.println(">> DAO: getSourceList()");
 		return mybatis.selectList("ProjectDAO.getSourceList", vo);
 	}
 
 	public ProjectVO modifyProject(ProjectVO vo) {
-		System.out.println(">> DAO: modifyProject()");
 		return mybatis.selectOne("ProjectDAO.modifyProject", vo);
 	}
 
 	public void insertSource(SourceVO svo) {
-		System.out.println(">> DAO: insertSource()");
 		mybatis.insert("ProjecDAO.insertSource", svo);
 	}
 	
 	public int getTotalPost(PagingProcess pages) {
-		System.out.println(">> DAO: getTotalPost()");
 		return mybatis.selectOne("ProjectDAO.getTotalPost", pages);
 	}
 
 	public int getProject_idx(ProjectVO vo) {
-		System.out.println(">> DAO: getProject_idx()");
 		return mybatis.selectOne("ProjectDAO.getProject_idx", vo);
 	}
 	
 	public void insertFunction(SourceVO svo) {
-		System.out.println(">> DAO: insertSource()");
 		mybatis.insert("ProjectDAO.insertFunction", svo);
 	}
 	
 	public void updateSource(SourceVO svo) {
-		System.out.println(">> DAO: updateSource()");
 		mybatis.update("ProjectDAO.updateSource", svo);
 	}
 	
 	public void deleteSource(SourceVO svo) {
-		System.out.println(">> DAO: deleteSource()");
 		mybatis.update("ProjectDAO.deleteSource", svo);
 	}
 	
 	public List<Integer> getSource_idxList(ProjectVO vo) {
-		System.out.println(">> DAO: getSource_idxList()");
 		return mybatis.selectList("ProjectDAO.getSource_idxList", vo);
 	}
 }

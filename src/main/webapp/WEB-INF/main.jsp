@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -14,176 +15,170 @@
         .video-item img {
             max-width: 64px;
         }
-
         .video-detail .details {
             margin-top: 10px;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
-
-
         .list-group-item {
             cursor: pointer;
-
         }
-
         .list-group-item:hover {
             background-color: #eee;
         }
-
-
         ul {
             float: right;
         }
-
         .notie {
             background-color: #808080;
         }
-
         #root {
             position: absolute;
             right: 0;
-
         }
+        .content {
+        	width: 160px;
+        	text-overflow:ellipsis; overflow:hidden; white-space:nowrap;
+        	word-wrap: normal !important;
+    display: block;
+        }
+        .element-tbody {
+        	line-height: 19px;
+        }
+        
     </style>
 <body>
-
 <div id="page-wrapper">
     <jsp:include page="menu.jsp"/>
     <div class="container" style="margin-top: 30px;">
         <!-- 유튜브 -->
-        
         <div id="root" class="col-md-8"></div>
         <script src="/js/youtube-bundle.js"></script>
-
-       
-        <div class="row">
-            <!-- 전자결재 -->
-            <div class="col-md-6">
+        <div class="row col-md-9">
+            <div class="col-md-4">
+            	<h5>
+					<a href="#"><i class="fas fa-search-plus"></i></a>
+					<small class="text-muted">직렬결재</small>
+				</h5>
                 <table class="table table-hover">
-                    <tr>
-                        <th colspan="7">직렬결재서류</th>
-                    </tr>
-                    <tr>
-                        <th width="100">제목</th>
-                        <th width="90">등록일</th>
-                    </tr>
-                    <c:forEach var="approval" items="${approvalListSerial}">
-                            <tr>
-                               
-                                <td><a href="getApproval.do?a_num=${approval.a_num }">
-                                        ${approval.a_title } </a></td>
-                               
-                                <td>${approval.regdate}</td>
-                            </tr>
+                	<thead>
+	                    <tr class="element-thead">
+	                        <th class="table-subject">제목</th>
+	                        <th class="table-regdate">등록일</th>
+	                    </tr>
+					</thead>
+					<tbody>
+	                    <c:forEach var="approval" items="${approvalListSerial}">
+	                    	<fmt:parseDate value="${approval.regdate }" var="dateFmt" pattern="yyyy-MM-ddHH:mm:ss" />
+                            <tr class="element-tbody">
+                                <td class="content"><a href="getApproval.do?a_num=${approval.a_num }">${approval.a_title } </a></td>
+                                <td class="regdate"><fmt:formatDate value="${dateFmt }" pattern="yy/MM/dd" /></td>
+							</tr>
 						</c:forEach>
+					</tbody>
                 </table>
-
-
+			</div>
+			<div class="col-md-4">
+				<h5>
+					<a href="#"><i class="fas fa-search-plus"></i></a>
+					<small class="text-muted">병렬결재</small>
+				</h5>
                 <table class="table table-hover">
-                    <tr>
-
-                        <th colspan="7">병렬결재서류</th>
-                    </tr>
-                    <tr>
-                        <th width="100">제목</th>
-                        <th width="90">등록일</th>
-                    </tr>
-                    <c:forEach var="approval" items="${approvalListParallel}">          
+                	<thead>
+	                    <tr class="element-thead">
+	                        <th class="table-subject">제목</th>
+	                        <th class="table-regdate">등록일</th>
+	                    </tr>
+					</thead>
+                	<tbody>
+	                    <c:forEach var="approval" items="${approvalListParallel}">
+	                    	<fmt:parseDate value="${approval.regdate }" var="dateFmt" pattern="yyyy-MM-ddHH:mm:ss" />        
                             <tr>
-                                
-                                <td><a href="getApproval.do?a_num=${approval.a_num }">
-                                        ${approval.a_title } </a></td>
-                              
-                                <td>${approval.regdate}</td>
+                                <td class="content"><a href="getApproval.do?a_num=${approval.a_num }">${approval.a_title } </a></td>
+                                <td class="regdate"><fmt:formatDate value="${dateFmt }" pattern="yy/MM/dd" /></td>
                             </tr>
-                      
-                    </c:forEach>
+	                    </c:forEach>
+                	</tbody>
                 </table>
-
-
-            </div>
-
-
-            <!-- 게시판 -->
-            <div class="col-md-6">
-                <form name="frm" method="post"
-                      action="getBoardList.do?curPage=1&li=original">
-
-                    <table class="table table-hover">
-                        <tr>
-
-                            <th colspan="3">사내전체게시판</th>
-                            <th><input type="submit" value="더보기" onclick="send_go()"></th>
-                        </tr>
-                        <tr>
-
-                            <th width="150">제목</th>
-
-                            <th width="100">등록일</th>
-
-                        </tr>
-
-
-                        <c:forEach var="board" items="${BdList }">
-                            <tr>
-
-                                <td class=${(board.t_noti == 'Y') ? 'notie' : '' }><a
-                                        href="getBoardInsert.do?seq=${board.seq }&curPage=1">
-                                        ${board.t_title } </a></td>
-                               
-                                <td class=${(board.t_noti == 'Y') ? 'notie' : '' }>${board.t_regdate }</td>
-                                
-                            </tr>
-                        </c:forEach>
-
-
-                    </table>
-                </form>
-                <form name="frmmm" method="post"
-                      action="dpgetBoardList.do?curPage=1&li=original">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-
-                            <th colspan="3">부서게시판</th>
-                            <th><input type="submit" value="더보기"></th>
-                        </tr>
-                        <tr>
-
-                            <th width="150">제목</th>
-
-                            <th width="100">등록일</th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="board" items="${DpboardList }">
-                            <tr>
-
-                                <td class=${(board.t_noti == 'Y') ? 'notie' : '' }><img
-                                        class="fancy"
-                                        style="display: ${(board.t_password == null) ? 'none':'' };"
-                                        src="image/icon_secret.gif" alt="titleImage"><a
-                                        href="dpgetBoardInsert.do?seq=${board.seq }&curPage=1&t_password=${board.t_password}">
-                                        ${board.t_title } </a></td>
-                                
-                                <td class=${(board.t_noti == 'Y') ? 'notie' : '' }>${board.t_regdate }</td>
-                                
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-
-                </form>
-
-            </div>
-
-        </div>
-
+			</div>             
+			<div class="col-md-4">
+				<h5>
+					<a href="#"><i class="fas fa-search-plus"></i></a>
+					<small class="text-muted">사내게시판</small>
+				</h5>
+				<table class="table table-hover">
+					<thead>
+	                    <tr class="element-thead">
+	                        <th class="table-subject">제목</th>
+	                        <th class="table-regdate">등록일</th>
+	                    </tr>
+					</thead>
+					<tbody>
+	                    <c:forEach var="board" items="${BdList }">
+	                    	<fmt:parseDate value="${board.t_regdate }" var="dateFmt" pattern="yyyy-MM-ddHH:mm:ss" />
+	                        <tr class="element-tbody">
+	                            <td class="${(board.t_noti == 'Y') ? 'notie' : '' } content"">
+	                            	<a href="getBoardInsert.do?seq=${board.seq }&curPage=1">${board.t_title }</a></td>
+	                            <td class="${(board.t_noti == 'Y') ? 'notie' : '' } regdate"><fmt:formatDate value="${dateFmt }" pattern="yy/MM/dd" /></td>
+	                        </tr>
+	                    </c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-4">
+				<h5>
+					<a href="#"><i class="fas fa-search-plus"></i></a>
+					<small class="text-muted">부서게시판</small>
+				</h5>
+				<table class="table table-hover">
+					<thead>
+						<thead>
+	                    <tr class="element-thead">
+	                        <th class="table-subject">제목</th>
+	                        <th class="table-regdate">등록일</th>
+	                    </tr>
+					</thead>
+					<tbody>
+						<c:forEach var="board" items="${DpboardList }">
+							<fmt:parseDate value="${board.t_regdate }" var="dateFmt" pattern="yyyy-MM-ddHH:mm:ss" />
+	                    	<tr class="element-tbody">
+	                        	<td class="${(board.t_noti == 'Y') ? 'notie' : '' } content">
+	                        		<img class="fancy" style="display: ${(board.t_password == null) ? 'none':'' };" src="image/icon_secret.gif" alt="titleImage"><a
+	                                       href="dpgetBoardInsert.do?seq=${board.seq }&curPage=1&t_password=${board.t_password}">
+	                                       ${board.t_title } </a>
+								</td>
+								<td class="${(board.t_noti == 'Y') ? 'notie' : '' } regdate"><fmt:formatDate value="${dateFmt }" pattern="yy/MM/dd" /></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+	        <div class="col-md-4">
+	        	<h5>
+					<a href="getProjectList.do"><i class="fas fa-search-plus"></i></a>
+					<small class="text-muted">프로젝트</small>
+				</h5>
+				<table class="table table-hover">
+					<thead>
+	                    <tr class="element-thead">
+	                        <th class="table-subject">제목</th>
+	                        <th class="table-regdate">등록일</th>
+	                    </tr>
+					</thead>
+					<tbody>
+						<c:forEach var="project" items="${projectList }">
+							<fmt:parseDate value="${project.project_reg_date }" var="dateFmt" pattern="yyyy-MM-ddHH:mm:ss" />
+							<tr class="element-tbody">
+								<td class="content"><a href="getProject.do?project_idx=${project.project_idx }">${project.project_name }</a></td>
+								<td class="regdate"><fmt:formatDate value="${dateFmt }" pattern="yy/MM/dd" /></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>        
+	        </div>
+		</div>
     </div>
-
 </div>
 </body>
 <script>
