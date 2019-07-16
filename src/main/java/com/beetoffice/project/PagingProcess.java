@@ -3,7 +3,7 @@ package com.beetoffice.project;
 public class PagingProcess {
 
 	private int countPost = 10;
-	private int countPage = 5;
+	private int countPage = 10;
 	private int totalPost;
 	private int totalPage;
 	private String currentPage;

@@ -13,73 +13,83 @@
 <body>
 <div id="page-wrapper">
     <jsp:include page="../menu.jsp"/>
-    <div class="container" style="margin-top:30px;">
-        <div>
-			<h5>프로젝트상세</h5>
-            <table class="table table-bordered">
-                <tr>
-                    <th>프로젝트번호</th>
-                    <td>${project.project_idx }</td>
-                    <th>계약업체</th>
-                    <td>${project.project_contractor }</td>
-                    <th>등록일</th>
-                    <td>${project.project_reg_date }</td>
-                </tr>
-                <tr>
-                    <th>프로젝트명</th>
-                    <td>${project.project_name }</td>
-                    <th>계약금액</th>
-                    <td><fmt:formatNumber pattern="##,###,###,###" value="${project.project_contract_amount }" />원</td>
-                    <th>계약기간</th>
-                    <td>${project.project_start_date }&nbsp;&nbsp;~&nbsp;${project.project_end_date }</td>
-                </tr>
-                <tr>
-                    <th>책임자</th>
-                    <td>${project.user_name }</td>
-                    <th>진행상황</th>
-                    <td>${project.project_progress }</td>
-                <tr>
-            </table>
-            <h5>기능목록</h5>
-            <table class="table table-bordered">
-            	<thead>
-	                <tr>
-	                    <th>담당자</th>
-	                    <th>소스번호(삭제예정)</th>
-	                    <th>기능</th>
-	                    <th>진행상황</th>
-	                </tr>
-            	</thead>
-            	<tbody>
-	                <c:forEach var="source" items="${sourceList }">
-	                    <tr>
-	                        <td>${source.user_name }</td>
-	                        <td>${source.source_idx }</td>
-	                        <td><a href="getSource.do?source_idx=${source.source_idx }">${source.source_name }</a></td>
-	                        <td>${source.source_progress }</td>
-	                    </tr>
-	                </c:forEach>
-            	</tbody>
-            </table>
-            <div class="flex_div">
-                <div id="flex_div_children1">
-                	<c:if test="${project.project_manager == user_id || fn:contains(user_position, '이사')}">
-	                    <a href="modifyProject.do?project_idx=${project.project_idx }"><input type="button" value="수정"></a>
-	                    <a href="deleteProject.do?project_idx=${project.project_idx }"><input type="button" value="삭제"></a>
-                	</c:if>
-                </div>
-                <div id="flex_div_children2">
-                </div>
-                <div id="flex_div_children3">
-                    <a href="getProjectList.do?currentPage=${pages.currentPage }&searchCondition=${pages.searchCondition }&searchKeyword=${pages.searchKeyword }"><input
-                            type="button" value="돌아가기"></a>
-                    <a href="getProjectList.do?currentPage=1"><input type="button" value="목록"></a>
-                    <!-- 					<a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null"><input type="button" value="목록"></a> -->
-                    <a href="getCommute.do"><input type="button" value="메인"></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <div class="container">
+		<h4>
+			<i class="fas fa-arrow-circle-down"></i>
+			<small class="text-muted">프로젝트상세</small>
+		</h4>
+		<table class="table table-bordered">
+			<tr>
+				<th>프로젝트번호</th>
+				<td>${project.project_idx }</td>
+				<th>계약업체</th>
+				<td>${project.project_contractor }</td>
+				<th>등록일</th>
+				<td>${project.project_reg_date }</td>
+			</tr>
+			<tr>
+				<th>프로젝트명</th>
+				<td>${project.project_name }</td>
+				<th>계약금액</th>
+				<td><fmt:formatNumber pattern="##,###,###,###"
+						value="${project.project_contract_amount }" />원</td>
+				<th>계약기간</th>
+				<td>${project.project_start_date }&nbsp;&nbsp;~&nbsp;${project.project_end_date }</td>
+			</tr>
+			<tr>
+				<th>책임자</th>
+				<td>${project.user_name }</td>
+				<th>진행상황</th>
+				<td>${project.project_progress }</td>
+			<tr>
+		</table>
+		<h4>
+			<i class="fas fa-arrow-circle-down"></i>
+			<small class="text-muted">프로젝트상세</small>
+		</h4>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>No.</th>
+					<th>기능</th>
+					<th>담당자</th>
+					<th>진행상황</th>
+					<th>수정일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="source" items="${sourceList }">
+					<tr>
+						<td>${source.source_idx }</td>
+						<td>${source.user_name }</td>
+						<td><a href="getSource.do?source_idx=${source.source_idx }">${source.source_name }</a></td>
+						<td>${source.source_progress }</td>
+						<td>수정일</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		</div>
+		<div class="container container-bottom">
+			<div class="flex_div">
+				<div id="flex_div_children1">
+					<c:if
+						test="${project.project_manager == user_id || fn:contains(user_position, '이사')}">
+						<a href="modifyProject.do?project_idx=${project.project_idx }"><input
+							type="button" class="btn btn-outline-primary btn-sm" value="수정"></a>
+						<a href="deleteProject.do?project_idx=${project.project_idx }"><input
+							type="button" class="btn btn-outline-primary btn-sm" value="삭제"></a>
+					</c:if>
+				</div>
+				<div id="flex_div_children2"></div>
+				<div id="flex_div_children3">
+					<a href="getProjectList.do?currentPage=${pages.currentPage }&searchCondition=${pages.searchCondition }&searchKeyword=${pages.searchKeyword }">
+						<input type="button" class="btn btn-outline-primary btn-sm" value="돌아가기"></a>
+					<a href="getProjectList.do?"><input type="button" class="btn btn-outline-primary btn-sm" value="목록"></a>
+					<a href="getCommute.do"><input type="button" class="btn btn-outline-primary btn-sm" value="메인"></a>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

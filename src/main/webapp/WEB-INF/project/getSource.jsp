@@ -48,8 +48,11 @@
 <body>
 <div id="page-wrapper">
 	<jsp:include page="../menu.jsp"/>
-	<div class="container" style="margin-top:30px;">
-		<h5>기능명 소스코드</h5>
+	<div class="container">
+		<h4>
+			<i class="fas fa-arrow-circle-down"></i>
+			<small class="text-muted">${source.source_name } 상세</small>
+		</h4>
 		<table class="table table-bordered">
 			<tbody>
 				<tr>
@@ -69,16 +72,18 @@
 		<div id="sourceCode">
 			<textarea row="4" cols="50" id="codesnippet_readonly">${source.source_code }</textarea>		
 		</div>
+	</div>
+	<div class="container container-bottom">
 		<div>
 			<div class="flex_div">
 				<div id="flex_div_children1">
-					<a href="modifySource.do?source_idx=${source.source_idx }"><input type="button" value="수정"></a>
-					<a href="deleteSource.do?source_idx=${source.source_idx }&project_idx=${source.project_idx }"><input type="button" value="삭제"></a>
+					<a href="modifySource.do?source_idx=${source.source_idx }"><input type="button" class="btn btn-outline-primary btn-sm" value="수정"></a>
+					<a href="deleteSource.do?source_idx=${source.source_idx }&project_idx=${source.project_idx }"><input type="button" class="btn btn-outline-primary btn-sm" value="삭제"></a>
 				</div>
 				<div id="flex_div_children2">
-					<a href="getProject.do?project_idx=${source.project_idx }"><input type="button" value="프로젝트"></a>
-					<a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null"><input type="button" value="목록"></a>
-					<a href="getCommute.do"><input type="button" value="메인"></a>
+					<a href="getProject.do?project_idx=${source.project_idx }"><input type="button" class="btn btn-outline-primary btn-sm" value="프로젝트"></a>
+					<a href="getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null"><input type="button" class="btn btn-outline-primary btn-sm" value="목록"></a>
+					<a href="getCommute.do"><input type="button" class="btn btn-outline-primary btn-sm" value="메인"></a>
 				</div>
 			</div>
 		</div>
