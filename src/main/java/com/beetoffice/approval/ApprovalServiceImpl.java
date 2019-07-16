@@ -73,7 +73,15 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return approvalDAO.getTotalPostMy(pages);
 	}
 
+	@Override
+	public List<ApprovalVO> getApprovalListMainSerial(ApprovalVO vo) {
+		return approvalDAO.getApprovalListMainSerial(vo);
+	}
 	
+	@Override
+	public List<ApprovalVO> getApprovalListMainParallel(ApprovalVO vo) {
+		return approvalDAO.getApprovalListMainParallel(vo);
+	}
 }
 
 

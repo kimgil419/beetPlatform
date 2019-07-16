@@ -11,9 +11,11 @@ public interface ApprovalService {
 	void refuseApproval(ApprovalVO vo); //수정
 	void deleteApproval(ApprovalVO vo); //삭제
 	ApprovalVO getApproval(ApprovalVO vo); //조회(상세조회)
-	List<ApprovalVO> getApprovalListDone(PagingProcessApproval pages);
-	List<ApprovalVO> getApprovalListMy(PagingProcessApproval pages); //조회(글목록)
-	List<ApprovalVO> getApprovalList(ApprovalVO vo);
+	List<ApprovalVO> getApprovalListDone(PagingProcessApproval pages); //지난 문서
+	List<ApprovalVO> getApprovalListMy(PagingProcessApproval pages); //내가쓴 글 조회(글목록)
+	List<ApprovalVO> getApprovalList(ApprovalVO vo); //결재 문서
+	List<ApprovalVO> getApprovalListMainSerial(ApprovalVO vo);
+	List<ApprovalVO> getApprovalListMainParallel(ApprovalVO vo); //메인 페이지용
 	int getTotalPostDone(PagingProcessApproval pages);
 	int getTotalPostMy(PagingProcessApproval pages);
 

@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ApprovalListVO {
 	
-	@XmlElement(name="approval") //�뿕由щ㉫�듃(�슂�냼)�쓽 �깭洹몃챸 吏��젙
+	@XmlElement(name="approval") 
 	private List<ApprovalVO> ApprovalList;
 
 	public List<ApprovalVO> getApprovalList() {

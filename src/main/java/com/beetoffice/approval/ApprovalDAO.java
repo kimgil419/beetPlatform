@@ -68,6 +68,12 @@ public class ApprovalDAO {
 		return mybatis.selectOne("ApprovalDAO.getTotalPostMy", pages);
 	}	
 	
+	public List<ApprovalVO> getApprovalListMainSerial(ApprovalVO vo) {
+		return mybatis.selectList("ApprovalDAO.getApprovalListMainSerial", vo);
+	}
+	public List<ApprovalVO> getApprovalListMainParallel(ApprovalVO vo) {
+		return mybatis.selectList("ApprovalDAO.getApprovalListMainParallel", vo);
+	}
 }
 
 

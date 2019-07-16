@@ -30,7 +30,7 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 	
 	<p>
 	
-	<button onclick="window.open('ApprovalForm.do','결재 문서 작성','width=510, height=700, location=no, status=no, scrollbars=yes');"> 결재 문서 작성 </button>
+	<button onclick="window.open('ApprovalForm.do','결재 문서 작성','width=1000, height=700, location=no, status=no, scrollbars=yes');"> 결재 문서 작성 </button>
 	<button onclick="window.open('getApprovalListDone.do?currentPage=1','지난 문서 목록','width=1000, height=700, location=no, status=no, scrollbars=yes');"> 지난 문서 목록 </button>
 	<button onclick="window.open('getApprovalListMy.do?currentPage=1','내가 쓴 문서 목록','width=1000, height=700, location=no, status=no, scrollbars=yes');"> 내가쓴 문서 목록 </button>
 	

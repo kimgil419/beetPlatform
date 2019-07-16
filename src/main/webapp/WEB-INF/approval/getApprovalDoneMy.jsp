@@ -14,6 +14,10 @@
 
 
 <script>
+if ( "${user_id}" == "" ) {
+	 alert("잘못된 접근 다시 로그인 하세요");
+	 location.href = "/";
+};
 $(function(){
 	
    
@@ -32,7 +36,7 @@ function refuse(frm){
 	var result = confirm('Are you sure you want to do this?');
 	
 	if(result) {
-	frm.action="refuseApproval.do"
+	frm.action="refuseApproval2.do"
 	frm.submit();
 	} else { //no 
 		}
@@ -120,11 +124,7 @@ function refuse(frm){
 
             <tr>
             <td colspan="2" class="center">
-            <c:if
-							test="${ (not empty approval.ok1 or not empty approval.ok2 or not approval.ok3)
-             and (approval.user_id1 == userInfo.user_id or approval.user_id2 == userInfo.user_id or approval.user_id3 == userInfo.user_id  ) }">
-							<input type="submit" value="결재">
-						</c:if> <input type="button" value="반려" onclick="refuse(this.form)">
+           <input type="button" value="반려" onclick="refuse(this.form)">
                   
                    <c:if test="${(approval.user_id1 == userInfo.user_id and not empty approval.ok1)
                     or (approval.user_id2 == userInfo.user_id and not empty approval.ok2)

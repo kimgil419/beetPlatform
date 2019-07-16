@@ -87,7 +87,9 @@ public class ApprovalController {
 	public String getApprovalListDone(ApprovalVO vo, PagingProcessApproval pages,
 			Model model, HttpServletRequest request) {
 		
-		
+		if (pages.getCurrentPage() == null) {
+			pages.setCurrentPage("1");
+		}
 		
 		if (pages.getSearchCondition() == null) {
 			pages.setSearchCondition("a_title");
@@ -117,6 +119,9 @@ public class ApprovalController {
 	public String getApprovalListMy(ApprovalVO vo, PagingProcessApproval pages,
 			Model model, HttpServletRequest request ) {
 		
+		if (pages.getCurrentPage() == null) {
+			pages.setCurrentPage("1");
+		}
 		
 		//null체크 ?�� 초기�? ?��?��
 		if (pages.getSearchCondition() == null) {
@@ -158,7 +163,7 @@ public class ApprovalController {
 		 vo.setOption("0");
 	 }
 		approvalService.insertApproval(vo);
-		return "redirect:getApprovalList.do";
+		return "redirect:getApprovalListMy.do";
 	}
 	
 	@RequestMapping("/updateApproval.do")
@@ -169,11 +174,17 @@ public class ApprovalController {
 		return "redirect:getApprovalList.do";
 	}
 	@RequestMapping("/refuseApproval.do")
-	public String refuseApproval(@ModelAttribute("approval") ApprovalVO vo) {
-		
+	public String refuseApproval(@ModelAttribute("approval") ApprovalVO vo) {	
 		
 		approvalService.refuseApproval(vo);
 		return "redirect:getApprovalList.do";
+	}
+	
+	@RequestMapping("/refuseApproval2.do")
+	public String refuseApproval2(@ModelAttribute("approval") ApprovalVO vo) {	
+		
+		approvalService.refuseApproval(vo);
+		return "redirect:getApprovalListDone.do";
 	}
 	@RequestMapping("/ApprovalForm.do")
 	public String ApprovalForm(ApprovalVO vo) {

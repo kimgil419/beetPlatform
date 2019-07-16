@@ -19,7 +19,26 @@
 	  FROM APPROVAL A
 	 
 	</select>
-	
+	<select id="getApprovalListMainSerial" parameterType="approval" resultType="approval">
+	 SELECT * 
+	  FROM APPROVAL
+	  WHERE OPTION = 0
+       AND ((USER_ID1 = #{user_id} AND OK1 IS NULL)
+		OR (USER_ID2 = #{user_id} AND OK1 IS NOT NULL AND OK2 IS NULL)
+		OR (USER_ID3 = #{user_id} AND OK1 IS NOT NULL AND OK2 IS NOT NULL AND OK3 IS NULL))
+	  
+	  ORDER BY A_NUM DESC LIMIT 0, 3
+	</select>
+	<select id="getApprovalListMainParallel" parameterType="approval" resultType="approval">
+	 SELECT * 
+	  FROM APPROVAL
+	  WHERE OPTION = 1
+	   AND ((USER_ID1 = #{user_id} AND OK1 IS NULL)
+		OR (USER_ID2 = #{user_id} AND OK2 IS NULL)
+		OR (USER_ID3 = #{user_id} AND OK3 IS NULL))
+	  
+	  ORDER BY A_NUM DESC LIMIT 0, 3
+	</select>
 	<select id="getApprovalListDone" parameterType="apages" resultType="approval">
 		SELECT * 
 		, (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID) AS USER_NAME

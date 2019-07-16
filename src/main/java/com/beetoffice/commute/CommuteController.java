@@ -99,14 +99,21 @@ public class CommuteController {
 		} else if ( getCommute != null) {
 			model.addAttribute("getCommute", getCommute);
 		}
+		//------------------------------------------------
+		ApprovalVO vo1 = new ApprovalVO();
+		String user_id = (String) session.getAttribute("user_id");
+		vo1.setUser_id(user_id);
+		System.out.println(vo1);
+		//병렬 결재 메인 
 		
-		ApprovalVO vo1 = null;
+		List<ApprovalVO> approvalListMainParallel = approvalService.getApprovalListMainParallel(vo1);
+		model.addAttribute("approvalListParallel", approvalListMainParallel);
+        //직렬 결재 메인
+		List<ApprovalVO> approvalListMainSerial = approvalService.getApprovalListMainSerial(vo1);
 		
-		List<ApprovalVO> approvalList = approvalService.getApprovalList(vo1);
-		
-		model.addAttribute("approvalList", approvalList);
-
-		System.out.println(approvalList);
+		model.addAttribute("approvalListSerial", approvalListMainSerial);
+		System.out.println(approvalListMainSerial + " | " + approvalListMainParallel);
+		//------------------------------------
 		
 		
 		String dept = (String) session.getAttribute("dept");

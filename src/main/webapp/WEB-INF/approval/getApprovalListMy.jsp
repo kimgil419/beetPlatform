@@ -32,13 +32,19 @@
 		justify-content: center;
 	}
 </style>
+<script>
+if ( "${user_id}" == "" ) {
+	 alert("잘못된 접근 다시 로그인 하세요");
+	 location.href = "/";
+};
+</script>
 </head>
 <body>
 <div id="page-wrapper">
 	
 	<div class="container" style="margin-top:30px;">
 		<div class="container-fluid">
-			<h4>지난 결재 목록</h4>
+			<h4>내가 쓴 결재 서류 목록</h4>
 			<table class="table table-striped">
 				<thead>
 					<tr>
