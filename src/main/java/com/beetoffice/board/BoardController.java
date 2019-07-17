@@ -45,6 +45,9 @@ public class BoardController {
 	@Autowired
 	CommentService commentService;
 	
+	@Autowired
+	LikeService likeService;
+	
 	//메소드에 설정된 @ModelAttribute 는 리턴된 데이타를 View에 전달
 	//@ModelAttribute 선언된 메소드는  
 	//@RequestMapping 선언된 메소드보다 먼저 실행된다
@@ -447,4 +450,109 @@ public class BoardController {
         return "success";
     }
 
+    @RequestMapping(value="/likeComment.do")
+    @ResponseBody
+    public Map<Object, Object> ajax_likeComment(@RequestParam("codes") String id,LikeVO vo, HttpSession session) throws Exception{ //requestbody로 하면 제이슨을 스트링으로 받을시 제이슨형태로 받는다
+         ModelAndView mv = new ModelAndView();
+    
+     //System.out.println(params.toString());
+        try{
+        	Map<Object, Object> map = new HashMap<Object, Object>();
+        	
+            
+           
+        	String user_id = (String)session.getAttribute("user_id");
+        	vo.setUser_id(user_id);
+        	vo.setReply_seq(id);
+        	
+        	String reallike = likeService.selectReallike(vo);
+      
+          if(reallike == null) {
+        	  vo.setUser_id(user_id);
+          	  vo.setReply_seq(id);
+        	  likeService.insertLike(vo);
+        	  String cnt = likeService.selectReallikec(vo);
+        	  String reallike1 = likeService.selectReallike(vo);
+        	  map.put("cnt", cnt);
+        	  map.put("reply", id);
+        	  map.put("reallike", reallike1);
+        	  return map;
+          }
+          int a = Integer.parseInt(reallike);
+          if(a>0) {
+        	  vo.setUser_id(user_id);
+          	  vo.setReply_seq(id);
+        	  likeService.updateLikemns(vo);
+        	  String cnt = likeService.selectReallikec(vo);
+        	  String reallike2 = likeService.selectReallike(vo);
+        	  map.put("cnt", cnt);
+        	  map.put("reply", id);
+        	  map.put("reallike", reallike2);
+        	  return map;
+          }else if(a==0) {
+        	  vo.setUser_id(user_id);
+          	  vo.setReply_seq(id);
+        	  likeService.updateLikepls(vo);
+        	  String cnt = likeService.selectReallikec(vo);
+        	  String reallike3 = likeService.selectReallike(vo);
+        	  map.put("cnt", cnt);
+        	  map.put("reply", id);
+        	  map.put("reallike", reallike3);
+        	  return map;
+          }
+//          else if(reallike > 0) {
+////        	  
+////          }
+           //System.out.println("ccd.toString()"+ccd.toString());
+          
+            
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        
+        Map<Object, Object> map1 = new HashMap<Object, Object>();
+        return map1;
+    }
+    
+    @RequestMapping(value="/likeCommentlist.do")
+    @ResponseBody
+    public Map<Object, Object> ajax_likeCommentlist(@RequestBody String ccd,LikeVO vo, HttpSession session) throws Exception{ //requestbody로 하면 제이슨을 스트링으로 받을시 제이슨형태로 받는다
+         ModelAndView mv = new ModelAndView();
+    
+     //System.out.println(params.toString());
+     
+        	Map<Object, Object> map = new HashMap<Object, Object>();
+        	
+            
+           
+        	String user_id = (String)session.getAttribute("user_id");
+        
+        
+     
+        	  vo.setUser_id(user_id);
+          	  vo.setReply_seq(ccd);
+          	String reallike = likeService.selectReallike(vo);
+        	  String cnt = likeService.selectReallikec(vo); //SUM NULL
+        	  if(cnt == null) {
+        		  String cnt1 =  likeService.selectReallikecc(vo);
+        		  map.put("cnt", cnt1);
+        		  map.put("reallike", reallike); //null
+            	  return map;
+        	  }
+        	  
+        	  System.out.println("reallike.toString()"+reallike.toString());
+        	  map.put("cnt", cnt);
+        	  
+        	  map.put("reply", ccd);
+        	  map.put("reallike", reallike); //null
+        	  return map;
+           //System.out.println("ccd.toString()"+ccd.toString());
+          
+            
+
+        
+    
+        
+    }
 }

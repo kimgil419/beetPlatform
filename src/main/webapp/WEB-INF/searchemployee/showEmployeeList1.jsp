@@ -49,11 +49,10 @@
             }
         })
 
-    })
+    });
 
 
     function searchkeyword() {
-
 
         var keyword = $("#searchbar").val();
 

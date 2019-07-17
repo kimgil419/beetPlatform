@@ -113,9 +113,7 @@
 					}
 				});
 
-		function submit() {
-
-		}
+	
 
 		function renderSearchTmpl() {
 			$("#empSearch").html($.render.searchTmpl(employeeData));
@@ -224,7 +222,8 @@
 				</tr>
 
 			</table>
-
+<br>
+<br>
 			<div class="row" id="p3">
 				<div class="col-xs-5">
 					<select name="from[]" id="multiselect" class="form-control"
