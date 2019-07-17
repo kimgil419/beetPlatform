@@ -54,12 +54,12 @@ function refuse(frm){
 <div id="page-wrapper">
    <div class="container">
    <div class="col-md-8">
-      <h1>결재</h1>
+      <h1>결재 문서</h1>
     
       <hr>
       <form id="sub" action="updateApproval.do" method="post">
 
-         <table style="position: absolute; right: 30px;">
+         <table style="margin-left: 600px">
 
             <tr>
                <td width="70" height="70" style="border: solid 1px black; text-align: center;">
@@ -90,11 +90,7 @@ function refuse(frm){
             </tr>
 
          </table>
-         <br>
-         <br>
-         <br>
-         <br>
-                           <table class="table table-hover">
+                                    <table class="table table-hover">
             <tr>
                <th>제목</th>
                <td colspan="2"><input type="text" name="a_title"
