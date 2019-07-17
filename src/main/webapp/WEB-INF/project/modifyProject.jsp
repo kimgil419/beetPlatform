@@ -35,7 +35,7 @@
 		$("#addrow").on("click", function () {
 			var newRow = $("<tr>");
 	        var cols = "";
-	        cols += '<td class="col-sm-"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-search-plus"></i></button>' +
+	        cols += '<td class="col-sm-"><button type="button" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-search-plus"></i></button>' +
             		'<input type="text" name="user_id">' +
             		'<input type="text" name="user_name" readonly="readonly"></td>';
             cols += '<td><input type="text" name="source_name">' +
@@ -115,8 +115,6 @@
 					</table>
 				</div>
 			</div>		
-				
-				
 			<div>
 			    <table id="function_table" class="table table-bordered">
 				    <thead>
@@ -128,6 +126,15 @@
 				        </tr>
 				    </thead>
 				    <tbody>
+				    	<tr>
+				    		<tr style="display: none;">
+								<td><input type="text" name="source_idx" value="-9">
+									<input type="text" name="user_id" value="-9">
+									<input type="text" name="source_name" value="array_dummy">
+									<input type="text" name="source_progress" value="array_dummy">
+								</td>
+							</tr>
+				    	</tr>
 				    	<c:forEach var="source" items="${sourceList }" varStatus="status">
 				    		<tr>
 				    			<td class="col-sm-">

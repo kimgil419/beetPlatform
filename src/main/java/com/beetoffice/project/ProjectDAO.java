@@ -16,7 +16,6 @@ public class ProjectDAO {
 	private SqlSessionTemplate mybatis;
 	
 	public ProjectDAO() {
-		System.out.println(">> ProjectDAO 객체 생성");
 	}
 	
 	public List<ProjectVO> getProjectList(PagingProcess pages) {
