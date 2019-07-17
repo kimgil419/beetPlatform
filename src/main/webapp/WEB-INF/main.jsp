@@ -53,8 +53,8 @@
     <jsp:include page="menu.jsp"/>
     <div class="container" style="margin-top: 30px;">
         <!-- 유튜브 -->
-        <div id="root" class="col-md-8"></div>
-        <script src="/js/youtube-bundle.js"></script>
+        <div id="root" class="col-md-6"></div>
+
         <div class="row col-md-9">
             <div class="col-md-4">
             	<h5>
@@ -181,6 +181,7 @@
     </div>
 </div>
 </body>
+<script src="/js/youtube-bundle.js"></script>
 <script>
     $(document).ready(function () {
 
