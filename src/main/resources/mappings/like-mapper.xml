@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper 태그의 namespace 속성 필수 작성 -->
+<mapper namespace="LikeDAO">
+	
+
+   <insert id="insertrs" parameterType="like">
+   INSERT INTO LIKEL (USER_ID,REPLY_SEQ,REALLIKE) VALUES (#{user_id},#{reply_seq},1)
+   </insert>
+
+	<update id="updateLikemns" parameterType="like" ><!-- resultType="Integer" -->
+		UPDATE LIKEL SET REALLIKE = 0 WHERE USER_ID = #{user_id}  AND REPLY_SEQ = #{reply_seq}
+	</update>
+	
+	<update id="updateLikepls" parameterType="like" ><!-- resultType="Integer" -->
+		UPDATE LIKEL SET REALLIKE = REALLIKE + 1 WHERE USER_ID = #{user_id}  AND REPLY_SEQ = #{reply_seq}
+	</update>
+
+    <select id="selectrs" parameterType="like" resultType="String">
+      SELECT REALLIKE FROM LIKEL
+      WHERE
+          USER_ID = #{user_id} AND REPLY_SEQ = #{reply_seq}
+    </select>
+    
+    <select id="selectrsc" parameterType="like" resultType="String">
+      SELECT SUM(REALLIKE) FROM LIKEL
+      WHERE
+          REPLY_SEQ = #{reply_seq}
+    </select>
+    
+    <select id="selectrscc" parameterType="like" resultType="String">
+      SELECT COUNT(REALLIKE) FROM LIKEL
+      WHERE
+          REPLY_SEQ = #{reply_seq}
+    </select>
+</mapper>
+
