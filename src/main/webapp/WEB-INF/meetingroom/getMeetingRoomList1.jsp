@@ -76,27 +76,22 @@
             $("#room_num").val("room1")
             room_num = $("#room_num").val();
             clicked(room_num);
-            $("#booktable").empty();
-            if (userDept === '인사') {
-                bookList(allList);
-            }
-
-        })
+        });
         $("#i2").on("click", function () {
             $("#room_num").val("room2")
             room_num = $("#room_num").val();
             clicked(room_num);
-        })
+        });
         $("#i3").on("click", function () {
             $("#room_num").val("room3")
             room_num = $("#room_num").val();
             clicked(room_num);
-        })
+        });
         $("#i4").on("click", function () {
             $("#room_num").val("room4")
             room_num = $("#room_num").val();
             clicked(room_num);
-        })
+        });
 
         $('#timePicker1').wickedpicker({
             timeSeparator: ':',
@@ -137,7 +132,7 @@
                 datatype: "json",
                 success: function (data) {
                     list = data.meetingroom;
-                    allList = JSON.parse(data.allList);
+                    allList = data.allList;
                     clicked("room1");
 
                     $("#booktable").empty();

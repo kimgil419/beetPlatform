@@ -7,7 +7,7 @@
 
     <select id="selectAll" resultType="searchemployee" parameterType="searchemployee">
         SELECT *
-        FROM USER_DB LIMIT 0, 10
+        FROM USER_DB
     </select>
 
     <select id="selectbykeyword" resultType="searchemployee" parameterType="String">
@@ -20,7 +20,7 @@
             PHONE regexp #{keyword} OR
             CPHONE regexp #{keyword} OR
             FIRSTJOIN regexp #{keyword} OR
-            USER_EMAIL regexp #{keyword} LIMIT 0, 10
+            USER_EMAIL regexp #{keyword}
     </select>
     
      <select id="selectAllForSearch" resultType="searchemployee" parameterType="searchemployee">

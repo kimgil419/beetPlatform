@@ -69,8 +69,13 @@ public class SearchEmployeeController {
         List<SearchEmployeeVO> employeelist = searchEmployeeService.getUserList(vo);
 
         Map data = new HashMap<>();
-        data.put("firstData", employeelist);
-        data.put("dataLength", employeelist.size());
+        int datasize = employeelist.size();
+        if(employeelist.size()<10){
+            data.put("firstData", employeelist.subList(0, datasize));
+        } else {
+            data.put("firstData", employeelist.subList(0,10));
+        }
+        data.put("dataLength", datasize);
 
         return data;
     }
@@ -83,9 +88,13 @@ public class SearchEmployeeController {
         List<SearchEmployeeVO> list = searchEmployeeService.getUserListbyKeyword(keyword);
 
         Map data = new HashMap<>();
-        data.put("firstData", list);
-        data.put("dataLength", list.size());
-
+        int datasize = list.size();
+        if(list.size()<10){
+            data.put("firstData", list.subList(0, datasize));
+        } else {
+            data.put("firstData", list.subList(0,10));
+        }
+        data.put("dataLength", datasize);
 
         return data;
     }
@@ -94,16 +103,10 @@ public class SearchEmployeeController {
     @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080", "http://localhost:5050"})
     public @ResponseBody String eachUserList(String keyword, Integer start, Integer length) {
 
-        System.out.println(keyword);
-        System.out.println(start);
-        System.out.println(length);
-
         Map data = new HashMap<>();
         data.put("start", start);
         data.put("length", length);
         data.put("keyword", keyword);
-
-        System.out.println(data);
 
         List<SearchEmployeeVO> employeelist = searchEmployeeService.getUserListForPaging(data);
         Gson json = new Gson();
