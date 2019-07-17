@@ -11,9 +11,7 @@
     <meta charset="UTF-8">
     <title>글목록</title>
     <script src='/js/jquery-3.4.1.min.js'></script>
-    <%--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">--%>
-
-    <%--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
+   
 
 
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" type="text/css"/>

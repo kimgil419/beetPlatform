@@ -113,9 +113,7 @@
 					}
 				});
 
-		function submit() {
-
-		}
+	
 
 		function renderSearchTmpl() {
 			$("#empSearch").html($.render.searchTmpl(employeeData));
