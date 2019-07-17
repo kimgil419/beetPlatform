@@ -7,7 +7,12 @@
 <mapper namespace="ApprovalDAO">
 	
 	<select id="getApproval"  parameterType="approval" resultType="approval">
-	SELECT * FROM APPROVAL WHERE A_NUM = #{a_num}
+	SELECT * 
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID) AS USER_NAME
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID1) AS USER_NAME1
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID2) AS USER_NAME2
+	 , (SELECT USER_NAME FROM USER_DB WHERE USER_ID = A.USER_ID3) AS USER_NAME3
+	FROM APPROVAL A WHERE A.A_NUM = #{a_num}
 	</select>
 	
 	<select id="getApprovalList" parameterType="approval" resultType="approval">

@@ -52,23 +52,23 @@ function refuse(frm){
    <div class="container">
    <div class="col-md-8">
       <h1>결재</h1>
-      <p>
-         <a href="logout.do">Log-out</a>
-      </p>
       <hr>
       <form id="sub" action="updateApproval.do" method="post">
 
-         <table>
+         <table style="position: absolute; right: 30px;">
 
             <tr>
-               <td width="70" height="70"><c:if
+               <td width="70" height="70" style="border: solid 1px black; text-align: center;">
+               ${approval.user_name1} <c:if
                      test="${not empty approval.ok1  }">
                      <img
                         src="https://st2.depositphotos.com/2274151/6340/i/950/depositphotos_63409211-stock-photo-completed-red-vintage-isolated-seal.jpg"
                         width="70px">
                   </c:if></td>
 
-               <td width="70" height="70"><c:if
+               <td width="70" height="70" style="border: solid 1px black; text-align: center;">
+                 ${approval.user_name2}
+               <c:if
                      test="${not empty approval.ok2 }">
                      <img
                         src="https://st2.depositphotos.com/2274151/6340/i/950/depositphotos_63409211-stock-photo-completed-red-vintage-isolated-seal.jpg"
@@ -76,7 +76,9 @@ function refuse(frm){
 
                   </c:if></td>
 
-               <td width="70" height="70"><c:if
+               <td width="70" height="70" style="border: solid 1px black; text-align: center;">
+                 ${approval.user_name3}
+               <c:if
                      test="${not empty approval.ok3 }">
                      <img
                         src="https://st2.depositphotos.com/2274151/6340/i/950/depositphotos_63409211-stock-photo-completed-red-vintage-isolated-seal.jpg"
@@ -84,11 +86,15 @@ function refuse(frm){
 
                   </c:if></td>
             </tr>
-
-         </table>
-         <table class="table table-hover">
+   </table>
+   <br>
+<br>
+<br>
+<br>
+      
+         <table class="table">
             <tr>
-               <th>제목</th>
+               <th style="width: 100px">제목</th>
                <td colspan="2"><input type="text" name="a_title"
                   value="${approval.a_title}"></td>
             </tr>
@@ -99,7 +105,7 @@ function refuse(frm){
 
             <tr>
                <th>내용</th>
-               <td colspan="3"><textarea rows="10" cols="40" name="a_content" style="width: 800px; height: 500px;">${approval.a_content}</textarea>
+               <td colspan="2"><textarea rows="10" cols="40" name="a_content" style="width: 600px; height: 500px;">${approval.a_content}</textarea>
                </td>
             </tr>
             <tr>
@@ -141,10 +147,9 @@ function refuse(frm){
       </form>
       <hr>
       <p>
-         <a href="insertApproval.do">글쓰기</a>&nbsp;&nbsp; <a
-            href="deleteApproval.do?a_num=${approval.a_num}">글삭제</a>&nbsp;&nbsp;
-         <a href="getApprovalList.do">글목록</a>
-         <p><a href="Main.do">메인메뉴이동</a></p>
+         
+
+         <a href="getApprovalList.do">전자 결재 목록</a>
      
    </div>
    </div>
