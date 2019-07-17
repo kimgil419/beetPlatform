@@ -55,23 +55,23 @@ function refuse(frm){
    <div class="container">
    <div class="col-md-8">
       <h1>결재</h1>
-      <p>
-         <a href="logout.do">Log-out</a>
-      </p>
+    
       <hr>
       <form id="sub" action="updateApproval.do" method="post">
 
-         <table>
+         <table style="position: absolute; right: 30px;">
 
             <tr>
-               <td width="70" height="70"><c:if
+               <td width="70" height="70" style="border: solid 1px black; text-align: center;">
+               ${approval.user_name1} <c:if
                      test="${not empty approval.ok1  }">
                      <img
                         src="https://st2.depositphotos.com/2274151/6340/i/950/depositphotos_63409211-stock-photo-completed-red-vintage-isolated-seal.jpg"
                         width="70px">
                   </c:if></td>
 
-               <td width="70" height="70"><c:if
+              <td width="70" height="70" style="border: solid 1px black; text-align: center;">
+               ${approval.user_name2} <c:if
                      test="${not empty approval.ok2 }">
                      <img
                         src="https://st2.depositphotos.com/2274151/6340/i/950/depositphotos_63409211-stock-photo-completed-red-vintage-isolated-seal.jpg"
@@ -79,7 +79,8 @@ function refuse(frm){
 
                   </c:if></td>
 
-               <td width="70" height="70"><c:if
+               <td width="70" height="70" style="border: solid 1px black; text-align: center;">
+               ${approval.user_name3} <c:if
                      test="${not empty approval.ok3 }">
                      <img
                         src="https://st2.depositphotos.com/2274151/6340/i/950/depositphotos_63409211-stock-photo-completed-red-vintage-isolated-seal.jpg"
@@ -89,7 +90,11 @@ function refuse(frm){
             </tr>
 
          </table>
-         <table class="table table-hover">
+         <br>
+         <br>
+         <br>
+         <br>
+                           <table class="table table-hover">
             <tr>
                <th>제목</th>
                <td colspan="2"><input type="text" name="a_title"

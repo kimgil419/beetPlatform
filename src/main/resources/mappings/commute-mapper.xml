@@ -52,7 +52,6 @@
 	WHERE (D.USER_ID = C.USER_ID)
 	AND (DATE(IN_TIME) = CURDATE())
 	AND D.USER_ID = #{user_id}
-
 </select>
 
 </mapper>
