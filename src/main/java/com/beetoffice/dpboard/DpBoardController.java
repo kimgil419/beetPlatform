@@ -33,8 +33,7 @@ public class DpBoardController {
 	@Autowired //일치 타입이 하나여야만 한다, 예전에 컨트롤러 타입?으로 찾던걸 오토와이어드로 찾는다
 	private DpBoardService boardService; //이 변수 명과 @서비스의 변수명이 같아야 서비스로 이동
 	
-	@Autowired
-	DpCommentService commentService;
+
 	
 	//메소드에 설정된 @ModelAttribute 는 리턴된 데이타를 View에 전달
 	//@ModelAttribute 선언된 메소드는  
@@ -58,7 +57,7 @@ public class DpBoardController {
 		int a = vo.getSeq();
 		String b = String.valueOf(a);
 		session.setAttribute("mySeq", b);
-		
+		vo = boardService.dpgetBoard(vo);
 		String pd = vo.getT_password();
 		//session.setAttribute("c1",curPage);
 		
@@ -71,7 +70,7 @@ public class DpBoardController {
 	//리턴타입 ModleAndView -> String 변경 통일
 	//데이타 저장타입 : ModleAndView -> Model
 	@RequestMapping("/dpgetBoard.do")
-	public String dpgetBoard(DpBoardVO vo, Model model, HttpSession session,@RequestParam String curPage, DpCommentVO vol,RedirectAttributes redirectAttributes) {
+	public String dpgetBoard(DpBoardVO vo, Model model, HttpSession session,@RequestParam String curPage,RedirectAttributes redirectAttributes) {
 		System.out.println(">>> 글 상세 조회 처리 - getBoard()");
 		String a = (String) session.getAttribute("mySeq");
 		vo.setSeq(Integer.parseInt(a));
@@ -81,14 +80,13 @@ public class DpBoardController {
 //		model.addAttribute("c1", c1);
 		model.addAttribute("c1", curPage);
 		
-		vol.setSeq(vo.getSeq());
-        List<DpCommentVO> list = commentService.dpgetCommentList(vol);
 		
-		model.addAttribute("cm_list", list);
+		
+		
 		String pd = (String) session.getAttribute("pd");
 		vo.setT_password(pd);
 		
-		if(!"".equals(vo.getT_password())) {
+		if(!"구분".equals(vo.getT_password())) {
 			String user_position = (String) session.getAttribute("user_position");
 			if("과장".equals(user_position) || "차장".equals(user_position) || "부장".equals(user_position) || "이사".equals(user_position) || "대표이사".equals(user_position)) {
 				boardService.dpgetBoardInsert(vo);
@@ -96,6 +94,7 @@ public class DpBoardController {
 				
 			}else {
 				session.setAttribute("secretAgent", "비밀글");
+				model.addAttribute("secretmassage", "비밀글");
 				redirectAttributes.addAttribute("curPage", curPage);
 		            return "redirect:dpgetBoardList.do";
 			}

@@ -74,7 +74,7 @@ public class UserController {
    }
    @RequestMapping("/finsertUser.do")
    public String finsertUser() {
-	   return "/board/signup";
+	   return "signup";
    }
    
    @RequestMapping(value="/insertUser.do", method = {RequestMethod.GET, RequestMethod.POST})

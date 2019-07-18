@@ -155,96 +155,94 @@ function execPostCode() {
     }).open();
 }
 
-function send_go(frm) {
+function send_go() {
 	if (frm.user_ids.value.trim() == "") {
 		
 		alert("아이디(ID)를 입력안하셨습니다.\n입력하세요.");
 		frm.user_ids.value = "";
 		frm.user_ids.focus();
 		
-		
 	} else if(frm.user_password.value.trim() == "") {
 		alert("비밀번호를 입력안하셨습니다.\n입력하세요.");
 		frm.user_password.value = "";
 		frm.user_password.focus();
-		
+
 	} else if(frm.dept.value.trim() == "") {
 		alert("소속부서를 입력안하셨습니다.\n입력하세요.");
 		frm.dept.value = "";
 		frm.dept.focus();
-		
+	
 	} else if(frm.birth.value.trim() == "") {
 		alert("생년월일을 입력안하셨습니다.\n입력하세요.");
 		frm.birth.value = "";
 		frm.birth.focus();
-		
+	
 	}else if(frm.job_id.value.trim() == "") {
 		alert("직무를 입력안하셨습니다.\n입력하세요.");
 		frm.job_id.value = "";
 		frm.job_id.focus();
-		
+	
 	}else if(frm.firstjoin.value.trim() == "") {
 		alert("입사일을 입력안하셨습니다.\n입력하세요.");
 		frm.firstjoin.value = "";
 		frm.firstjoin.focus();
-		
+	
 	}else if(frm.user_name.value.trim() == "") {
 		alert("이름을 입력안하셨습니다.\n입력하세요.");
 		frm.user_name.value = "";
 		frm.user_name.focus();
-		
+	
 	}else if(frm.user_position.value.trim() == "") {
 		alert("직급을 입력안하셨습니다.\n입력하세요.");
 		frm.user_position.value = "";
 		frm.user_position.focus();
-		
+	
 	}else if(frm.phone.value.trim() == "") {
 		alert("전화번호를 입력안하셨습니다.\n입력하세요.");
 		frm.phone.value = "";
 		frm.phone.focus();
-		
+	
 	}else if(frm.cphone.value.trim() == "") {
 		alert("내선번호를 입력안하셨습니다.\n입력하세요.");
 		frm.cphone.value = "";
 		frm.cphone.focus();
-		
-	}else if(frm.user_email1.value.trim() == "") {
+	
+	}else if(frm.user_email.value.trim() == "") {
 		alert("이메일용아이디를 입력안하셨습니다.\n입력하세요.");
 		frm.user_email1.value = "";
 		frm.user_email1.focus();
-		
-	}else if(frm.user_email2.value.trim() == "") {
-		alert("이메일을 입력안하셨습니다.\n입력하세요.");
-		frm.user_email2.value = "";
-		frm.user_email2.focus();
-		
+	
 	}else if(frm.addr1.value.trim() == "") {
 		alert("우편번호를 입력안하셨습니다.\n입력하세요.");
 		frm.addr1.value = "";
 		frm.addr1.focus();
-		
+	
 	}else if(frm.addr2.value.trim() == "") {
 		alert("도로명 주소를 입력안하셨습니다.\n입력하세요.");
 		frm.addr2.value = "";
 		frm.addr2.focus();
-		
+
 	}else if(frm.addr3.value.trim() == "") {
 		alert("상세주소를 입력안하셨습니다.\n입력하세요.");
 		frm.addr3.value = "";
 		frm.addr3.focus();
-		
+	
 	}else if(frm.user_pictures.value.trim() == "") {
 		alert("프로필사진을 업로드안하셨습니다.\n업로드하세요.");
 		frm.user_pictures.value = "";
 		frm.user_pictures.focus();
-		
+
+	} else {
+		frm.action = "insertUser.do";
+		frm.submit();
 	}
+	
 }
 </script>
 </head>
 <body>
 	<div id="page-wrapper">
-<jsp:include page="../menu.jsp"/>
+<jsp:include page="menu.jsp"/>
 <div id="container">
 		
 			
@@ -265,8 +263,7 @@ function send_go(frm) {
  							
 					
 				
-				
- 				 		                  <form action="insertUser.do" method="post"
+		<form name="frm" method="post"
 	        enctype="multipart/form-data">
 												
 							
@@ -353,9 +350,9 @@ function send_go(frm) {
 						
  					
 							
-							<div>
+							<div class="form-group">
 							<hr>
-								<input type="button" class="btn btn-md" id="ea" value="Sign In" onclick="send_go(this.form)">
+								<input type="button" class="btn btn-md" id="ea" value="Sign In" onclick="send_go()">
 							</div>
 			
  					

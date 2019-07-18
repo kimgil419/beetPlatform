@@ -72,7 +72,7 @@
 		</tr>
 		<tr>
 			<th class="tt">작성자</th>
-			<td>${user_name }</td>
+			<td>${board.user_name }</td>
 		</tr>
 		<tr>
 			<th bgcolor="#A9F5A9">사용하던 이미지</th>

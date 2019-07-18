@@ -102,7 +102,7 @@ function fn_comment(code){
  * 댓글 불러오기(Ajax)
  */
 function getCommentList(){
-    
+
     $.ajax({
     	async: false,
         type:'GET',
@@ -120,8 +120,8 @@ function getCommentList(){
                 for(i=0; i<data.length; i++){
                     html += "<div>";
                     html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
-                    html += data[i].comment + "<tr><td></td></tr>";
-                    html += "</table></div><input type='button' onclick='sendgos("+data[i].c_code+")' value='삭제'>";
+                    html += data[i].comment + "<tr><td><a href='#' onclick='sendgos("+data[i].c_code+")'  class='btn pull-right btn-secondary'>삭제</a></td></tr>";
+                    html += "</table></div>";
                     html += "</div>";
                     
                     
@@ -188,9 +188,6 @@ function sendgos(codesData){
 			
 				var cCnt = data.cnt;
 				console.log(cCnt);
-				
-				var seq = data.reply;
-				console.log(seq);
 	               
 				var reals = data.reallike;
 				console.log(reals);
@@ -239,9 +236,6 @@ function sendgos(codesData){
 				
 					var cCnt = data.cnt;
 					console.log(cCnt);
-					
-					var seq = data.reply;
-					console.log(seq);
 		               
 					var reals = data.reallike;
 					console.log(reals);
@@ -297,7 +291,7 @@ function sendgos(codesData){
 		</thead>
 		<tr>
 			<th>작성자</th>
-			<td>${user_name }</td>
+			<td>${board.user_name }</td>
 			<th>등록일</th>
 			<td>${board.t_regdate}</td>
 			<th>조회수</th>
@@ -364,10 +358,10 @@ function sendgos(codesData){
     </form>
 </div>
 <div class="container">
-    <form id="commentListForm" name="commentListForm" method="post">
+ 
         <div id="commentList">
         </div>
-    </form>
+
     </div>
 
 

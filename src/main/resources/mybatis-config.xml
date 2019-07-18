@@ -17,7 +17,6 @@
         <typeAlias alias="board" type="com.beetoffice.board.BoardVO"/>
         <typeAlias alias="dpboard" type="com.beetoffice.dpboard.DpBoardVO"/>
         <typeAlias alias="comment" type="com.beetoffice.board.CommentVO"/>
-        <typeAlias alias="dpcomment" type="com.beetoffice.dpboard.DpCommentVO"/>
         <typeAlias alias="like" type="com.beetoffice.board.LikeVO"/>
     </typeAliases>
 

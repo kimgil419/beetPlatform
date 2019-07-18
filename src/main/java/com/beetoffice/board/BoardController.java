@@ -434,7 +434,7 @@ public class BoardController {
     @RequestMapping(value="/deleteComment.do")
     @ResponseBody
     public String ajax_deleteComment(@RequestParam("codes") String id) throws Exception{ //requestbody로 하면 제이슨을 스트링으로 받을시 제이슨형태로 받는다
-         ModelAndView mv = new ModelAndView();
+       
     
      //System.out.println(params.toString());
         try{
@@ -453,7 +453,7 @@ public class BoardController {
     @RequestMapping(value="/likeComment.do")
     @ResponseBody
     public Map<Object, Object> ajax_likeComment(@RequestParam("codes") String id,LikeVO vo, HttpSession session) throws Exception{ //requestbody로 하면 제이슨을 스트링으로 받을시 제이슨형태로 받는다
-         ModelAndView mv = new ModelAndView();
+      
     
      //System.out.println(params.toString());
         try{
@@ -518,7 +518,7 @@ public class BoardController {
     @RequestMapping(value="/likeCommentlist.do")
     @ResponseBody
     public Map<Object, Object> ajax_likeCommentlist(@RequestBody String ccd,LikeVO vo, HttpSession session) throws Exception{ //requestbody로 하면 제이슨을 스트링으로 받을시 제이슨형태로 받는다
-         ModelAndView mv = new ModelAndView();
+
     
      //System.out.println(params.toString());
      
@@ -541,7 +541,7 @@ public class BoardController {
             	  return map;
         	  }
         	  
-        	  System.out.println("reallike.toString()"+reallike.toString());
+        	
         	  map.put("cnt", cnt);
         	  
         	  map.put("reply", ccd);
