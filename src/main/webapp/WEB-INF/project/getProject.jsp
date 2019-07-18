@@ -45,7 +45,7 @@
 		</table>
 		<h4>
 			<i class="fas fa-arrow-circle-down"></i>
-			<small class="text-muted">프로젝트상세</small>
+			<small class="text-muted">기능목록</small>
 		</h4>
 		<table class="table table-bordered">
 			<thead>

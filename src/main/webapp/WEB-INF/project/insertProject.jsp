@@ -8,12 +8,6 @@
 <title>프로젝트작성</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
 <link href="/css/project_common.css" rel="stylesheet" type="text/css" />
-
-<!-- <script src="/js/pagination.min.js"></script> -->
-<!-- <link href="css/pagination.css" rel='stylesheet'/> -->
-<!-- <script src="/js/selectEmployee.js"></script> -->
-<!-- <script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js" data-auto-replace-svg="nest"></script> -->
-
 <script>
 	var employeeList = ${employeeList};
 	var counter = 0;
@@ -26,7 +20,7 @@
 	        var cols = "";
 	        cols += 
 	        		'<td class="col-sm-">' +
-	        		'<button type="button" class="searchButton' + index + '" value="' + index + '"data-toggle="modal" data-target="#exampleModal" onclick="selectEmployee(' + index + ')">' +
+	        		'<button type="button" id="searchButton" class="searchButton' + index + '" value="' + index + '"data-toggle="modal" data-target="#exampleModal" onclick="selectEmployee(' + index + ')">' +
 	       		 	'<i class="fas fa-search-plus"></i></button>' +
             		'<input type="text" id="employee_id' + index + '" name="user_id">' +
             		'<input type="text" id="employee_name' + index + '" name="user_name" readonly="readonly"></td>';
@@ -60,6 +54,7 @@
 	    });
 		
 	});
+	
 	function selectEmployee(index){
 		$("#here").empty();
 		const number = index;
@@ -132,7 +127,16 @@
 			frm.project_contract_amount.focus();
 			return false;
 		}
-		frm.action="insertProject.do";
+		if(frm.user_id.value=="") {
+			alert("기능담당자를 입력하세요.");
+			return false;
+		}
+		if(frm.source_name.value=="") {
+			alert("기능명을 입력하세요.");
+			frm.source_name.focus();
+			return false;
+		}
+ 		frm.action="insertProject.do";
 		frm.submit();
 	}
 </script>
@@ -198,9 +202,9 @@
 						<tbody>
 							<tr style="display: none;">
 								<td><input type="text" name="source_idx" value="-9">
-									<input type="text" name="user_id" value="-9"> <input
-									type="text" name="source_name" value="array_dummy"> <input
-									type="text" name="source_progress" value="array_dummy">
+									<input type="text" name="user_id" value="-9">
+									<input type="text" name="source_name" value="array_dummy">
+									<input type="text" name="source_progress" value="array_dummy">
 								</td>
 							</tr>
 						</tbody>
@@ -224,35 +228,32 @@
 		</div>
 	</div>
 	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<!-- 여기에 일단 리스트를 띄우고 싶어요. -->
-					<div class="container" style="max-width: 500px;">
-						<div class="float:right;">
-							<input type="text" name="search" id="searchBar" style="border: none; width: 130px;" placeholder="search keyword...">
-							<div style="padding-top: 4px; display: inline-block;" onclick="">
-								<i class="fas fa-search" style="color: lightgrey;"></i>
-							</div>
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="container" style="max-width: 500px;">
+					<div class="float:right;">
+						<input type="text" name="search" id="searchBar" style="border: none; width: 130px;" placeholder="search keyword...">
+						<div style="padding-top: 4px; display: inline-block;" onclick="">
+							<i class="fas fa-search" style="color: lightgrey;"></i>
 						</div>
 					</div>
-					<div id="here"></div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
-				</div>
+				<div id="here"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
+</div>
 </body>
 </html>

@@ -35,7 +35,7 @@
 		$("#addrow").on("click", function () {
 			var newRow = $("<tr>");
 	        var cols = "";
-	        cols += '<td class="col-sm-"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-search-plus"></i></button>' +
+	        cols += '<td class="col-sm-"><button type="button" id="searchEmployee" data-toggle="modal" href="remote.html" data-target="#modal"><i class="fas fa-search-plus"></i></button>' +
             		'<input type="text" name="user_id">' +
             		'<input type="text" name="user_name" readonly="readonly"></td>';
             cols += '<td><input type="text" name="source_name">' +
@@ -57,6 +57,7 @@
 	        $(this).closest("tr").remove();       
 	        counter -= 1
 	    });
+	    
 	});
 	function calculateRow(row) {
 	    var price = +row.find('input[name^="price"]').val();
@@ -80,7 +81,7 @@
 				<div>
 					<h4>
 						<i class="fas fa-arrow-circle-down"></i>
-						<small class="text-muted">프로젝트작성</small>
+						<small class="text-muted">프로젝트수정</small>
 					</h4>
 					<table class="table table-bordered">
 						<tbody>
@@ -115,8 +116,6 @@
 					</table>
 				</div>
 			</div>		
-				
-				
 			<div>
 			    <table id="function_table" class="table table-bordered">
 				    <thead>
@@ -128,11 +127,20 @@
 				        </tr>
 				    </thead>
 				    <tbody>
+				    	<tr>
+				    		<tr style="display: none;">
+								<td><input type="text" name="source_idx" value="-9">
+									<input type="text" name="user_id" value="-9">
+									<input type="text" name="source_name" value="array_dummy">
+									<input type="text" name="source_progress" value="array_dummy">
+								</td>
+							</tr>
+				    	</tr>
 				    	<c:forEach var="source" items="${sourceList }" varStatus="status">
 				    		<tr>
 				    			<td class="col-sm-">
 					                <button type="button" class="searchButton" data-toggle="modal" data-target="#exampleModal" onclick="selectEmployee()"><i class="fas fa-search-plus"></i></button>
-					                <input type="text" name="user_id" value="${source.user_id }" readonly="readonly">
+					                <input type="text" name="user_id" value="${source.user_id }">
 					                <input type="text" name="user_name" value="${source.user_name }" readonly="readonly">
 				            	</td>
 					            <td class="col-sm-">
