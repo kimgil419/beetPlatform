@@ -56,8 +56,11 @@
 }
 .notie { background-color: #D8D8D8; }
 </style>
-<script type="text/javascript">
-
+<script>
+var result = '${secretmassage}';
+if(result == '비밀글') {
+	alert(result + '을 열람할 수 있는 권한이 아닙니다'); //아무 조건도 안걸면 계속 나온다 전달도 안된다
+	} 
 </script>
 </head>
 <body>

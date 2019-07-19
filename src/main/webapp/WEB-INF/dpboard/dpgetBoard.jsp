@@ -50,6 +50,8 @@
     color: #333;
     font-weight: 600;
 }
+
+
 </style>
 <script>
 
@@ -71,9 +73,9 @@ function fn_comment(code){
     	async: false,
         type:'POST',
         url : "<c:url value='/addComment.do'/>",
-        data:$("#commentForm").serialize(),
-        success : function(data){
-            if(data=="success")
+        data:$("#commentForm").serialize(), //여기까지가 AJAX로 데이타를 갖고 간다는 뜻이다
+        success : function(data){ //이 부분부터 받는다는 뜻이다
+            if(data=="success")  //받는 데이타의 조건문이다
             {
                 getCommentList();
                 $("#comment").val("");
@@ -86,20 +88,21 @@ function fn_comment(code){
     });
 }
  
+
 /**
  * 초기 페이지 로딩시 댓글 불러오기
  */
-$(function(){
-    
-    getCommentList();
-    
-});
- 
+ $(function(){ //할상 실행시킨다는 뜻이다 //펑션레디안해도 자동으로 실행된다
+	    
+	    getCommentList(); 
+	    sendgol();
+	    
+	});
 /**
  * 댓글 불러오기(Ajax)
  */
 function getCommentList(){
-    
+	
     $.ajax({
     	async: false,
         type:'GET',
@@ -115,12 +118,15 @@ function getCommentList(){
             if(data.length > 0){
                 
                 for(i=0; i<data.length; i++){
+                	
                     html += "<div>";
                     html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
-                    html += data[i].comment + "<tr><td></td></tr>";
+                    html += data[i].comment + "<tr><td><a href='#' onclick='sendgos("+data[i].c_code+")'  class='btn pull-right btn-secondary'>삭제</a></td></tr>";
                     html += "</table></div>";
                     html += "</div>";
                     
+                    
+            
                     
                 }
                
@@ -132,7 +138,7 @@ function getCommentList(){
                 html += "</div>";
                 
             }
-            
+           
             $("#cCnt").html(cCnt);
             $("#commentList").html(html);
             
@@ -143,6 +149,126 @@ function getCommentList(){
         
     });
 }
+
+function sendgos(codesData){
+	//var ccd = codes;
+	var ccd ={
+			codes	:codesData
+			
+	}
+	console.log(ccd);
+	$.ajax({
+		
+		type:'POST',
+		url : "deleteComment.do",
+		data: ccd,
+		success : function(data){
+			if(data=="success")
+			{
+                getCommentList();
+                $("#comment").val("");
+            }
+        },
+        error:function(request,status,error){
+            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+       }
+	});
+}
+
+	function sendgol(){
+		//var ccd = codes;
+		var ccd = $("#seqqs").val(); 
+		console.log(ccd);
+		$.ajax({
+			
+			type:'POST',
+			url : "likeCommentlist.do",
+			data: ccd,
+			success : function(data){
+				
+			
+				var cCnt = data.cnt;
+				console.log(cCnt);
+	               
+				var reals = data.reallike;
+				console.log(reals);
+				if(reals  == null){
+					getCommentList();
+		                $("#comment").val("");
+		                $("#img_form_url").attr("src","./image/heass.jpg");
+
+		          
+		                $("#cCntlike").html(cCnt);
+					}
+				else if(reals  != 0){
+				getCommentList();
+	                $("#comment").val("");
+	                $("#img_form_url").attr("src","./image/download.png");
+
+	          
+	                $("#cCntlike").html(cCnt);
+				}else if(reals == 0){
+					$("#comment").val("");
+					 $("#img_form_url").attr("src","./image/heass.jpg");
+
+	          
+	                $("#cCntlike").html(cCnt);
+				}
+				
+	        },
+	        error:function(request,status,error){
+	            //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	       }
+		});
+	}
+		function sendgols(codesData){
+			//var ccd = codes;
+				var ccd ={
+			codes	:codesData
+			
+	}
+			$.ajax({
+				
+				type:'POST',
+				url : "likeComment.do",
+				data: ccd,
+				success : function(data){
+					
+				
+					var cCnt = data.cnt;
+					console.log(cCnt);
+		               
+					var reals = data.reallike;
+					console.log(reals);
+					if(reals  != 0){
+						getCommentList();
+			                $("#comment").val("");
+			              
+			                $("#img_form_url").attr("src","./image/download.png");
+
+			    
+			          
+			                $("#cCntlike").html(cCnt);
+						}else if(reals == 0){
+							$("#comment").val("");
+							 $("#img_form_url").attr("src","./image/heass.jpg");
+			               
+			          
+			                $("#cCntlike").html(cCnt);
+						}
+					
+		        },
+		        error:function(request,status,error){
+
+		       }
+			});
+		
+}
+
+
+
+	
+
 </script>
 </head>
 <body>
@@ -155,7 +281,7 @@ function getCommentList(){
 	<p><a href="logout.do">Log-out</a></p>
 	<hr>
 	<form action="dpupdateBoardf.do" method="post">
-	<input type="hidden" name="seq" value="${board.seq}">
+	<input type="hidden" name="seq" value="${board.seq}" id=seqqs>
 	<input type="hidden" name="curPage" value="${c1 }">
 	<table class="table" cellspacing="0">
 	<thead>
@@ -166,7 +292,7 @@ function getCommentList(){
 		</thead>
 		<tr>
 			<th>작성자</th>
-			<td>${user_name }</td>
+			<td>${board.user_name }</td>
 			<th>등록일</th>
 			<td>${board.t_regdate}</td>
 			<th>조회수</th>
@@ -177,15 +303,19 @@ function getCommentList(){
 			
 			<td colspan="6" style="width: 500px; height: 500px;">
 			<div style="border: 5px solid #A9F5A9; padding: 7px; display: ${(board.t_img == null) ? 'none':'' };" >
-			<img class="fancy"  style="display: ${(board.t_password == null) ? 'none':'' };" src ="image/${board.t_img}" width="500px;" height="350px;" alt="boardImage"> </div> <!-- $는 .equals는 반응하지 않는다 'null'은 안된다 -->
+			<img class="fancy"  style="display: ${(board.t_img == null) ? 'none':'' };" src ="${pageContext.request.contextPath}/image/${board.t_img}" width="500px;" height="350px;" alt="boardImage"> </div> <!-- $는 .equals는 반응하지 않는다 'null'은 안된다 -->
 					<p>
 					${board.t_content}
 			</td>
 		</tr>
 		<tr>
-			<td colspan="6" class="center">
+			<td colspan="2" class="center">
 				<input type="submit" ${(board.user_id == user_id) ? '':'hidden' } value="글 수정">
 			</td>
+			<td colspan="4" class="center">
+				<a href='#' onClick="sendgols('${board.seq}')" class="btn pull-right btn-success" id="likeall">좋아요</a><img id="img_form_url" width="50px;" height="50px;"><span id='favorite'></span><span id='cCntlike'></span>개
+			</td>
+			
 		</tr>
 	</table>
 	</form>
@@ -217,7 +347,7 @@ function getCommentList(){
                             <textarea style="width: 1100px" rows="3" cols="30" id="comment" name="board_content" placeholder="${com.board_content }"></textarea>
                             <br>
                             <div>
-                                <a href='#' onClick="fn_comment('${board.seq}')" class="btn pull-right btn-success">등록</a>
+                                <a href='#' onClick="fn_comment('${board.seq}')" class="btn pull-right btn-secondary">등록</a>
                             </div>
                         </td>
                     </tr>
@@ -229,10 +359,10 @@ function getCommentList(){
     </form>
 </div>
 <div class="container">
-    <form id="commentListForm" name="commentListForm" method="post">
+
         <div id="commentList">
         </div>
-    </form>
+
     </div>
 
 

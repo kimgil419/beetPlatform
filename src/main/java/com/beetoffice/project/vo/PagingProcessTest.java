@@ -6,13 +6,9 @@ public class PagingProcessTest {
 
 	public static void main(String[] shockWave) {
 		
-		
 		PagingProcess pu = new PagingProcess();
 		pu.setCurrentPage("1");
-//		System.out.println(pu);
 		pu.setTotalPost(0);
 		System.out.println(pu);
-		
-		
 	}
 }

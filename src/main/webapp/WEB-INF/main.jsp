@@ -144,7 +144,7 @@
 							<fmt:parseDate value="${board.t_regdate }" var="dateFmt" pattern="yyyy-MM-ddHH:mm:ss" />
 	                    	<tr class="element-tbody">
 	                        	<td class="${(board.t_noti == 'Y') ? 'notie' : '' } content">
-	                        		<img class="fancy" style="display: ${(board.t_password == null) ? 'none':'' };" src="image/icon_secret.gif" alt="titleImage"><a
+	                        		<img class="fancy"  style="display: ${(board.t_password == '구분') ? 'none':'' };" src ="image/icon_secret.gif" alt="titleImage"><a
 	                                       href="dpgetBoardInsert.do?seq=${board.seq }&curPage=1&t_password=${board.t_password}">
 	                                       ${board.t_title } </a>
 								</td>

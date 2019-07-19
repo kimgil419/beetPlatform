@@ -84,25 +84,16 @@ public class PagingProcess {
 	
 	public void setStartPage() {
 		this.startPage = (Integer.parseInt(currentPage) - 1) / countPage * countPage + 1;
-		System.out.println("startPage: " + startPage);
 	}
 	public int getStartPage() {
 		return startPage;
 	}
 	
 	public void setEndPage() {
-		System.out.println("startPage in end: " + startPage);
-		System.out.println("countPage in end: " + countPage);
 		this.endPage = startPage + countPage - 1;
-		System.out.println(startPage + countPage - 1);
-		System.out.println(endPage > totalPage);
-		System.out.println(endPage);
 		if (endPage > totalPage) {
 			endPage = totalPage;
-			System.out.println("totalPage: " + totalPage);
-			System.out.println("endPage: " + endPage);
 		}
-		System.out.println();
 	}
 	public int getEndPage() {
 		return endPage;

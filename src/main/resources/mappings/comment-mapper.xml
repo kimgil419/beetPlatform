@@ -17,11 +17,7 @@
 
 
 	
-	
-	<select id="dpgetCommentList" parameterType="dpcomment"
-		resultType="comment">
-		SELECT * FROM COMMENT WHERE SEQ = #{seq}
-	</select>
+
 	
 	
 

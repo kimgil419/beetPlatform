@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,17 +37,13 @@ public class ProjectController {
 	
 	@RequestMapping("getProjectList.do")
 	public String getProjectSearchList(ProjectVO vo, PagingProcess pages, Model model) {
-		System.out.println(">> Controller: getProjectList()");
 		
 		if (pages.getCurrentPage() == null) {
 			pages.setCurrentPage("1");
 		}
 		pages.setTotalPost(projectService.getTotalPost(pages));
-		
 		List<ProjectVO> projectList = projectService.getProjectList(pages);
-		for (ProjectVO projectVO : projectList) {
-			System.out.println(projectVO);
-		}
+		
 		model.addAttribute("projectList", projectList);
 		model.addAttribute("pages", pages);
 		
@@ -57,12 +52,10 @@ public class ProjectController {
 	
 	@RequestMapping("getProject.do")
 	public String getProject(ProjectVO vo, PagingProcess pages, Model model) {
-		System.out.println(">> Controller: getProject()");
 		
 		model.addAttribute("pages", pages);
 		model.addAttribute("project", projectService.getProject(vo));
 		model.addAttribute("sourceList", projectService.getSourceList(vo));
-		System.out.println(">>>>>>>>>>>>>>>>>> projectVO: " + projectService.getProject(vo));
 		
 		return "project/getProject";
 	}
@@ -77,10 +70,8 @@ public class ProjectController {
 	}
 
 	@RequestMapping(value = "insertProject.do", produces = "application/json; charset = utf8")
-	@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080", "http://localhost:5050"})
 	public String insertProject(Model model, ProjectVO vo, SourceVO svo, @RequestParam String[] source_idx, 
 			@RequestParam String[] user_id, @RequestParam String[] source_name, @RequestParam String[] source_progress) {
-		System.out.println(">> Controller: insertProject()");
 		
 		projectService.insertProject(vo);
 		
@@ -93,17 +84,12 @@ public class ProjectController {
 			projectService.insertFunction(svo);
 		}
 		
-//		return "redirect:getProjectList.do?currentPage=1&searchCondition=null&searchKeyword=null";
 		return "redirect:getProjectList.do?";
 	}
 	
 	@RequestMapping(value = "writeProject.do", produces = "application/json; charset = utf8")
-	@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080", "http://localhost:5050"})
 	public String writeProject(Model model, SearchEmployeeVO vo) {
 		List<SearchEmployeeVO> employeeList = searchEmployeeService.getUserList(vo);
-		for (SearchEmployeeVO svo: employeeList) {
-			System.out.println(svo.toString());
-		}
 		Gson json = new Gson();
 		
 		model.addAttribute("employeeList", json.toJson(employeeList));
@@ -113,7 +99,6 @@ public class ProjectController {
 	
 	@RequestMapping("getSource.do")
 	public String getSource(SourceVO vo, Model model) {
-		System.out.println(">> Controller: getSource()");
 		
 		model.addAttribute("source", projectService.getSource(vo));
 		
@@ -150,7 +135,6 @@ public class ProjectController {
 				projectService.deleteSource(svo);
 			}
 		}
-		
 		int project_idx = vo.getProject_idx();
 		for (int i = 0; i < user_id.length; i++) {
 			if (source_idx[i].equalsIgnoreCase("-1")) {
@@ -165,7 +149,6 @@ public class ProjectController {
 				svo.setUser_id(user_id[i]);
 				svo.setSource_name(source_name[i]);
 				svo.setSource_progress(source_progress[i]);
-				System.out.println(">>>>>>>>>>>>>>>>>>svo: " + svo);
 				projectService.updateSource(svo);
 			}
 		}
@@ -176,17 +159,15 @@ public class ProjectController {
 	
 	@RequestMapping("modifySource.do")
 	public String modifySource(SourceVO vo, Model model) {
-		System.out.println(">> Controller: modifySource()");
 		
 		vo = projectService.getSource(vo);
 		model.addAttribute("source", vo);
+		
 		return "project/modifySource";
 	}
 	
 	@RequestMapping("updateSource.do")
 	public String updateSource(SourceVO vo, Model model) {
-		System.out.println(">> Controller: updateSource");
-		System.out.println(">>>>>>>>>>>: " + vo);
 		
 		projectService.updateSource(vo);
 		
@@ -197,9 +178,7 @@ public class ProjectController {
 	public String deleteSource(SourceVO svo) {
 		System.out.println(">> Controller: deleteSource");
 		
-		System.out.println(">>>> svo.getProject_idx(): " + svo.getProject_idx());
 		projectService.deleteSource(svo);
-		System.out.println(">>>> svo.getProject_idx(): " + svo.getProject_idx());
 		
 		return "redirect:getProject.do?project_idx=" + svo.getProject_idx();
 	}
@@ -212,11 +191,6 @@ public class ProjectController {
 		model.addAttribute("employeeList", json.toJson(employeeList));
 		
 		return null;
-	}
-	@RequestMapping("modal")
-	public String modal() {
-		
-		return "project/modal";
 	}
 }
 

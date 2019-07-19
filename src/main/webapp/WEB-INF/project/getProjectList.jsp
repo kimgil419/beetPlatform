@@ -8,11 +8,6 @@
 <title>프로젝트목록</title>
 <script src='/js/jquery-3.4.1.min.js'></script>
 <link href="/css/project_common.css" rel="stylesheet" type="text/css" />
-<script>
-	/* $(document).ready(function(){
-		var = ${project}
-	}); */
-</script>
 </head>
 <body>
 <div id="page-wrapper">
@@ -138,7 +133,6 @@
 				<div id="flex_div_children3">
 					<c:choose>
 						<c:when test="${userInfo.user_position == '과장' || userInfo.user_position == '차장' || userInfo.user_position == '부장' || userInfo.user_position == '이사' || userInfo.user_position == '대표이사' }">
-							<a href="/mail"><button type="button" class="btn btn-outline-primary btn-sm">메일작성</button></a>
 							<a href="writeProject.do"><button type="button" class="btn btn-outline-primary btn-sm">작성</button></a>
 							<a href="getCommute.do"><button type="button" class="btn btn-outline-primary btn-sm">메인</button></a>
 						</c:when>
