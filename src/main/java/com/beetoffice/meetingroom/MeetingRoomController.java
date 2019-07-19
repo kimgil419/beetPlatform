@@ -119,7 +119,6 @@ public class MeetingRoomController {
 
 
     @RequestMapping("/meetingrommbookinglist.do")
-    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080", "http://localhost:5050"})
     public @ResponseBody Map meetingrommbookinglist(MeetingRoomVO vo, HttpSession session) {
 
         String dept = (String) session.getAttribute("dept");
@@ -137,7 +136,6 @@ public class MeetingRoomController {
     }
 
     @RequestMapping(value="/saveBooking.do", produces="application/json; charset=utf8")
-    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080", "http://localhost:5050"})
     public @ResponseBody
     Map saveBooking(MeetingRoomVO vo, Model model, HttpSession session){
 
@@ -163,7 +161,6 @@ public class MeetingRoomController {
 
 
     @RequestMapping(value = "/deleteList.do", produces = "application/json; charset=utf8")
-    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080", "http://localhost:5050"})
     public @ResponseBody Map deleteList( MeetingRoomVO vo){
 
         System.out.println(vo);
