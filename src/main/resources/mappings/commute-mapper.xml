@@ -43,8 +43,7 @@
 		</if> 
 		<if test="searchCondition == 'dept' ">
 			AND (DEPT LIKE CONCAT('%', #{searchKeyword}, '%'))
-		</if>
-		
+		</if>		
 	</select>
 	<select id="getCommute" parameterType="commute"
 	resultType="commute">

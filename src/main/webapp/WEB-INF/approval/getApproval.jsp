@@ -20,9 +20,9 @@ $(function(){
 	$("#btn").on("click",function(frm){
 		var txt = "";
 		console.log(frm);
-		$("#ok1").val(txt); 
-		$("#ok2").val(txt); 
-		$("#ok3").val(txt); 
+		$("#first_approval").val(txt); 
+		$("#second_approval").val(txt); 
+		$("#third_approval").val(txt); 
 		
 		$("#sub").submit();
 		
@@ -60,7 +60,7 @@ function refuse(frm){
             <tr>
                <td width="70" height="70" style="border: solid 1px black; text-align: center;">
                ${approval.user_name1} <c:if
-                     test="${not empty approval.ok1  }">
+                     test="${not empty approval.first_approval  }">
                      <img
                         src="https://st2.depositphotos.com/2274151/6340/i/950/depositphotos_63409211-stock-photo-completed-red-vintage-isolated-seal.jpg"
                         width="70px">
@@ -69,7 +69,7 @@ function refuse(frm){
                <td width="70" height="70" style="border: solid 1px black; text-align: center;">
                  ${approval.user_name2}
                <c:if
-                     test="${not empty approval.ok2 }">
+                     test="${not empty approval.second_approval }">
                      <img
                         src="https://st2.depositphotos.com/2274151/6340/i/950/depositphotos_63409211-stock-photo-completed-red-vintage-isolated-seal.jpg"
                         width="70px">
@@ -79,7 +79,7 @@ function refuse(frm){
                <td width="70" height="70" style="border: solid 1px black; text-align: center;">
                  ${approval.user_name3}
                <c:if
-                     test="${not empty approval.ok3 }">
+                     test="${not empty approval.third_approval }">
                      <img
                         src="https://st2.depositphotos.com/2274151/6340/i/950/depositphotos_63409211-stock-photo-completed-red-vintage-isolated-seal.jpg"
                         width="70px">
@@ -112,15 +112,15 @@ function refuse(frm){
                <th>등록일</th>
                <td>${approval.regdate}</td>
                <c:if test="${approval.user_id1 == userInfo.user_id }">
-                  <input type="hidden" name="ok1" id="ok1" value="1">
+                  <input type="hidden" name="first_approval" id="first_approval" value="1">
                </c:if>
 
                <c:if test="${approval.user_id2 == userInfo.user_id }">
-                  <input type="hidden" name="ok2" id="ok2" value="1">
+                  <input type="hidden" name="second_approval" id="second_approval" value="1">
                </c:if>
 
                <c:if test="${approval.user_id3 == userInfo.user_id }">
-                  <input type="hidden" name="ok3" id="ok3" value="1">
+                  <input type="hidden" name="third_approval" id="third_approval" value="1">
                </c:if>
             </tr>
 
@@ -128,14 +128,14 @@ function refuse(frm){
             <tr>
             <td colspan="2" class="center">
             <c:if
-							test="${ (not empty approval.ok1 or not empty approval.ok2 or not approval.ok3)
+							test="${ (not empty approval.first_approval or not empty approval.second_approval or not approval.third_approval)
              and (approval.user_id1 == userInfo.user_id or approval.user_id2 == userInfo.user_id or approval.user_id3 == userInfo.user_id  ) }">
 							<input type="submit" value="결재">
 						</c:if> <input type="button" value="반려" onclick="refuse(this.form)">
                   
-                   <c:if test="${(approval.user_id1 == userInfo.user_id and not empty approval.ok1)
-                    or (approval.user_id2 == userInfo.user_id and not empty approval.ok2)
-                     or (approval.user_id3 == userInfo.user_id and not empty approval.ok3)}">
+                   <c:if test="${(approval.user_id1 == userInfo.user_id and not empty approval.first_approval)
+                    or (approval.user_id2 == userInfo.user_id and not empty approval.second_approval)
+                     or (approval.user_id3 == userInfo.user_id and not empty approval.third_approval)}">
                   
                    <input type="button" value="결재 취소" id="btn">
                    </c:if>
