@@ -129,6 +129,7 @@ public class MeetingRoomController {
         Map list = new HashMap();
         list.put("event", meetingroom);
         list.put("bookingList", allList);
+        list.put("userDept", dept);
 
         System.out.println(list);
 

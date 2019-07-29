@@ -74,7 +74,8 @@
 
     <div class="container col-md-4" style="margin-top:30px" ;>
         <div style="float:left;">
-            <img class="img-fluid float-left" src="image/${list.user_picture}" alt="프로필 사진">
+            <img class="img-fluid float-left" style="width:150px;margin-bottom:15px;" src="image/${list.user_picture}" alt="프로필 사진">
+            <div style="text-align: center"><button>변경</button></div>
 
         </div>
         <div style="margin-left:50px;float:left;">
@@ -111,10 +112,12 @@
                         <input type="button" value="변경" name="changepassword" disabled>
                     </form>
                 </li>
-
+                <br/>
             </ul>
         </div>
     </div>
 </div>
+<br/>
+<br/><br/>
 </body>
 </html>
