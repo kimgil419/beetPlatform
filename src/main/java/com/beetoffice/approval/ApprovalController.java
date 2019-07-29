@@ -156,14 +156,14 @@ public class ApprovalController {
 	public String insertApproval(ApprovalVO vo, HttpServletRequest request) 
 			throws IllegalStateException, IOException {
 		
-	 System.out.println("userid1 : " + vo.getUser_id1());
-	 if (vo.getUser_id1() == null || vo.getUser_id1() == "") {
+	 System.out.println("userid1 : " + vo.getApproval_id_a());
+	 if (vo.getApproval_id_a() == null || vo.getApproval_id_a() == "") {
 		 String id1 = vo.getTo().split(",")[0];
 		String id2 = vo.getTo().split(",")[1];
 		String id3 = vo.getTo().split(",")[2];
-		 vo.setUser_id1(id1);
-		 vo.setUser_id2(id2);
-		 vo.setUser_id3(id3);
+		 vo.setApproval_id_a(id1);
+		 vo.setApproval_id_b(id2);
+		 vo.setApproval_id_c(id3);
 		 vo.setOption("1");
 	 } else {
 		 vo.setOption("0");

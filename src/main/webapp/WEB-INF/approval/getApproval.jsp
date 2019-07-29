@@ -111,15 +111,15 @@ function refuse(frm){
             <tr>
                <th>등록일</th>
                <td>${approval.regdate}</td>
-               <c:if test="${approval.user_id1 == userInfo.user_id }">
+               <c:if test="${approval.approval_id_a == userInfo.user_id }">
                   <input type="hidden" name="first_approval" id="first_approval" value="1">
                </c:if>
 
-               <c:if test="${approval.user_id2 == userInfo.user_id }">
+               <c:if test="${approval.approval_id_b == userInfo.user_id }">
                   <input type="hidden" name="second_approval" id="second_approval" value="1">
                </c:if>
 
-               <c:if test="${approval.user_id3 == userInfo.user_id }">
+               <c:if test="${approval.approval_id_c == userInfo.user_id }">
                   <input type="hidden" name="third_approval" id="third_approval" value="1">
                </c:if>
             </tr>
@@ -129,13 +129,13 @@ function refuse(frm){
             <td colspan="2" class="center">
             <c:if
 							test="${ (not empty approval.first_approval or not empty approval.second_approval or not approval.third_approval)
-             and (approval.user_id1 == userInfo.user_id or approval.user_id2 == userInfo.user_id or approval.user_id3 == userInfo.user_id  ) }">
+             and (approval.approval_id_a == userInfo.user_id or approval.approval_id_b == userInfo.user_id or approval.approval_id_c == userInfo.user_id  ) }">
 							<input type="submit" value="결재">
 						</c:if> <input type="button" value="반려" onclick="refuse(this.form)">
                   
-                   <c:if test="${(approval.user_id1 == userInfo.user_id and not empty approval.first_approval)
-                    or (approval.user_id2 == userInfo.user_id and not empty approval.second_approval)
-                     or (approval.user_id3 == userInfo.user_id and not empty approval.third_approval)}">
+                   <c:if test="${(approval.approval_id_a == userInfo.user_id and not empty approval.first_approval)
+                    or (approval.approval_id_b == userInfo.user_id and not empty approval.second_approval)
+                     or (approval.approval_id_c == userInfo.user_id and not empty approval.third_approval)}">
                   
                    <input type="button" value="결재 취소" id="btn">
                    </c:if>

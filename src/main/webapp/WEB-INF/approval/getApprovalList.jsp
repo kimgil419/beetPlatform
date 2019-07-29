@@ -50,9 +50,9 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 		</tr>	
 		<c:forEach var="approval" items="${approvalList}">
 		
-		<c:if test="${(not empty approval.urgent) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
-		or (approval.user_id2 == userInfo.user_id and not empty approval.ok1 and empty approval.ok2) 
-		or (approval.user_id3 == userInfo.user_id and not empty approval.ok1 and not empty approval.ok2 and empty approval.ok3)}" >
+		<c:if test="${(not empty approval.urgent) and (approval.approval_id_a == userInfo.user_id and empty approval.first_approval) 
+		or (approval.approval_id_b == userInfo.user_id and not empty approval.first_approval and empty approval.second_approval) 
+		or (approval.approval_id_c == userInfo.user_id and not empty approval.first_approval and not empty approval.second_approval and empty approval.third_approval)}" >
 		
 		<tr>
 			<td class="center">${approval.a_num }</td>
@@ -90,9 +90,9 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 		</tr>	
 		<c:forEach var="approval" items="${approvalList}">
 		
-		<c:if test="${(approval.option == 0 ) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
-		or (approval.user_id2 == userInfo.user_id and not empty approval.ok1 and empty approval.ok2) 
-		or (approval.user_id3 == userInfo.user_id and not empty approval.ok1 and not empty approval.ok2 and empty approval.ok3)}" >
+		<c:if test="${(approval.option == 0 ) and (approval.approval_id_a == userInfo.user_id and empty approval.first_approval) 
+		or (approval.approval_id_b == userInfo.user_id and not empty approval.first_approval and empty approval.second_approval) 
+		or (approval.approval_id_c == userInfo.user_id and not empty approval.first_approval and not empty approval.second_approval and empty approval.third_approval)}" >
 		
 		<tr>
 			<td class="center">${approval.a_num }</td>
@@ -129,9 +129,9 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 		
 		<c:forEach var="approval" items="${approvalList}">
 		
-		<c:if test="${ (approval.option == 1) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
-		or (approval.user_id2 == userInfo.user_id and empty approval.ok2) 
-		or (approval.user_id3 == userInfo.user_id and empty approval.ok3)}" >
+		<c:if test="${ (approval.option == 1) and (approval.approval_id_a == userInfo.user_id and empty approval.first_approval) 
+		or (approval.approval_id_b == userInfo.user_id and empty approval.second_approval) 
+		or (approval.approval_id_c == userInfo.user_id and empty approval.third_approval)}" >
 		
 		<tr>
 			<td class="center">${approval.a_num }</td>
@@ -166,9 +166,9 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 		</tr>	
 		<c:forEach var="approval" items="${approvalList}">
 		
-		<c:if test="${(not empty approval.refuse) and (approval.user_id1 == userInfo.user_id and empty approval.ok1) 
-		or (approval.user_id2 == userInfo.user_id and not empty approval.ok1 and empty approval.ok2) 
-		or (approval.user_id3 == userInfo.user_id and not empty approval.ok1 and not empty approval.ok2 and empty approval.ok3)}" >
+		<c:if test="${(not empty approval.refuse) and (approval.approval_id_a == userInfo.user_id and empty approval.first_approval) 
+		or (approval.approval_id_b == userInfo.user_id and not empty approval.first_approval and empty approval.second_approval) 
+		or (approval.approval_id_c == userInfo.user_id and not empty approval.first_approval and not empty approval.second_approval and empty approval.third_approval)}" >
 		
 		<tr>
 			<td class="center">${approval.a_num }</td>

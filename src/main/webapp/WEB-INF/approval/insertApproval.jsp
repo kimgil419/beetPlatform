@@ -56,11 +56,11 @@
 
 						}
 
-						$('#user_id1').append(
+						$('#approval_id_a').append(
 								"<option value='' selected disabled hidden>"
 										+ "선택하세요" + "</option>");
 						for (var i = 0; i < employeeData.length; i++) {
-							$('#user_id1').append(
+							$('#approval_id_a').append(
 									"<option value="+employeeData[i].user_id+">"
 											+ employeeData[i].user_name
 											+ employeeData[i].user_position
@@ -68,11 +68,11 @@
 
 						}
 
-						$("#user_id1").change(function() {
-											$('#user_id2 option').remove()
-											var id = ($("#user_id1 option:selected").val());
+						$("#approval_id_a").change(function() {
+											$('#approval_id_b option').remove()
+											var id = ($("#approval_id_a option:selected").val());
 
-											$('#user_id2').append(
+											$('#approval_id_b').append(
 													"<option value='' selected disabled hidden>"
 															+ "선택하세요"
 															+ "</option>");
@@ -80,7 +80,7 @@
 
 												if (employeeData[i].user_id != id) {
 
-													$('#user_id2')
+													$('#approval_id_b')
 															.append(
 																	"<option value="+employeeData[i].user_id+ ">"
 																			+ employeeData[i].user_name
@@ -89,17 +89,17 @@
 												}
 
 											}
-											$("#user_id2").change(function() {
-												$('#user_id3 option').remove()
-																var id2 = ($("#user_id2 option:selected").val());
-																var id1 = ($("#user_id1 option:selected").val());
+											$("#approval_id_b").change(function() {
+												$('#approval_id_c option').remove()
+																var id2 = ($("#approval_id_b option:selected").val());
+																var id1 = ($("#approval_id_a option:selected").val());
 
-																$('#user_id3').append("<option value='' selected disabled hidden>"
+																$('#approval_id_c').append("<option value='' selected disabled hidden>"
 																						+ "선택하세요"
 																						+ "</option>");
 																for (var i = 0; i < employeeData.length; i++) {
 																	if (employeeData[i].user_id != id2 && employeeData[i].user_id != id1) {
-																		$('#user_id3').append("<option value="+employeeData[i].user_id+ ">"
+																		$('#approval_id_c').append("<option value="+employeeData[i].user_id+ ">"
 																								+ employeeData[i].user_name
 																								+ employeeData[i].user_position
 																								+ "</option>");
@@ -188,8 +188,7 @@
 		<hr>
 		<form action="insertApproval.do" method="post">
 			<p>
-				<input type="button" name="p" id="p" value=" 결재 방식 전환 "
-					>
+				<input type="button" name="p" id="p" value=" 결재 방식 전환 ">
 			</p>
 
 
@@ -201,20 +200,20 @@
 				</tr>
 
 				<tr>
-					<td width="140" id="empSearch">결재1 <select id="user_id1"
-						name="user_id1">
+					<td width="140" id="empSearch">결재1 <select id="approval_id_a"
+						name="approval_id_a">
 
 					</select>
 					</td>
-					<td width="140" id="empSearch">결재2 <select id="user_id2"
-						name="user_id2">
+					<td width="140" id="empSearch">결재2 <select id="approval_id_b"
+						name="approval_id_b">
 						<option value='' selected disabled >선택하세요 </option>
 					</select></td>
 
 
 
-					<td width="140" id="empSearch">결재3 <select id="user_id3"
-						name="user_id3">
+					<td width="140" id="empSearch">결재3 <select id="approval_id_c"
+						name="approval_id_c">
 						<option value='' selected disabled >선택하세요 </option>
 					</select></td>
 
